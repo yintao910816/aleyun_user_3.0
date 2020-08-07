@@ -116,6 +116,16 @@ class BaseWebViewController: BaseViewController, VMNavigation {
         webView.snp.makeConstraints{ $0.edges.equalTo(UIEdgeInsets.zero) }
         
         requestData()
+        
+        NotificationCenter.default.rx.notification(NotificationName.Pay.wChatPayFinish)
+            .subscribe(onNext: { [weak self] _ in
+                if let redirect = self?.redirect_url, let redirectURL = URL(string: redirect) {
+                    let request = URLRequest.init(url: redirectURL)
+                    self?.webView.loadRequest(request)
+                }
+                self?.redirect_url = nil
+            })
+            .disposed(by: disposeBag)
     }
 
     private func setupBridge() {
@@ -156,7 +166,7 @@ extension BaseWebViewController: UIWebViewDelegate{
         if urlString?.contains("wx.tenpay.com") == true && urlString?.contains("redirect_url=\(rs)") == false
         {
             let sep = s!.components(separatedBy: "redirect_url=")
-            redirect_url = sep.last//sep.first(where: { !$0.contains("wx.tenpay.com") })
+            redirect_url = sep.last?.removingPercentEncoding//sep.first(where: { !$0.contains("wx.tenpay.com") })
             let reloadUrl = sep.first(where: { $0.contains("wx.tenpay.com") })!.appending("&redirect_url=\(rs)")
             if let _url = URL.init(string: reloadUrl) {
                 var mRequest = URLRequest.init(url: _url)

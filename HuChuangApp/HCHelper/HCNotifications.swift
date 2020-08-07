@@ -38,4 +38,10 @@ extension Notification.Name {
         /// 首页顶部红色背景点击跳转记录界面
         static let gotoRecord = Notification.Name(rawValue: "org.UILogic.notification.name.gotoRecord")
     }
+    
+    public struct Pay {
+        /// 微信支付完成
+        static let wChatPayFinish = Notification.Name(rawValue: "org.Pay.notification.name.wChatPayFinish")
+    }
+
 }
