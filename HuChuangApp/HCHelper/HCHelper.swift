@@ -53,8 +53,9 @@ extension HCHelper {
     class func presentLogin(presentVC: UIViewController? = nil, isPopToRoot: Bool = false, _ completion: (() ->())? = nil) {
         HCHelper.share.isPresentLogin = true
         
-        let loginSB = UIStoryboard.init(name: "HCLogin", bundle: Bundle.main)
-        let loginControl = loginSB.instantiateViewController(withIdentifier: "loginControl")
+//        let loginSB = UIStoryboard.init(name: "HCLogin", bundle: Bundle.main)
+//        let loginControl = loginSB.instantiateViewController(withIdentifier: "loginControl")
+        let loginControl = HCLoginViewController()
         loginControl.modalPresentationStyle = .fullScreen
         
         let newPresentV = presentVC == nil ? NSObject().visibleViewController : presentVC

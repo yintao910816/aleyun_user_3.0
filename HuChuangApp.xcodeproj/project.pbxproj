@@ -396,8 +396,6 @@
 		C421335A2205883D006C10C4 /* RefreshServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42133572205883D006C10C4 /* RefreshServer.swift */; };
 		C421335D220588B7006C10C4 /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C421335C220588B7006C10C4 /* BaseModel.swift */; };
 		C421335F220588FD006C10C4 /* HandyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C421335E220588FD006C10C4 /* HandyModel.swift */; };
-		C421336122058E50006C10C4 /* HCLogin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C421336022058E50006C10C4 /* HCLogin.storyboard */; };
-		C421336622058F97006C10C4 /* HCLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C421336522058F97006C10C4 /* HCLoginViewController.swift */; };
 		C42133682205902A006C10C4 /* AccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42133672205902A006C10C4 /* AccountViewModel.swift */; };
 		C421336E2205961D006C10C4 /* UIView+_Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = C421336A2205961D006C10C4 /* UIView+_Rx.swift */; };
 		C421336F2205961D006C10C4 /* ObservableType+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C421336B2205961D006C10C4 /* ObservableType+Extension.swift */; };
@@ -434,11 +432,17 @@
 		C44159F6234616F00011B987 /* HCSearchHealthyCourseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44159F4234616F00011B987 /* HCSearchHealthyCourseViewController.swift */; };
 		C4481E2422154D66007F4B0C /* BaseWKWebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4481E2322154D66007F4B0C /* BaseWKWebViewViewController.swift */; };
 		C449FA5B2298021D00B7803E /* AppAbout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C449FA5A2298021D00B7803E /* AppAbout.swift */; };
-		C44C8B2F23A72FC4009E2226 /* HCBindPhoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44C8B2E23A72FC4009E2226 /* HCBindPhoneViewController.swift */; };
 		C454C01B234E0005005CBC0B /* TYSearchRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C454C01A234E0005005CBC0B /* TYSearchRecordView.swift */; };
 		C454C01D234E007B005CBC0B /* TYSearchRecordLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C454C01C234E007B005CBC0B /* TYSearchRecordLayout.swift */; };
 		C454C01F234E00A8005CBC0B /* TYSearchRecordData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C454C01E234E00A8005CBC0B /* TYSearchRecordData.swift */; };
 		C46E4D6923AE40A800A67F02 /* TYCurveTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46E4D6823AE40A800A67F02 /* TYCurveTimeView.swift */; };
+		C472524F24DD54B0006DEEC9 /* HCLoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C472524E24DD54B0006DEEC9 /* HCLoginViewModel.swift */; };
+		C472525124DD562A006DEEC9 /* HCVerifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C472525024DD562A006DEEC9 /* HCVerifyViewController.swift */; };
+		C472525324DD564D006DEEC9 /* HCVerifyViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C472525224DD564D006DEEC9 /* HCVerifyViewContainer.swift */; };
+		C472525524DD7C80006DEEC9 /* HCCodeInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C472525424DD7C80006DEEC9 /* HCCodeInputView.swift */; };
+		C4783B2E24DD39E800737479 /* HCLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4783B2A24DD39E800737479 /* HCLoginViewController.swift */; };
+		C4783B2F24DD39E800737479 /* HCBindPhoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4783B2B24DD39E800737479 /* HCBindPhoneViewController.swift */; };
+		C4783B3124DD3BFC00737479 /* HCLoginViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4783B3024DD3BFC00737479 /* HCLoginViewContainer.swift */; };
 		C47E067923588FCD003A3320 /* TYCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47E067823588FCD003A3320 /* TYCalendarView.swift */; };
 		C47E067B23589355003A3320 /* TYCalendarDayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47E067A23589355003A3320 /* TYCalendarDayCell.swift */; };
 		C47E067E23589800003A3320 /* HCRecorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47E067D23589800003A3320 /* HCRecorderView.swift */; };
@@ -1141,8 +1145,6 @@
 		C42133572205883D006C10C4 /* RefreshServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshServer.swift; sourceTree = "<group>"; };
 		C421335C220588B7006C10C4 /* BaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
 		C421335E220588FD006C10C4 /* HandyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandyModel.swift; sourceTree = "<group>"; };
-		C421336022058E50006C10C4 /* HCLogin.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HCLogin.storyboard; sourceTree = "<group>"; };
-		C421336522058F97006C10C4 /* HCLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCLoginViewController.swift; sourceTree = "<group>"; };
 		C42133672205902A006C10C4 /* AccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewModel.swift; sourceTree = "<group>"; };
 		C421336A2205961D006C10C4 /* UIView+_Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+_Rx.swift"; sourceTree = "<group>"; };
 		C421336B2205961D006C10C4 /* ObservableType+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ObservableType+Extension.swift"; sourceTree = "<group>"; };
@@ -1180,11 +1182,17 @@
 		C44159F4234616F00011B987 /* HCSearchHealthyCourseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCSearchHealthyCourseViewController.swift; sourceTree = "<group>"; };
 		C4481E2322154D66007F4B0C /* BaseWKWebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseWKWebViewViewController.swift; sourceTree = "<group>"; };
 		C449FA5A2298021D00B7803E /* AppAbout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAbout.swift; sourceTree = "<group>"; };
-		C44C8B2E23A72FC4009E2226 /* HCBindPhoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCBindPhoneViewController.swift; sourceTree = "<group>"; };
 		C454C01A234E0005005CBC0B /* TYSearchRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TYSearchRecordView.swift; sourceTree = "<group>"; };
 		C454C01C234E007B005CBC0B /* TYSearchRecordLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TYSearchRecordLayout.swift; sourceTree = "<group>"; };
 		C454C01E234E00A8005CBC0B /* TYSearchRecordData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TYSearchRecordData.swift; sourceTree = "<group>"; };
 		C46E4D6823AE40A800A67F02 /* TYCurveTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TYCurveTimeView.swift; sourceTree = "<group>"; };
+		C472524E24DD54B0006DEEC9 /* HCLoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCLoginViewModel.swift; sourceTree = "<group>"; };
+		C472525024DD562A006DEEC9 /* HCVerifyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCVerifyViewController.swift; sourceTree = "<group>"; };
+		C472525224DD564D006DEEC9 /* HCVerifyViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCVerifyViewContainer.swift; sourceTree = "<group>"; };
+		C472525424DD7C80006DEEC9 /* HCCodeInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCCodeInputView.swift; sourceTree = "<group>"; };
+		C4783B2A24DD39E800737479 /* HCLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCLoginViewController.swift; sourceTree = "<group>"; };
+		C4783B2B24DD39E800737479 /* HCBindPhoneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCBindPhoneViewController.swift; sourceTree = "<group>"; };
+		C4783B3024DD3BFC00737479 /* HCLoginViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCLoginViewContainer.swift; sourceTree = "<group>"; };
 		C47E067823588FCD003A3320 /* TYCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TYCalendarView.swift; sourceTree = "<group>"; };
 		C47E067A23589355003A3320 /* TYCalendarDayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TYCalendarDayCell.swift; sourceTree = "<group>"; };
 		C47E067D23589800003A3320 /* HCRecorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCRecorderView.swift; sourceTree = "<group>"; };
@@ -2298,6 +2306,7 @@
 			isa = PBXGroup;
 			children = (
 				B842D1FF22258D7F00A4F8DF /* HuChuangApp.entitlements */,
+				C4783B2624DD39E800737479 /* Interface */,
 				C421330722056B59006C10C4 /* Main */,
 				C421330422056B19006C10C4 /* Core */,
 				C421330522056B19006C10C4 /* HCHelper */,
@@ -2412,7 +2421,6 @@
 				C43BC447233B0D3800194539 /* Consult */,
 				B816E86F221DABA100F024D5 /* Home */,
 				B8BE34F92214704300EF16F1 /* Mine */,
-				C421336422058F8C006C10C4 /* Login */,
 				C421333B220586B0006C10C4 /* Main */,
 				C421330F22056BAE006C10C4 /* Base */,
 			);
@@ -2423,7 +2431,6 @@
 			isa = PBXGroup;
 			children = (
 				C4213337220572C6006C10C4 /* HCMain.storyboard */,
-				C421336022058E50006C10C4 /* HCLogin.storyboard */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -2603,15 +2610,6 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
-		C421336422058F8C006C10C4 /* Login */ = {
-			isa = PBXGroup;
-			children = (
-				C421336522058F97006C10C4 /* HCLoginViewController.swift */,
-				C44C8B2E23A72FC4009E2226 /* HCBindPhoneViewController.swift */,
-			);
-			path = Login;
-			sourceTree = "<group>";
-		};
 		C42133692205961D006C10C4 /* Rx */ = {
 			isa = PBXGroup;
 			children = (
@@ -2735,6 +2733,60 @@
 				C48842B0233EF6A700C209B3 /* HCClassRoomListCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		C4783B2624DD39E800737479 /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				C4783B2724DD39E800737479 /* Account */,
+			);
+			path = Interface;
+			sourceTree = "<group>";
+		};
+		C4783B2724DD39E800737479 /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				C4783B2824DD39E800737479 /* ViewModel */,
+				C4783B2924DD39E800737479 /* Controller */,
+				C4783B2C24DD39E800737479 /* Model */,
+				C4783B2D24DD39E800737479 /* View */,
+			);
+			path = Account;
+			sourceTree = "<group>";
+		};
+		C4783B2824DD39E800737479 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C472524E24DD54B0006DEEC9 /* HCLoginViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		C4783B2924DD39E800737479 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C4783B2A24DD39E800737479 /* HCLoginViewController.swift */,
+				C472525024DD562A006DEEC9 /* HCVerifyViewController.swift */,
+				C4783B2B24DD39E800737479 /* HCBindPhoneViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C4783B2C24DD39E800737479 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C4783B2D24DD39E800737479 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C4783B3024DD3BFC00737479 /* HCLoginViewContainer.swift */,
+				C472525224DD564D006DEEC9 /* HCVerifyViewContainer.swift */,
+				C472525424DD7C80006DEEC9 /* HCCodeInputView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		C47E067C23589766003A3320 /* Recorder */ = {
@@ -2949,7 +3001,6 @@
 				B8CD926A23A2967D00C9C061 /* HCRecordSuggestReusableView.xib in Resources */,
 				C497E9622344610500328B47 /* HCHomePregnancyClassroomReusableView.xib in Resources */,
 				C497E95123444E4600328B47 /* HCHomeConsultingVolumeReusableView.xib in Resources */,
-				C421336122058E50006C10C4 /* HCLogin.storyboard in Resources */,
 				B8CD926623A2964800C9C061 /* HCRecordUserInfoReusableView.xib in Resources */,
 				C497E96E234466E100328B47 /* HCHomePregnancyClassroomCellItemCell.xib in Resources */,
 				C497E95A23444EF200328B47 /* HCHomeGoodNewsCell.xib in Resources */,
@@ -3050,6 +3101,7 @@
 				B816EB50221DABF400F024D5 /* ZXSMSParsedResult.m in Sources */,
 				B816EA85221DABF400F024D5 /* ZXInvertedLuminanceSource.m in Sources */,
 				B816EB2D221DABF400F024D5 /* ZXCode39Writer.m in Sources */,
+				C472524F24DD54B0006DEEC9 /* HCLoginViewModel.swift in Sources */,
 				C421337722059A6D006C10C4 /* HCHelper.swift in Sources */,
 				B870E55823919D840085AFA3 /* HCUserInfoViewModel.swift in Sources */,
 				B816EB09221DABF400F024D5 /* ZXRSSExpandedDecodedChar.m in Sources */,
@@ -3080,6 +3132,7 @@
 				C4F139BB235419EF00D777F6 /* TYFont.swift in Sources */,
 				B816EB25221DABF400F024D5 /* ZXUPCEANExtension5Support.m in Sources */,
 				B816EB07221DABF400F024D5 /* ZXRSSExpandedBlockParsedResult.m in Sources */,
+				C4783B2F24DD39E800737479 /* HCBindPhoneViewController.swift in Sources */,
 				B8BE34FD221470D900EF16F1 /* EditUserInfoViewModel.swift in Sources */,
 				B816EB16221DABF400F024D5 /* ZXAI01392xDecoder.m in Sources */,
 				B816EB56221DABF400F024D5 /* ZXCGImageLuminanceSource.m in Sources */,
@@ -3090,6 +3143,7 @@
 				B816EB06221DABF400F024D5 /* ZXAnyAIDecoder.m in Sources */,
 				B816EAC4221DABF400F024D5 /* ZXReedSolomonEncoder.m in Sources */,
 				B816EA9F221DABF400F024D5 /* ZXQRCodeMultiReader.m in Sources */,
+				C4783B2E24DD39E800737479 /* HCLoginViewController.swift in Sources */,
 				B81C2F792215BBFB00A887AF /* FileUpload.swift in Sources */,
 				B816EAB7221DABF400F024D5 /* ZXCharacterSetECI.m in Sources */,
 				B816EACD221DABF400F024D5 /* ZXPDF417HighLevelEncoder.m in Sources */,
@@ -3098,6 +3152,7 @@
 				B892FF9D23AB6BB500A137C0 /* TYCityFilterView.swift in Sources */,
 				B8508EAA23421E22008C24BA /* HCListDetailIconCell.swift in Sources */,
 				B816EAD3221DABF400F024D5 /* ZXPDF417ECErrorCorrection.m in Sources */,
+				C472525124DD562A006DEEC9 /* HCVerifyViewController.swift in Sources */,
 				B8BE350B221478A900EF16F1 /* VCServer.swift in Sources */,
 				C421332722056F24006C10C4 /* HUDIndicatorView.swift in Sources */,
 				C42133932205B1E9006C10C4 /* KeyboardManager.swift in Sources */,
@@ -3241,6 +3296,7 @@
 				B816EA7B221DABF400F024D5 /* ZXPlanarYUVLuminanceSource.m in Sources */,
 				B8508E332340FC9F008C24BA /* Doctor.swift in Sources */,
 				B816EB55221DABF400F024D5 /* ZXCapture.m in Sources */,
+				C4783B3124DD3BFC00737479 /* HCLoginViewContainer.swift in Sources */,
 				B819AF6324C68C3400F88BA7 /* HCOrderRecordController.swift in Sources */,
 				B816EB45221DABF400F024D5 /* ZXSMTPResultParser.m in Sources */,
 				C421339D2205B224006C10C4 /* ImageRx.swift in Sources */,
@@ -3343,7 +3399,6 @@
 				B870E545238EE0570085AFA3 /* HCExpertConsultViewController.swift in Sources */,
 				C421338522059B8C006C10C4 /* DBProtocol.swift in Sources */,
 				C4F139B6235419EF00D777F6 /* AppLaunchView.swift in Sources */,
-				C421336622058F97006C10C4 /* HCLoginViewController.swift in Sources */,
 				B816EB4B221DABF400F024D5 /* ZXBookmarkDoCoMoResultParser.m in Sources */,
 				B816EB54221DABF400F024D5 /* ZXImage.m in Sources */,
 				B8891A4623038DAB00950D5C /* ConsultViewModel.swift in Sources */,
@@ -3353,6 +3408,7 @@
 				B8BE35092214738000EF16F1 /* EditUserInfoModel.swift in Sources */,
 				B816EB0E221DABF400F024D5 /* ZXRSSExpandedDecodedObject.m in Sources */,
 				C43F09BE22143B5200910437 /* BaseWebViewController.swift in Sources */,
+				C472525524DD7C80006DEEC9 /* HCCodeInputView.swift in Sources */,
 				B816EAC9221DABF400F024D5 /* ZXPDF417Common.m in Sources */,
 				B816EB41221DABF400F024D5 /* ZXTextParsedResult.m in Sources */,
 				B816EAFF221DABF400F024D5 /* ZXITFWriter.m in Sources */,
@@ -3414,7 +3470,6 @@
 				B816EA8D221DABF400F024D5 /* ZXAztecState.m in Sources */,
 				B816EA9B221DABF400F024D5 /* ZXQRCodeMatrixUtil.m in Sources */,
 				B816EA98221DABF400F024D5 /* ZXQRCodeMaskUtil.m in Sources */,
-				C44C8B2F23A72FC4009E2226 /* HCBindPhoneViewController.swift in Sources */,
 				B8BE603323BB4C4D00EC0027 /* Dictionary+Extension.swift in Sources */,
 				B816EAFC221DABF400F024D5 /* ZXEAN8Reader.m in Sources */,
 				B8BE1AED23A7E92F00DF472A /* HCSearchHeaderView.swift in Sources */,
@@ -3462,6 +3517,7 @@
 				B816EA8F221DABF400F024D5 /* ZXAztecCode.m in Sources */,
 				B8508EA823421D7B008C24BA /* HCListDetailCell.swift in Sources */,
 				B8508E9A2341BFB3008C24BA /* HCMineCell.swift in Sources */,
+				C472525324DD564D006DEEC9 /* HCVerifyViewContainer.swift in Sources */,
 				B816EB2C221DABF400F024D5 /* ZXUPCEReader.m in Sources */,
 				C421332D22056F24006C10C4 /* HUDUtil.swift in Sources */,
 				B8FC3F89239A9FCE006EB478 /* HCSettingViewController.swift in Sources */,
