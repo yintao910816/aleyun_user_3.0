@@ -18,6 +18,8 @@ class HCTabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupTabBar()
+        
         NotificationCenter.default.rx.notification(NotificationName.UILogic.gotoClassRoom)
             .subscribe(onNext: { [weak self] data in
                 self?.selectedIndex = 3
@@ -37,6 +39,16 @@ class HCTabBarViewController: UITabBarController {
             .disposed(by: disposeBag)
     }
 
+    private func setupTabBar() {
+        let mineCtrl = HCMineViewController()
+        let mineNav = MainNavigationController.init(rootViewController: mineCtrl)
+        mineCtrl.title = "个人中心"
+        mineNav.tabBarItem.title = "我的"
+        mineNav.tabBarItem.image = nil
+        mineNav.tabBarItem.selectedImage = nil
+        
+        viewControllers = [mineNav]
+    }
 }
 
 extension HCTabBarViewController: UITabBarControllerDelegate {

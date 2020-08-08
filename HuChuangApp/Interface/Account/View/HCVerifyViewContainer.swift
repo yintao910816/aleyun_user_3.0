@@ -17,6 +17,8 @@ class HCVerifyViewContainer: UIView {
     private var codeView: HCCodeInputView!
     private var timeLabel: UILabel!
     
+    public var finishInput: ((String)->())?
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -42,6 +44,7 @@ class HCVerifyViewContainer: UIView {
         
         codeView = HCCodeInputView()
         codeView.codeCount = 4
+        codeView.finishInput = { [weak self] in self?.finishInput?($0) }
         
         timeLabel = UILabel()
         timeLabel.text = "55s后重新发送"
