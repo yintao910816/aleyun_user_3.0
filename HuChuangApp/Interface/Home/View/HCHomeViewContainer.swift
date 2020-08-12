@@ -158,9 +158,9 @@ extension HCHomeViewContainer: UICollectionViewDataSource, UICollectionViewDeleg
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         switch section {
-        case 1:
+        case 0:
             return 15
-        case 2:
+        case 1:
             return 10
         default:
             return 0

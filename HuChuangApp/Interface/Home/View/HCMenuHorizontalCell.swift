@@ -77,7 +77,6 @@ class HCMenuHorizontalCell: UICollectionViewCell {
         title = UILabel()
         title.textColor = RGB(51, 51, 51)
         title.font = .font(fontSize: 14)
-        title.textAlignment = .center
         title.text = "测试"
         
         addSubview(icon)
