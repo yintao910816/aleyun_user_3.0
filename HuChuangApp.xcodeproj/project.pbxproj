@@ -493,6 +493,8 @@
 		C4AEA71923ACB35F00DD7AC1 /* HCPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AEA71823ACB35F00DD7AC1 /* HCPickerController.swift */; };
 		C4B1852B2345880E00F37197 /* HCSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B1852A2345880E00F37197 /* HCSearchViewModel.swift */; };
 		C4B185342345B03400F37197 /* HCSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B185332345B03400F37197 /* HCSearch.swift */; };
+		C4C11AD624E4151E001CBE74 /* HCMenuItemShadowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C11AD524E4151E001CBE74 /* HCMenuItemShadowCell.swift */; };
+		C4C11AD824E41C6F001CBE74 /* HCMenuHorizontalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C11AD724E41C6F001CBE74 /* HCMenuHorizontalCell.swift */; };
 		C4C3257B2205B8490091783C /* ScrollTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C3257A2205B8490091783C /* ScrollTextView.swift */; };
 		C4C3257D2205C3AD0091783C /* UIView+XIB.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C3257C2205C3AC0091783C /* UIView+XIB.swift */; };
 		C4C8EB3F235175660054A295 /* HCHomePreparePregnantInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C8EB3D235175660054A295 /* HCHomePreparePregnantInfoCell.swift */; };
@@ -1256,6 +1258,8 @@
 		C4AEA71823ACB35F00DD7AC1 /* HCPickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCPickerController.swift; sourceTree = "<group>"; };
 		C4B1852A2345880E00F37197 /* HCSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCSearchViewModel.swift; sourceTree = "<group>"; };
 		C4B185332345B03400F37197 /* HCSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCSearch.swift; sourceTree = "<group>"; };
+		C4C11AD524E4151E001CBE74 /* HCMenuItemShadowCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCMenuItemShadowCell.swift; sourceTree = "<group>"; };
+		C4C11AD724E41C6F001CBE74 /* HCMenuHorizontalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCMenuHorizontalCell.swift; sourceTree = "<group>"; };
 		C4C3257A2205B8490091783C /* ScrollTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollTextView.swift; sourceTree = "<group>"; };
 		C4C3257C2205C3AC0091783C /* UIView+XIB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+XIB.swift"; sourceTree = "<group>"; };
 		C4C8EB3D235175660054A295 /* HCHomePreparePregnantInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCHomePreparePregnantInfoCell.swift; sourceTree = "<group>"; };
@@ -2951,6 +2955,8 @@
 			children = (
 				C494137224DE9EF000045749 /* HCHomeViewContainer.swift */,
 				C494137624DEA12B00045749 /* HCHomeHeaderReusableView.swift */,
+				C4C11AD524E4151E001CBE74 /* HCMenuItemShadowCell.swift */,
+				C4C11AD724E41C6F001CBE74 /* HCMenuHorizontalCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3354,6 +3360,7 @@
 				B8FC3F872396D74D006EB478 /* HCDoctorInfoViewModel.swift in Sources */,
 				B816EAB1221DABF400F024D5 /* ZXStringUtils.m in Sources */,
 				C497E9712344728200328B47 /* HCHomeBabyTuinaClassroomReusableView.swift in Sources */,
+				C4C11AD824E41C6F001CBE74 /* HCMenuHorizontalCell.swift in Sources */,
 				B816EA8E221DABF400F024D5 /* ZXAztecBinaryShiftToken.m in Sources */,
 				B816EB42221DABF400F024D5 /* ZXURIParsedResult.m in Sources */,
 				C421332822056F24006C10C4 /* TYHUDAnimating.swift in Sources */,
@@ -3445,6 +3452,7 @@
 				B816EAEE221DABF400F024D5 /* ZXDataMatrixDecodedBitStreamParser.m in Sources */,
 				B870E54B2390134B0085AFA3 /* TYListMenuData.swift in Sources */,
 				C421338C2205A544006C10C4 /* Home.swift in Sources */,
+				C4C11AD624E4151E001CBE74 /* HCMenuItemShadowCell.swift in Sources */,
 				B870E552239039A40085AFA3 /* HCExpertConsultViewModel.swift in Sources */,
 				B816EB37221DABF400F024D5 /* ZXProductResultParser.m in Sources */,
 				B816EB2B221DABF400F024D5 /* ZXUPCEANExtension2Support.m in Sources */,
