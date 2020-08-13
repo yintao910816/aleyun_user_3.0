@@ -12,6 +12,8 @@ class HCMineViewContainer: UIView {
 
     private var collectionView: UICollectionView!
     
+    public var excuteAction: ((HCMineHeaderView.HCMineHeaderAction)->())?
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -103,6 +105,7 @@ extension HCMineViewContainer: UICollectionViewDataSource, UICollectionViewDeleg
             var header = UICollectionReusableView()
             if indexPath.section == 0 {
                 header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HCMineHeaderView_identifier, for: indexPath)
+                (header as! HCMineHeaderView).excuteAction = { [weak self] in self?.excuteAction?($0) }
             }else if indexPath.section == 1 {
                 header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HCCollectionSectionTitleView_identifier, for: indexPath)
                 (header as! HCCollectionSectionTitleView).title = "我的服务"

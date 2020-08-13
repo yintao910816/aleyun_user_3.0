@@ -13,6 +13,11 @@ public let HCMineHeaderView_height: CGFloat = 165 + HCCollectionSectionTitleView
 
 class HCMineHeaderView: UICollectionReusableView {
   
+    enum HCMineHeaderAction {
+        /// 认证
+        case verify
+    }
+    
     private var avatarButton: UIButton!
     private var phoneLabel: UILabel!
     private var verifyButton: UIButton!
@@ -25,6 +30,8 @@ class HCMineHeaderView: UICollectionReusableView {
     
     private var bottomTitleView: HCCollectionSectionTitleView!
 
+    public var excuteAction: ((HCMineHeaderAction)->())?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -76,6 +83,7 @@ extension HCMineHeaderView {
         verifyButton.backgroundColor = HC_MAIN_COLOR
         verifyButton.layer.cornerRadius = 14
         verifyButton.clipsToBounds = true
+        verifyButton.addTarget(self, action: #selector(buttonAction(_:)), for: .touchUpInside)
         
         couponButton = HCCustomTextButton()
         couponButton.setupText(first: "1", second: "优惠卷")
@@ -97,5 +105,11 @@ extension HCMineHeaderView {
         addSubview(serverButton)
         addSubview(collectionButton)
         addSubview(bottomTitleView)
+    }
+    
+    @objc private func buttonAction(_ button: UIButton) {
+        if button == verifyButton {
+            excuteAction?(.verify)
+        }
     }
 }

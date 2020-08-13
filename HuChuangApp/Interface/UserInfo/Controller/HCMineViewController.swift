@@ -12,10 +12,7 @@ class HCMineViewController: BaseViewController {
 
     private var containerView: HCMineViewContainer!
     
-    override func viewWillAppear(_ animated: Bool) {
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        
+    override func viewWillAppear(_ animated: Bool) {        
         navigationController?.navigationBar.barTintColor = RGB(255, 244, 251)
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : RGB(51, 51, 51),
                                                                    NSAttributedString.Key.font : UIFont.font(fontSize: 18, fontName: .PingFRegular)]
@@ -28,6 +25,12 @@ class HCMineViewController: BaseViewController {
     
     override func rxBind() {
         
+        containerView.excuteAction = { [weak self] in
+            switch $0 {
+            case .verify:
+                self?.navigationController?.pushViewController(HCAccountSettingViewController(), animated: true)
+            }
+        }
     }
     
     override func viewDidLayoutSubviews() {

@@ -41,7 +41,10 @@ class BaseNavigationController: UINavigationController {
         
         isSideBackEnable = true
         
-        self.navigationBar.barTintColor   = .white
+        navigationBar.shadowImage = UIImage()
+        navigationBar.setBackgroundImage(UIImage(), for: .default)
+
+        navigationBar.barTintColor   = RGB(245, 245, 245)
         navigationBar.isTranslucent       = false
         navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : RGB(51, 51, 51),
                                              NSAttributedString.Key.font : UIFont.font(fontSize: 18, fontName: .PingFRegular)]
