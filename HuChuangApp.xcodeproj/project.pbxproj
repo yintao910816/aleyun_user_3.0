@@ -490,6 +490,8 @@
 		C497E97823447E6F00328B47 /* HCHomeBabyTuinaClassroomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C497E97623447E6F00328B47 /* HCHomeBabyTuinaClassroomCell.swift */; };
 		C497E97923447E6F00328B47 /* HCHomeBabyTuinaClassroomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C497E97723447E6F00328B47 /* HCHomeBabyTuinaClassroomCell.xib */; };
 		C4AA410A233C648C00144400 /* HCDatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AA4109233C648C00144400 /* HCDatePickerViewController.swift */; };
+		C4AB271124E4E9AA0095F693 /* HCNewsReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AB271024E4E9AA0095F693 /* HCNewsReusableView.swift */; };
+		C4AB271324E4EAD70095F693 /* HCMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AB271224E4EAD70095F693 /* HCMenuView.swift */; };
 		C4AEA71923ACB35F00DD7AC1 /* HCPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AEA71823ACB35F00DD7AC1 /* HCPickerController.swift */; };
 		C4B1852B2345880E00F37197 /* HCSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B1852A2345880E00F37197 /* HCSearchViewModel.swift */; };
 		C4B185342345B03400F37197 /* HCSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B185332345B03400F37197 /* HCSearch.swift */; };
@@ -1255,6 +1257,8 @@
 		C497E97623447E6F00328B47 /* HCHomeBabyTuinaClassroomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCHomeBabyTuinaClassroomCell.swift; sourceTree = "<group>"; };
 		C497E97723447E6F00328B47 /* HCHomeBabyTuinaClassroomCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HCHomeBabyTuinaClassroomCell.xib; sourceTree = "<group>"; };
 		C4AA4109233C648C00144400 /* HCDatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCDatePickerViewController.swift; sourceTree = "<group>"; };
+		C4AB271024E4E9AA0095F693 /* HCNewsReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCNewsReusableView.swift; sourceTree = "<group>"; };
+		C4AB271224E4EAD70095F693 /* HCMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCMenuView.swift; sourceTree = "<group>"; };
 		C4AEA71823ACB35F00DD7AC1 /* HCPickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCPickerController.swift; sourceTree = "<group>"; };
 		C4B1852A2345880E00F37197 /* HCSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCSearchViewModel.swift; sourceTree = "<group>"; };
 		C4B185332345B03400F37197 /* HCSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCSearch.swift; sourceTree = "<group>"; };
@@ -2957,6 +2961,8 @@
 				C494137624DEA12B00045749 /* HCHomeHeaderReusableView.swift */,
 				C4C11AD524E4151E001CBE74 /* HCMenuItemShadowCell.swift */,
 				C4C11AD724E41C6F001CBE74 /* HCMenuHorizontalCell.swift */,
+				C4AB271024E4E9AA0095F693 /* HCNewsReusableView.swift */,
+				C4AB271224E4EAD70095F693 /* HCMenuView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3500,6 +3506,7 @@
 				B85CD93323BE602E00B1A1C3 /* HCEditUserCityController.swift in Sources */,
 				B826AF85221C7205000428C1 /* ArticleCell.swift in Sources */,
 				C497E9612344610500328B47 /* HCHomePregnancyClassroomReusableView.swift in Sources */,
+				C4AB271124E4E9AA0095F693 /* HCNewsReusableView.swift in Sources */,
 				B816EACC221DABF400F024D5 /* ZXPDF417Dimensions.m in Sources */,
 				B816EB58221DABF400F024D5 /* LBXZXCapture.m in Sources */,
 				C421334C220587DC006C10C4 /* HandyJSON+MapModel.swift in Sources */,
@@ -3568,6 +3575,7 @@
 				C421338722059B8C006C10C4 /* DBCtrl.swift in Sources */,
 				B816EA95221DABF400F024D5 /* ZXAztecDetector.m in Sources */,
 				B892FFA423ABB70700A137C0 /* TYFiliterViewData.swift in Sources */,
+				C4AB271324E4EAD70095F693 /* HCMenuView.swift in Sources */,
 				B870E545238EE0570085AFA3 /* HCExpertConsultViewController.swift in Sources */,
 				C421338522059B8C006C10C4 /* DBProtocol.swift in Sources */,
 				C4F139B6235419EF00D777F6 /* AppLaunchView.swift in Sources */,

@@ -45,6 +45,7 @@ extension HCHomeViewContainer {
         addSubview(collectionView)
         
         collectionView.register(HCHomeHeaderReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HCHomeHeaderReusableView_identifier)
+        collectionView.register(HCNewsReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HCNewsReusableView_identifier)
 
         collectionView.register(HCMenuItemShadowCell.self, forCellWithReuseIdentifier: HCMenuItemShadowCell_identifier)
         collectionView.register(HCMenuHorizontalCell.self, forCellWithReuseIdentifier: HCMenuHorizontalCell_identifier)
@@ -55,7 +56,7 @@ extension HCHomeViewContainer {
 extension HCHomeViewContainer: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
+        return 3
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -65,7 +66,7 @@ extension HCHomeViewContainer: UICollectionViewDataSource, UICollectionViewDeleg
         case 1:
             return 6
         case 2:
-            return 1
+            return 0
         default:
             return 0
         }
@@ -102,22 +103,11 @@ extension HCHomeViewContainer: UICollectionViewDataSource, UICollectionViewDeleg
             var header = UICollectionReusableView()
             if indexPath.section == 0 {
                 header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HCHomeHeaderReusableView_identifier, for: indexPath)
+            }else if indexPath.section == 2 {
+                header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HCNewsReusableView_identifier, for: indexPath)
             }
-//            else if indexPath.section == 1 {
-//                header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HCCollectionSectionTitleView_identifier, for: indexPath)
-//                (header as! HCCollectionSectionTitleView).title = "我的服务"
-//            }else if indexPath.section == 2 {
-//                header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HCCollectionSectionTitleView_identifier, for: indexPath)
-//                (header as! HCCollectionSectionTitleView).title = "健康档案"
-//            }
             return header
         }
-
-//        if kind == UICollectionView.elementKindSectionFooter {
-//            let footer = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "footer", for: indexPath)
-//            footer.backgroundColor = RGB(245, 244, 247)
-//            return footer
-//        }
 
         return UICollectionReusableView()
     }
@@ -126,6 +116,8 @@ extension HCHomeViewContainer: UICollectionViewDataSource, UICollectionViewDeleg
         switch section {
         case 0:
             return .init(width: width, height: HCHomeHeaderReusableView_height)
+        case 2:
+            return .init(width: width, height: HCNewsReusableView_height)
         default:
             return .zero
         }
@@ -141,6 +133,8 @@ extension HCHomeViewContainer: UICollectionViewDataSource, UICollectionViewDeleg
             return .init(top: 20, left: 15, bottom: 0, right: 15)
         case 1:
             return .init(top: 20, left: 20, bottom: 0, right: 20)
+        case 2:
+            return .init(top: 15, left: 20, bottom: 0, right: 15)
 
         default:
             return .zero
