@@ -16,7 +16,7 @@ class HCListSwitchCell: HCBaseListCell {
     
     override func loadView() {
         switchView = UISwitch()
-        switchView.onTintColor = RGB(245, 102, 149)
+//        switchView.onTintColor = RGB(245, 102, 149)
         
         contentView.addSubview(switchView)
         

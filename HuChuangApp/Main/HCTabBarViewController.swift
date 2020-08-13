@@ -52,8 +52,14 @@ class HCTabBarViewController: UITabBarController {
         homeNav.tabBarItem.title = "首页"
         homeNav.tabBarItem.image = nil
         homeNav.tabBarItem.selectedImage = nil
+        
+        let toolCtrl = HCToolViewController()
+        let toolNav = MainNavigationController.init(rootViewController: toolCtrl)
+        toolNav.tabBarItem.title = "工具"
+        toolNav.tabBarItem.image = nil
+        toolNav.tabBarItem.selectedImage = nil
 
-        viewControllers = [homeNav, mineNav]
+        viewControllers = [homeNav, toolNav, mineNav]
     }
 }
 
