@@ -40,13 +40,6 @@ class HCTabBarViewController: UITabBarController {
     }
 
     private func setupTabBar() {
-        let mineCtrl = HCMineViewController()
-        let mineNav = MainNavigationController.init(rootViewController: mineCtrl)
-        mineCtrl.title = "个人中心"
-        mineNav.tabBarItem.title = "我的"
-        mineNav.tabBarItem.image = nil
-        mineNav.tabBarItem.selectedImage = nil
-        
         let homeCtrl = HCHomeViewController()
         let homeNav = MainNavigationController.init(rootViewController: homeCtrl)
         homeNav.tabBarItem.title = "首页"
@@ -59,7 +52,20 @@ class HCTabBarViewController: UITabBarController {
         toolNav.tabBarItem.image = nil
         toolNav.tabBarItem.selectedImage = nil
 
-        viewControllers = [homeNav, toolNav, mineNav]
+        let classRoomCtrl = HCClassRoomViewController()
+        let classRoomNav = MainNavigationController.init(rootViewController: classRoomCtrl)
+        classRoomNav.tabBarItem.title = "课堂"
+        classRoomNav.tabBarItem.image = nil
+        classRoomNav.tabBarItem.selectedImage = nil
+        
+        let mineCtrl = HCMineViewController()
+        let mineNav = MainNavigationController.init(rootViewController: mineCtrl)
+        mineCtrl.title = "个人中心"
+        mineNav.tabBarItem.title = "我的"
+        mineNav.tabBarItem.image = nil
+        mineNav.tabBarItem.selectedImage = nil
+
+        viewControllers = [homeNav, toolNav, classRoomNav, mineNav]
     }
 }
 

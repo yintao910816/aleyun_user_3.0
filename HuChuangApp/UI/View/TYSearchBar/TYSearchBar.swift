@@ -200,6 +200,8 @@ class TYSearchBar: UIView {
     private lazy var contentContainer: UIView = {
         let container = UIView()
         container.backgroundColor = RGB(255, 255, 255, 0.6)
+        container.layer.cornerRadius = 5
+        container.clipsToBounds = true
         self.addSubview(container)
         return container
     }()
@@ -281,6 +283,12 @@ class TYSearchBar: UIView {
         }
     }
     
+    public var contentBgRadius: CGFloat = 0 {
+        didSet {
+            contentContainer.layer.cornerRadius = contentBgRadius
+        }
+    }
+    
     //MARK: - private
     
     @objc private func tapAction() {
@@ -303,7 +311,6 @@ class TYSearchBar: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        contentContainer.layer.cornerRadius = contentContainer.height / 2.0
         if rightItemIcon.count > 0 {
             rightItem.snp.updateConstraints{ $0.size.equalTo(CGSize.init(width: 30, height: 30)) }
         }else if rightItemTitle.count > 0 {

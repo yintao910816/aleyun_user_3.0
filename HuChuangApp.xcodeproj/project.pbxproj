@@ -410,6 +410,8 @@
 		C421339D2205B224006C10C4 /* ImageRx.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42133992205B224006C10C4 /* ImageRx.swift */; };
 		C421339E2205B224006C10C4 /* HttpImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C421339A2205B224006C10C4 /* HttpImage.swift */; };
 		C42133A12205B41C006C10C4 /* BaseFilesOwner.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42133A02205B41C006C10C4 /* BaseFilesOwner.swift */; };
+		C4382BE924E55AE2000C00CE /* HCClassRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4382BE824E55AE2000C00CE /* HCClassRoomViewController.swift */; };
+		C4382BEB24E55B07000C00CE /* HCClassRoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4382BEA24E55B06000C00CE /* HCClassRoomViewModel.swift */; };
 		C43BC443233B080F00194539 /* HCConsultListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43BC441233B080F00194539 /* HCConsultListCell.swift */; };
 		C43BC449233B0D8F00194539 /* HCFindDoctorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43BC448233B0D8F00194539 /* HCFindDoctorViewController.swift */; };
 		C43BC450233B111000194539 /* HCPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43BC44F233B111000194539 /* HCPickerView.swift */; };
@@ -434,7 +436,6 @@
 		C4783B2F24DD39E800737479 /* HCBindPhoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4783B2B24DD39E800737479 /* HCBindPhoneViewController.swift */; };
 		C4783B3124DD3BFC00737479 /* HCLoginViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4783B3024DD3BFC00737479 /* HCLoginViewContainer.swift */; };
 		C48842B2233EF6A700C209B3 /* HCClassRoomListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48842B0233EF6A700C209B3 /* HCClassRoomListCell.swift */; };
-		C48842B5233EFD3500C209B3 /* HCClassRoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48842B4233EFD3500C209B3 /* HCClassRoomViewModel.swift */; };
 		C494135524DE4B7900045749 /* HCMineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C494135424DE4B7900045749 /* HCMineViewController.swift */; };
 		C494135724DE4C3200045749 /* HCMineViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C494135624DE4C3200045749 /* HCMineViewContainer.swift */; };
 		C494135924DE4C5800045749 /* HCMineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C494135824DE4C5800045749 /* HCMineViewModel.swift */; };
@@ -505,7 +506,6 @@
 		C4C3257D2205C3AD0091783C /* UIView+XIB.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C3257C2205C3AC0091783C /* UIView+XIB.swift */; };
 		C4C8EB3F235175660054A295 /* HCHomePreparePregnantInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C8EB3D235175660054A295 /* HCHomePreparePregnantInfoCell.swift */; };
 		C4C8EB40235175660054A295 /* HCHomePreparePregnantInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4C8EB3E235175660054A295 /* HCHomePreparePregnantInfoCell.xib */; };
-		C4E254E5233E069D006922DB /* HCClassRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E254E4233E069C006922DB /* HCClassRoomViewController.swift */; };
 		C4E254EA233E0793006922DB /* TYSlideMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E254E9233E0792006922DB /* TYSlideMenuController.swift */; };
 		C4E254EC233E0D4D006922DB /* TYSlideDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E254EB233E0D4D006922DB /* TYSlideDatasource.swift */; };
 		C4E254EF233E1C36006922DB /* HCClassRoomItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E254EE233E1C36006922DB /* HCClassRoomItemController.swift */; };
@@ -1180,6 +1180,8 @@
 		C421339A2205B224006C10C4 /* HttpImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpImage.swift; sourceTree = "<group>"; };
 		C421339F2205B366006C10C4 /* HcChuangApp-Bridge-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HcChuangApp-Bridge-Header.h"; sourceTree = "<group>"; };
 		C42133A02205B41C006C10C4 /* BaseFilesOwner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseFilesOwner.swift; sourceTree = "<group>"; };
+		C4382BE824E55AE2000C00CE /* HCClassRoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCClassRoomViewController.swift; sourceTree = "<group>"; };
+		C4382BEA24E55B06000C00CE /* HCClassRoomViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCClassRoomViewModel.swift; sourceTree = "<group>"; };
 		C43BC441233B080F00194539 /* HCConsultListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCConsultListCell.swift; sourceTree = "<group>"; };
 		C43BC448233B0D8F00194539 /* HCFindDoctorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCFindDoctorViewController.swift; sourceTree = "<group>"; };
 		C43BC44F233B111000194539 /* HCPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCPickerView.swift; sourceTree = "<group>"; };
@@ -2710,6 +2712,47 @@
 			path = ImageUtls;
 			sourceTree = "<group>";
 		};
+		C4382BE324E55A81000C00CE /* ClassRoom */ = {
+			isa = PBXGroup;
+			children = (
+				C4382BE424E55A81000C00CE /* ViewModel */,
+				C4382BE524E55A81000C00CE /* Controller */,
+				C4382BE624E55A81000C00CE /* Model */,
+				C4382BE724E55A81000C00CE /* View */,
+			);
+			path = ClassRoom;
+			sourceTree = "<group>";
+		};
+		C4382BE424E55A81000C00CE /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C4382BEA24E55B06000C00CE /* HCClassRoomViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		C4382BE524E55A81000C00CE /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C4382BE824E55AE2000C00CE /* HCClassRoomViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C4382BE624E55A81000C00CE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C4382BE724E55A81000C00CE /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		C43BC447233B0D3800194539 /* Consult */ = {
 			isa = PBXGroup;
 			children = (
@@ -2761,6 +2804,7 @@
 		C4783B2624DD39E800737479 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
+				C4382BE324E55A81000C00CE /* ClassRoom */,
 				C4AB271424E52A600095F693 /* Tool */,
 				C494136024DE544300045749 /* Base */,
 				C494136B24DE9E2400045749 /* Home */,
@@ -3335,7 +3379,6 @@
 				B816EA97221DABF400F024D5 /* ZXQRCodeWriter.m in Sources */,
 				B816EAF0221DABF400F024D5 /* ZXDataMatrixDataBlock.m in Sources */,
 				C454C01D234E007B005CBC0B /* TYSearchRecordLayout.swift in Sources */,
-				C4E254E5233E069D006922DB /* HCClassRoomViewController.swift in Sources */,
 				C4AEA71923ACB35F00DD7AC1 /* HCPickerController.swift in Sources */,
 				C4AB272524E536D20095F693 /* HCCalendarView.swift in Sources */,
 				C497E93523443DB100328B47 /* FindDoctorHeaderView.swift in Sources */,
@@ -3599,6 +3642,7 @@
 				B870E541238C37050085AFA3 /* HCMenstruationHistoryViewController.swift in Sources */,
 				B816EAE2221DABF400F024D5 /* ZXDataMatrixX12Encoder.m in Sources */,
 				B8BE351D221484C600EF16F1 /* UINavigationController+BarButtonItem.swift in Sources */,
+				C4382BE924E55AE2000C00CE /* HCClassRoomViewController.swift in Sources */,
 				C43BC443233B080F00194539 /* HCConsultListCell.swift in Sources */,
 				B816EAF1221DABF400F024D5 /* ZXDataMatrixDecoder.m in Sources */,
 				B816EA91221DABF400F024D5 /* ZXAztecEncoder.m in Sources */,
@@ -3660,6 +3704,7 @@
 				B8454ED123A3E19300E88BAD /* HCCurveCell.swift in Sources */,
 				B816EB30221DABF400F024D5 /* ZXEmailAddressResultParser.m in Sources */,
 				B816EB01221DABF400F024D5 /* ZXCode39Reader.m in Sources */,
+				C4382BEB24E55B07000C00CE /* HCClassRoomViewModel.swift in Sources */,
 				B816EAE5221DABF400F024D5 /* ZXDataMatrixC40Encoder.m in Sources */,
 				B816EAE0221DABF400F024D5 /* ZXPDF417ResultMetadata.m in Sources */,
 				B816EB3F221DABF400F024D5 /* ZXAddressBookParsedResult.m in Sources */,
@@ -3722,7 +3767,6 @@
 				B816EA9E221DABF400F024D5 /* ZXMultiDetector.m in Sources */,
 				C43F09BB2214315900910437 /* HomeFunctionCell.swift in Sources */,
 				C494135924DE4C5800045749 /* HCMineViewModel.swift in Sources */,
-				C48842B5233EFD3500C209B3 /* HCClassRoomViewModel.swift in Sources */,
 				B819AF7624C6E89700F88BA7 /* HCNavBarOrderRecordCell.swift in Sources */,
 				B816EAB6221DABF400F024D5 /* ZXHybridBinarizer.m in Sources */,
 				B816EB44221DABF400F024D5 /* ZXResultParser.m in Sources */,
