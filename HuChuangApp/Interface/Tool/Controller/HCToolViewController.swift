@@ -16,6 +16,12 @@ class HCToolViewController: BaseViewController {
     override func setupUI() {
         containerView = HCToolViewContainer.init(frame: .init(x: 0, y: 0, width: view.width, height: view.height))
         view.addSubview(containerView)
+        
+        containerView.didSelected = { [weak self] in
+            if $0.title == "经期设置" {
+                self?.navigationController?.pushViewController(HCMenstruationSettingViewController(), animated: true)
+            }
+        }
     }
     
     override func rxBind() {

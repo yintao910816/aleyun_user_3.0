@@ -15,6 +15,8 @@ class HCToolViewContainer: UIView {
     private var calendarView: HCCalendarView!
     private var tableView: UITableView!
     
+    public var didSelected: ((HCListCellItem)->())?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -91,6 +93,8 @@ extension HCToolViewContainer: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        didSelected?(listData[indexPath.row])
     }
 
 }
