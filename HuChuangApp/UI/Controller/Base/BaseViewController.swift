@@ -88,6 +88,9 @@ class BaseViewController: UIViewController {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.barTintColor = navBarColor
 
+        navigationController?.navigationBar.shadowImage = nil
+        navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
+
         if UIApplication.shared.statusBarStyle != .lightContent {
             UIApplication.shared.statusBarStyle = .lightContent
         }

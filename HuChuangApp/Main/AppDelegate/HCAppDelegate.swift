@@ -34,7 +34,10 @@ class HCAppDelegate: UIResponder, UIApplicationDelegate {
             self.checkVersion()
         }
 
+        window = UIWindow.init(frame: UIScreen.main.bounds)
         window?.backgroundColor = .white
+        window?.makeKeyAndVisible()
+        window?.rootViewController = HCTabBarViewController()
         
         if #available(iOS 13.0, *) {
             window?.overrideUserInterfaceStyle = .light

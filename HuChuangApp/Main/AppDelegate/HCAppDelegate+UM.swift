@@ -268,8 +268,7 @@ extension HCAppDelegate {
     }
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         if url.absoluteString.contains(HCHelper.AppKeys.appSchame.rawValue) {
-            let param = url.absoluteString.replacingOccurrences(of: "\(HCHelper.AppKeys.appSchame.rawValue)://", with: "")
-            NoticesCenter.alert(title: "应用唤起", message: param)
+            NotificationCenter.default.post(name: NotificationName.Pay.wChatPayFinish, object: nil)
             return true
         }
 
