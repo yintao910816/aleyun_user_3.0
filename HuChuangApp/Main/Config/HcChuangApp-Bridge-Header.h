@@ -23,5 +23,6 @@
 #import <UMShare/UMShare.h>
 #import "WXApi.h"
 #import <UShareUI/UShareUI.h>
+#import "YYText.h"
 
 #endif /* HcChuangApp_Bridge_Header_h */

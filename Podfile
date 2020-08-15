@@ -23,4 +23,6 @@ pod 'UMCAnalytics'
 pod 'UMCShare/Social/WeChat'
 pod 'UMCShare/UI'
 
+pod 'YYText'
+
 end

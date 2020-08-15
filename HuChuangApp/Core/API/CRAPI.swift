@@ -111,13 +111,16 @@ enum HCsearchModule: String {
 //MARK:
 //MARK: 接口定义
 enum API{
-    /// 向app服务器注册友盟token
-    case UMAdd(deviceToken: String)
-
+    // --------------- 3.0接口
     /// 获取验证码
     case validateCode(mobile: String)
     /// 登录
-    case login(mobile: String, smsCode: String)
+    case loginTel(mobile: String, smsCode: String)
+
+    // --------------- 2.0接口
+    /// 向app服务器注册友盟token
+    case UMAdd(deviceToken: String)
+
     /// 绑定微信
     case bindAuthMember(userInfo: UMSocialUserInfoResponse, mobile: String, smsCode: String)
     /// 获取用户信息
@@ -192,12 +195,16 @@ extension API: TargetType{
     
     var path: String{
         switch self {
-        case .UMAdd(_):
-            return "api/umeng/add"
+            
         case .validateCode(_):
             return "api/login/validateCode"
-        case .login(_):
-            return "api/login/login"
+        case .loginTel(_, _):
+//            return "api/login/login"
+            return "api/login/loginTel"
+
+            
+        case .UMAdd(_):
+            return "api/umeng/add"
         case .bindAuthMember(_):
             return "api/login/bindAuthMember"
         case .selectInfo:
@@ -329,16 +336,17 @@ extension API {
     private var parameters: [String: Any]? {
         var params = [String: Any]()
         switch self {
+        case .validateCode(let mobile):
+            params["mobile"] = mobile
+        case .loginTel(let mobile, let smsCode):
+            params["mobile"] = mobile
+            params["smsCode"] = smsCode
+
+            
         case .UMAdd(let deviceToken):
             params["deviceToken"] = deviceToken
             params["appPackage"] = Bundle.main.bundleIdentifier
             params["appType"] = "ios"
-
-        case .validateCode(let mobile):
-            params["mobile"] = mobile
-        case .login(let mobile, let smsCode):
-            params["mobile"] = mobile
-            params["smsCode"] = smsCode
         case .bindAuthMember(let userInfo, let mobile, let smsCode):
             params["openId"] = userInfo.openid
             params["accessToken"] = userInfo.accessToken

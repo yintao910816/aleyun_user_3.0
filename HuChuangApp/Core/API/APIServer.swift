@@ -61,12 +61,12 @@ public final class RequestLoadingPlugin: PluginType {
                 
                 guard let code = rdic["code"] as? Int else { return }
                 
-                if code == RequestCode.invalid.rawValue && HCHelper.share.isPresentLogin == false {
-                    HCHelper.presentLogin()
-                }
+//                if code == RequestCode.invalid.rawValue && HCHelper.share.isPresentLogin == false {
+//                    HCHelper.presentLogin()
+//                }
 
                 switch (target as! API) {
-                case .login(_), .selectInfo:
+                case .loginTel(_, _), .selectInfo:
                     let infoDic = (rdic["data"] as? [String : Any] ?? [:])
                     userDefault.loginInfoString = infoDic.getJSONString()
                     break

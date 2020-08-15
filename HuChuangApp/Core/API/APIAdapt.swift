@@ -45,7 +45,8 @@ import Moya
 
 struct APIAssistance {
         
-    public static let base   = "https://ileyun.ivfcn.com/hc-patient/"
+    public static let base   = "https://ileyun.ivfcn.com/hc-patient-web-test/"
+//    public static let base   = "https://ileyun.ivfcn.com/hc-patient/"
     public static let fileBase = "https://ileyun.ivfcn.com/hc-files/"
 //    public static let baseH5Host = "https://ileyun.ivfcn.com/patient-c/"
     public static let baseH5Host = "https://ileyun.ivfcn.com/consult/"

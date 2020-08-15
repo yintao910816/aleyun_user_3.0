@@ -25,49 +25,18 @@ class HCCodeInputView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func becomeFirstResponder() -> Bool {
+        super.becomeFirstResponder()
+        
+        return textView.becomeFirstResponder()
+    }
+    
     public var codeCount: Int = 0 {
         didSet {
             creatCodeUI()
         }
     }
-    
-    private func initUI() {
-        backgroundColor = .clear
-        textView = UITextView()
-        textView.backgroundColor = .clear
-        textView.keyboardType = .numberPad
-        textView.delegate = self
-        textView.isUserInteractionEnabled = false
-        textView.tintColor = .clear
         
-        frontView = UIButton()
-        frontView.backgroundColor = .clear
-        frontView.addTarget(self, action: #selector(tapAction), for: .touchUpInside)
-                
-        addSubview(textView)
-        addSubview(frontView)
-    }
-    
-    private func creatCodeUI() {
-        for idx in 200..<(200 + codeCount) {
-            let label = UILabel()
-            label.tag = idx
-            label.font = .font(fontSize: 16, fontName: .PingFSemibold)
-            label.textColor = RGB(50, 50, 50)
-            label.textAlignment = .center
-            label.layer.cornerRadius = 5
-            label.layer.borderColor = RGB(235, 235, 235).cgColor
-            label.layer.borderWidth = 2
-            frontView.addSubview(label)
-        }
-    }
-    
-    @objc private func tapAction() {
-        if !textView.isFirstResponder {
-            textView.becomeFirstResponder()
-        }
-    }
-    
     /// 一次性设置所有code
     public func setAll(with content: String) {
         for idx in 0..<content.count {
@@ -129,4 +98,45 @@ extension HCCodeInputView: UITextViewDelegate {
         setCode(with: text)
         return false
     }
+}
+
+extension HCCodeInputView {
+   
+    private func initUI() {
+        backgroundColor = .clear
+        textView = UITextView()
+        textView.backgroundColor = .clear
+        textView.keyboardType = .numberPad
+        textView.delegate = self
+        textView.isUserInteractionEnabled = false
+        textView.tintColor = .clear
+        
+        frontView = UIButton()
+        frontView.backgroundColor = .clear
+        frontView.addTarget(self, action: #selector(tapAction), for: .touchUpInside)
+                
+        addSubview(textView)
+        addSubview(frontView)
+    }
+    
+    private func creatCodeUI() {
+        for idx in 200..<(200 + codeCount) {
+            let label = UILabel()
+            label.tag = idx
+            label.font = .font(fontSize: 16, fontName: .PingFSemibold)
+            label.textColor = RGB(50, 50, 50)
+            label.textAlignment = .center
+            label.layer.cornerRadius = 5
+            label.layer.borderColor = RGB(235, 235, 235).cgColor
+            label.layer.borderWidth = 2
+            frontView.addSubview(label)
+        }
+    }
+    
+    @objc private func tapAction() {
+        if !textView.isFirstResponder {
+            textView.becomeFirstResponder()
+        }
+    }
+
 }

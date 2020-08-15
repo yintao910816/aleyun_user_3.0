@@ -14,17 +14,7 @@ class HCLoginViewController: BaseViewController {
     private var containerView: HCLoginViewContainer!
     
     private var viewModel: HCLoginViewModel!
-    
-    @IBAction func actions(_ sender: UIButton) {
-        if sender.tag == 1000 {
-            let webVC = BaseWebViewController()
-            webVC.url = "https://ileyun.ivfcn.com/cms/alyyhxy.html"
-            navigationController?.pushViewController(webVC, animated: true)
-        }else if sender.tag == 1001 {
-            sender.isSelected = !sender.isSelected
-        }
-    }
-    
+        
     override func viewWillAppear(_ animated: Bool) {        
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
@@ -35,21 +25,26 @@ class HCLoginViewController: BaseViewController {
                                                                width: view.width,
                                                                height: view.height - topArea - LayoutSize.bottomVirtualArea))
         view.addSubview(containerView)
-//        #if DEBUG
-//        accountInputOutlet.text = "13995631675"
-//        //        accountInputOutlet.text = "15717102067"
-//        //        accountInputOutlet.text = "13244762499"
-//        passInputOutlet.text  = "8888"
-//        #else
-//        accountInputOutlet.text = userDefault.loginPhone
-//        #endif
 
+        containerView.agreementTap = { [weak self] in
+            let webVC = BaseWebViewController()
+            webVC.url = "https://ileyun.ivfcn.com/cms/alyyhxy.html"
+            self?.navigationController?.pushViewController(webVC, animated: true)
+        }
     }
     
     override func rxBind() {
         viewModel = HCLoginViewModel.init(input: containerView.phoneTf.rx.text.orEmpty.asDriver(),
                                           tap: (codeTap: containerView.getCodeButton.rx.tap.asDriver(),
-                                                agreeTap: Observable.just(true).asDriver(onErrorJustReturn: true)))
+                                                agreeTap: containerView.agreeSignal.asDriver()))
+        viewModel.enableCode
+            .do(onNext: { [weak self] flag in
+                self?.containerView.getCodeButton.backgroundColor = flag ? HC_MAIN_COLOR : RGB(242, 242, 242)
+                self?.containerView.getCodeButton.isSelected = flag
+            })
+            .drive(containerView.getCodeButton.rx.isUserInteractionEnabled)
+            .disposed(by: disposeBag)
+        
     }
     
 }

@@ -15,7 +15,7 @@ class HCVerifyViewContainer: UIView {
     private var subIcon: UIImageView!
 
     private var codeView: HCCodeInputView!
-    private var timeLabel: UILabel!
+    public var timeLabel: UILabel!
     
     public var finishInput: ((String)->())?
 
@@ -28,6 +28,30 @@ class HCVerifyViewContainer: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    @discardableResult
+    override func becomeFirstResponder() -> Bool {
+        super.becomeFirstResponder()
+
+        return codeView.becomeFirstResponder()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        titlelabel.frame = .init(x: 40, y: 0, width: width - 80, height: 45)
+        
+        let tempSize = subTitleLabel.sizeThatFits(.init(width: Double(MAXFLOAT), height: 20.0))
+        subTitleLabel.frame = .init(x: titlelabel.frame.minX, y: titlelabel.frame.maxY + 5, width: tempSize.width, height: 20)
+        subIcon.frame = .init(x: subTitleLabel.frame.maxX + 5, y: subTitleLabel.frame.minY + 2.5, width: 18, height: 15)
+
+        codeView.frame = .init(x: 40, y: subTitleLabel.frame.maxY + 15, width: width - 80, height: 60)
+        timeLabel.frame = .init(x: 40, y: codeView.frame.maxY + 32, width: width - 80, height: 16)
+    }
+    
+}
+
+extension HCVerifyViewContainer {
     
     private func initUI() {
         titlelabel = UILabel()
@@ -47,7 +71,7 @@ class HCVerifyViewContainer: UIView {
         codeView.finishInput = { [weak self] in self?.finishInput?($0) }
         
         timeLabel = UILabel()
-        timeLabel.text = "55s后重新发送"
+        timeLabel.text = ""
         timeLabel.textAlignment = .center
         timeLabel.font = .font(fontSize: 12, fontName: .PingFRegular)
         timeLabel.textColor = RGB(54, 54, 54)
@@ -58,18 +82,4 @@ class HCVerifyViewContainer: UIView {
         addSubview(codeView)
         addSubview(timeLabel)
     }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        titlelabel.frame = .init(x: 40, y: 0, width: width - 80, height: 45)
-        
-        let tempSize = subTitleLabel.sizeThatFits(.init(width: Double(MAXFLOAT), height: 20.0))
-        subTitleLabel.frame = .init(x: titlelabel.frame.minX, y: titlelabel.frame.maxY + 5, width: tempSize.width, height: 20)
-        subIcon.frame = .init(x: subTitleLabel.frame.maxX + 5, y: subTitleLabel.frame.minY + 2.5, width: 18, height: 15)
-
-        codeView.frame = .init(x: 40, y: subTitleLabel.frame.maxY + 15, width: width - 80, height: 60)
-        timeLabel.frame = .init(x: 40, y: codeView.frame.maxY + 32, width: width - 80, height: 16)
-    }
-    
 }
