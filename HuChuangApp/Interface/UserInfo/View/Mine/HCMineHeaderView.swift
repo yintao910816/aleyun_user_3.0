@@ -42,6 +42,21 @@ class HCMineHeaderView: UICollectionReusableView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    public var model: HCPersonalCenterInfoModel = HCPersonalCenterInfoModel() {
+        didSet {
+            couponButton.setupText(first: "\(model.coupon)", second: "优惠卷")
+            serverButton.setupText(first: "\(model.servicePack)", second: "服务包")
+            collectionButton.setupText(first: "\(model.attentionStore)", second: "收藏")
+        }
+    }
+    
+    public var userModel: HCUserModel = HCUserModel() {
+        didSet {
+            avatarButton.setImage(userModel.headPath, .userIcon)
+            phoneLabel.text = userModel.mobileInfo
+        }
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         
@@ -71,7 +86,7 @@ extension HCMineHeaderView {
         avatarButton = UIButton()
         avatarButton.layer.cornerRadius = 30
         avatarButton.clipsToBounds = true
-        avatarButton.setImage(UIImage.init(named: "default_user_icon"), for: .normal)
+        avatarButton.setBackgroundImage(UIImage.init(named: "default_user_icon"), for: .normal)
         
         phoneLabel = UILabel()
         phoneLabel.textColor = RGB(51, 51, 51)
@@ -86,13 +101,13 @@ extension HCMineHeaderView {
         verifyButton.addTarget(self, action: #selector(buttonAction(_:)), for: .touchUpInside)
         
         couponButton = HCCustomTextButton()
-        couponButton.setupText(first: "1", second: "优惠卷")
+        couponButton.setupText(first: "0", second: "优惠卷")
         
         serverButton = HCCustomTextButton()
-        serverButton.setupText(first: "1", second: "服务包")
+        serverButton.setupText(first: "0", second: "服务包")
 
         collectionButton = HCCustomTextButton()
-        collectionButton.setupText(first: "1", second: "收藏")
+        collectionButton.setupText(first: "0", second: "收藏")
         
         bottomTitleView = HCCollectionSectionTitleView()
         bottomTitleView.title = "进行中的服务"

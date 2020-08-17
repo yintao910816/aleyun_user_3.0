@@ -18,12 +18,23 @@ class HCMineViewContainer: UIView {
         super.init(frame: frame)
         
         initUI()
-        
         collectionView.reloadData()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    public var model: HCPersonalCenterInfoModel = HCPersonalCenterInfoModel() {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
+    
+    public var userModel: HCUserModel = HCUserModel() {
+        didSet {
+            collectionView.reloadData()
+        }
     }
     
     override func layoutSubviews() {
@@ -106,6 +117,8 @@ extension HCMineViewContainer: UICollectionViewDataSource, UICollectionViewDeleg
             if indexPath.section == 0 {
                 header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HCMineHeaderView_identifier, for: indexPath)
                 (header as! HCMineHeaderView).excuteAction = { [weak self] in self?.excuteAction?($0) }
+                (header as! HCMineHeaderView).model = model
+                (header as! HCMineHeaderView).userModel = userModel
             }else if indexPath.section == 1 {
                 header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HCCollectionSectionTitleView_identifier, for: indexPath)
                 (header as! HCCollectionSectionTitleView).title = "我的服务"

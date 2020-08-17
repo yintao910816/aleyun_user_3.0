@@ -11,6 +11,7 @@ import UIKit
 class HCMineViewController: BaseViewController {
 
     private var containerView: HCMineViewContainer!
+    private var viewModel: HCMineViewModel!
     
     override func viewWillAppear(_ animated: Bool) {        
         navigationController?.navigationBar.barTintColor = RGB(255, 244, 251)
@@ -21,9 +22,6 @@ class HCMineViewController: BaseViewController {
     override func setupUI() {
         containerView = HCMineViewContainer.init(frame: .init(x: 0, y: 0, width: view.width, height: view.height))
         view.addSubview(containerView)
-    }
-    
-    override func rxBind() {
         
         containerView.excuteAction = { [weak self] in
             switch $0 {
@@ -31,6 +29,22 @@ class HCMineViewController: BaseViewController {
                 self?.navigationController?.pushViewController(HCAccountSettingViewController(), animated: true)
             }
         }
+    }
+    
+    override func rxBind() {
+        viewModel = HCMineViewModel()
+        
+        viewModel.personalCenterInfoSignal
+            .asDriver()
+            .drive(onNext: { [weak self] in self?.containerView.model = $0 })
+            .disposed(by: disposeBag)
+        
+        viewModel.userInfoSignal
+            .asDriver()
+            .drive(onNext: { [weak self] in self?.containerView.userModel = $0 })
+            .disposed(by: disposeBag)
+
+        viewModel.reloadSubject.onNext(Void())
     }
     
     override func viewDidLayoutSubviews() {

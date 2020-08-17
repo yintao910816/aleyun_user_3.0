@@ -122,6 +122,8 @@ enum API{
     case accountSetting(nickName: String, headPath: String)
     /// 上传头像
     case uploadIcon(image: UIImage)
+    /// 个人中心
+    case personalCenterInfo
 
 
     // --------------- 2.0接口
@@ -211,7 +213,9 @@ extension API: TargetType{
             return "api/personalCenter/accountSetting"
         case .uploadIcon(_):
             return "api/upload/imgSingle"
-
+        case .personalCenterInfo:
+            return "api/personalCenter/info"
+            
         case .UMAdd(_):
             return "api/umeng/add"
         case .bindAuthMember(_):
