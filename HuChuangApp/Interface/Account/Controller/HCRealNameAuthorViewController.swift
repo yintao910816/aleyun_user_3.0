@@ -21,7 +21,13 @@ class HCRealNameAuthorViewController: BaseViewController {
     }
     
     override func rxBind() {
+        viewModel = HCRealNameAuthorViewModel.init(commit: containerView.commitButton.rx.tap.asDriver())
         
+        viewModel.listItemSubject
+            .subscribe(onNext: { [weak self] in self?.containerView.reloadData(data: $0) })
+            .disposed(by: disposeBag)
+        
+        viewModel.reloadSubject.onNext(Void())
     }
     
     override func viewDidLayoutSubviews() {

@@ -21,11 +21,11 @@ class HCListDetailInputCell: HCBaseListCell {
         inputTf = UITextField()
         inputTf.font = .font(fontSize: 14)
         inputTf.textColor = .black
-        
+
         contentView.addSubview(inputTf)
         
         inputTf.snp.makeConstraints {
-            $0.right.equalTo(contentView).offset(-15)
+            $0.right.equalTo(arrowImgV.snp.right).offset(15 + 8)
             $0.size.equalTo(CGSize.init(width: 100, height: 25))
             $0.centerY.equalTo(contentView.snp.centerY)
         }
@@ -35,17 +35,12 @@ class HCListDetailInputCell: HCBaseListCell {
         didSet {
             super.model = model
             
+            inputTf.textAlignment = model.detailInputTextAlignment
             inputTf.placeholder = model.placeholder
             
-            if model.shwoArrow && arrowImgV.isHidden {
-                inputTf.snp.updateConstraints {
-                    $0.right.equalTo(contentView).offset(-7 - 8 - 15)
-                    $0.size.equalTo(model.inputSize)
-                }
-            }else {
-                inputTf.snp.updateConstraints {
-                    $0.size.equalTo(model.inputSize)
-                }
+            inputTf.snp.updateConstraints {
+                $0.right.equalTo(arrowImgV.snp.right).offset(model.shwoArrow ? 15 + 8 : 0)
+                $0.size.equalTo(model.inputSize)
             }
         }
     }

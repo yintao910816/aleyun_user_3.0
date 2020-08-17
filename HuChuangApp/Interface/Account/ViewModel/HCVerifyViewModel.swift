@@ -9,7 +9,7 @@
 import Foundation
 import RxSwift
 
-class HCVerifyViewModel: BaseViewModel {
+class HCVerifyViewModel: BaseViewModel, VMNavigation {
     
     private var mobile: String = ""
     
@@ -51,23 +51,33 @@ class HCVerifyViewModel: BaseViewModel {
 extension HCVerifyViewModel {
     
     private func requestLogin(code: String) {
-        HCProvider.request(.loginTel(mobile: mobile, smsCode: code))
-            .map(result: HCUserModel.self)
-            .subscribe(onSuccess: { [weak self] in
-                if RequestCode(rawValue: $0.code) == .unVerified {
-                    
-                }else if RequestCode(rawValue: $0.code) == .success {
-                    if let user = $0.data {
-                        self?.hud.noticeHidden()
-                        self?.popSubject.onNext(Void())
-                        HCHelper.saveLogin(user: user)
-                    }
-                }else {
-                    self?.hud.failureHidden($0.message)
-                }
-            }) { [weak self] in
-                self?.hud.failureHidden(self?.errorMessage($0))
-        }
-        .disposed(by: disposeBag)
+        HCLoginViewModel.push(HCRealNameAuthorViewController.self, nil)
+
+//        HCProvider.request(.loginTel(mobile: mobile, smsCode: code))
+//            .map(result: HCUserModel.self)
+//            .subscribe(onSuccess: { [weak self] in
+//                if RequestCode(rawValue: $0.code) == .unVerified {
+//                    if let user = $0.data {
+//                        self?.hud.noticeHidden()
+//                        self?.popSubject.onNext(Void())
+//                        HCHelper.saveLogin(user: user)
+//                    }
+//                    self?.timer.timerRemove()
+//                    HCLoginViewModel.push(HCRealNameAuthorViewController.self, nil)
+//                }else if RequestCode(rawValue: $0.code) == .success {
+//                    if let user = $0.data {
+//                        self?.timer.timerRemove()
+//
+//                        self?.hud.noticeHidden()
+//                        self?.popSubject.onNext(Void())
+//                        HCHelper.saveLogin(user: user)
+//                    }
+//                }else {
+//                    self?.hud.failureHidden($0.message)
+//                }
+//            }) { [weak self] in
+//                self?.hud.failureHidden(self?.errorMessage($0))
+//        }
+//        .disposed(by: disposeBag)
     }
 }

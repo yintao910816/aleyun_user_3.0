@@ -51,7 +51,7 @@ extension HCRealNameAuthorContainer {
         remindLabel = UILabel()
         remindLabel.font = .font(fontSize: 11)
         remindLabel.textColor = RGB(91, 113, 145)
-        remindLabel.text = "国家卫健委要求，就医行为必须实名登记"
+        remindLabel.text = "*国家卫健委要求，就医行为必须实名登记"
         
         tableView = UITableView.init(frame: bounds, style: .plain)
         tableView.delegate = self
@@ -65,9 +65,10 @@ extension HCRealNameAuthorContainer {
         commitButton.setTitleColor(.white, for: .normal)
         commitButton.titleLabel?.font = .font(fontSize: 16)
 
+        tableView.register(HCListDetailInputCell.self, forCellReuseIdentifier: HCListDetailInputCell_identifier)
+        tableView.register(HCListSexCell.self, forCellReuseIdentifier: HCListSexCell_identifier)
         tableView.register(HCListDetailCell.self, forCellReuseIdentifier: HCListDetailCell_identifier)
-        tableView.register(HCListDetailIconCell.self, forCellReuseIdentifier: HCListDetailIconCell_identifier)
-        
+
         addSubview(remindBg)
         remindBg.addSubview(remindLabel)
         addSubview(tableView)

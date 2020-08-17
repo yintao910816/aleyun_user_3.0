@@ -116,6 +116,8 @@ enum API{
     case validateCode(mobile: String)
     /// 登录
     case loginTel(mobile: String, smsCode: String)
+    /// 实名认证
+    case realNameAuth(realName: String, sex: String, birthDay: String, certificateType: String, certificateNo: String)
 
     // --------------- 2.0接口
     /// 向app服务器注册友盟token
@@ -199,9 +201,9 @@ extension API: TargetType{
         case .validateCode(_):
             return "api/login/validateCode"
         case .loginTel(_, _):
-//            return "api/login/login"
             return "api/login/loginTel"
-
+        case .realNameAuth(_, _, _, _, _):
+            return "api/consumer/realNameAuth"
             
         case .UMAdd(_):
             return "api/umeng/add"
@@ -341,7 +343,12 @@ extension API {
         case .loginTel(let mobile, let smsCode):
             params["mobile"] = mobile
             params["smsCode"] = smsCode
-
+        case .realNameAuth(let realName, let sex, let birthDay, let certificateType, let certificateNo):
+            params["realName"] = realName
+            params["sex"] = sex
+            params["birthDay"] = birthDay
+            params["certificateType"] = certificateType
+            params["certificateNo"] = certificateNo
             
         case .UMAdd(let deviceToken):
             params["deviceToken"] = deviceToken

@@ -42,10 +42,10 @@ class HCLoginViewModel: BaseViewModel, VMNavigation {
 extension HCLoginViewModel {
     
     private func requestCode(mobile: String) {
-//        #if DEBUG
-//        hud.noticeHidden()
-//        HCLoginViewModel.push(HCVerifyViewController.self, ["mobile": mobile])
-//        #else
+        #if DEBUG
+        hud.noticeHidden()
+        HCLoginViewModel.push(HCVerifyViewController.self, ["mobile": mobile])
+        #else
         HCProvider.request(.validateCode(mobile: mobile))
             .mapResponse()
             .subscribe(onSuccess: { [weak self] res in
@@ -59,7 +59,7 @@ extension HCLoginViewModel {
                 self?.hud.failureHidden(self?.errorMessage($0))
         }
         .disposed(by: disposeBag)
-//        #endif
+        #endif
     }
 
 }

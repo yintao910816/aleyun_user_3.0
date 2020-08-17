@@ -15,8 +15,26 @@ enum RequestCode: Int {
     case invalid = 401
     /// 未实名认证
     case unVerified = 402
+    /// 微信未绑定手机号
+    case unBindPhone = 403
+    /// 免费订单
+    case freeOrder = 1111
     /// 其它错误
     case badRequest
+}
+
+enum HCGender: Int {
+    case female = 0
+    case male = 1
+    
+    var genderText: String {
+        switch self {
+        case .female:
+            return "女"
+        case .male:
+            return "男"
+        }
+    }
 }
 
 // MARK:

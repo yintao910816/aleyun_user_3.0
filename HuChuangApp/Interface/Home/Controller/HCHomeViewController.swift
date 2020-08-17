@@ -18,7 +18,9 @@ class HCHomeViewController: BaseViewController {
     }
     
     override func rxBind() {
-        
+//        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
+//            HCHelper.presentLogin()
+//        }
     }
     
     override func viewDidLayoutSubviews() {
