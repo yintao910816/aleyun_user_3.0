@@ -1216,7 +1216,6 @@
 		C4382C0B24E62DE3000C00CE /* HCMenstruationSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCMenstruationSettingViewModel.swift; sourceTree = "<group>"; };
 		C43BC441233B080F00194539 /* HCConsultListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCConsultListCell.swift; sourceTree = "<group>"; };
 		C43BC448233B0D8F00194539 /* HCFindDoctorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCFindDoctorViewController.swift; sourceTree = "<group>"; };
-		C43BC44F233B111000194539 /* HCPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCPickerView.swift; sourceTree = "<group>"; };
 		C43F09B92214315900910437 /* HomeFunctionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFunctionCell.swift; sourceTree = "<group>"; };
 		C43F09BA2214315900910437 /* HomeFunctionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeFunctionCell.xib; sourceTree = "<group>"; };
 		C43F09BD22143B5200910437 /* BaseWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseWebViewController.swift; sourceTree = "<group>"; };
@@ -1279,7 +1278,6 @@
 		C497E9702344728200328B47 /* HCHomeBabyTuinaClassroomReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HCHomeBabyTuinaClassroomReusableView.xib; sourceTree = "<group>"; };
 		C497E97623447E6F00328B47 /* HCHomeBabyTuinaClassroomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCHomeBabyTuinaClassroomCell.swift; sourceTree = "<group>"; };
 		C497E97723447E6F00328B47 /* HCHomeBabyTuinaClassroomCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HCHomeBabyTuinaClassroomCell.xib; sourceTree = "<group>"; };
-		C4AA4109233C648C00144400 /* HCDatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCDatePickerViewController.swift; sourceTree = "<group>"; };
 		C4AB271024E4E9AA0095F693 /* HCNewsReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCNewsReusableView.swift; sourceTree = "<group>"; };
 		C4AB271224E4EAD70095F693 /* HCMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCMenuView.swift; sourceTree = "<group>"; };
 		C4AB271924E52AB90095F693 /* HCToolViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCToolViewController.swift; sourceTree = "<group>"; };
@@ -1297,7 +1295,6 @@
 		C4AB272E24E53D6F0095F693 /* HCListDetailButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCListDetailButtonCell.swift; sourceTree = "<group>"; };
 		C4AB272F24E53D6F0095F693 /* HCBaseListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCBaseListCell.swift; sourceTree = "<group>"; };
 		C4AB273024E53D6F0095F693 /* HCListDetailInputCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCListDetailInputCell.swift; sourceTree = "<group>"; };
-		C4AEA71823ACB35F00DD7AC1 /* HCPickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCPickerController.swift; sourceTree = "<group>"; };
 		C4B1852A2345880E00F37197 /* HCSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCSearchViewModel.swift; sourceTree = "<group>"; };
 		C4B185332345B03400F37197 /* HCSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCSearch.swift; sourceTree = "<group>"; };
 		C4C11AD524E4151E001CBE74 /* HCMenuItemShadowCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCMenuItemShadowCell.swift; sourceTree = "<group>"; };
@@ -2526,7 +2523,6 @@
 				C47E067C23589766003A3320 /* Recorder */,
 				C497E93323443D1D00328B47 /* FindDoctor */,
 				C4E254E8233E0770006922DB /* SlideMenu */,
-				C43BC44E233B10F200194539 /* Picker */,
 				B86993D423373A5300086A77 /* TYSearchBar */,
 				B8BE34F022145DF000EF16F1 /* Custom */,
 				B8BE34EB2214597800EF16F1 /* Mine */,
@@ -2832,16 +2828,6 @@
 				B890693723BA40D2001D3FE9 /* HCDoctorHomeController.swift */,
 			);
 			path = Consult;
-			sourceTree = "<group>";
-		};
-		C43BC44E233B10F200194539 /* Picker */ = {
-			isa = PBXGroup;
-			children = (
-				C43BC44F233B111000194539 /* HCPickerView.swift */,
-				C4AA4109233C648C00144400 /* HCDatePickerViewController.swift */,
-				C4AEA71823ACB35F00DD7AC1 /* HCPickerController.swift */,
-			);
-			path = Picker;
 			sourceTree = "<group>";
 		};
 		C43F09B722142DEA00910437 /* Cell */ = {
