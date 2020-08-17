@@ -52,11 +52,19 @@ extension HCVerifyViewModel {
     
     private func requestLogin(code: String) {
         HCProvider.request(.loginTel(mobile: mobile, smsCode: code))
-            .map(model: HCUserModel.self)
+            .map(result: HCUserModel.self)
             .subscribe(onSuccess: { [weak self] in
-                HCHelper.saveLogin(user: $0)
-                self?.hud.noticeHidden()
-                self?.popSubject.onNext(Void())
+                if RequestCode(rawValue: $0.code) == .unVerified {
+                    
+                }else if RequestCode(rawValue: $0.code) == .success {
+                    if let user = $0.data {
+                        self?.hud.noticeHidden()
+                        self?.popSubject.onNext(Void())
+                        HCHelper.saveLogin(user: user)
+                    }
+                }else {
+                    self?.hud.failureHidden($0.message)
+                }
             }) { [weak self] in
                 self?.hud.failureHidden(self?.errorMessage($0))
         }

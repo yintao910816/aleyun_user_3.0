@@ -9,6 +9,7 @@
 import UIKit
 import StoreKit
 import RxSwift
+import HandyJSON
 
 @UIApplicationMain
 class HCAppDelegate: UIResponder, UIApplicationDelegate {
@@ -52,6 +53,10 @@ class HCAppDelegate: UIResponder, UIApplicationDelegate {
                     PrintLog(error)
                 }
                 .disposed(by: disposeBag)
+        }else {
+            if let user = JSONDeserializer<HCUserModel>.deserializeFrom(json: userDefault.loginInfoString) {
+                HCHelper.saveLogin(user: user)
+            }
         }
         
 //        if userDefault.lanuchStatue != vLaunch { AppLaunchView().show() }

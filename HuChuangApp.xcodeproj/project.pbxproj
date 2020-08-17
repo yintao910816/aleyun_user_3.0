@@ -411,6 +411,10 @@
 		C421339D2205B224006C10C4 /* ImageRx.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42133992205B224006C10C4 /* ImageRx.swift */; };
 		C421339E2205B224006C10C4 /* HttpImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C421339A2205B224006C10C4 /* HttpImage.swift */; };
 		C42133A12205B41C006C10C4 /* BaseFilesOwner.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42133A02205B41C006C10C4 /* BaseFilesOwner.swift */; };
+		C42AF1A324EA1D6A0034DBEF /* HCRealNameAuthorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42AF1A224EA1D6A0034DBEF /* HCRealNameAuthorViewController.swift */; };
+		C42AF1A524EA1D830034DBEF /* HCRealNameAuthorContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42AF1A424EA1D830034DBEF /* HCRealNameAuthorContainer.swift */; };
+		C42AF1A724EA1D8F0034DBEF /* HCRealNameAuthorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42AF1A624EA1D8F0034DBEF /* HCRealNameAuthorViewModel.swift */; };
+		C42AF1A924EA210E0034DBEF /* HCListSexCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42AF1A824EA210E0034DBEF /* HCListSexCell.swift */; };
 		C4382BE924E55AE2000C00CE /* HCClassRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4382BE824E55AE2000C00CE /* HCClassRoomViewController.swift */; };
 		C4382BEB24E55B07000C00CE /* HCClassRoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4382BEA24E55B06000C00CE /* HCClassRoomViewModel.swift */; };
 		C4382BED24E5604D000C00CE /* HCAccountSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4382BEC24E5604D000C00CE /* HCAccountSettingViewController.swift */; };
@@ -1191,6 +1195,10 @@
 		C421339A2205B224006C10C4 /* HttpImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpImage.swift; sourceTree = "<group>"; };
 		C421339F2205B366006C10C4 /* HcChuangApp-Bridge-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HcChuangApp-Bridge-Header.h"; sourceTree = "<group>"; };
 		C42133A02205B41C006C10C4 /* BaseFilesOwner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseFilesOwner.swift; sourceTree = "<group>"; };
+		C42AF1A224EA1D6A0034DBEF /* HCRealNameAuthorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCRealNameAuthorViewController.swift; sourceTree = "<group>"; };
+		C42AF1A424EA1D830034DBEF /* HCRealNameAuthorContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCRealNameAuthorContainer.swift; sourceTree = "<group>"; };
+		C42AF1A624EA1D8F0034DBEF /* HCRealNameAuthorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCRealNameAuthorViewModel.swift; sourceTree = "<group>"; };
+		C42AF1A824EA210E0034DBEF /* HCListSexCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCListSexCell.swift; sourceTree = "<group>"; };
 		C4382BE824E55AE2000C00CE /* HCClassRoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCClassRoomViewController.swift; sourceTree = "<group>"; };
 		C4382BEA24E55B06000C00CE /* HCClassRoomViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCClassRoomViewModel.swift; sourceTree = "<group>"; };
 		C4382BEC24E5604D000C00CE /* HCAccountSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCAccountSettingViewController.swift; sourceTree = "<group>"; };
@@ -2879,6 +2887,7 @@
 			children = (
 				C472524E24DD54B0006DEEC9 /* HCLoginViewModel.swift */,
 				B88497DB24E7F6FB00B91262 /* HCVerifyViewModel.swift */,
+				C42AF1A624EA1D8F0034DBEF /* HCRealNameAuthorViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -2889,6 +2898,7 @@
 				C4783B2A24DD39E800737479 /* HCLoginViewController.swift */,
 				C472525024DD562A006DEEC9 /* HCVerifyViewController.swift */,
 				C4783B2B24DD39E800737479 /* HCBindPhoneViewController.swift */,
+				C42AF1A224EA1D6A0034DBEF /* HCRealNameAuthorViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2907,6 +2917,7 @@
 				C4783B3024DD3BFC00737479 /* HCLoginViewContainer.swift */,
 				C472525224DD564D006DEEC9 /* HCVerifyViewContainer.swift */,
 				C472525424DD7C80006DEEC9 /* HCCodeInputView.swift */,
+				C42AF1A424EA1D830034DBEF /* HCRealNameAuthorContainer.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3161,6 +3172,7 @@
 				C4AB272E24E53D6F0095F693 /* HCListDetailButtonCell.swift */,
 				C4AB272F24E53D6F0095F693 /* HCBaseListCell.swift */,
 				C4AB273024E53D6F0095F693 /* HCListDetailInputCell.swift */,
+				C42AF1A824EA210E0034DBEF /* HCListSexCell.swift */,
 			);
 			path = HCCellItem;
 			sourceTree = "<group>";
@@ -3422,6 +3434,7 @@
 				B816EAFB221DABF400F024D5 /* ZXCodaBarReader.m in Sources */,
 				B816EA80221DABF400F024D5 /* ZXEncodeHints.m in Sources */,
 				C4E254EF233E1C36006922DB /* HCClassRoomItemController.swift in Sources */,
+				C42AF1A924EA210E0034DBEF /* HCListSexCell.swift in Sources */,
 				B816EB50221DABF400F024D5 /* ZXSMSParsedResult.m in Sources */,
 				B816EA85221DABF400F024D5 /* ZXInvertedLuminanceSource.m in Sources */,
 				B816EB2D221DABF400F024D5 /* ZXCode39Writer.m in Sources */,
@@ -3485,6 +3498,7 @@
 				B816EB5A221DACA600F024D5 /* ScanViewModel.swift in Sources */,
 				B816EB4F221DABF400F024D5 /* ZXExpandedProductParsedResult.m in Sources */,
 				B892FF9423AB52CD00A137C0 /* HCArticleDetailViewController.swift in Sources */,
+				C42AF1A324EA1D6A0034DBEF /* HCRealNameAuthorViewController.swift in Sources */,
 				C42133702205961D006C10C4 /* SharedSequenceConvertibleType+Extension.swift in Sources */,
 				B870E55023902E110085AFA3 /* TYListMenuCell.swift in Sources */,
 				C421339B2205B224006C10C4 /* DiskImage.swift in Sources */,
@@ -3522,6 +3536,7 @@
 				C421336F2205961D006C10C4 /* ObservableType+Extension.swift in Sources */,
 				B816EAD6221DABF400F024D5 /* ZXPDF417BarcodeMetadata.m in Sources */,
 				B816EB1D221DABF400F024D5 /* ZXRSSPair.m in Sources */,
+				C42AF1A524EA1D830034DBEF /* HCRealNameAuthorContainer.swift in Sources */,
 				B816EA75221DABF400F024D5 /* LBXScanViewStyle.m in Sources */,
 				B816EB20221DABF400F024D5 /* ZXRSSFinderPattern.m in Sources */,
 				B816EACB221DABF400F024D5 /* ZXPDF417BarcodeMatrix.m in Sources */,
@@ -3632,6 +3647,7 @@
 				C4AB273824E53D6F0095F693 /* HCBaseListCell.swift in Sources */,
 				B816EB1A221DABF400F024D5 /* ZXRSSExpandedReader.m in Sources */,
 				B8BE350D2214794900EF16F1 /* Bundle+Extension.swift in Sources */,
+				C42AF1A724EA1D8F0034DBEF /* HCRealNameAuthorViewModel.swift in Sources */,
 				B816EB36221DABF400F024D5 /* ZXVEventResultParser.m in Sources */,
 				B8CD926523A2964800C9C061 /* HCRecordUserInfoReusableView.swift in Sources */,
 				B8FC3F8B239AA0C5006EB478 /* HCSettingViewModel.swift in Sources */,
