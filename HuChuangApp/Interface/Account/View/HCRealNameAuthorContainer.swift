@@ -17,6 +17,8 @@ class HCRealNameAuthorContainer: UIView {
     private var tableView: UITableView!
     public var commitButton: UIButton!
     
+    public var didSelected: ((IndexPath)->())?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -29,6 +31,11 @@ class HCRealNameAuthorContainer: UIView {
     
     public func reloadData(data: [HCListCellItem]) {
         listData = data
+        tableView.reloadData()
+    }
+    
+    public func reloadItem(indexPath: IndexPath, content: String) {
+        listData[indexPath.row].detailTitle = content
         tableView.reloadData()
     }
 
@@ -95,6 +102,15 @@ extension HCRealNameAuthorContainer: UITableViewDelegate, UITableViewDataSource 
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        if indexPath.row == 2 || indexPath.row == 3 {
+            didSelected?(indexPath)
+        }
+        
+        endEditing(true)
     }
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        endEditing(true)
+    }
 }

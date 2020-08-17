@@ -14,7 +14,7 @@ enum CellIconType {
     case userIcon
 }
 
-struct HCListCellItem {
+class HCListCellItem {
     
     var title: String = ""
     var titleIcon: String = ""

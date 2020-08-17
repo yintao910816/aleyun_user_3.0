@@ -27,6 +27,10 @@ class HCBaseListCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    deinit {
+        PrintLog("已释放：\(self)")
+    }
+    
     private func setupView() {
         titleIcon = UIImageView()
         titleIcon.contentMode = .scaleAspectFill

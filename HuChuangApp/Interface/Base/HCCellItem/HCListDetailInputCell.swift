@@ -21,6 +21,7 @@ class HCListDetailInputCell: HCBaseListCell {
         inputTf = UITextField()
         inputTf.font = .font(fontSize: 14)
         inputTf.textColor = .black
+        inputTf.delegate = self
 
         contentView.addSubview(inputTf)
         
@@ -35,6 +36,10 @@ class HCListDetailInputCell: HCBaseListCell {
         didSet {
             super.model = model
             
+            if inputTf.delegate == nil {
+                inputTf.delegate = self
+            }
+            
             inputTf.textAlignment = model.detailInputTextAlignment
             inputTf.placeholder = model.placeholder
             
@@ -43,5 +48,17 @@ class HCListDetailInputCell: HCBaseListCell {
                 $0.size.equalTo(model.inputSize)
             }
         }
+    }
+    
+    deinit {
+        inputTf.delegate = nil
+        inputTf.removeFromSuperview()
+    }
+}
+
+extension HCListDetailInputCell: UITextFieldDelegate {
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        model.detailTitle = textField.text ?? ""
     }
 }
