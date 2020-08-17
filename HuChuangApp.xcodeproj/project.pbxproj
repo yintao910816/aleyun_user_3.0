@@ -355,6 +355,7 @@
 		C40448A024EA721200AD1610 /* HCPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C404489D24EA721200AD1610 /* HCPickerController.swift */; };
 		C40448A124EA721200AD1610 /* HCDatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C404489E24EA721200AD1610 /* HCDatePickerViewController.swift */; };
 		C40448A324EA722A00AD1610 /* HCPickerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40448A224EA722A00AD1610 /* HCPickerData.swift */; };
+		C40448A524EAA31A00AD1610 /* HCFileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40448A424EAA31A00AD1610 /* HCFileModel.swift */; };
 		C4193D8422A7649F007A9E07 /* TYClickedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4193D8322A7649F007A9E07 /* TYClickedButton.swift */; };
 		C41A12C122BCF49100214216 /* String+Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41A12C022BCF49100214216 /* String+Operation.swift */; };
 		C42132F622054463006C10C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C42132F522054463006C10C4 /* Assets.xcassets */; };
@@ -1134,6 +1135,7 @@
 		C404489D24EA721200AD1610 /* HCPickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCPickerController.swift; sourceTree = "<group>"; };
 		C404489E24EA721200AD1610 /* HCDatePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCDatePickerViewController.swift; sourceTree = "<group>"; };
 		C40448A224EA722A00AD1610 /* HCPickerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCPickerData.swift; sourceTree = "<group>"; };
+		C40448A424EAA31A00AD1610 /* HCFileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCFileModel.swift; sourceTree = "<group>"; };
 		C4193D8322A7649F007A9E07 /* TYClickedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TYClickedButton.swift; sourceTree = "<group>"; };
 		C41A12C022BCF49100214216 /* String+Operation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Operation.swift"; sourceTree = "<group>"; };
 		C42132EB22054462006C10C4 /* 爱乐孕.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "爱乐孕.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2960,6 +2962,7 @@
 		C494135224DE4B5700045749 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				C40448A424EAA31A00AD1610 /* HCFileModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3524,6 +3527,7 @@
 				B816EA8E221DABF400F024D5 /* ZXAztecBinaryShiftToken.m in Sources */,
 				B816EB42221DABF400F024D5 /* ZXURIParsedResult.m in Sources */,
 				C40448A324EA722A00AD1610 /* HCPickerData.swift in Sources */,
+				C40448A524EAA31A00AD1610 /* HCFileModel.swift in Sources */,
 				C421332822056F24006C10C4 /* TYHUDAnimating.swift in Sources */,
 				C4213336220570B6006C10C4 /* UIView+Frame.swift in Sources */,
 				B816EB53221DABF400F024D5 /* ZXISBNParsedResult.m in Sources */,

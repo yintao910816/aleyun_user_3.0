@@ -23,14 +23,36 @@ class HCEditInfoViewController: BaseViewController {
     
     override func rxBind() {
         let commitSignal = addBarItem(title: "完成", titleColor: HC_MAIN_COLOR, right: true)
+            .do(onNext: { [unowned self] in
+                self.containerView.endEditing(true)
+            })
 
         viewModel = HCEditInfoViewModel(inputSignal: containerView.textField.rx.text.orEmpty.asDriver(),
                                         commitSignal: commitSignal)
-        
+                
         viewModel.enableSignal
-            .bind(to: navigationItem.rightBarButtonItem!.rx.isEnabled)
+            .subscribe(onNext: { [unowned self] in
+                let button = self.navigationItem.rightBarButtonItem?.customView as? UIButton
+                if $0 == true {
+                    button?.setTitleColor(HC_MAIN_COLOR, for: .normal)
+                }else {
+                    button?.setTitleColor(RGB(182, 182, 182), for: .normal)
+                }
+                button?.isUserInteractionEnabled = $0
+            })
+            .disposed(by: disposeBag)
+                    
+        viewModel.contentSignal
+            .bind(to: containerView.textField.rx.text)
             .disposed(by: disposeBag)
         
+        viewModel.popSubject
+            .subscribe(onNext: { [weak self] in
+                self?.navigationController?.popViewController(animated: true)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.reloadSubject.onNext(Void())
     }
     
     override func viewDidLayoutSubviews() {

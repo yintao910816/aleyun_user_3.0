@@ -23,6 +23,8 @@ class HCAccountSettingViewController: BaseViewController {
         containerView.didSelected = { [weak self] in
             if $0.title == "昵称" {
                 self?.navigationController?.pushViewController(HCEditInfoViewController(), animated: true)
+            }else if $0.title == "头像" {
+                self?.presetentSheet()
             }
         }
     }
@@ -41,5 +43,69 @@ class HCAccountSettingViewController: BaseViewController {
         super.viewDidLayoutSubviews()
         
         containerView.frame = view.bounds
+    }
+}
+
+extension HCAccountSettingViewController {
+   
+    func takePhoto(){
+        if HCHelper.checkCameraPermissions() {
+            let photoVC = UIImagePickerController()
+            photoVC.sourceType = UIImagePickerController.SourceType.camera
+            photoVC.delegate = self
+            photoVC.allowsEditing = true
+            photoVC.showsCameraControls = true
+            UIApplication.shared.keyWindow?.rootViewController?.present(photoVC, animated: true, completion: nil)
+        }else{
+            HCHelper.authorizationForCamera(confirmBlock: { [weak self]()in
+                let photoVC = UIImagePickerController()
+                photoVC.sourceType = UIImagePickerController.SourceType.camera
+                photoVC.delegate = self
+                photoVC.allowsEditing = true
+                photoVC.showsCameraControls = true
+                UIApplication.shared.keyWindow?.rootViewController?.present(photoVC, animated: true, completion: nil)
+            })
+            NoticesCenter.alert(title: nil, message: "请在手机设置-隐私-相机中开启权限")
+        }
+    }
+    
+    func systemPic(){
+        let systemPicVC = UIImagePickerController()
+        systemPicVC.sourceType = UIImagePickerController.SourceType.photoLibrary
+        systemPicVC.delegate = self
+        systemPicVC.allowsEditing = true
+        UIApplication.shared.keyWindow?.rootViewController?.present(systemPicVC, animated: true, completion: nil)
+    }
+}
+
+extension HCAccountSettingViewController : UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let img = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
+            viewModel.uploadIconSubject.onNext(img)
+        }
+        
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension HCAccountSettingViewController {
+    
+    private func presetentSheet() {
+        let takePhotoAction = UIAlertAction.init(title: "拍照", style: .default) { [weak self] _ in
+            self?.takePhoto()
+        }
+        let systemPicAction = UIAlertAction.init(title: "相册", style: .default) { _ in
+            self.systemPic()
+        }
+        
+        let alert = UIAlertController.init(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.addAction(takePhotoAction)
+        alert.addAction(systemPicAction)
+
+        present(alert, animated: true, completion: nil)
     }
 }

@@ -118,6 +118,11 @@ enum API{
     case loginTel(mobile: String, smsCode: String)
     /// 实名认证
     case realNameAuth(realName: String, sex: String, birthDay: String, certificateType: String, certificateNo: String)
+    /// 账号设置 - 头像/昵称
+    case accountSetting(nickName: String, headPath: String)
+    /// 上传头像
+    case uploadIcon(image: UIImage)
+
 
     // --------------- 2.0接口
     /// 向app服务器注册友盟token
@@ -129,8 +134,6 @@ enum API{
     case selectInfo
     /// 修改用户信息
     case updateInfo(param: [String: String])
-    /// 上传头像
-    case uploadIcon(image: UIImage)
     /// 首页banner
     case selectBanner
     /// 首页功能列表
@@ -204,7 +207,11 @@ extension API: TargetType{
             return "api/login/loginTel"
         case .realNameAuth(_, _, _, _, _):
             return "api/consumer/realNameAuth"
-            
+        case .accountSetting(_, _):
+            return "api/personalCenter/accountSetting"
+        case .uploadIcon(_):
+            return "api/upload/imgSingle"
+
         case .UMAdd(_):
             return "api/umeng/add"
         case .bindAuthMember(_):
@@ -213,8 +220,6 @@ extension API: TargetType{
             return "api/member/selectInfo"
         case .updateInfo(_):
             return "api/member/updateInfo"
-        case .uploadIcon(_):
-            return "api/upload/imgSingle"
         case .selectBanner:
             return "api/index/selectBanner"
         case .functionList:
@@ -349,6 +354,10 @@ extension API {
             params["birthDay"] = birthDay
             params["certificateType"] = certificateType
             params["certificateNo"] = certificateNo
+        case .accountSetting(let nickName, let headPath):
+            params["nickName"] = nickName
+            params["headPath"] = headPath
+
             
         case .UMAdd(let deviceToken):
             params["deviceToken"] = deviceToken
