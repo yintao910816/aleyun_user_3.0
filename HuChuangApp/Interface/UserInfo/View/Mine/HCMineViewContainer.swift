@@ -64,6 +64,7 @@ extension HCMineViewContainer {
         collectionView.register(HCMenuItemCell.self, forCellWithReuseIdentifier: HCMenuItemCell_identifier)
         collectionView.register(HCMineEmptyHeathyDataCell.self, forCellWithReuseIdentifier: HCMineEmptyHeathyDataCell_identifier)
         collectionView.register(HCMineInServerCell.self, forCellWithReuseIdentifier: HCMineInServerCell_identifier)
+        collectionView.register(HCMineHealthArchivesCell.self, forCellWithReuseIdentifier: HCMineHealthArchivesCell_identifier)
 
     }
 }
@@ -101,7 +102,12 @@ extension HCMineViewContainer: UICollectionViewDataSource, UICollectionViewDeleg
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: HCMenuItemCell_identifier, for: indexPath)
             (cell as? HCMenuItemCell)?.mode = modes[indexPath.row]
         }else if indexPath.section == 2 {
-            cell = collectionView.dequeueReusableCell(withReuseIdentifier: HCMineEmptyHeathyDataCell_identifier, for: indexPath)
+            if let healthArchivesData = model.healthArchives {
+                cell = collectionView.dequeueReusableCell(withReuseIdentifier: HCMineHealthArchivesCell_identifier, for: indexPath)
+                (cell as? HCMineHealthArchivesCell)?.model = healthArchivesData
+            }else {
+                cell = collectionView.dequeueReusableCell(withReuseIdentifier: HCMineEmptyHeathyDataCell_identifier, for: indexPath)
+            }
         }
         
         return cell
@@ -116,6 +122,9 @@ extension HCMineViewContainer: UICollectionViewDataSource, UICollectionViewDeleg
         }else if indexPath.section == 1 {
             return .init(width: width / 4.0, height: HCMenuItemCell_height)
         }else if indexPath.section == 2 {
+            if model.healthArchives != nil {
+                return .init(width: width - 30, height: HCMineHealthArchivesCell_height)
+            }
             return .init(width: HCMineEmptyHeathyDataCell_height, height: HCMineEmptyHeathyDataCell_height)
         }
         return .zero

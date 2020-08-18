@@ -358,6 +358,7 @@
 		C40448A524EAA31A00AD1610 /* HCFileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40448A424EAA31A00AD1610 /* HCFileModel.swift */; };
 		C40448A724EAAFB500AD1610 /* HCPersonalCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40448A624EAAFB500AD1610 /* HCPersonalCenter.swift */; };
 		C40448A924EB6B1D00AD1610 /* HCMineInServerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40448A824EB6B1D00AD1610 /* HCMineInServerCell.swift */; };
+		C40448AB24EB721E00AD1610 /* HCMineHealthArchivesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40448AA24EB721E00AD1610 /* HCMineHealthArchivesCell.swift */; };
 		C4193D8422A7649F007A9E07 /* TYClickedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4193D8322A7649F007A9E07 /* TYClickedButton.swift */; };
 		C41A12C122BCF49100214216 /* String+Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41A12C022BCF49100214216 /* String+Operation.swift */; };
 		C42132F622054463006C10C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C42132F522054463006C10C4 /* Assets.xcassets */; };
@@ -1140,6 +1141,7 @@
 		C40448A424EAA31A00AD1610 /* HCFileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCFileModel.swift; sourceTree = "<group>"; };
 		C40448A624EAAFB500AD1610 /* HCPersonalCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCPersonalCenter.swift; sourceTree = "<group>"; };
 		C40448A824EB6B1D00AD1610 /* HCMineInServerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCMineInServerCell.swift; sourceTree = "<group>"; };
+		C40448AA24EB721E00AD1610 /* HCMineHealthArchivesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCMineHealthArchivesCell.swift; sourceTree = "<group>"; };
 		C4193D8322A7649F007A9E07 /* TYClickedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TYClickedButton.swift; sourceTree = "<group>"; };
 		C41A12C022BCF49100214216 /* String+Operation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Operation.swift"; sourceTree = "<group>"; };
 		C42132EB22054462006C10C4 /* 爱乐孕.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "爱乐孕.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2801,6 +2803,7 @@
 				C4382BF324E560C2000C00CE /* HCCollectionSectionTitleView.swift */,
 				C4382BF424E560C2000C00CE /* HCMineEmptyConsultCell.swift */,
 				C40448A824EB6B1D00AD1610 /* HCMineInServerCell.swift */,
+				C40448AA24EB721E00AD1610 /* HCMineHealthArchivesCell.swift */,
 			);
 			path = Mine;
 			sourceTree = "<group>";
@@ -3750,6 +3753,7 @@
 				C4F139B6235419EF00D777F6 /* AppLaunchView.swift in Sources */,
 				B816EB4B221DABF400F024D5 /* ZXBookmarkDoCoMoResultParser.m in Sources */,
 				B816EB54221DABF400F024D5 /* ZXImage.m in Sources */,
+				C40448AB24EB721E00AD1610 /* HCMineHealthArchivesCell.swift in Sources */,
 				B8891A4623038DAB00950D5C /* ConsultViewModel.swift in Sources */,
 				C44159F2234616A50011B987 /* HCSearchPopularScienceViewController.swift in Sources */,
 				B816EB12221DABF400F024D5 /* ZXRSSExpandedGeneralAppIdDecoder.m in Sources */,

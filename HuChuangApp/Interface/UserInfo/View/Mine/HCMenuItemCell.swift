@@ -37,13 +37,13 @@ enum HCMenuItemCellMode {
     public var modeIcon: UIImage? {
         switch self {
         case .consult:
-            return UIImage(named: "gongjuxiang")
+            return UIImage(named: "mine_wenzen")
         case .reservation:
-            return UIImage(named: "gongjuxiang")
+            return UIImage(named: "mine_yuyue")
         case .order:
-            return UIImage(named: "gongjuxiang")
+            return UIImage(named: "mine_order")
         case .record:
-            return UIImage(named: "gongjuxiang")
+            return UIImage(named: "mine_record")
         }
     }
 }

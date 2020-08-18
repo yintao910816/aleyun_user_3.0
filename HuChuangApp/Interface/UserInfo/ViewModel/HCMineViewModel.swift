@@ -38,6 +38,7 @@ extension HCMineViewModel {
         HCProvider.request(.personalCenterInfo)
             .map(model: HCPersonalCenterInfoModel.self)
             .subscribe(onSuccess: { [weak self] in
+                $0.healthArchives = HCPersonalHealthArchivesModel()
                 self?.personalCenterInfoSignal.value = $0
             })
             .disposed(by: disposeBag)
