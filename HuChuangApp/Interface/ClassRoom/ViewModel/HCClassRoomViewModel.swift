@@ -49,8 +49,8 @@ class HCClassRoomViewModel: RefreshVM<HCArticleItemModel> {
             .map(model: HCArticlePageDataModel.self)
         
         if page == 0 {
-            signal = HCProvider.request(.allChannelArticle(cmsType: .webCms001, pageNum: currentPage(for: "\(page)"), pageSize: pageSize(for: "\(page)")))
-                .map(model: HCArticlePageDataModel.self)
+//            signal = HCProvider.request(.allChannelArticle(cmsType: .webCms001, pageNum: currentPage(for: "\(page)"), pageSize: pageSize(for: "\(page)")))
+//                .map(model: HCArticlePageDataModel.self)
         }
         
         signal.subscribe(onSuccess: { [weak self] data in
@@ -70,19 +70,19 @@ class HCClassRoomViewModel: RefreshVM<HCArticleItemModel> {
     
     /// 滚动菜单
     private func requestColumnData() {
-        HCProvider.request(.column(cmsType: .webCms001))
-            .map(model: HomeColumnModel.self)
-            .subscribe(onSuccess: { [weak self] model in
-                model.content.insert(HomeColumnItemModel.creatAllColum(), at: 0)
-                self?.columnData = model
-                                
-                if model.content.count > 0 {
-                    self?.menuItemData.onNext(TYSlideItemModel.mapData(models: model.content))
-                    self?.requestData(true)
-                }
-            }) { error in
-                
-        }
-        .disposed(by: disposeBag)
+//        HCProvider.request(.column(cmsType: .webCms001))
+//            .map(model: HomeColumnModel.self)
+//            .subscribe(onSuccess: { [weak self] model in
+//                model.content.insert(HomeColumnItemModel.creatAllColum(), at: 0)
+//                self?.columnData = model
+//                                
+//                if model.content.count > 0 {
+//                    self?.menuItemData.onNext(TYSlideItemModel.mapData(models: model.content))
+//                    self?.requestData(true)
+//                }
+//            }) { error in
+//                
+//        }
+//        .disposed(by: disposeBag)
     }
 }

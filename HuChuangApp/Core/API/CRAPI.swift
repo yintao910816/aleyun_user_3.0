@@ -10,9 +10,11 @@ import Foundation
 import Moya
 
 /// 文章栏目编码
-enum HCWebCmsType: String {
-    /// 首页-好孕课堂
-    case webCms001 = "webCms001"
+enum HCCmsType: String {
+    /// 首页-推荐课程列表
+    case SGBK = "SGBK"
+    /// 热门资讯 类目code
+    case RMZX = "RMZX"
 }
 
 enum HCMergeProOpType: String {
@@ -124,7 +126,14 @@ enum API{
     case uploadIcon(image: UIImage)
     /// 个人中心
     case personalCenterInfo
-
+    /// 首页菜单
+    case functionsMenu
+    /// 首页推荐文章
+    case cmsRecommend(cmsCode: HCCmsType)
+    /// 热门资讯 类目
+    case cmsCmsChanelList(cmsCode: HCCmsType)
+    /// 热门资讯—文章列表
+    case cmsArticleList(channelId: String)
 
     // --------------- 2.0接口
     /// 向app服务器注册友盟token
@@ -163,11 +172,11 @@ enum API{
     /// 怀孕几率查询
     case probability
     /// 首页好孕课堂
-    case allChannelArticle(cmsType: HCWebCmsType, pageNum: Int, pageSize: Int)
+//    case allChannelArticle(cmsType: HCWebCmsType, pageNum: Int, pageSize: Int)
     /// 名医推荐
     case recommendDoctor(areaCode: String, lat: String, lng: String)
     /// 课堂
-    case column(cmsType: HCWebCmsType)
+//    case column(cmsType: HCWebCmsType)
     /// 栏目文章列表
     case articlePage(id: Int, pageNum: Int, pageSize: Int)
     /// 健康档案
@@ -215,6 +224,14 @@ extension API: TargetType{
             return "api/upload/imgSingle"
         case .personalCenterInfo:
             return "api/personalCenter/info"
+        case .functionsMenu:
+            return "api/functions/menu"
+        case .cmsRecommend(let cmsCode):
+            return "api/cms/recommend/\(cmsCode.rawValue)"
+        case .cmsCmsChanelList(let cmsCode):
+            return "api/cms/cmsChanelList/\(cmsCode.rawValue)"
+        case .cmsArticleList(let channelId):
+            return "api/cms/articleList/\(channelId)"
             
         case .UMAdd(_):
             return "api/umeng/add"
@@ -245,10 +262,10 @@ extension API: TargetType{
         case .consultList(_):
             return "api/consult/selectPageList"
             
-        case .column(_):
-            return "api/index/column"
-        case .allChannelArticle(_):
-            return "api/index/allChannelArticle"
+//        case .column(_):
+//            return "api/index/column"
+//        case .allChannelArticle(_):
+//            return "api/index/allChannelArticle"
         case .recommendDoctor(_):
             return "api/doctor/recommendDoctor"
         case .articlePage(_):
@@ -395,17 +412,17 @@ extension API {
             params["pageNum"] = pageNum
             params["pageSize"] = pageSize
 
-        case .allChannelArticle(let articleType, let pageNum, let pageSize):
-            params["unitId"] = userDefault.unitId
-            params["cmsCode"] = articleType.rawValue
-            params["pageNum"] = pageNum
-            params["pageSize"] = pageSize
+//        case .allChannelArticle(let articleType, let pageNum, let pageSize):
+//            params["unitId"] = userDefault.unitId
+//            params["cmsCode"] = articleType.rawValue
+//            params["pageNum"] = pageNum
+//            params["pageSize"] = pageSize
         case .recommendDoctor(let areaCode, let lat, let lng):
             params["areaCode"] = areaCode
             params["lat"] = lat
             params["lng"] = lng
-        case .column(let cmsType):
-            params["cmsCode"] = cmsType.rawValue
+//        case .column(let cmsType):
+//            params["cmsCode"] = cmsType.rawValue
         case .articlePage(let id, let pageNum, let pageSize):
             params["id"] = id
             params["unitId"] = userDefault.unitId

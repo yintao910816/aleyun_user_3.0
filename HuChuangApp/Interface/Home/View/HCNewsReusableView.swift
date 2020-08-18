@@ -16,6 +16,10 @@ class HCNewsReusableView: UICollectionReusableView {
     private var titleHeader: HCCollectionSectionTitleView!
     private var menuView: HCMenuView!
     
+    private var datasource: [HCMenuItemModel] = []
+    
+    public var menuChanged: ((HCMenuItemModel)->())?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -24,6 +28,24 @@ class HCNewsReusableView: UICollectionReusableView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    public var menuItems: [HCCmsCmsChanelListModel] = [] {
+        didSet {
+            datasource.removeAll()
+            
+            for idx in 0..<menuItems.count {
+                let item = HCMenuItemModel()
+                item.titleText = menuItems[idx].name
+                item.isSelected = idx == 0
+                item.contentHeight = 26
+                item.itemId = menuItems[idx].id
+                
+                datasource.append(item)
+            }
+            
+            menuView.datasource = datasource
+        }
     }
     
     override func layoutSubviews() {
@@ -43,26 +65,11 @@ extension HCNewsReusableView {
         titleHeader.title = "热门资讯"
         
         menuView = HCMenuView()
-        menuView.datasource = createMenuItems()
         menuView.backgroundColor = backgroundColor
+        
+        menuView.menuChanged = { [weak self] in self?.menuChanged?($0) }
      
         addSubview(titleHeader)
         addSubview(menuView)
-    }
-
-    private func createMenuItems() ->[HCMenuItemModel] {
-        var menus: [HCMenuItemModel] = []
-        let titles: [String] = ["推荐", "试管之前", "体检建档", "降调促排"]
-        
-        for idx in 0..<titles.count {
-            let item = HCMenuItemModel()
-            item.titleText = titles[idx]
-            item.isSelected = idx == 0
-            item.contentHeight = 26
-            
-            menus.append(item)
-        }
-        
-        return menus
     }
 }

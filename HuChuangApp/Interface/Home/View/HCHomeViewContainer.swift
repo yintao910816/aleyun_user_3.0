@@ -12,6 +12,11 @@ class HCHomeViewContainer: UIView {
 
     private var collectionView: UICollectionView!
 
+    private var menuItems: [HCFunctionsMenuModel] = []
+    private var cmsChanelListModel: [HCCmsCmsChanelListModel] = []
+    
+    public var menuChanged: ((HCMenuItemModel)->())?
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -29,7 +34,19 @@ class HCHomeViewContainer: UIView {
         
         collectionView.frame = bounds
     }
-
+   
+    public func reloadData(menuItems: [HCFunctionsMenuModel], cmsChanelListModel: [HCCmsCmsChanelListModel]) {
+        self.menuItems = menuItems
+        self.cmsChanelListModel = cmsChanelListModel
+        
+        collectionView.reloadData()
+    }
+    
+    public var articleDatas: [HCCmsArticleModel] = [] {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
 }
 
 extension HCHomeViewContainer {
@@ -49,6 +66,7 @@ extension HCHomeViewContainer {
 
         collectionView.register(HCMenuItemShadowCell.self, forCellWithReuseIdentifier: HCMenuItemShadowCell_identifier)
         collectionView.register(HCMenuHorizontalCell.self, forCellWithReuseIdentifier: HCMenuHorizontalCell_identifier)
+        collectionView.register(HCHomeArticleCell.self, forCellWithReuseIdentifier: HCHomeArticleCell_identifier)
     }
 
 }
@@ -64,9 +82,9 @@ extension HCHomeViewContainer: UICollectionViewDataSource, UICollectionViewDeleg
         case 0:
             return 4
         case 1:
-            return 6
+            return menuItems.count
         case 2:
-            return 0
+            return articleDatas.count
         default:
             return 0
         }
@@ -80,8 +98,10 @@ extension HCHomeViewContainer: UICollectionViewDataSource, UICollectionViewDeleg
             (cell as? HCMenuItemShadowCell)?.mode = modes[indexPath.row]
         }else if indexPath.section == 1 {
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: HCMenuHorizontalCell_identifier, for: indexPath)
+            (cell as? HCMenuHorizontalCell)?.mode = menuItems[indexPath.row]
         }else if indexPath.section == 2 {
-            cell = collectionView.dequeueReusableCell(withReuseIdentifier: HCMineEmptyHeathyDataCell_identifier, for: indexPath)
+            cell = collectionView.dequeueReusableCell(withReuseIdentifier: HCHomeArticleCell_identifier, for: indexPath)
+            (cell as? HCHomeArticleCell)?.model = articleDatas[indexPath.row]
         }
         
         return cell
@@ -93,7 +113,7 @@ extension HCHomeViewContainer: UICollectionViewDataSource, UICollectionViewDeleg
         }else if indexPath.section == 1 {
             return .init(width: (width - 20 * 2 - 10 * 2 - 1) / 3.0, height: HCMenuHorizontalCell_height)
         }else if indexPath.section == 2 {
-            return .init(width: HCMineEmptyHeathyDataCell_height, height: HCMineEmptyHeathyDataCell_height)
+            return .init(width: width, height: HCHomeArticleCell_height)
         }
         return .zero
     }
@@ -104,7 +124,11 @@ extension HCHomeViewContainer: UICollectionViewDataSource, UICollectionViewDeleg
             if indexPath.section == 0 {
                 header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HCHomeHeaderReusableView_identifier, for: indexPath)
             }else if indexPath.section == 2 {
-                header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HCNewsReusableView_identifier, for: indexPath)
+                if cmsChanelListModel.count > 0 {
+                    header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HCNewsReusableView_identifier, for: indexPath)
+                    (header as? HCNewsReusableView)?.menuItems = cmsChanelListModel
+                    (header as? HCNewsReusableView)?.menuChanged = { [weak self] in self?.menuChanged?($0) }
+                }
             }
             return header
         }
@@ -117,7 +141,10 @@ extension HCHomeViewContainer: UICollectionViewDataSource, UICollectionViewDeleg
         case 0:
             return .init(width: width, height: HCHomeHeaderReusableView_height)
         case 2:
-            return .init(width: width, height: HCNewsReusableView_height)
+            if cmsChanelListModel.count > 0 {
+                return .init(width: width, height: HCNewsReusableView_height)
+            }
+            return .zero
         default:
             return .zero
         }

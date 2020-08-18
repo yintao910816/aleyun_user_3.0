@@ -14,6 +14,8 @@ class HCMenuView: UIView {
     private var animotionView: UIView!
     
     private var lastSelectedIdx: IndexPath = .init(row: 0, section: 0)
+    
+    public var menuChanged: ((HCMenuItemModel)->())?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -133,6 +135,8 @@ extension HCMenuView: UICollectionViewDataSource, UICollectionViewDelegateFlowLa
             collectionView.reloadData()
             
             beginAnimotion(to: indexPath, animotion: true)
+            
+            menuChanged?(datasource[indexPath.row])
         }
     }
 }
@@ -183,6 +187,8 @@ class HCMenuItemModel {
     
     public var titleText: String = ""
     public var isSelected: Bool = false
+    /// 服务器返回id
+    public var itemId: String = ""
     
     public var contentHeight: CGFloat = 45
 
