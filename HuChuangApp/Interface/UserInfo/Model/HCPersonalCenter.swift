@@ -16,7 +16,7 @@ class HCPersonalCenterInfoModel: HJModel {
     /// 服务包数量
     var servicePack: Int = 0
     
-    var healthArchives: HCPersonalHealthArchivesModel = HCPersonalHealthArchivesModel()
+    var healthArchives: HCPersonalHealthArchivesModel?
     var progressServices: [HCPersonalProgressServiceModel] = []
 }
 

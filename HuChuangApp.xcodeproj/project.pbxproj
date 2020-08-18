@@ -357,6 +357,7 @@
 		C40448A324EA722A00AD1610 /* HCPickerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40448A224EA722A00AD1610 /* HCPickerData.swift */; };
 		C40448A524EAA31A00AD1610 /* HCFileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40448A424EAA31A00AD1610 /* HCFileModel.swift */; };
 		C40448A724EAAFB500AD1610 /* HCPersonalCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40448A624EAAFB500AD1610 /* HCPersonalCenter.swift */; };
+		C40448A924EB6B1D00AD1610 /* HCMineInServerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40448A824EB6B1D00AD1610 /* HCMineInServerCell.swift */; };
 		C4193D8422A7649F007A9E07 /* TYClickedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4193D8322A7649F007A9E07 /* TYClickedButton.swift */; };
 		C41A12C122BCF49100214216 /* String+Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41A12C022BCF49100214216 /* String+Operation.swift */; };
 		C42132F622054463006C10C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C42132F522054463006C10C4 /* Assets.xcassets */; };
@@ -1138,6 +1139,7 @@
 		C40448A224EA722A00AD1610 /* HCPickerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCPickerData.swift; sourceTree = "<group>"; };
 		C40448A424EAA31A00AD1610 /* HCFileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCFileModel.swift; sourceTree = "<group>"; };
 		C40448A624EAAFB500AD1610 /* HCPersonalCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCPersonalCenter.swift; sourceTree = "<group>"; };
+		C40448A824EB6B1D00AD1610 /* HCMineInServerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCMineInServerCell.swift; sourceTree = "<group>"; };
 		C4193D8322A7649F007A9E07 /* TYClickedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TYClickedButton.swift; sourceTree = "<group>"; };
 		C41A12C022BCF49100214216 /* String+Operation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Operation.swift"; sourceTree = "<group>"; };
 		C42132EB22054462006C10C4 /* 爱乐孕.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "爱乐孕.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2798,6 +2800,7 @@
 				C4382BF224E560C2000C00CE /* HCMenuItemCell.swift */,
 				C4382BF324E560C2000C00CE /* HCCollectionSectionTitleView.swift */,
 				C4382BF424E560C2000C00CE /* HCMineEmptyConsultCell.swift */,
+				C40448A824EB6B1D00AD1610 /* HCMineInServerCell.swift */,
 			);
 			path = Mine;
 			sourceTree = "<group>";
@@ -3731,6 +3734,7 @@
 				B8F1587524E801400046B107 /* HCUser.swift in Sources */,
 				C497E94F23444E4600328B47 /* HCHomeCollectionHeaderReusableView.swift in Sources */,
 				B816EA96221DABF400F024D5 /* ZXAztecWriter.m in Sources */,
+				C40448A924EB6B1D00AD1610 /* HCMineInServerCell.swift in Sources */,
 				B816EADE221DABF400F024D5 /* ZXPDF417Detector.m in Sources */,
 				B816EAB9221DABF400F024D5 /* ZXWhiteRectangleDetector.m in Sources */,
 				B816E871221DABBC00F024D5 /* HCScanViewController.swift in Sources */,

@@ -63,6 +63,8 @@ extension HCMineViewContainer {
         collectionView.register(HCMineEmptyConsultCell.self, forCellWithReuseIdentifier: HCMineEmptyConsultCell_identifier)
         collectionView.register(HCMenuItemCell.self, forCellWithReuseIdentifier: HCMenuItemCell_identifier)
         collectionView.register(HCMineEmptyHeathyDataCell.self, forCellWithReuseIdentifier: HCMineEmptyHeathyDataCell_identifier)
+        collectionView.register(HCMineInServerCell.self, forCellWithReuseIdentifier: HCMineInServerCell_identifier)
+
     }
 }
 
@@ -75,7 +77,7 @@ extension HCMineViewContainer: UICollectionViewDataSource, UICollectionViewDeleg
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return 1
+            return (model.progressServices.count > 0 ? model.progressServices.count : 1)
         case 1:
             return 4
         case 2:
@@ -88,7 +90,12 @@ extension HCMineViewContainer: UICollectionViewDataSource, UICollectionViewDeleg
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         var cell: UICollectionViewCell!
         if indexPath.section == 0 {
-            cell = collectionView.dequeueReusableCell(withReuseIdentifier: HCMineEmptyConsultCell_identifier, for: indexPath)
+            if model.progressServices.count > 0 {
+                cell = collectionView.dequeueReusableCell(withReuseIdentifier: HCMineInServerCell_identifier, for: indexPath)
+                (cell as? HCMineInServerCell)?.model = model.progressServices[indexPath.row]
+            }else {
+                cell = collectionView.dequeueReusableCell(withReuseIdentifier: HCMineEmptyConsultCell_identifier, for: indexPath)
+            }
         }else if indexPath.section == 1 {
             let modes: [HCMenuItemCellMode] = [.consult, .reservation, .order, .record]
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: HCMenuItemCell_identifier, for: indexPath)
@@ -102,6 +109,9 @@ extension HCMineViewContainer: UICollectionViewDataSource, UICollectionViewDeleg
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if indexPath.section == 0 {
+            if model.progressServices.count > 0 {
+                return .init(width: width, height: HCMineInServerCell_height)
+            }
             return .init(width: width, height: HCMineEmptyConsultCell_height)
         }else if indexPath.section == 1 {
             return .init(width: width / 4.0, height: HCMenuItemCell_height)
