@@ -50,6 +50,9 @@ enum HCMenuItemShadowCellMode {
 
 class HCMenuItemShadowCell: UICollectionViewCell {
     
+    private var shadowBgView: UIView!
+    private var cornerBgView: UIView!
+    
     private var icon: UIImageView!
     private var title: UILabel!
     
@@ -71,6 +74,14 @@ class HCMenuItemShadowCell: UICollectionViewCell {
     }
     
     private func initUI() {
+        shadowBgView = UIView()
+        shadowBgView.backgroundColor = .clear
+        
+        cornerBgView = UIView()
+        cornerBgView.backgroundColor = .white
+        cornerBgView.layer.cornerRadius = 3
+        cornerBgView.clipsToBounds = true
+        
         icon = UIImageView()
         
         title = UILabel()
@@ -78,14 +89,23 @@ class HCMenuItemShadowCell: UICollectionViewCell {
         title.font = .font(fontSize: 14)
         title.textAlignment = .center
         
-        addSubview(icon)
-        addSubview(title)
+        addSubview(shadowBgView)
+        insertSubview(cornerBgView, aboveSubview: shadowBgView)
+        cornerBgView.addSubview(icon)
+        cornerBgView.addSubview(title)
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        icon.frame = .init(x: (width - 25) / 2.0, y: 18, width: 25, height: 25)
-        title.frame = .init(x: 0, y: icon.frame.maxY + 18, width: width, height: 20)
+        shadowBgView.frame = bounds
+        cornerBgView.frame = bounds
+        
+        icon.frame = .init(x: (cornerBgView.width - 25) / 2.0, y: 18, width: 25, height: 25)
+        title.frame = .init(x: 0, y: icon.frame.maxY + 18, width: cornerBgView.width, height: 20)
+        
+        if shadowBgView.layer.shadowPath == nil {
+            shadowBgView.setCornerAndShaow(shadowOpacity: 0.05)
+        }
     }
 }

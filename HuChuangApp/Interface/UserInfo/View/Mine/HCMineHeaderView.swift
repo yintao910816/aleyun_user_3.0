@@ -16,6 +16,8 @@ class HCMineHeaderView: UICollectionReusableView {
     enum HCMineHeaderAction {
         /// 认证
         case verify
+        /// 点击头像
+        case avatar
     }
     
     private var avatarButton: UIButton!
@@ -87,7 +89,8 @@ extension HCMineHeaderView {
         avatarButton.layer.cornerRadius = 30
         avatarButton.clipsToBounds = true
         avatarButton.setBackgroundImage(UIImage.init(named: "default_user_icon"), for: .normal)
-        
+        avatarButton.addTarget(self, action: #selector(buttonAction(_:)), for: .touchUpInside)
+
         phoneLabel = UILabel()
         phoneLabel.textColor = RGB(51, 51, 51)
         phoneLabel.font = .font(fontSize: 16)
@@ -125,6 +128,8 @@ extension HCMineHeaderView {
     @objc private func buttonAction(_ button: UIButton) {
         if button == verifyButton {
             excuteAction?(.verify)
+        }else if button == avatarButton {
+            excuteAction?(.avatar)
         }
     }
 }

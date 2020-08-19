@@ -59,8 +59,12 @@ extension HCMenuView {
     private func initUI() {
         backgroundColor = .white
         
-        collectionView = UICollectionView.init(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        
+        collectionView = UICollectionView.init(frame: .zero, collectionViewLayout: layout)
         collectionView.showsVerticalScrollIndicator = false
+        collectionView.showsHorizontalScrollIndicator = false
         collectionView.backgroundColor = backgroundColor
         collectionView.dataSource = self
         collectionView.delegate = self

@@ -26,9 +26,17 @@ class HCMineViewController: BaseViewController {
         containerView.excuteAction = { [weak self] in
             switch $0 {
             case .verify:
+                break
+            case .avatar:
                 self?.navigationController?.pushViewController(HCAccountSettingViewController(), animated: true)
             }
         }
+        
+        addBarItem(title: "设置", titleColor: HC_MAIN_COLOR, right: true)
+            .drive(onNext: { [weak self] in
+                self?.navigationController?.pushViewController(HCSettingViewController(), animated: true)
+            })
+            .disposed(by: disposeBag)
     }
     
     override func rxBind() {

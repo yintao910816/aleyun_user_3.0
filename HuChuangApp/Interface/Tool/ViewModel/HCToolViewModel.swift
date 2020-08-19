@@ -34,7 +34,7 @@ extension HCToolViewModel {
         let titleIconss: [String] = ["gongjuxiang", "gongjuxiang", "gongjuxiang", "gongjuxiang", "gongjuxiang"]
         let identifiers: [String] = [HCListSwitchCell_identifier, HCListSwitchCell_identifier, HCListDetailNewTypeCell_identifier, HCListDetailNewTypeCell_identifier, HCListDetailNewTypeCell_identifier]
         for idx in 0..<titles.count {
-            var item = HCListCellItem()
+            let item = HCListCellItem()
             item.titleIcon = titleIconss[idx]
             item.title = titles[idx]
             item.titleColor = RGB(51, 51, 51)
