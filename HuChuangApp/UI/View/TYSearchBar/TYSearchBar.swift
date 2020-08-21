@@ -207,7 +207,7 @@ class TYSearchBar: UIView {
     }()
 
     private lazy var searchIcon: UIImageView = {
-        let imgV = UIImageView.init(image: .image(for: "nav_search"))
+        let imgV = UIImageView.init(image: .image(for: "searchBar_searchIcon"))
         imgV.contentMode = .scaleAspectFill
         imgV.clipsToBounds = true
         self.contentContainer.addSubview(imgV)
@@ -255,7 +255,13 @@ class TYSearchBar: UIView {
     
     public var leftItemTitle: String = "" {
         didSet {
-            updateRightItem()
+            updateLeftItem()
+        }
+    }
+    
+    public var leftItelColor: UIColor = RGB(51, 51, 51) {
+        didSet {
+            leftItem.setTitleColor(leftItelColor, for: .normal)
         }
     }
 

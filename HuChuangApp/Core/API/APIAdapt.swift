@@ -60,6 +60,11 @@ struct APIAssistance {
         }
     }
     
+    /// id拼接文章详情跳转链接
+    static public func link(with id: String) ->String {
+        return "\(APIAssistance.base)api/cms/detail/\(id)"
+    }
+    
     /**
      请求方式
      */

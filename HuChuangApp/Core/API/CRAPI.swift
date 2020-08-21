@@ -15,6 +15,8 @@ enum HCCmsType: String {
     case SGBK = "SGBK"
     /// 热门资讯 类目code
     case RMZX = "RMZX"
+    /// api/cms/recommend
+    case webCms001 = "webCms001"
 }
 
 /// 列表类型
@@ -140,6 +142,8 @@ enum API{
     case functionsMenu
     /// 首页推荐文章
     case cmsRecommend(cmsCode: HCCmsType)
+    /// 首页第三部分菜单
+    case getRecommedList(cmsCode: HCCmsType)
     /// 热门资讯 类目
     case cmsCmsChanelList(cmsCode: HCCmsType)
     /// 热门资讯—文章列表
@@ -240,6 +244,8 @@ extension API: TargetType{
             return "api/functions/menu"
         case .cmsRecommend(let cmsCode):
             return "api/cms/recommend/\(cmsCode.rawValue)"
+        case .getRecommedList(let cmsCode):
+            return "api/cms/getRecommedList/\(cmsCode.rawValue)"
         case .cmsCmsChanelList(let cmsCode):
             return "api/cms/cmsChanelList/\(cmsCode.rawValue)"
         case .cmsArticleList(let channelId):

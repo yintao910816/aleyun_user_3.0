@@ -14,12 +14,14 @@ class HCHomeViewContainer: UIView {
 
     private var menuItems: [HCFunctionsMenuModel] = []
     private var cmsChanelListModel: [HCCmsCmsChanelListModel] = []
-    private var articleDatas: [HCCmsArticleModel] = []
+    private var articleDatas: [HCCmsArticleListModel] = []
+    private var cmsRecommendDatas: [HCCmsRecommendModel] = []
     private var pageIdx: Int = 0
     
     public var menuChanged: ((HCMenuItemModel)->())?
-    public var articleClicked: ((HCCmsArticleModel)->())?
+    public var articleClicked: ((HCCmsArticleListModel)->())?
     public var funcItemClicked: ((HCFunctionsMenuModel)->())?
+    public var cmsRecommendItemClicked: ((HCCmsRecommendModel)->())?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -39,15 +41,16 @@ class HCHomeViewContainer: UIView {
         collectionView.frame = bounds
     }
    
-    public func reloadData(menuItems: [HCFunctionsMenuModel], cmsChanelListModel: [HCCmsCmsChanelListModel], page: Int) {
+    public func reloadData(menuItems: [HCFunctionsMenuModel], cmsChanelListModel: [HCCmsCmsChanelListModel], cmsModes: [HCCmsRecommendModel], page: Int) {
         pageIdx = page
         self.menuItems = menuItems
         self.cmsChanelListModel = cmsChanelListModel
+        self.cmsRecommendDatas = cmsModes
         
         collectionView.reloadData()
     }
     
-    public func reloadArticleDatas(datas: [HCCmsArticleModel], page: Int){
+    public func reloadArticleDatas(datas: [HCCmsArticleListModel], page: Int){
         pageIdx = page
         articleDatas = datas
         collectionView.reloadData()
@@ -90,7 +93,7 @@ extension HCHomeViewContainer: UICollectionViewDataSource, UICollectionViewDeleg
             }
             return 0
         case 1:
-            return menuItems.count
+            return cmsRecommendDatas.count
         case 2:
             return articleDatas.count
         default:
@@ -106,7 +109,7 @@ extension HCHomeViewContainer: UICollectionViewDataSource, UICollectionViewDeleg
             (cell as? HCMenuItemShadowCell)?.funcModel = menuItems[indexPath.row + 3]
         }else if indexPath.section == 1 {
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: HCMenuHorizontalCell_identifier, for: indexPath)
-            (cell as? HCMenuHorizontalCell)?.mode = menuItems[indexPath.row]
+            (cell as? HCMenuHorizontalCell)?.mode = cmsRecommendDatas[indexPath.row]
         }else if indexPath.section == 2 {
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: HCHomeArticleCell_identifier, for: indexPath)
             (cell as? HCHomeArticleCell)?.model = articleDatas[indexPath.row]
@@ -119,6 +122,7 @@ extension HCHomeViewContainer: UICollectionViewDataSource, UICollectionViewDeleg
         if indexPath.section == 0 {
             return .init(width: (width - 15 * 5) / 4.0, height: HCMenuItemShadowCell_height)
         }else if indexPath.section == 1 {
+//            return .init(width: cmsRecommendDatas[indexPath.row].itemW, height: HCMenuHorizontalCell_height)
             return .init(width: (width - 20 * 2 - 10 * 2 - 1) / 3.0, height: HCMenuHorizontalCell_height)
         }else if indexPath.section == 2 {
             return .init(width: width, height: HCHomeArticleCell_height)
@@ -207,7 +211,7 @@ extension HCHomeViewContainer: UICollectionViewDataSource, UICollectionViewDeleg
         case 0:
             funcItemClicked?(menuItems[3 + indexPath.row])
         case 1:
-            break
+            cmsRecommendItemClicked?(cmsRecommendDatas[indexPath.row])
         case 2:
             articleClicked?(articleDatas[indexPath.row])
         default:

@@ -54,8 +54,17 @@ class HCCmsCmsChanelListModel: HJModel {
     var url: String = ""
 }
 
-class HCCmsArticleModel: HJModel {
+class HCCmsRecommendModel: HJModel {
     var id: String = ""
     var picPath: String = ""
     var title: String = ""
+    
+    public lazy var itemW: CGFloat = {
+        let titleW: CGFloat = self.title.ty_textSize(font: .font(fontSize: 14), width: CGFloat(MAXFLOAT), height: 20).width
+        return titleW + 5
+    }()
+}
+
+class HCCmsArticleListModel: HJModel {
+    
 }

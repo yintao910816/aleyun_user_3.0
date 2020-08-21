@@ -31,10 +31,10 @@ class HCHomeArticleCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public var model: HCCmsArticleModel! {
+    public var model: HCCmsArticleListModel! {
         didSet {
-            coverImg.setImage(model.picPath)
-            titleLable.text = model.title
+//            coverImg.setImage(model.picPath)
+//            titleLable.text = model.title
         }
     }
     

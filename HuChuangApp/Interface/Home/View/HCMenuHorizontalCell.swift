@@ -26,15 +26,15 @@ class HCMenuHorizontalCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    public var mode: HCFunctionsMenuModel! {
+    public var mode: HCCmsRecommendModel! {
         didSet {
-            icon.setImage(mode.iconPath)
-            title.text = mode.name
+            title.text = mode.title
         }
     }
     
     private func initUI() {
         icon = UIImageView()
+        icon.image = UIImage(named: "home_menu_icon")
         
         title = UILabel()
         title.textColor = RGB(51, 51, 51)
@@ -47,8 +47,8 @@ class HCMenuHorizontalCell: UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        icon.frame = .init(x: 0, y: (height - 15) / 2.0, width: 15, height: 15)
-        title.frame = .init(x: icon.frame.maxX + 5, y: (height - 20) / 2.0, width: width - icon.frame.maxX - 5 - 5, height: 20)
+        icon.frame = .init(x: 0, y: (height - 16) / 2.0, width: 16, height: 16)
+        title.frame = .init(x: icon.frame.maxX + 5, y: (height - 20) / 2.0, width: width - icon.frame.maxX - 5, height: 20)
     }
 
 }

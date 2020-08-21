@@ -87,7 +87,7 @@ extension HCHomeHeaderReusableView {
         colorBgView = UIImageView.init(image: UIImage(named: "home_header_bg"))
         colorBgView.contentMode = .scaleAspectFill
         colorBgView.clipsToBounds = true
-        colorBgView.backgroundColor = RGB(245, 245, 245)
+        colorBgView.backgroundColor = .white
         
         shadowBgView = UIView()
         shadowBgView.backgroundColor = .clear
