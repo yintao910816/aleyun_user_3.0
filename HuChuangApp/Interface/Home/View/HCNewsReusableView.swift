@@ -30,22 +30,20 @@ class HCNewsReusableView: UICollectionReusableView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public var menuItems: [HCCmsCmsChanelListModel] = [] {
-        didSet {
-            datasource.removeAll()
+    public func reloadMenuItems(items: [HCCmsCmsChanelListModel], page: Int) {
+        datasource.removeAll()
+        
+        for idx in 0..<items.count {
+            let item = HCMenuItemModel()
+            item.titleText = items[idx].name
+            item.isSelected = page == idx
+            item.contentHeight = 26
+            item.itemId = items[idx].id
             
-            for idx in 0..<menuItems.count {
-                let item = HCMenuItemModel()
-                item.titleText = menuItems[idx].name
-                item.isSelected = idx == 0
-                item.contentHeight = 26
-                item.itemId = menuItems[idx].id
-                
-                datasource.append(item)
-            }
-            
-            menuView.datasource = datasource
+            datasource.append(item)
         }
+        
+        menuView.datasource = datasource
     }
     
     override func layoutSubviews() {

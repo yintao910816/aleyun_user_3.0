@@ -11,11 +11,11 @@ import JavaScriptCore
 
 class BaseWebViewController: BaseViewController, VMNavigation {
 
-    var url: String = ""
     var redirect_url: String?
 
     private var context : JSContext?
     private var webTitle: String?
+    private var correctURL: String = ""
     
     private var bridge: WebViewJavascriptBridge!
     
@@ -24,6 +24,19 @@ class BaseWebViewController: BaseViewController, VMNavigation {
     private lazy var hud: NoticesCenter = {
         return NoticesCenter()
     }()
+    
+    public var url: String = "" {
+        didSet {
+            PrintLog("h5拼接前地址：\(url)")
+            if url.contains("?") == false {
+                correctURL = "\(url)?token=\(userDefault.token)&unitId=\(userDefault.unitId)"
+            }else {
+                correctURL = "\(url)&token=\(userDefault.token)&unitId=\(userDefault.unitId)"
+            }
+            PrintLog("h5拼接后地址：\(url)")
+        }
+    }
+
     
     private lazy var webView: UIWebView = {
         let w = UIWebView()
@@ -62,13 +75,13 @@ class BaseWebViewController: BaseViewController, VMNavigation {
                     PrintLog("位置：\(location)")
                     if location != nil {
                         if strongSelf.url.contains("?") {
-                            strongSelf.url = strongSelf.url + "&lat=\(location!.coordinate.latitude)&lng=\(location!.coordinate.longitude)"
+                            strongSelf.correctURL = strongSelf.correctURL + "&lat=\(location!.coordinate.latitude)&lng=\(location!.coordinate.longitude)"
                         }else {
-                            strongSelf.url = strongSelf.url + "?lat=\(location!.coordinate.latitude)&lng=\(location!.coordinate.longitude)"
+                            strongSelf.correctURL = strongSelf.correctURL + "?lat=\(location!.coordinate.latitude)&lng=\(location!.coordinate.longitude)"
                         }
                     }
                     
-                    if let requestUrl = URL.init(string: strongSelf.url) {
+                    if let requestUrl = URL.init(string: strongSelf.correctURL) {
                         let request = URLRequest.init(url: requestUrl)
                         strongSelf.webView.loadRequest(request)
                     }else {
@@ -79,7 +92,7 @@ class BaseWebViewController: BaseViewController, VMNavigation {
         }else {
             hud.noticeLoading()
 
-            if let requestUrl = URL.init(string: url) {
+            if let requestUrl = URL.init(string: correctURL) {
                 let request = URLRequest.init(url: requestUrl)
                 webView.loadRequest(request)
             }else {
@@ -89,7 +102,7 @@ class BaseWebViewController: BaseViewController, VMNavigation {
     }
     
     func reloadData() {
-        if let requestUrl = URL.init(string: url) {
+        if let requestUrl = URL.init(string: correctURL) {
             let request = URLRequest.init(url: requestUrl)
             webView.loadRequest(request)
         }else {
@@ -156,7 +169,7 @@ extension BaseWebViewController: UIWebViewDelegate{
         PrintLog("shouldStartLoadWith -- \(String(describing: s))")
         
         if s == "app://reload"{
-            webView.loadRequest(URLRequest.init(url: URL.init(string: url)!))
+            webView.loadRequest(URLRequest.init(url: URL.init(string: correctURL)!))
             return false
         }
         

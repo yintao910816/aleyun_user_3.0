@@ -11,9 +11,12 @@ import UIKit
 class HCCustomTextButton: UIView {
 
     private var titleLabel: UILabel!
+    private var button: UIButton!
     
     private var firstString: String = ""
     private var secondString: String = ""
+    
+    public var actionCallBack: (()->())?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -39,6 +42,7 @@ class HCCustomTextButton: UIView {
         super.layoutSubviews()
         
         titleLabel.frame = bounds
+        button.frame = bounds
     }
 }
 
@@ -50,6 +54,16 @@ extension HCCustomTextButton {
         titleLabel.textColor = RGB(153, 153, 153)
         titleLabel.font = .font(fontSize: 14)
         titleLabel.textAlignment = .center
+        
+        button = UIButton()
+        button.backgroundColor = .clear
+        button.addTarget(self, action: #selector(clicked), for: .touchUpInside)
+        
         addSubview(titleLabel)
+        addSubview(button)
+    }
+    
+    @objc private func clicked() {
+        actionCallBack?()
     }
 }

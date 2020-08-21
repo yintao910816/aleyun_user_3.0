@@ -29,6 +29,8 @@ class HCMineViewController: BaseViewController {
                 break
             case .avatar:
                 self?.navigationController?.pushViewController(HCAccountSettingViewController(), animated: true)
+            case .attentionStore:
+                self?.navigationController?.pushViewController(HCCollectionViewController(), animated: true)
             }
         }
         

@@ -9,17 +9,19 @@
 import Foundation
 
 struct TYSlideItemModel {
+    var title: String = ""
     var textColor: UIColor = RGB(51, 51, 51)
     var selectedTextColor: UIColor = RGB(255, 102, 149)
     var lineColor: UIColor = .red
     var textFont: UIFont = .font(fontSize: 14, fontName: .PingFMedium)
+    var lineWidth: CGFloat = 20
     
     var isSelected: Bool = false
     
     var dataModel: HomeColumnItemModel!
     
     public lazy var contentWidth: CGFloat = {
-        return self.dataModel.name.getTexWidth(fontSize: 14, height: 30, fontName: FontName.PingFRegular.rawValue) + 30
+        return self.title.ty_textSize(font: self.textFont, width: CGFloat(MAXFLOAT), height: 30).width + 30
     }()
     
     public static func creatSimple(for titles: [String]) ->[TYSlideItemModel] {
@@ -52,12 +54,33 @@ extension TYSlideItemModel {
         
         return datas
     }
+    
+    /// 搜藏数据
+    internal static func createAttentionStoreData() ->[TYSlideItemModel] {
+        return [TYSlideItemModel(title: "我的医生",
+                                 textColor: RGB(153, 153, 153),
+                                 selectedTextColor: HC_MAIN_COLOR,
+                                 lineColor: HC_MAIN_COLOR,
+                                 textFont: .font(fontSize: 16),
+                                 isSelected: true),
+                TYSlideItemModel(title: "我的课程",
+                                 textColor: RGB(153, 153, 153),
+                                 selectedTextColor: HC_MAIN_COLOR,
+                                 lineColor: HC_MAIN_COLOR,
+                                 textFont: .font(fontSize: 16),
+                                 isSelected: false),
+                TYSlideItemModel(title: "我的资讯",textColor: RGB(153, 153, 153),
+                                 selectedTextColor: HC_MAIN_COLOR,
+                                 lineColor: HC_MAIN_COLOR,
+                                 textFont: .font(fontSize: 16),
+                                 isSelected: false)]
+    }
 }
 
 class HCSlideItemController: BaseViewController {
     
     public var pageIdx: Int = 0
-
+    
     override func viewWillAppear(_ animated: Bool) {
         
     }

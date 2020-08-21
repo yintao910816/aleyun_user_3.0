@@ -18,6 +18,8 @@ class HCMineHeaderView: UICollectionReusableView {
         case verify
         /// 点击头像
         case avatar
+        /// 收藏
+        case attentionStore
     }
     
     private var avatarButton: UIButton!
@@ -111,6 +113,7 @@ extension HCMineHeaderView {
 
         collectionButton = HCCustomTextButton()
         collectionButton.setupText(first: "0", second: "收藏")
+        collectionButton.actionCallBack = { [weak self] in self?.excuteAction?(.attentionStore) }
         
         bottomTitleView = HCCollectionSectionTitleView()
         bottomTitleView.title = "进行中的服务"

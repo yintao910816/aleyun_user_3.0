@@ -24,7 +24,7 @@ class HCSettingContainer: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    public var listData: [HCListCellItem] = [] {
+    public var listData: [[HCListCellItem]] = [] {
         didSet {
             tableView.reloadData()
         }
@@ -59,16 +59,20 @@ class HCSettingContainer: UIView {
 
 extension HCSettingContainer: UITableViewDelegate, UITableViewDataSource {
         
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return listData.count
     }
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return listData[section].count
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return listData[indexPath.row].cellHeight
+        return listData[indexPath.section][indexPath.row].cellHeight
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let model = listData[indexPath.row]
+        let model = listData[indexPath.section][indexPath.row]
         let cell = (tableView.dequeueReusableCell(withIdentifier: model.cellIdentifier) as! HCBaseListCell)
         cell.model = model
         return cell
@@ -77,9 +81,21 @@ extension HCSettingContainer: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        didSelected?(listData[indexPath.row])
+        didSelected?(listData[indexPath.section][indexPath.row])
     }
 
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if section == 1 {
+            let view = UIView(frame: .init(x: 0, y: 0, width: width, height: 10))
+            view.backgroundColor = RGB(245, 245, 245)
+            return view
+        }
+        return nil
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return section == 1 ? 10 : 0
+    }
 }
 
 class HCSettingHeader: UIView {

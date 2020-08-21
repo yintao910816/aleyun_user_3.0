@@ -14,8 +14,12 @@ class HCHomeViewContainer: UIView {
 
     private var menuItems: [HCFunctionsMenuModel] = []
     private var cmsChanelListModel: [HCCmsCmsChanelListModel] = []
+    private var articleDatas: [HCCmsArticleModel] = []
+    private var pageIdx: Int = 0
     
     public var menuChanged: ((HCMenuItemModel)->())?
+    public var articleClicked: ((HCCmsArticleModel)->())?
+    public var funcItemClicked: ((HCFunctionsMenuModel)->())?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -35,17 +39,18 @@ class HCHomeViewContainer: UIView {
         collectionView.frame = bounds
     }
    
-    public func reloadData(menuItems: [HCFunctionsMenuModel], cmsChanelListModel: [HCCmsCmsChanelListModel]) {
+    public func reloadData(menuItems: [HCFunctionsMenuModel], cmsChanelListModel: [HCCmsCmsChanelListModel], page: Int) {
+        pageIdx = page
         self.menuItems = menuItems
         self.cmsChanelListModel = cmsChanelListModel
         
         collectionView.reloadData()
     }
     
-    public var articleDatas: [HCCmsArticleModel] = [] {
-        didSet {
-            collectionView.reloadData()
-        }
+    public func reloadArticleDatas(datas: [HCCmsArticleModel], page: Int){
+        pageIdx = page
+        articleDatas = datas
+        collectionView.reloadData()
     }
 }
 
@@ -80,7 +85,10 @@ extension HCHomeViewContainer: UICollectionViewDataSource, UICollectionViewDeleg
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return 4
+            if menuItems.count > 3 {
+                return menuItems.count - 3
+            }
+            return 0
         case 1:
             return menuItems.count
         case 2:
@@ -93,9 +101,9 @@ extension HCHomeViewContainer: UICollectionViewDataSource, UICollectionViewDeleg
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         var cell: UICollectionViewCell!
         if indexPath.section == 0 {
-            let modes: [HCMenuItemShadowCellMode] = [.testTubeEncyclopedia, .reproductiveCenter, .testTubeDiary, .drugEncyclopedia]
+//            let modes: [HCMenuItemShadowCellMode] = [.testTubeEncyclopedia, .reproductiveCenter, .testTubeDiary, .drugEncyclopedia]
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: HCMenuItemShadowCell_identifier, for: indexPath)
-            (cell as? HCMenuItemShadowCell)?.mode = modes[indexPath.row]
+            (cell as? HCMenuItemShadowCell)?.funcModel = menuItems[indexPath.row + 3]
         }else if indexPath.section == 1 {
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: HCMenuHorizontalCell_identifier, for: indexPath)
             (cell as? HCMenuHorizontalCell)?.mode = menuItems[indexPath.row]
@@ -123,10 +131,16 @@ extension HCHomeViewContainer: UICollectionViewDataSource, UICollectionViewDeleg
             var header = UICollectionReusableView()
             if indexPath.section == 0 {
                 header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HCHomeHeaderReusableView_identifier, for: indexPath)
+                if menuItems.count > 3 {
+                    (header as? HCHomeHeaderReusableView)?.funcMenuModels = Array(menuItems[0..<3])
+                }else {
+                    (header as? HCHomeHeaderReusableView)?.funcMenuModels = menuItems
+                }
+                (header as? HCHomeHeaderReusableView)?.funcItemClicked = { [weak self] in self?.funcItemClicked?($0) }
             }else if indexPath.section == 2 {
                 if cmsChanelListModel.count > 0 {
                     header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HCNewsReusableView_identifier, for: indexPath)
-                    (header as? HCNewsReusableView)?.menuItems = cmsChanelListModel
+                    (header as? HCNewsReusableView)?.reloadMenuItems(items: cmsChanelListModel, page: pageIdx)
                     (header as? HCNewsReusableView)?.menuChanged = { [weak self] in self?.menuChanged?($0) }
                 }
             }
@@ -188,4 +202,16 @@ extension HCHomeViewContainer: UICollectionViewDataSource, UICollectionViewDeleg
         }
     }
 
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        switch indexPath.section {
+        case 0:
+            funcItemClicked?(menuItems[3 + indexPath.row])
+        case 1:
+            break
+        case 2:
+            articleClicked?(articleDatas[indexPath.row])
+        default:
+            break
+        }
+    }
 }

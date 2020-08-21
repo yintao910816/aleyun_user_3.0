@@ -17,6 +17,16 @@ enum HCCmsType: String {
     case RMZX = "RMZX"
 }
 
+/// 列表类型
+enum HCMenuListModuleType: String {
+    /// 我的医生
+    case doctor = "doctor"
+    /// 我的课程
+    case course = "course"
+    /// 我的资讯
+    case information = "information"
+}
+
 enum HCMergeProOpType: String {
     /// 标记月经
     case menstruationDate = "menstruationDate"
@@ -134,7 +144,9 @@ enum API{
     case cmsCmsChanelList(cmsCode: HCCmsType)
     /// 热门资讯—文章列表
     case cmsArticleList(channelId: String)
-
+    /// 关注与收藏
+    case attentionStore(moduleType: HCMenuListModuleType, pageNum: Int, pageSize: Int)
+    
     // --------------- 2.0接口
     /// 向app服务器注册友盟token
     case UMAdd(deviceToken: String)
@@ -232,6 +244,8 @@ extension API: TargetType{
             return "api/cms/cmsChanelList/\(cmsCode.rawValue)"
         case .cmsArticleList(let channelId):
             return "api/cms/articleList/\(channelId)"
+        case .attentionStore(_, _, _):
+            return "api/attentionStore/attentionStore"
             
         case .UMAdd(_):
             return "api/umeng/add"
@@ -378,6 +392,11 @@ extension API {
         case .accountSetting(let nickName, let headPath):
             params["nickName"] = nickName
             params["headPath"] = headPath
+        case .attentionStore(let moduleType, let pageNum, let pageSize):
+            params["moduleType"] = moduleType.rawValue
+            params["pageNum"] = pageNum
+            params["pageSize"] = pageSize
+            
 
             
         case .UMAdd(let deviceToken):

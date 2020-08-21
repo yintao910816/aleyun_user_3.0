@@ -36,13 +36,13 @@ class HCMenuView: UIView {
                 }
             }
             
-            collectionView.performBatchUpdates({
+//            collectionView.performBatchUpdates({
                 collectionView.reloadData()
-            }) { [weak self] flag in
-                if flag, let strongSelf = self {
-                    strongSelf.beginAnimotion(to: strongSelf.lastSelectedIdx, animotion: false)
-                }
-            }
+//            }) { [weak self] flag in
+//                if flag, let strongSelf = self {
+                    beginAnimotion(to: lastSelectedIdx, animotion: false)
+//                }
+//            }
         }
     }
     

@@ -12,7 +12,7 @@ import RxSwift
 
 class HCSettingViewModel: BaseViewModel {
     
-    public let listItemSubject = PublishSubject<[HCListCellItem]>()
+    public let listItemSubject = PublishSubject<[[HCListCellItem]]>()
 
     override init() {
         super.init()
@@ -30,7 +30,7 @@ extension HCSettingViewModel {
     private func prepareCellItems() {
         var items: [HCListCellItem] = []
         
-        let titles: [String] = ["退出登陆", "消息通知", "清除缓存", "法律声明", "隐私", "鼓励我们，给我们评分"]
+        let titles: [String] = ["消息通知", "清除缓存", "法律声明", "隐私", "鼓励我们，给我们评分"]
         let subTitles: [String] = ["", "", "20M", "", "", ""]
         for idx in 0..<titles.count {
             let item = HCListCellItem()
@@ -41,6 +41,11 @@ extension HCSettingViewModel {
             items.append(item)
         }
         
-        listItemSubject.onNext(items)
+        let loginOutItem = HCListCellItem()
+        loginOutItem.title = "退出登陆"
+        loginOutItem.titleColor = RGB(51, 51, 51)
+        loginOutItem.cellIdentifier = HCListDetailCell_identifier
+        
+        listItemSubject.onNext([items, [loginOutItem]])
     }
 }

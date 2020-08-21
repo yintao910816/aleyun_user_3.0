@@ -18,6 +18,7 @@ class TYSlideMenuController: UIViewController {
     
     private var pendingCtrl: UIViewController?
         
+    public var isFullScreen: Bool = true
     public var pageScroll: ((Int)->())?
     public let pageScrollSubject = PublishSubject<Int>()
     
@@ -25,6 +26,7 @@ class TYSlideMenuController: UIViewController {
         super.viewDidLoad()
 
         headerMenu = TYSlideMenu()
+        headerMenu.isFullScreen = isFullScreen
         headerMenu.backgroundColor = .white
         view.addSubview(headerMenu)
         
@@ -159,6 +161,7 @@ class TYSlideMenu: UIView {
     private var collectionView: UICollectionView!
     private var lastSelected: Int = 0
     public var menuSelect: ((Int)->())?
+    public var isFullScreen: Bool = true
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -219,7 +222,8 @@ extension TYSlideMenu: UICollectionViewDataSource, UICollectionViewDelegateFlowL
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return .init(width: datasource[indexPath.row].contentWidth, height: collectionView.height)
+        let itemW: CGFloat = isFullScreen ? width / CGFloat(datasource.count) : datasource[indexPath.row].contentWidth
+        return .init(width: itemW, height: collectionView.height)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -260,7 +264,8 @@ class TYSlideCell: UICollectionViewCell {
     
     public var model: TYSlideItemModel! {
         didSet {
-            titleLabel.text = model.dataModel.name
+            titleLabel.text = model.title
+            titleLabel.font = model.textFont
             
             titleLabel.textColor = model.isSelected ? model.selectedTextColor : model.textColor
             bottomLine.backgroundColor = model.lineColor
@@ -272,6 +277,6 @@ class TYSlideCell: UICollectionViewCell {
         super.layoutSubviews()
         
         titleLabel.frame = bounds
-        bottomLine.frame = .init(x: 0, y: height - 2, width: width, height: 2)
+        bottomLine.frame = .init(x: (width - model.lineWidth) / 2, y: height - 2, width: model.lineWidth, height: 2)
     }
 }

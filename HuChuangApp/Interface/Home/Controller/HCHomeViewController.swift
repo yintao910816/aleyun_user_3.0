@@ -18,17 +18,30 @@ class HCHomeViewController: BaseViewController {
         view.addSubview(containerView)
         
         containerView.menuChanged = { [weak self] in self?.viewModel.articleTypeChangeSignal.onNext($0) }
+        containerView.articleClicked = { [weak self] in
+            PrintLog("点击：\($0.title)")
+//            let webVC = BaseWebViewController()
+//            webVC.url = $0.picPath
+//            self?.navigationController?.pushViewController(webVC, animated: true)
+        }
+        
+        containerView.funcItemClicked = { [weak self] in
+            let webVC = BaseWebViewController()
+            webVC.url = $0.functionUrl
+            webVC.title = $0.name
+            self?.navigationController?.pushViewController(webVC, animated: true)
+        }
     }
     
     override func rxBind() {
         viewModel = HCHomeViewModel()
         
         viewModel.functionsMenuSignal.asDriver()
-            .drive(onNext: { [weak self] in self?.containerView.reloadData(menuItems: $0.0, cmsChanelListModel: $0.1) })
+            .drive(onNext: { [weak self] in self?.containerView.reloadData(menuItems: $0.0, cmsChanelListModel: $0.1, page: $0.2) })
             .disposed(by: disposeBag)
         
-        viewModel.articleDataSignal.asDriver()
-            .drive(onNext: { [weak self] in self?.containerView.articleDatas = $0 })
+        viewModel.articleDataSignal
+            .subscribe(onNext: { [weak self] in self?.containerView.reloadArticleDatas(datas: $0.0, page: $0.1) })
             .disposed(by: disposeBag)
                 
         viewModel.reloadSubject.onNext(Void())
