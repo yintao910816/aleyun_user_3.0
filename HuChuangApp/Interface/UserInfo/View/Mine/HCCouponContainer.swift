@@ -10,10 +10,12 @@ import UIKit
 
 class HCCouponContainer: UIView {
 
-    private var collectionView: UICollectionView!
+    public var collectionView: UICollectionView!
 
     private var bottomView: UIView!
     private var changeStatusButton: UIButton!
+    
+    public var changeStatus: ((Bool)->())?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -63,12 +65,18 @@ extension HCCouponContainer {
         changeStatusButton.setTitle("查看可用卷", for: .selected)
         changeStatusButton.setTitleColor(RGB(255, 79, 120), for: .normal)
         changeStatusButton.titleLabel?.font = .font(fontSize: 12)
-
+        changeStatusButton.addTarget(self, action: #selector(changeStatusAction), for: .touchUpInside)
+        
         addSubview(collectionView)
         addSubview(bottomView)
         bottomView.addSubview(changeStatusButton)
         
         collectionView.register(HCCouponCell.self, forCellWithReuseIdentifier: HCCouponCell_identifier)
+    }
+    
+    @objc private func changeStatusAction() {
+        changeStatusButton.isSelected = !changeStatusButton.isSelected
+        changeStatus?(changeStatusButton.isSelected)
     }
 }
 

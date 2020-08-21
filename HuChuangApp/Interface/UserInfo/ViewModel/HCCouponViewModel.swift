@@ -8,16 +8,22 @@
 
 import Foundation
 
+import RxSwift
+
 class HCCouponViewModel: RefreshVM<HCCouponModel> {
     
     private var useStatus: Int = 1
+    public let useStatusChangeSignal = PublishSubject<Bool>()
     
     override init() {
         super.init()
-        
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) { [weak self] in
-            self?.datasource.value = [HCCouponModel(), HCCouponModel()]
-        }
+
+        useStatusChangeSignal
+            .subscribe(onNext: { [weak self] in
+                self?.useStatus = $0 == true ? 1 : 0
+                self?.requestData(true)
+            })
+            .disposed(by: disposeBag)
     }
     
     override func requestData(_ refresh: Bool) {
@@ -27,10 +33,12 @@ class HCCouponViewModel: RefreshVM<HCCouponModel> {
                                      useStatus: useStatus,
                                      pageSize: pageModel.pageSize,
                                      pageNum: pageModel.currentPage))
-            .map(models: HCCouponModel.self)
-            .subscribe(onSuccess: { res in
-                
-            })
-            .disposed(by: disposeBag)
+            .map(model: HCCouponListModel.self)
+            .subscribe(onSuccess: { [weak self] data in
+                self?.updateRefresh(refresh, data.records, data.pages)
+            }) { [weak self] error in
+                self?.revertCurrentPageAndRefreshStatus()
+        }
+        .disposed(by: disposeBag)
     }
 }

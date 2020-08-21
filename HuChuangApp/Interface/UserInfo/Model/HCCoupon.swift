@@ -8,6 +8,10 @@
 
 import Foundation
 
+class HCCouponListModel: HJModel {
+    var records: [HCCouponModel] = []
+}
+
 class HCCouponModel: HJModel {
     var name: String = "￥8抵扣券"
     var payPrice: String = ""

@@ -18,6 +18,8 @@ class HCCouponViewController: BaseViewController {
         
         containerView = HCCouponContainer.init(frame: .init(x: 0, y: 0, width: view.width, height: view.height))
         view.addSubview(containerView)
+        
+        containerView.changeStatus = { [weak self] in self?.viewModel.useStatusChangeSignal.onNext($0) }
     }
     
     override func rxBind() {
@@ -26,6 +28,9 @@ class HCCouponViewController: BaseViewController {
         viewModel.datasource.asDriver()
             .drive(onNext: { [weak self] in self?.containerView.couponDatas = $0 })
             .disposed(by: disposeBag)
+        
+        containerView.collectionView.prepare(viewModel)
+        containerView.collectionView.headerRefreshing()
     }
     
     override func viewDidLayoutSubviews() {
