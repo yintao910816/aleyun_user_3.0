@@ -26,7 +26,7 @@ class EditUserInfoCell: UITableViewCell {
             if model.isImg == true {
                 iconOutlet.isHidden = false
                 desOutlet.isHidden  = true
-                iconOutlet.setImage(model.iconUrl, .userIcon)
+                iconOutlet.setImage(model.iconUrl, .userIconWomen)
             }else {
                 iconOutlet.isHidden = true
                 desOutlet.isHidden  = false

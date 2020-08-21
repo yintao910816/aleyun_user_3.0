@@ -56,7 +56,7 @@ class HCMineHeaderView: UICollectionReusableView {
     
     public var userModel: HCUserModel = HCUserModel() {
         didSet {
-            avatarButton.setImage(userModel.headPath, .userIcon)
+            avatarButton.setImage(userModel.headPath, userModel.userIconType)
             phoneLabel.text = userModel.mobileInfo
         }
     }

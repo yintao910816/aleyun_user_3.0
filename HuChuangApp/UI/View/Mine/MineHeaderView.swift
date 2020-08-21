@@ -92,7 +92,7 @@ class MineHeaderView: UIView {
             .disposed(by: disposeBag)
         
         userModel.subscribe(onNext: { [weak self] user in
-            self?.userIconOutlet.setImage(user.headPath, .userIcon)
+            self?.userIconOutlet.setImage(user.headPath, .userIconWomen)
             self?.nickNameOutlet.text = user.name
             let pregnantTypeName = user.pregnantTypeName.count > 0 ? user.pregnantTypeName : "未知"
             self?.statuesOutlet.text = "人生阶段：\(pregnantTypeName)"

@@ -87,7 +87,8 @@ enum ImageStrategy {
     case scale
     case homeFunction
     
-    case userIcon
+    case userIconMen
+    case userIconWomen
 }
 
 extension ImageStrategy {
@@ -101,8 +102,10 @@ extension ImageStrategy {
             return UIImage.init(named: "default_cover")
         case .homeFunction:
             return UIImage.init(named: "default_func_icon")
-        case .userIcon:
-            return UIImage.init(named: "default_user_icon")
+        case .userIconWomen:
+            return UIImage.init(named: "default_women_icon")
+        case .userIconMen:
+            return UIImage.init(named: "default_men_icon")
         }
     }
 }

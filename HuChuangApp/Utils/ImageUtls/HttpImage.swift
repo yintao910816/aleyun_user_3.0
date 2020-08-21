@@ -29,7 +29,7 @@ extension UIImageView {
             return
         }
 
-        if type != .userIcon {
+        if type != .userIconWomen && type != .userIconMen {
             var _options = [KingfisherOptionsInfoItem]()
             if let _folder = folder {
                 _options.append(.targetCache(ImageCacheCenter.shared.kingfisherCache(_folder)))
@@ -86,7 +86,7 @@ extension UIButton {
             return
         }
         
-        if type != .userIcon {
+        if type != .userIconWomen && type != .userIconMen {
             var _options = [KingfisherOptionsInfoItem]()
             if let _folder = folder {
                 _options.append(.targetCache(ImageCacheCenter.shared.kingfisherCache(_folder)))

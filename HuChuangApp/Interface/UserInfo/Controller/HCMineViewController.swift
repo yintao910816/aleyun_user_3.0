@@ -34,7 +34,7 @@ class HCMineViewController: BaseViewController {
             }
         }
         
-        addBarItem(title: "设置", titleColor: HC_MAIN_COLOR, right: true)
+        addBarItem(normal: "setting", right: true)
             .drive(onNext: { [weak self] in
                 self?.navigationController?.pushViewController(HCSettingViewController(), animated: true)
             })

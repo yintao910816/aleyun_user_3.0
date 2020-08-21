@@ -47,7 +47,7 @@ extension Reactive where Base: UIImageView {
         }
     }
     
-    func image(forStrategy model: ImageStrategy = .userIcon) -> Binder<String?> {
+    func image(forStrategy model: ImageStrategy = .userIconWomen) -> Binder<String?> {
         return Binder(self.base) { view, url in
             view.setImage(url, model)
         }
@@ -62,7 +62,7 @@ extension Reactive where Base: UIButton {
         }
     }
     
-    func image(forStrategy model: ImageStrategy = .userIcon) -> Binder<String> {
+    func image(forStrategy model: ImageStrategy = .userIconWomen) -> Binder<String> {
         return Binder(self.base) { view, url in
             view.setImage(url, model)
         }

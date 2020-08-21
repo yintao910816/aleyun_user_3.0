@@ -31,7 +31,7 @@ class HCMineInServerCell: UICollectionViewCell {
     
     public var model: HCPersonalProgressServiceModel! {
         didSet {
-            avatar.setImage(model.headPath, .userIcon)
+            avatar.setImage(model.headPath, .userIconWomen)
             nameLabel.text = model.userName
             jobLabel.text = model.technicalPost
             hospitalLabel.text = model.unitName

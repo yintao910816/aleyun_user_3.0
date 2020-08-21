@@ -60,6 +60,10 @@ class HCUserModel: HJModel {
         get { return sex == 1 ? "男" : "女" }
     }
     
+    var userIconType: ImageStrategy {
+        get { return sex == 1 ? .userIconMen : .userIconWomen }
+    }
+    
     /// 是否绑定成功
     var isSuccessBind: Bool {
         get { return visitCard.count > 0 }

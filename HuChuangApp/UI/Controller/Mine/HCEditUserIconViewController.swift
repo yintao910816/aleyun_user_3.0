@@ -35,7 +35,7 @@ class HCEditUserIconViewController: BaseViewController {
         viewModel = EditUserIconViewModel()
         
         viewModel.userIcon
-            .bind(to: userIconOutlet.rx.image(forStrategy: .userIcon))
+            .bind(to: userIconOutlet.rx.image(forStrategy: .userIconWomen))
             .disposed(by: disposeBag)
         
         addBarItem(title: "完成", titleColor: HC_MAIN_COLOR)

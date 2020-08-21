@@ -38,7 +38,7 @@ class HCListDetailIconCell: HCBaseListCell {
                 if model.iconType == .network {
                     detailIconImgV.setImage(model.detailIcon)
                 }else if model.iconType == .userIcon {
-                    detailIconImgV.setImage(model.detailIcon, .userIcon)
+                    detailIconImgV.setImage(model.detailIcon, .userIconWomen)
                 }else {
                     detailIconImgV.image = UIImage(named: model.detailIcon)
                 }
