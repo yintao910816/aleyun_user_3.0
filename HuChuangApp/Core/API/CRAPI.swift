@@ -109,17 +109,15 @@ enum H5Type: String {
 }
 
 /// 搜索的内容类型
-/**
- 1，searchModule = doctor 为 医生模块，
- 2，searchModule = course 为课程，
- 3，searchModule = article 为文章）
- 4，searchModule 等于 空 为 全部
- */
 enum HCsearchModule: String {
+    /// 专家
     case doctor = "doctor"
+    /// 课程
     case course = "course"
-    case article = "article"
-    case all = ""
+    /// 资讯
+    case article = "information"
+    /// 直播
+    case live = "live"
 }
 
 //MARK:
@@ -150,7 +148,9 @@ enum API{
     case cmsArticleList(channelId: String)
     /// 关注与收藏
     case attentionStore(moduleType: HCMenuListModuleType, pageNum: Int, pageSize: Int)
-    
+    /// 搜索
+    case search(moduleType: HCsearchModule, searchWords: String, pageSize: Int, pageNum: Int)
+
     // --------------- 2.0接口
     /// 向app服务器注册友盟token
     case UMAdd(deviceToken: String)
@@ -207,8 +207,6 @@ enum API{
     case getMenstruationBaseInfo
     /// 微信授权登录---获取绑定信息
     case getAuthMember(openId: String)
-    /// 搜索
-    case search(pageNum: Int, pageSize: Int, searchModule: HCsearchModule, searchName: String)
     /// 文章当前收藏数量
     case storeAndStatus(articleId: String)
     /// 文章收藏取消
@@ -252,6 +250,10 @@ extension API: TargetType{
             return "api/cms/articleList/\(channelId)"
         case .attentionStore(_, _, _):
             return "api/attentionStore/attentionStore"
+        case .search(_, _, _, _):
+            return "api/search/search"
+
+            
             
         case .UMAdd(_):
             return "api/umeng/add"
@@ -304,8 +306,6 @@ extension API: TargetType{
             return "api/physiology/getMenstruationBaseInfo"
         case .getAuthMember(_):
             return "api/login/getAuthMember"
-        case .search(_):
-            return "api/search/search"
         case .storeAndStatus(_):
             return "api/cms/storeAndStatus"
         case .articelStore(_):
@@ -402,7 +402,12 @@ extension API {
             params["moduleType"] = moduleType.rawValue
             params["pageNum"] = pageNum
             params["pageSize"] = pageSize
-            
+        case .search(let moduleType, let searchWords, let pageSize, let pageNum):
+            params["moduleType"] = moduleType.rawValue
+            params["searchWords"] = searchWords
+            params["pageSize"] = pageSize
+            params["pageNum"] = pageNum
+
 
             
         case .UMAdd(let deviceToken):
@@ -467,22 +472,6 @@ extension API {
             params["openId"] = openId
             params["appType"] = "IOS"
             params["oauthType"] = "weixin"
-        case .search(let pageNum, let pageSize, let searchModule, let searchName):
-            if searchName.count > 0 {
-                switch searchModule {
-                case .all:
-                    params["searchName"] = searchName
-                default:
-                    params["searchName"] = searchName
-                    params["searchModule"] = searchModule.rawValue
-                }
-            }else {
-                params["searchModule"] = searchModule.rawValue
-//                params["searchName"] = ""
-            }
-            
-            params["pageNum"] = pageNum
-            params["pageSize"] = pageSize
         case .storeAndStatus(let articleId):
             params["articleId"] = articleId
         case .articelStore(let articleId, let status):

@@ -31,6 +31,14 @@ class HCHomeViewController: BaseViewController {
         searchBar.backgroundColor = RGB(255, 79, 120)
         view.addSubview(searchBar)
         
+        searchBar.tapInputCallBack = { [unowned self] in
+            self.navigationController?.pushViewController(HCSearchViewController(), animated: true)
+        }
+        
+        searchBar.rightItemTapBack = {
+
+        }
+        
         containerView = HCHomeViewContainer.init(frame: .init(x: 0, y: 0, width: view.width, height: view.height))
         view.insertSubview(containerView, belowSubview: searchBar)
         

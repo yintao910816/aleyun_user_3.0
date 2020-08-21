@@ -14,7 +14,7 @@ class HCSearchViewModel: RefreshVM<HCBaseSearchItemModel> {
         
     private var menuPageListData: [HCsearchModule: [HCBaseSearchItemModel]] = [:]
     // 记录当前第几页数据
-    private var module: HCsearchModule = .all
+    private var module: HCsearchModule = .doctor
 
     public let keyWordObser = Variable("")
 //    public let pageListData = PublishSubject<([HCBaseSearchItemModel], HCsearchModule)>()
@@ -23,7 +23,7 @@ class HCSearchViewModel: RefreshVM<HCBaseSearchItemModel> {
 
     public let requestSearchListSubject = PublishSubject<HCsearchModule>()
     /// 绑定当前滑动到哪个栏目
-    public let currentPageObser = Variable(HCsearchModule.all)
+    public let currentPageObser = Variable(HCsearchModule.doctor)
     /// 关键字搜索 - 是否添加到本地数据库
     public let requestSearchSubject = PublishSubject<Bool>()
     /// 清除本地缓存记录
@@ -54,7 +54,7 @@ class HCSearchViewModel: RefreshVM<HCBaseSearchItemModel> {
         requestSearchSubject
             .subscribe(onNext: { [unowned self] cache in
                 if cache { self.cacheSearchRecord() }
-                self.module = .all
+                self.module = .doctor
                 self.requestData(true)
             })
             .disposed(by: disposeBag)
@@ -78,10 +78,10 @@ class HCSearchViewModel: RefreshVM<HCBaseSearchItemModel> {
         
         updatePage(for: module.rawValue, refresh: refresh)
         
-        HCProvider.request(.search(pageNum: currentPage(for: module.rawValue),
+        HCProvider.request(.search(moduleType: module,
+                                   searchWords: keyWordObser.value,
                                    pageSize: pageSize(for: module.rawValue),
-                                   searchModule: module,
-                                   searchName: keyWordObser.value))
+                                   pageNum: currentPage(for: module.rawValue)))
             .map(model: HCSearchDataModel.self)
             .subscribe(onSuccess: { [weak self] in self?.dealSuccess(data: $0, refresh: refresh) },
                        onError: { [weak self] in self?.dealFailure(error: $0) })
@@ -134,7 +134,7 @@ extension HCSearchViewModel {
         
         var datas = [HCBaseSearchItemModel]()
         switch module {
-        case .all:
+        case .doctor:
             if menuPageListData[HCsearchModule.doctor] == nil {
                 menuPageListData[HCsearchModule.doctor] = [HCBaseSearchItemModel]()
             }
@@ -168,9 +168,9 @@ extension HCSearchViewModel {
                           pageKey: HCsearchModule.article.rawValue)
         case .article:
             datas = (data as? HCSearchArticleModel)?.records ?? [HCBaseSearchItemModel]()
-        case .doctor:
-            datas = (data as? HCSearchDoctorModel)?.records ?? [HCBaseSearchItemModel]()
         case .course:
+            datas = (data as? HCSearchDoctorModel)?.records ?? [HCBaseSearchItemModel]()
+        case .live:
             datas = (data as? HCSearchCourseModel)?.records ?? [HCBaseSearchItemModel]()
             break
         }
@@ -182,7 +182,7 @@ extension HCSearchViewModel {
                       pageKey: module.rawValue)
                 
         let allData = HCSearchDataModel.init()
-        if let allSource = menuPageListData[.all]?.first as? HCSearchDataModel {
+        if let allSource = menuPageListData[.doctor]?.first as? HCSearchDataModel {
             allData.doctor = allSource.doctor.count > 3 ? Array(allSource.doctor[0...2]) : allSource.doctor
             allData.course = allSource.course.count > 3 ? Array(allSource.course[0...2]) : allSource.course
             allData.article = allSource.article.count > 3 ? Array(allSource.article[0...2]) : allSource.article

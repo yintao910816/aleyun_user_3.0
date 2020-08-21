@@ -15,7 +15,7 @@ class HCSearchViewController: BaseViewController {
     private var searchRecordView: TYSearchRecordView!
     private var slideCtrl: TYSlideMenuController!
     
-    private var pageIds: [HCsearchModule] = [.all, .doctor, .course, .article]
+    private var pageIds: [HCsearchModule] = [.doctor, .article, .course, .live]
     
     private var viewModel: HCSearchViewModel!
 
@@ -140,24 +140,24 @@ class HCSearchViewController: BaseViewController {
             self.navigationController?.pushViewController(ctrl, animated: true)
         }
 
-        slideCtrl.menuItems = TYSlideItemModel.creatSimple(for: ["全部", "医生", "课程", "文章"])
+        slideCtrl.menuItems = TYSlideItemModel.createSearchResultData()
         slideCtrl.menuCtrls = [allCtrl, doctorCtrl, classCtrl, popularScienceCtrl]
         
         viewModel.pageListData
             .subscribe(onNext: { [weak self] data in
                 guard let strongSelf = self else { return }
                 switch data.4 {
-                case .all:
-                    strongSelf.slideCtrl.reloadList(listMode: data.0, page: strongSelf.pageIds.lastIndex(of: .all)!)
-                    strongSelf.slideCtrl.reloadList(listMode: data.1, page: strongSelf.pageIds.lastIndex(of: .doctor)!)
-                    strongSelf.slideCtrl.reloadList(listMode: data.2, page: strongSelf.pageIds.lastIndex(of: .course)!)
-                    strongSelf.slideCtrl.reloadList(listMode: data.3, page: strongSelf.pageIds.lastIndex(of: .article)!)
                 case .doctor:
-                    strongSelf.slideCtrl.reloadList(listMode: data.1, page: strongSelf.pageIds.lastIndex(of: .doctor)!)
+                    strongSelf.slideCtrl.reloadList(listMode: data.0, page: strongSelf.pageIds.lastIndex(of: .doctor)!)
+                    strongSelf.slideCtrl.reloadList(listMode: data.1, page: strongSelf.pageIds.lastIndex(of: .article)!)
+                    strongSelf.slideCtrl.reloadList(listMode: data.2, page: strongSelf.pageIds.lastIndex(of: .course)!)
+                    strongSelf.slideCtrl.reloadList(listMode: data.3, page: strongSelf.pageIds.lastIndex(of: .live)!)
+                case .article:
+                    strongSelf.slideCtrl.reloadList(listMode: data.1, page: strongSelf.pageIds.lastIndex(of: .article)!)
                 case .course:
                     strongSelf.slideCtrl.reloadList(listMode: data.2, page: strongSelf.pageIds.lastIndex(of: .course)!)
-                case .article:
-                    strongSelf.slideCtrl.reloadList(listMode: data.3, page: strongSelf.pageIds.lastIndex(of: .article)!)
+                case .live:
+                    strongSelf.slideCtrl.reloadList(listMode: data.3, page: strongSelf.pageIds.lastIndex(of: .live)!)
                 }
             })
             .disposed(by: disposeBag)
