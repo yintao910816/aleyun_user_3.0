@@ -18,6 +18,8 @@ class HCMineHeaderView: UICollectionReusableView {
         case verify
         /// 点击头像
         case avatar
+        /// 优惠卷
+        case coupon
         /// 收藏
         case attentionStore
     }
@@ -107,7 +109,8 @@ extension HCMineHeaderView {
         
         couponButton = HCCustomTextButton()
         couponButton.setupText(first: "0", second: "优惠卷")
-        
+        couponButton.actionCallBack = { [weak self] in self?.excuteAction?(.coupon) }
+
         serverButton = HCCustomTextButton()
         serverButton.setupText(first: "0", second: "服务包")
 

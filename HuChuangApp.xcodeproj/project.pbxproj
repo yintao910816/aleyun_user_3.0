@@ -257,6 +257,11 @@
 		B82456D324EFDBD0006356BB /* HCSearchPopularScienceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82456CC24EFDBD0006356BB /* HCSearchPopularScienceViewController.swift */; };
 		B82456D424EFDBD0006356BB /* HCSearchAllViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82456CD24EFDBD0006356BB /* HCSearchAllViewController.swift */; };
 		B82456D624EFDC1A006356BB /* HCSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82456D524EFDC19006356BB /* HCSearchViewModel.swift */; };
+		B82456D924EFE0F7006356BB /* HCCouponViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82456D824EFE0F7006356BB /* HCCouponViewController.swift */; };
+		B82456DB24EFE139006356BB /* HCCouponViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82456DA24EFE139006356BB /* HCCouponViewModel.swift */; };
+		B82456DD24EFE166006356BB /* HCCouponContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82456DC24EFE166006356BB /* HCCouponContainer.swift */; };
+		B82456DF24EFE17B006356BB /* HCCoupon.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82456DE24EFE17B006356BB /* HCCoupon.swift */; };
+		B82456E124EFE559006356BB /* HCCouponCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82456E024EFE559006356BB /* HCCouponCell.swift */; };
 		B826AF7F221C671B000428C1 /* ColunmCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B826AF7D221C671B000428C1 /* ColunmCollectionViewCell.swift */; };
 		B826AF80221C671B000428C1 /* ColunmCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B826AF7E221C671B000428C1 /* ColunmCollectionViewCell.xib */; };
 		B826AF82221C6C24000428C1 /* String+Extends.swift in Sources */ = {isa = PBXBuildFile; fileRef = B826AF81221C6C23000428C1 /* String+Extends.swift */; };
@@ -1037,6 +1042,11 @@
 		B82456CC24EFDBD0006356BB /* HCSearchPopularScienceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCSearchPopularScienceViewController.swift; sourceTree = "<group>"; };
 		B82456CD24EFDBD0006356BB /* HCSearchAllViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCSearchAllViewController.swift; sourceTree = "<group>"; };
 		B82456D524EFDC19006356BB /* HCSearchViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCSearchViewModel.swift; sourceTree = "<group>"; };
+		B82456D824EFE0F7006356BB /* HCCouponViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCCouponViewController.swift; sourceTree = "<group>"; };
+		B82456DA24EFE139006356BB /* HCCouponViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCCouponViewModel.swift; sourceTree = "<group>"; };
+		B82456DC24EFE166006356BB /* HCCouponContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCCouponContainer.swift; sourceTree = "<group>"; };
+		B82456DE24EFE17B006356BB /* HCCoupon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCCoupon.swift; sourceTree = "<group>"; };
+		B82456E024EFE559006356BB /* HCCouponCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCCouponCell.swift; sourceTree = "<group>"; };
 		B826AF7D221C671B000428C1 /* ColunmCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColunmCollectionViewCell.swift; sourceTree = "<group>"; };
 		B826AF7E221C671B000428C1 /* ColunmCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ColunmCollectionViewCell.xib; sourceTree = "<group>"; };
 		B826AF81221C6C23000428C1 /* String+Extends.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extends.swift"; sourceTree = "<group>"; };
@@ -2232,6 +2242,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		B82456D724EFE0E4006356BB /* Coupon */ = {
+			isa = PBXGroup;
+			children = (
+				B82456D824EFE0F7006356BB /* HCCouponViewController.swift */,
+			);
+			path = Coupon;
+			sourceTree = "<group>";
+		};
 		B86993D423373A5300086A77 /* TYSearchBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -2857,6 +2875,8 @@
 			isa = PBXGroup;
 			children = (
 				C4382BEF24E560C2000C00CE /* HCMineViewContainer.swift */,
+				B82456DC24EFE166006356BB /* HCCouponContainer.swift */,
+				B82456E024EFE559006356BB /* HCCouponCell.swift */,
 				C4382BF024E560C2000C00CE /* HCMineHeaderView.swift */,
 				C4382BF124E560C2000C00CE /* HCMineEmptyHeathyDataCell.swift */,
 				C4382BF224E560C2000C00CE /* HCMenuItemCell.swift */,
@@ -3018,6 +3038,7 @@
 				C4382C0424E56C37000C00CE /* HCEditInfoViewModel.swift */,
 				C42B218E24ECCB1500B2A665 /* HCSettingViewModel.swift */,
 				B8F1587F24EF68310046B107 /* HCCollectionViewModel.swift */,
+				B82456DA24EFE139006356BB /* HCCouponViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -3025,6 +3046,7 @@
 		C494135124DE4B5700045749 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				B82456D724EFE0E4006356BB /* Coupon */,
 				B8F1587624EF64150046B107 /* Collection */,
 				C494135424DE4B7900045749 /* HCMineViewController.swift */,
 				C4382BEC24E5604D000C00CE /* HCAccountSettingViewController.swift */,
@@ -3040,6 +3062,7 @@
 				C40448A424EAA31A00AD1610 /* HCFileModel.swift */,
 				C40448A624EAAFB500AD1610 /* HCPersonalCenter.swift */,
 				B8F1588124EF68670046B107 /* HCAttentionStore.swift */,
+				B82456DE24EFE17B006356BB /* HCCoupon.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3555,6 +3578,7 @@
 				B816EA9F221DABF400F024D5 /* ZXQRCodeMultiReader.m in Sources */,
 				C4783B2E24DD39E800737479 /* HCLoginViewController.swift in Sources */,
 				B816EAB7221DABF400F024D5 /* ZXCharacterSetECI.m in Sources */,
+				B82456D924EFE0F7006356BB /* HCCouponViewController.swift in Sources */,
 				B816EACD221DABF400F024D5 /* ZXPDF417HighLevelEncoder.m in Sources */,
 				B86993E3233754B100086A77 /* HomeLayout.swift in Sources */,
 				B816EB2F221DABF400F024D5 /* ZXUPCEANExtensionSupport.m in Sources */,
@@ -3596,12 +3620,14 @@
 				B842D1FE22258CC000A4F8DF /* HCAppDelegate+UM.swift in Sources */,
 				B816EA76221DABF400F024D5 /* LBXScanVideoZoomView.m in Sources */,
 				C497E95923444EF200328B47 /* HCHomeGoodNewsCell.swift in Sources */,
+				B82456E124EFE559006356BB /* HCCouponCell.swift in Sources */,
 				B819AF6D24C6E5A500F88BA7 /* HCNavBarTitleData.swift in Sources */,
 				B816EAAD221DABF400F024D5 /* ZXQRCodeAlignmentPatternFinder.m in Sources */,
 				B816EAEA221DABF400F024D5 /* ZXDataMatrixSymbolInfo.m in Sources */,
 				B816EB02221DABF400F024D5 /* ZXOneDimensionalCodeWriter.m in Sources */,
 				B816EB21221DABF400F024D5 /* ZXCode128Writer.m in Sources */,
 				B8FC3F872396D74D006EB478 /* HCDoctorInfoViewModel.swift in Sources */,
+				B82456DF24EFE17B006356BB /* HCCoupon.swift in Sources */,
 				B816EAB1221DABF400F024D5 /* ZXStringUtils.m in Sources */,
 				C497E9712344728200328B47 /* HCHomeBabyTuinaClassroomReusableView.swift in Sources */,
 				C4C11AD824E41C6F001CBE74 /* HCMenuHorizontalCell.swift in Sources */,
@@ -3845,6 +3871,7 @@
 				B816EAAF221DABF400F024D5 /* ZXQRCodeDetector.m in Sources */,
 				C497E94523444E4600328B47 /* HCHomeConsultingVolumeReusableView.swift in Sources */,
 				B816EB13221DABF400F024D5 /* ZXAI01decoder.m in Sources */,
+				B82456DB24EFE139006356BB /* HCCouponViewModel.swift in Sources */,
 				B879A060221AF0B200E573C9 /* MineFooterView.swift in Sources */,
 				C4F139B9235419EF00D777F6 /* TYIcon.swift in Sources */,
 				C42133A12205B41C006C10C4 /* BaseFilesOwner.swift in Sources */,
@@ -3949,6 +3976,7 @@
 				C497E94A23444E4600328B47 /* HCHomePreparePregnantCell.swift in Sources */,
 				C4AB272624E536D20095F693 /* HCCalendarDayCell.swift in Sources */,
 				B816EAD5221DABF400F024D5 /* ZXPDF417BoundingBox.m in Sources */,
+				B82456DD24EFE166006356BB /* HCCouponContainer.swift in Sources */,
 				B816EA7D221DABF400F024D5 /* ZXBinarizer.m in Sources */,
 				B826AF82221C6C24000428C1 /* String+Extends.swift in Sources */,
 				B816EA7C221DABF400F024D5 /* ZXByteMatrix.m in Sources */,

@@ -150,6 +150,8 @@ enum API{
     case attentionStore(moduleType: HCMenuListModuleType, pageNum: Int, pageSize: Int)
     /// 搜索
     case search(moduleType: HCsearchModule, searchWords: String, pageSize: Int, pageNum: Int)
+    /// 我的优惠卷
+    case myCoupon(orderSn: String, useStatus: Int, pageSize: Int, pageNum: Int)
 
     // --------------- 2.0接口
     /// 向app服务器注册友盟token
@@ -252,7 +254,8 @@ extension API: TargetType{
             return "api/attentionStore/attentionStore"
         case .search(_, _, _, _):
             return "api/search/search"
-
+        case .myCoupon(_, _, _, _):
+            return "api/coupon/myCoupon"
             
             
         case .UMAdd(_):
@@ -407,7 +410,11 @@ extension API {
             params["searchWords"] = searchWords
             params["pageSize"] = pageSize
             params["pageNum"] = pageNum
-
+        case .myCoupon(let orderSn, let useStatus, let pageSize, let pageNum):
+            params["orderSn"] = orderSn
+            params["useStatus"] = useStatus
+            params["pageSize"] = pageSize
+            params["pageNum"] = pageNum
 
             
         case .UMAdd(let deviceToken):
