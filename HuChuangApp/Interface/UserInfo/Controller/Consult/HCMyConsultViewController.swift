@@ -13,6 +13,9 @@ class HCMyConsultViewController: BaseViewController {
     private var viewModel: HCMyConsultViewModel!
     
     private var slideCtrl: TYSlideMenuController!
+    private var picConsultCtrl: HCPicConsultViewController!
+    private var videoConsultCtrl: HCVideoConsultViewController!
+    private var cloudClinicConsultCtrl: HCCloudClinicConsultViewController!
 
     override func setupUI() {
         navigationItem.title = "我的问诊"
@@ -21,10 +24,12 @@ class HCMyConsultViewController: BaseViewController {
         addChild(slideCtrl)
         view.addSubview(slideCtrl.view)
         
+        picConsultCtrl = HCPicConsultViewController()
+        videoConsultCtrl = HCVideoConsultViewController()
+        cloudClinicConsultCtrl = HCCloudClinicConsultViewController()
+        
         slideCtrl.menuItems = TYSlideItemModel.createMyConsultData()
-        slideCtrl.menuCtrls = [HCPicConsultViewController(),
-                               HCVideoConsultViewController(),
-                               HCCloudClinicConsultViewController()]
+        slideCtrl.menuCtrls = [picConsultCtrl, videoConsultCtrl, cloudClinicConsultCtrl]
         
         slideCtrl.pageScroll = { [weak self] page in
             //            self?.viewModel.requestTodayListSubject.onNext(page)
@@ -34,6 +39,23 @@ class HCMyConsultViewController: BaseViewController {
     override func rxBind() {
         viewModel = HCMyConsultViewModel()
         
+        picConsultCtrl.bind(viewModel: viewModel, canRefresh: true, canLoadMore: true, isAddNoMoreContent: false)
+        
+        viewModel.datasource.asDriver()
+            .drive(onNext: { [weak self] in
+                guard let strongSelf = self else { return }
+                switch strongSelf.viewModel.currentMode {
+                case .picConsult:
+                    strongSelf.picConsultCtrl.reloadData(data: $0)
+                case .videoConsult:
+                    strongSelf.picConsultCtrl.reloadData(data: $0)
+                case .cloudClinic:
+                    strongSelf.cloudClinicConsultCtrl.reloadData(data: $0)
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        picConsultCtrl.tableView.headerRefreshing()
     }
     
     override func viewDidLayoutSubviews() {

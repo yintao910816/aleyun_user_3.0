@@ -45,7 +45,7 @@ class HCMyConsultViewModel: RefreshVM<HCConsultModelAdapt> {
         let cacheKey: String = "\(module.rawValue)"
         updatePage(for: cacheKey, refresh: refresh)
         
-        if menuPageListData.keys.contains(module) {
+        if !menuPageListData.keys.contains(module) {
             menuPageListData[module] = []
         }
         
@@ -58,7 +58,7 @@ class HCMyConsultViewModel: RefreshVM<HCConsultModelAdapt> {
                     strongSelf.updateRefresh(refresh: refresh,
                                              models: data.data?.records,
                                              dataModels: &strongSelf.menuPageListData[strongSelf.module]!,
-                                             pages: data.pages,
+                                             pages: data.data?.pages ?? 0,
                                              pageKey: cacheKey)
                     strongSelf.datasource.value = strongSelf.menuPageListData[strongSelf.module]!
                 }) { [weak self] _ in
@@ -73,7 +73,7 @@ class HCMyConsultViewModel: RefreshVM<HCConsultModelAdapt> {
                     strongSelf.updateRefresh(refresh: refresh,
                                              models: data.data?.records,
                                              dataModels: &strongSelf.menuPageListData[strongSelf.module]!,
-                                             pages: data.pages,
+                                             pages: data.data?.pages ?? 0,
                                              pageKey: cacheKey)
                     strongSelf.datasource.value = strongSelf.menuPageListData[strongSelf.module]!
                 }) { [weak self] _ in
@@ -89,7 +89,7 @@ class HCMyConsultViewModel: RefreshVM<HCConsultModelAdapt> {
                     strongSelf.updateRefresh(refresh: refresh,
                                              models: data.data?.records,
                                              dataModels: &strongSelf.menuPageListData[strongSelf.module]!,
-                                             pages: data.pages,
+                                             pages: data.data?.pages ?? 0,
                                              pageKey: cacheKey)
                     strongSelf.datasource.value = strongSelf.menuPageListData[strongSelf.module]!
                 }) { [weak self] _ in

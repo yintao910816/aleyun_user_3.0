@@ -10,21 +10,22 @@ import UIKit
 
 class HCPicConsultViewController: HCSlideItemController {
 
-    private var tableView: UITableView!
+    public var tableView: UITableView!
         
     private var datasource: [HCPicConsultItemModel] = []
 
     public var pushH5CallBack:((String)->())?
 
     override func setupUI() {
-        tableView = UITableView.init(frame: .zero, style: .plain)
+        tableView = UITableView.init(frame: .zero, style: .grouped)
+        tableView.backgroundColor = .white
         tableView.separatorStyle = .none
         tableView.showsVerticalScrollIndicator = false
         tableView.delegate = self
         tableView.dataSource = self
         view.addSubview(tableView)
         
-        tableView.register(HCClassRoomListCell.self, forCellReuseIdentifier: HCClassRoomListCell_identifier)
+        tableView.register(HCPicConsultCell.self, forCellReuseIdentifier: HCPicConsultCell_identifier)
     }
     
     override func reloadData(data: Any?) {
@@ -39,22 +40,56 @@ class HCPicConsultViewController: HCSlideItemController {
         
         tableView.prepare(viewModel, showFooter: canLoadMore, showHeader: canRefresh, isAddNoMoreContent: isAddNoMoreContent)
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        tableView.frame = view.bounds
+    }
 }
 
 extension HCPicConsultViewController: UITableViewDelegate, UITableViewDataSource {
 
+    func numberOfSections(in tableView: UITableView) -> Int {
+        datasource.count
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return datasource.count
+        return 1
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return HCClassRoomListCell_height
+        return HCPicConsultCell_height
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = (tableView.dequeueReusableCell(withIdentifier: HCClassRoomListCell_identifier) as! HCClassRoomListCell)
-//        cell.searchCourseModel = datasource[indexPath.row]
+        let cell = (tableView.dequeueReusableCell(withIdentifier: HCPicConsultCell_identifier) as! HCPicConsultCell)
+        cell.model = datasource[indexPath.row]
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if section < datasource.count - 1 {
+            return 10
+        }
+        return 0.01
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0.01
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return nil
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        if section < datasource.count - 1 {
+            let view = UIView()
+            view.backgroundColor = RGB(243, 243, 243)
+            return view
+        }
+        return nil
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

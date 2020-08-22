@@ -8,6 +8,59 @@
 
 import Foundation
 
+/// 订单状态
+enum HCOrderDetailStatus: Int {
+    /// 未知状态
+    case unknow = -1
+    /// 待支付
+    case unpay = 0
+    /// 已取消 - 订单状态 status
+    case cancelled = 7
+    /// 已完成 - 已支付，已回复，已完结
+    case finished = 8
+    /// 接诊中 - 组合状态（已支付，已回复，未完结）
+    case receiving = 9
+    /// 待接诊 - 已支付，未回复
+    case waiteReceive = 10
+    
+    /// 我的问诊支付状态
+    public var myConsultPayStatusText: String {
+        switch self {
+        case .unpay:
+            return "待支付"
+        case .cancelled:
+            return "已取消"
+        case .finished:
+            return "已完成"
+        case .receiving:
+            return "接诊中"
+        case .waiteReceive:
+            return "待接诊"
+        case .unknow:
+            return "未知状态"
+        }
+    }
+
+    /// 我的问诊按钮文字
+    public var myConsultButtonText: String {
+        switch self {
+        case .unpay:
+            return "去支付"
+        case .cancelled:
+            return "再次咨询"
+        case .finished:
+            return "再次咨询"
+        case .receiving:
+            return "进入咨询"
+        case .waiteReceive:
+            return "待接诊"
+        case .unknow:
+            return "未知状态"
+        }
+    }
+}
+
+
 /// 图文咨询
 class HCPicConsultListModel: HJModel {
     var records: [HCPicConsultItemModel] = []
@@ -25,6 +78,28 @@ class HCPicConsultItemModel: HJModel, HCConsultModelAdapt {
     var technicalPost: String = ""
     var userId: String = ""
     var userName: String = ""
+    
+    public lazy var nameText: NSAttributedString = {
+        let string = NSMutableAttributedString(string: "\(self.userName) \(self.technicalPost)")
+        string.addAttribute(NSAttributedString.Key.font,
+                            value: UIFont.font(fontSize: 14),
+                            range: .init(location: self.userName.count + 1, length: self.technicalPost.count))
+        string.addAttribute(NSAttributedString.Key.foregroundColor, value: RGB(153, 153, 153),
+                            range: .init(location: self.userName.count + 1, length: self.technicalPost.count))
+        return string
+    }()
+    
+    public lazy var timeText: String = {
+        return "\(self.createDate) \(self.consultTypeName)"
+    }()
+
+    public lazy var statusMode: HCOrderDetailStatus = {
+        if let statusMode = HCOrderDetailStatus(rawValue: self.status) {
+            return statusMode
+        }
+        return .unknow
+    }()
+    
 }
 
 /// 视频问诊
