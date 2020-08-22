@@ -41,6 +41,8 @@ class HCCouponCell: UICollectionViewCell {
             useLimitLabel.text = model.content
             subTitleLabel.text = model.bak
             statusButton.isSelected = model.status == 1
+            
+            configTheme()
         }
     }
     
@@ -82,6 +84,24 @@ class HCCouponCell: UICollectionViewCell {
 }
 
 extension HCCouponCell {
+    
+    private func  configTheme() {
+        if model.status == 1 {
+            couponTypeLabel.backgroundColor = RGB(255, 79, 120)
+            couponTypeLabel.textColor = .white
+            couponLabel.textColor = RGB(255, 79, 120)
+            couponTypeDetailLabel.textColor = RGB(51, 51, 51)
+            timeLabel.textColor = RGB(94, 97, 106)
+            useLimitLabel.textColor = RGB(94, 97, 106)
+        }else {
+            couponTypeLabel.backgroundColor = RGB(153, 153, 153)
+            couponLabel.textColor = RGB(153, 153, 153)
+            couponTypeDetailLabel.textColor = RGB(153, 153, 153)
+            timeLabel.textColor = RGB(153, 153, 153)
+            useLimitLabel.textColor = RGB(153, 153, 153)
+        }
+    }
+    
     private func initUI() {
         layer.cornerRadius = 5
         backgroundColor = .white
