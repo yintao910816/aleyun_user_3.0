@@ -152,6 +152,8 @@ enum API{
     case search(moduleType: HCsearchModule, searchWords: String, pageSize: Int, pageNum: Int)
     /// 我的优惠卷
     case myCoupon(orderSn: String, useStatus: Int, pageSize: Int, pageNum: Int)
+    /// 我的问诊
+    case myConsult(consultType: Int, pageSize: Int, pageNum: Int)
 
     // --------------- 2.0接口
     /// 向app服务器注册友盟token
@@ -256,7 +258,8 @@ extension API: TargetType{
             return "api/search/search"
         case .myCoupon(_, _, _, _):
             return "api/coupon/myCoupon"
-            
+        case .myConsult(_, _, _):
+            return "api/consult/myConsult"
             
         case .UMAdd(_):
             return "api/umeng/add"
@@ -413,6 +416,10 @@ extension API {
         case .myCoupon(let orderSn, let useStatus, let pageSize, let pageNum):
             params["orderSn"] = orderSn
             params["useStatus"] = useStatus
+            params["pageSize"] = pageSize
+            params["pageNum"] = pageNum
+        case .myConsult(let consultType, let pageSize, let pageNum):
+            params["consultType"] = consultType
             params["pageSize"] = pageSize
             params["pageNum"] = pageNum
 

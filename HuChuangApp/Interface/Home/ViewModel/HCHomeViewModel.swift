@@ -53,7 +53,9 @@ extension HCHomeViewModel {
                 }
                 
                 self.functionsMenuSignal.value = (data.0, data.2, data.1, 0)
-                self.requestCmsArticleList(channelId: data.2[0].id, page: 0)
+                if data.2.count > 0 {
+                    self.requestCmsArticleList(channelId: data.2[0].id, page: 0)
+                }
             })
             .disposed(by: disposeBag)
     }

@@ -10,9 +10,11 @@ import UIKit
 
 class HCMineViewContainer: UIView {
 
+    private let myServerModes: [HCMenuItemCellMode] = [.consult, .reservation, .order, .record]
     private var collectionView: UICollectionView!
     
     public var excuteAction: ((HCMineHeaderView.HCMineHeaderAction)->())?
+    public var excuteMyServerAction: ((HCMenuItemCellMode)->())?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -98,9 +100,8 @@ extension HCMineViewContainer: UICollectionViewDataSource, UICollectionViewDeleg
                 cell = collectionView.dequeueReusableCell(withReuseIdentifier: HCMineEmptyConsultCell_identifier, for: indexPath)
             }
         }else if indexPath.section == 1 {
-            let modes: [HCMenuItemCellMode] = [.consult, .reservation, .order, .record]
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: HCMenuItemCell_identifier, for: indexPath)
-            (cell as? HCMenuItemCell)?.mode = modes[indexPath.row]
+            (cell as? HCMenuItemCell)?.mode = myServerModes[indexPath.row]
         }else if indexPath.section == 2 {
             if let healthArchivesData = model.healthArchives {
                 cell = collectionView.dequeueReusableCell(withReuseIdentifier: HCMineHealthArchivesCell_identifier, for: indexPath)
@@ -189,5 +190,18 @@ extension HCMineViewContainer: UICollectionViewDataSource, UICollectionViewDeleg
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        switch indexPath.section {
+        case 0:
+            break
+        case 1:
+            excuteMyServerAction?(myServerModes[indexPath.row])
+        case 2:
+            break
+        default:
+            break
+        }
     }
 }

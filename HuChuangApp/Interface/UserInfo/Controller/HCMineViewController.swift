@@ -36,6 +36,19 @@ class HCMineViewController: BaseViewController {
             }
         }
         
+        containerView.excuteMyServerAction = { [weak self] in
+            switch $0 {
+            case .consult:
+                self?.navigationController?.pushViewController(HCMyConsultViewController(), animated: true)
+            case .reservation:
+                break
+            case .order:
+                break
+            case .record:
+                break
+            }
+        }
+        
         addBarItem(normal: "setting", right: true)
             .drive(onNext: { [weak self] in
                 self?.navigationController?.pushViewController(HCSettingViewController(), animated: true)

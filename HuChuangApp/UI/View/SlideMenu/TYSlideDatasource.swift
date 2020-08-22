@@ -77,6 +77,29 @@ extension TYSlideItemModel {
                                  isSelected: false)]
     }
     
+    /// 我的问诊数据
+    internal static func createMyConsultData() ->[TYSlideItemModel] {
+        return [TYSlideItemModel(title: "图文问诊",
+                                 textColor: RGB(153, 153, 153),
+                                 selectedTextColor: HC_MAIN_COLOR,
+                                 lineColor: HC_MAIN_COLOR,
+                                 textFont: .font(fontSize: 16),
+                                 isSelected: true),
+                TYSlideItemModel(title: "视频问诊",
+                                 textColor: RGB(153, 153, 153),
+                                 selectedTextColor: HC_MAIN_COLOR,
+                                 lineColor: HC_MAIN_COLOR,
+                                 textFont: .font(fontSize: 16),
+                                 isSelected: false),
+                TYSlideItemModel(title: "云门诊",
+                                 textColor: RGB(153, 153, 153),
+                                 selectedTextColor: HC_MAIN_COLOR,
+                                 lineColor: HC_MAIN_COLOR,
+                                 textFont: .font(fontSize: 16),
+                                 isSelected: false)]
+    }
+
+    
     /// 搜索结果数据
     internal static func createSearchResultData() ->[TYSlideItemModel] {
         return [TYSlideItemModel(title: "专家",
