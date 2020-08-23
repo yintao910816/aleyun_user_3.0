@@ -360,6 +360,11 @@
 		B8F1588024EF68310046B107 /* HCCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F1587F24EF68310046B107 /* HCCollectionViewModel.swift */; };
 		B8F1588224EF68670046B107 /* HCAttentionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F1588124EF68670046B107 /* HCAttentionStore.swift */; };
 		B8F8FBA823572B5700784442 /* TYData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F8FBA723572B5700784442 /* TYData.swift */; };
+		B8F90E2B24F24E6200A1D68C /* HCMyOrderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F90E2A24F24E6200A1D68C /* HCMyOrderViewModel.swift */; };
+		B8F90E2D24F24E7F00A1D68C /* HCMyOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F90E2C24F24E7F00A1D68C /* HCMyOrderViewController.swift */; };
+		B8F90E2F24F24E8700A1D68C /* HCMyOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F90E2E24F24E8700A1D68C /* HCMyOrder.swift */; };
+		B8F90E3224F24EC200A1D68C /* HCMyOrderContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F90E3124F24EC200A1D68C /* HCMyOrderContainer.swift */; };
+		B8F90E3424F24F8E00A1D68C /* HCMyOrderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F90E3324F24F8E00A1D68C /* HCMyOrderCell.swift */; };
 		B8FC3F872396D74D006EB478 /* HCDoctorInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FC3F862396D74D006EB478 /* HCDoctorInfoViewModel.swift */; };
 		B8FC3F8D239AA626006EB478 /* HCSettingFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FC3F8C239AA626006EB478 /* HCSettingFooterView.swift */; };
 		B8FE96B72388301B0077B9BF /* TYCirCleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FE96B62388301B0077B9BF /* TYCirCleView.swift */; };
@@ -1160,6 +1165,11 @@
 		B8F1587F24EF68310046B107 /* HCCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCCollectionViewModel.swift; sourceTree = "<group>"; };
 		B8F1588124EF68670046B107 /* HCAttentionStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCAttentionStore.swift; sourceTree = "<group>"; };
 		B8F8FBA723572B5700784442 /* TYData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TYData.swift; sourceTree = "<group>"; };
+		B8F90E2A24F24E6200A1D68C /* HCMyOrderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCMyOrderViewModel.swift; sourceTree = "<group>"; };
+		B8F90E2C24F24E7F00A1D68C /* HCMyOrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCMyOrderViewController.swift; sourceTree = "<group>"; };
+		B8F90E2E24F24E8700A1D68C /* HCMyOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCMyOrder.swift; sourceTree = "<group>"; };
+		B8F90E3124F24EC200A1D68C /* HCMyOrderContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCMyOrderContainer.swift; sourceTree = "<group>"; };
+		B8F90E3324F24F8E00A1D68C /* HCMyOrderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCMyOrderCell.swift; sourceTree = "<group>"; };
 		B8FC3F862396D74D006EB478 /* HCDoctorInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCDoctorInfoViewModel.swift; sourceTree = "<group>"; };
 		B8FC3F88239A9FCE006EB478 /* HCSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCSettingViewController.swift; sourceTree = "<group>"; };
 		B8FC3F8A239AA0C5006EB478 /* HCSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCSettingViewModel.swift; sourceTree = "<group>"; };
@@ -2455,6 +2465,23 @@
 			path = Collection;
 			sourceTree = "<group>";
 		};
+		B8F90E2924F24E4200A1D68C /* Order */ = {
+			isa = PBXGroup;
+			children = (
+				B8F90E2C24F24E7F00A1D68C /* HCMyOrderViewController.swift */,
+			);
+			path = Order;
+			sourceTree = "<group>";
+		};
+		B8F90E3024F24EB500A1D68C /* Order */ = {
+			isa = PBXGroup;
+			children = (
+				B8F90E3124F24EC200A1D68C /* HCMyOrderContainer.swift */,
+				B8F90E3324F24F8E00A1D68C /* HCMyOrderCell.swift */,
+			);
+			path = Order;
+			sourceTree = "<group>";
+		};
 		C404489B24EA71CC00AD1610 /* HCPicker */ = {
 			isa = PBXGroup;
 			children = (
@@ -3054,6 +3081,7 @@
 				B8F1587F24EF68310046B107 /* HCCollectionViewModel.swift */,
 				B82456DA24EFE139006356BB /* HCCouponViewModel.swift */,
 				C4DDE09624F140790001201C /* HCMyConsultViewModel.swift */,
+				B8F90E2A24F24E6200A1D68C /* HCMyOrderViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -3061,6 +3089,7 @@
 		C494135124DE4B5700045749 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				B8F90E2924F24E4200A1D68C /* Order */,
 				C4DDE09324F140570001201C /* Consult */,
 				B82456D724EFE0E4006356BB /* Coupon */,
 				B8F1587624EF64150046B107 /* Collection */,
@@ -3080,6 +3109,7 @@
 				B8F1588124EF68670046B107 /* HCAttentionStore.swift */,
 				B82456DE24EFE17B006356BB /* HCCoupon.swift */,
 				C4DDE09124F140470001201C /* HCMyConsult.swift */,
+				B8F90E2E24F24E8700A1D68C /* HCMyOrder.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3087,6 +3117,7 @@
 		C494135324DE4B5700045749 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B8F90E3024F24EB500A1D68C /* Order */,
 				C4DDE0A024F14EF10001201C /* Consult */,
 				C4382BFB24E560CB000C00CE /* Setting */,
 				C4382BEE24E560C2000C00CE /* Mine */,
@@ -3557,6 +3588,7 @@
 				B816EB27221DABF400F024D5 /* ZXCodaBarWriter.m in Sources */,
 				B816EB04221DABF400F024D5 /* ZXRSSExpandedRow.m in Sources */,
 				B816EB0C221DABF400F024D5 /* ZXRSSExpandedFieldParser.m in Sources */,
+				B8F90E2B24F24E6200A1D68C /* HCMyOrderViewModel.swift in Sources */,
 				B819AF7324C6E85B00F88BA7 /* HCNavBarOrderRecordModeView.swift in Sources */,
 				C497E95D23444FA300328B47 /* HCHomeGoodNewsCellItemCell.swift in Sources */,
 				C4AB273324E53D6F0095F693 /* HCListDetailCell.swift in Sources */,
@@ -3569,6 +3601,7 @@
 				C4F139BA235419EF00D777F6 /* Frame.swift in Sources */,
 				B81D422224E7FB99003EA388 /* BaseModel.swift in Sources */,
 				C421338322059B8C006C10C4 /* CacheKey.swift in Sources */,
+				B8F90E3424F24F8E00A1D68C /* HCMyOrderCell.swift in Sources */,
 				B816EAFB221DABF400F024D5 /* ZXCodaBarReader.m in Sources */,
 				B816EA80221DABF400F024D5 /* ZXEncodeHints.m in Sources */,
 				C4E254EF233E1C36006922DB /* HCClassRoomItemController.swift in Sources */,
@@ -3585,6 +3618,7 @@
 				B816EAF0221DABF400F024D5 /* ZXDataMatrixDataBlock.m in Sources */,
 				C454C01D234E007B005CBC0B /* TYSearchRecordLayout.swift in Sources */,
 				C4AB272524E536D20095F693 /* HCCalendarView.swift in Sources */,
+				B8F90E3224F24EC200A1D68C /* HCMyOrderContainer.swift in Sources */,
 				C497E93523443DB100328B47 /* FindDoctorHeaderView.swift in Sources */,
 				B8F8FBA823572B5700784442 /* TYData.swift in Sources */,
 				C4F3E87622201D1B008B143C /* H5.swift in Sources */,
@@ -3814,6 +3848,7 @@
 				C497E9612344610500328B47 /* HCHomePregnancyClassroomReusableView.swift in Sources */,
 				C4AB271124E4E9AA0095F693 /* HCNewsReusableView.swift in Sources */,
 				B816EACC221DABF400F024D5 /* ZXPDF417Dimensions.m in Sources */,
+				B8F90E2D24F24E7F00A1D68C /* HCMyOrderViewController.swift in Sources */,
 				B816EB58221DABF400F024D5 /* LBXZXCapture.m in Sources */,
 				C421334C220587DC006C10C4 /* HandyJSON+MapModel.swift in Sources */,
 				B870E534238A878A0085AFA3 /* HCAskViewModel.swift in Sources */,
@@ -4002,6 +4037,7 @@
 				B816EA8C221DABF400F024D5 /* ZXAztecToken.m in Sources */,
 				C42133682205902A006C10C4 /* AccountViewModel.swift in Sources */,
 				B892FF9A23AB69EC00A137C0 /* HCFiliter.swift in Sources */,
+				B8F90E2F24F24E8700A1D68C /* HCMyOrder.swift in Sources */,
 				B816EB52221DABF400F024D5 /* ZXVINParsedResult.m in Sources */,
 				B816EABE221DABF400F024D5 /* ZXDefaultGridSampler.m in Sources */,
 				B826AF7F221C671B000428C1 /* ColunmCollectionViewCell.swift in Sources */,
