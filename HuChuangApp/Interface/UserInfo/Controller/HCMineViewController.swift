@@ -45,7 +45,7 @@ class HCMineViewController: BaseViewController {
             case .order:
                 self?.navigationController?.pushViewController(HCMyOrderViewController(), animated: true)
             case .record:
-                break
+                self?.navigationController?.pushViewController(HCMyRecordViewController(), animated: true)
             }
         }
         

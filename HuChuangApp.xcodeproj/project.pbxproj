@@ -371,6 +371,13 @@
 		B8F90E4224F256F200A1D68C /* HCAccurateReservationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F90E4124F256F200A1D68C /* HCAccurateReservationCell.swift */; };
 		B8F90E4424F2572B00A1D68C /* HCAccurateReservationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F90E4324F2572B00A1D68C /* HCAccurateReservationController.swift */; };
 		B8F90E4624F2576000A1D68C /* HCRegisterReservationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F90E4524F2576000A1D68C /* HCRegisterReservationController.swift */; };
+		B8F90E4924F25A4200A1D68C /* HCMyRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F90E4824F25A4200A1D68C /* HCMyRecordViewController.swift */; };
+		B8F90E4B24F25A5300A1D68C /* HCMyRecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F90E4A24F25A5300A1D68C /* HCMyRecordViewModel.swift */; };
+		B8F90E4D24F25A5F00A1D68C /* HCMyRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F90E4C24F25A5F00A1D68C /* HCMyRecord.swift */; };
+		B8F90E4F24F25AAB00A1D68C /* HCPicConsultRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F90E4E24F25AAB00A1D68C /* HCPicConsultRecordViewController.swift */; };
+		B8F90E5124F25AC800A1D68C /* HCVideoConsultRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F90E5024F25AC800A1D68C /* HCVideoConsultRecordViewController.swift */; };
+		B8F90E5324F25AE500A1D68C /* HCAccurateReservationRecordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F90E5224F25AE500A1D68C /* HCAccurateReservationRecordController.swift */; };
+		B8F90E5624F25BF900A1D68C /* HCPicConsultRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F90E5524F25BF900A1D68C /* HCPicConsultRecordCell.swift */; };
 		B8FC3F872396D74D006EB478 /* HCDoctorInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FC3F862396D74D006EB478 /* HCDoctorInfoViewModel.swift */; };
 		B8FC3F8D239AA626006EB478 /* HCSettingFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FC3F8C239AA626006EB478 /* HCSettingFooterView.swift */; };
 		B8FE96B72388301B0077B9BF /* TYCirCleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FE96B62388301B0077B9BF /* TYCirCleView.swift */; };
@@ -1182,6 +1189,13 @@
 		B8F90E4124F256F200A1D68C /* HCAccurateReservationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCAccurateReservationCell.swift; sourceTree = "<group>"; };
 		B8F90E4324F2572B00A1D68C /* HCAccurateReservationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCAccurateReservationController.swift; sourceTree = "<group>"; };
 		B8F90E4524F2576000A1D68C /* HCRegisterReservationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCRegisterReservationController.swift; sourceTree = "<group>"; };
+		B8F90E4824F25A4200A1D68C /* HCMyRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCMyRecordViewController.swift; sourceTree = "<group>"; };
+		B8F90E4A24F25A5300A1D68C /* HCMyRecordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCMyRecordViewModel.swift; sourceTree = "<group>"; };
+		B8F90E4C24F25A5F00A1D68C /* HCMyRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCMyRecord.swift; sourceTree = "<group>"; };
+		B8F90E4E24F25AAB00A1D68C /* HCPicConsultRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCPicConsultRecordViewController.swift; sourceTree = "<group>"; };
+		B8F90E5024F25AC800A1D68C /* HCVideoConsultRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCVideoConsultRecordViewController.swift; sourceTree = "<group>"; };
+		B8F90E5224F25AE500A1D68C /* HCAccurateReservationRecordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCAccurateReservationRecordController.swift; sourceTree = "<group>"; };
+		B8F90E5524F25BF900A1D68C /* HCPicConsultRecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCPicConsultRecordCell.swift; sourceTree = "<group>"; };
 		B8FC3F862396D74D006EB478 /* HCDoctorInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCDoctorInfoViewModel.swift; sourceTree = "<group>"; };
 		B8FC3F88239A9FCE006EB478 /* HCSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCSettingViewController.swift; sourceTree = "<group>"; };
 		B8FC3F8A239AA0C5006EB478 /* HCSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCSettingViewModel.swift; sourceTree = "<group>"; };
@@ -2512,6 +2526,25 @@
 			path = Reservation;
 			sourceTree = "<group>";
 		};
+		B8F90E4724F25A3600A1D68C /* Record */ = {
+			isa = PBXGroup;
+			children = (
+				B8F90E4824F25A4200A1D68C /* HCMyRecordViewController.swift */,
+				B8F90E4E24F25AAB00A1D68C /* HCPicConsultRecordViewController.swift */,
+				B8F90E5024F25AC800A1D68C /* HCVideoConsultRecordViewController.swift */,
+				B8F90E5224F25AE500A1D68C /* HCAccurateReservationRecordController.swift */,
+			);
+			path = Record;
+			sourceTree = "<group>";
+		};
+		B8F90E5424F25BD300A1D68C /* Record */ = {
+			isa = PBXGroup;
+			children = (
+				B8F90E5524F25BF900A1D68C /* HCPicConsultRecordCell.swift */,
+			);
+			path = Record;
+			sourceTree = "<group>";
+		};
 		C404489B24EA71CC00AD1610 /* HCPicker */ = {
 			isa = PBXGroup;
 			children = (
@@ -3113,6 +3146,7 @@
 				C4DDE09624F140790001201C /* HCMyConsultViewModel.swift */,
 				B8F90E2A24F24E6200A1D68C /* HCMyOrderViewModel.swift */,
 				B8F90E3D24F255C400A1D68C /* HCReservationViewModel.swift */,
+				B8F90E4A24F25A5300A1D68C /* HCMyRecordViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -3120,6 +3154,7 @@
 		C494135124DE4B5700045749 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				B8F90E4724F25A3600A1D68C /* Record */,
 				B8F90E3524F2556800A1D68C /* Reservation */,
 				B8F90E2924F24E4200A1D68C /* Order */,
 				C4DDE09324F140570001201C /* Consult */,
@@ -3143,6 +3178,7 @@
 				C4DDE09124F140470001201C /* HCMyConsult.swift */,
 				B8F90E2E24F24E8700A1D68C /* HCMyOrder.swift */,
 				B8F90E3924F255A600A1D68C /* HCReservation.swift */,
+				B8F90E4C24F25A5F00A1D68C /* HCMyRecord.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3150,6 +3186,7 @@
 		C494135324DE4B5700045749 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B8F90E5424F25BD300A1D68C /* Record */,
 				B8F90E3624F2558400A1D68C /* Reservation */,
 				B8F90E3024F24EB500A1D68C /* Order */,
 				C4DDE0A024F14EF10001201C /* Consult */,
@@ -3691,6 +3728,7 @@
 				B816EAD3221DABF400F024D5 /* ZXPDF417ECErrorCorrection.m in Sources */,
 				C472525124DD562A006DEEC9 /* HCVerifyViewController.swift in Sources */,
 				B8BE350B221478A900EF16F1 /* VCServer.swift in Sources */,
+				B8F90E4F24F25AAB00A1D68C /* HCPicConsultRecordViewController.swift in Sources */,
 				C40448A024EA721200AD1610 /* HCPickerController.swift in Sources */,
 				C421332722056F24006C10C4 /* HUDIndicatorView.swift in Sources */,
 				C42133932205B1E9006C10C4 /* KeyboardManager.swift in Sources */,
@@ -3770,6 +3808,7 @@
 				B816EB1F221DABF400F024D5 /* ZXAbstractRSSReader.m in Sources */,
 				B816EAD2221DABF400F024D5 /* ZXModulusGF.m in Sources */,
 				B86993E12337547700086A77 /* BaseLayout.swift in Sources */,
+				B8F90E5124F25AC800A1D68C /* HCVideoConsultRecordViewController.swift in Sources */,
 				B816EAC6221DABF400F024D5 /* ZXIntArray.m in Sources */,
 				B816EAE3221DABF400F024D5 /* ZXDataMatrixEdifactEncoder.m in Sources */,
 				C497E97823447E6F00328B47 /* HCHomeBabyTuinaClassroomCell.swift in Sources */,
@@ -3783,6 +3822,7 @@
 				B8BE351122147AE600EF16F1 /* HCEditUserIconViewController.swift in Sources */,
 				B821E34D23070907009A11A3 /* HCLocationManager.swift in Sources */,
 				C4481E2422154D66007F4B0C /* BaseWKWebViewViewController.swift in Sources */,
+				B8F90E5624F25BF900A1D68C /* HCPicConsultRecordCell.swift in Sources */,
 				B892FFA023ABB50800A137C0 /* TYFiliterView.swift in Sources */,
 				C421332C22056F24006C10C4 /* TYHUD.swift in Sources */,
 				B816EAAA221DABF400F024D5 /* ZXQRCodeFinderPatternInfo.m in Sources */,
@@ -3844,6 +3884,7 @@
 				B8D4D47B2394258C00AA3D52 /* HCPicAndTextAskViewController.swift in Sources */,
 				C40448AC24EB7D3800AD1610 /* HCClassRoomViewController.swift in Sources */,
 				C40448B424EBB07900AD1610 /* HCHomeArticleCell.swift in Sources */,
+				B8F90E4924F25A4200A1D68C /* HCMyRecordViewController.swift in Sources */,
 				C46E4D6923AE40A800A67F02 /* TYCurveTimeView.swift in Sources */,
 				C421332B22056F24006C10C4 /* HUD.swift in Sources */,
 				B816EA7B221DABF400F024D5 /* ZXPlanarYUVLuminanceSource.m in Sources */,
@@ -3994,6 +4035,7 @@
 				B816EAE5221DABF400F024D5 /* ZXDataMatrixC40Encoder.m in Sources */,
 				B816EAE0221DABF400F024D5 /* ZXPDF417ResultMetadata.m in Sources */,
 				B816EB3F221DABF400F024D5 /* ZXAddressBookParsedResult.m in Sources */,
+				B8F90E4D24F25A5F00A1D68C /* HCMyRecord.swift in Sources */,
 				B816EAA2221DABF400F024D5 /* ZXQRCodeDecoder.m in Sources */,
 				B816EAEF221DABF400F024D5 /* ZXDataMatrixBitMatrixParser.m in Sources */,
 				C421330B22056B59006C10C4 /* HCAppDelegate.swift in Sources */,
@@ -4059,6 +4101,7 @@
 				B816EB15221DABF400F024D5 /* ZXRSSExpandedDecodedNumeric.m in Sources */,
 				C4AB273124E53D6F0095F693 /* DataModel.swift in Sources */,
 				B816EB38221DABF400F024D5 /* ZXAddressBookDoCoMoResultParser.m in Sources */,
+				B8F90E4B24F25A5300A1D68C /* HCMyRecordViewModel.swift in Sources */,
 				C421333422056FB8006C10C4 /* UIDevice+Extension.swift in Sources */,
 				B816EA9E221DABF400F024D5 /* ZXMultiDetector.m in Sources */,
 				C4382BF824E560C2000C00CE /* HCMenuItemCell.swift in Sources */,
@@ -4107,6 +4150,7 @@
 				B816EA8F221DABF400F024D5 /* ZXAztecCode.m in Sources */,
 				B88497E224E7F8E500B91262 /* CRAPI.swift in Sources */,
 				C4382BF624E560C2000C00CE /* HCMineHeaderView.swift in Sources */,
+				B8F90E5324F25AE500A1D68C /* HCAccurateReservationRecordController.swift in Sources */,
 				C472525324DD564D006DEEC9 /* HCVerifyViewContainer.swift in Sources */,
 				B816EB2C221DABF400F024D5 /* ZXUPCEReader.m in Sources */,
 				C421332D22056F24006C10C4 /* HUDUtil.swift in Sources */,
