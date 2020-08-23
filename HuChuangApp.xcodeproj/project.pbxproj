@@ -378,6 +378,18 @@
 		B8F90E5124F25AC800A1D68C /* HCVideoConsultRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F90E5024F25AC800A1D68C /* HCVideoConsultRecordViewController.swift */; };
 		B8F90E5324F25AE500A1D68C /* HCAccurateReservationRecordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F90E5224F25AE500A1D68C /* HCAccurateReservationRecordController.swift */; };
 		B8F90E5624F25BF900A1D68C /* HCPicConsultRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F90E5524F25BF900A1D68C /* HCPicConsultRecordCell.swift */; };
+		B8F90E5824F25F8E00A1D68C /* HCMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F90E5724F25F8E00A1D68C /* HCMessageViewController.swift */; };
+		B8F90E5C24F25FBB00A1D68C /* HCMessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F90E5B24F25FBB00A1D68C /* HCMessageViewModel.swift */; };
+		B8F90E5E24F25FD100A1D68C /* HCMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F90E5D24F25FD100A1D68C /* HCMessage.swift */; };
+		B8F90E6824F2604A00A1D68C /* HCMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F90E6024F2604A00A1D68C /* HCMenuView.swift */; };
+		B8F90E6924F2604A00A1D68C /* HCHomeHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F90E6124F2604A00A1D68C /* HCHomeHeaderReusableView.swift */; };
+		B8F90E6A24F2604A00A1D68C /* HCMenuHorizontalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F90E6224F2604A00A1D68C /* HCMenuHorizontalCell.swift */; };
+		B8F90E6B24F2604A00A1D68C /* HCHomeViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F90E6324F2604A00A1D68C /* HCHomeViewContainer.swift */; };
+		B8F90E6C24F2604A00A1D68C /* HCMenuItemShadowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F90E6424F2604A00A1D68C /* HCMenuItemShadowCell.swift */; };
+		B8F90E6D24F2604A00A1D68C /* HCNewsReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F90E6524F2604A00A1D68C /* HCNewsReusableView.swift */; };
+		B8F90E6E24F2604A00A1D68C /* HCHomeArticleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F90E6624F2604A00A1D68C /* HCHomeArticleCell.swift */; };
+		B8F90E7024F2605E00A1D68C /* HCMessageContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F90E6F24F2605E00A1D68C /* HCMessageContainer.swift */; };
+		B8F90E7224F260B600A1D68C /* HCMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F90E7124F260B600A1D68C /* HCMessageCell.swift */; };
 		B8FC3F872396D74D006EB478 /* HCDoctorInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FC3F862396D74D006EB478 /* HCDoctorInfoViewModel.swift */; };
 		B8FC3F8D239AA626006EB478 /* HCSettingFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FC3F8C239AA626006EB478 /* HCSettingFooterView.swift */; };
 		B8FE96B72388301B0077B9BF /* TYCirCleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FE96B62388301B0077B9BF /* TYCirCleView.swift */; };
@@ -393,7 +405,6 @@
 		C40448AC24EB7D3800AD1610 /* HCClassRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4382BE824E55AE2000C00CE /* HCClassRoomViewController.swift */; };
 		C40448AD24EB7D4300AD1610 /* HCClassRoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4382BEA24E55B06000C00CE /* HCClassRoomViewModel.swift */; };
 		C40448B224EB80E100AD1610 /* HCHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40448B024EB7E0100AD1610 /* HCHome.swift */; };
-		C40448B424EBB07900AD1610 /* HCHomeArticleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40448B324EBB07900AD1610 /* HCHomeArticleCell.swift */; };
 		C4193D8422A7649F007A9E07 /* TYClickedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4193D8322A7649F007A9E07 /* TYClickedButton.swift */; };
 		C41A12C122BCF49100214216 /* String+Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41A12C022BCF49100214216 /* String+Operation.swift */; };
 		C42132F622054463006C10C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C42132F522054463006C10C4 /* Assets.xcassets */; };
@@ -493,9 +504,7 @@
 		C494135924DE4C5800045749 /* HCMineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C494135824DE4C5800045749 /* HCMineViewModel.swift */; };
 		C494136524DE54A100045749 /* HCCustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C494136424DE54A100045749 /* HCCustomButton.swift */; };
 		C494137124DE9E3600045749 /* HCHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C494137024DE9E3600045749 /* HCHomeViewController.swift */; };
-		C494137324DE9EF000045749 /* HCHomeViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C494137224DE9EF000045749 /* HCHomeViewContainer.swift */; };
 		C494137524DE9EFC00045749 /* HCHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C494137424DE9EFC00045749 /* HCHomeViewModel.swift */; };
-		C494137724DEA12B00045749 /* HCHomeHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C494137624DEA12B00045749 /* HCHomeHeaderReusableView.swift */; };
 		C497E93523443DB100328B47 /* FindDoctorHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C497E93423443DB100328B47 /* FindDoctorHeaderView.swift */; };
 		C497E94523444E4600328B47 /* HCHomeConsultingVolumeReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C497E93723444E4600328B47 /* HCHomeConsultingVolumeReusableView.swift */; };
 		C497E94623444E4600328B47 /* HCHomeConsultingVolumeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C497E93823444E4600328B47 /* HCHomeConsultingVolumeCell.xib */; };
@@ -523,8 +532,6 @@
 		C497E9722344728200328B47 /* HCHomeBabyTuinaClassroomReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C497E9702344728200328B47 /* HCHomeBabyTuinaClassroomReusableView.xib */; };
 		C497E97823447E6F00328B47 /* HCHomeBabyTuinaClassroomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C497E97623447E6F00328B47 /* HCHomeBabyTuinaClassroomCell.swift */; };
 		C497E97923447E6F00328B47 /* HCHomeBabyTuinaClassroomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C497E97723447E6F00328B47 /* HCHomeBabyTuinaClassroomCell.xib */; };
-		C4AB271124E4E9AA0095F693 /* HCNewsReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AB271024E4E9AA0095F693 /* HCNewsReusableView.swift */; };
-		C4AB271324E4EAD70095F693 /* HCMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AB271224E4EAD70095F693 /* HCMenuView.swift */; };
 		C4AB271A24E52AB90095F693 /* HCToolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AB271924E52AB90095F693 /* HCToolViewController.swift */; };
 		C4AB271C24E52AD50095F693 /* HCToolViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AB271B24E52AD50095F693 /* HCToolViewModel.swift */; };
 		C4AB271E24E52AF20095F693 /* HCToolViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AB271D24E52AF20095F693 /* HCToolViewContainer.swift */; };
@@ -541,8 +548,6 @@
 		C4AB273824E53D6F0095F693 /* HCBaseListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AB272F24E53D6F0095F693 /* HCBaseListCell.swift */; };
 		C4AB273924E53D6F0095F693 /* HCListDetailInputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AB273024E53D6F0095F693 /* HCListDetailInputCell.swift */; };
 		C4B185342345B03400F37197 /* HCSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B185332345B03400F37197 /* HCSearch.swift */; };
-		C4C11AD624E4151E001CBE74 /* HCMenuItemShadowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C11AD524E4151E001CBE74 /* HCMenuItemShadowCell.swift */; };
-		C4C11AD824E41C6F001CBE74 /* HCMenuHorizontalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C11AD724E41C6F001CBE74 /* HCMenuHorizontalCell.swift */; };
 		C4C3257B2205B8490091783C /* ScrollTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C3257A2205B8490091783C /* ScrollTextView.swift */; };
 		C4C3257D2205C3AD0091783C /* UIView+XIB.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C3257C2205C3AC0091783C /* UIView+XIB.swift */; };
 		C4C8EB3F235175660054A295 /* HCHomePreparePregnantInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C8EB3D235175660054A295 /* HCHomePreparePregnantInfoCell.swift */; };
@@ -1196,6 +1201,18 @@
 		B8F90E5024F25AC800A1D68C /* HCVideoConsultRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCVideoConsultRecordViewController.swift; sourceTree = "<group>"; };
 		B8F90E5224F25AE500A1D68C /* HCAccurateReservationRecordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCAccurateReservationRecordController.swift; sourceTree = "<group>"; };
 		B8F90E5524F25BF900A1D68C /* HCPicConsultRecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCPicConsultRecordCell.swift; sourceTree = "<group>"; };
+		B8F90E5724F25F8E00A1D68C /* HCMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCMessageViewController.swift; sourceTree = "<group>"; };
+		B8F90E5B24F25FBB00A1D68C /* HCMessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCMessageViewModel.swift; sourceTree = "<group>"; };
+		B8F90E5D24F25FD100A1D68C /* HCMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCMessage.swift; sourceTree = "<group>"; };
+		B8F90E6024F2604A00A1D68C /* HCMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCMenuView.swift; sourceTree = "<group>"; };
+		B8F90E6124F2604A00A1D68C /* HCHomeHeaderReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCHomeHeaderReusableView.swift; sourceTree = "<group>"; };
+		B8F90E6224F2604A00A1D68C /* HCMenuHorizontalCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCMenuHorizontalCell.swift; sourceTree = "<group>"; };
+		B8F90E6324F2604A00A1D68C /* HCHomeViewContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCHomeViewContainer.swift; sourceTree = "<group>"; };
+		B8F90E6424F2604A00A1D68C /* HCMenuItemShadowCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCMenuItemShadowCell.swift; sourceTree = "<group>"; };
+		B8F90E6524F2604A00A1D68C /* HCNewsReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCNewsReusableView.swift; sourceTree = "<group>"; };
+		B8F90E6624F2604A00A1D68C /* HCHomeArticleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCHomeArticleCell.swift; sourceTree = "<group>"; };
+		B8F90E6F24F2605E00A1D68C /* HCMessageContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCMessageContainer.swift; sourceTree = "<group>"; };
+		B8F90E7124F260B600A1D68C /* HCMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCMessageCell.swift; sourceTree = "<group>"; };
 		B8FC3F862396D74D006EB478 /* HCDoctorInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCDoctorInfoViewModel.swift; sourceTree = "<group>"; };
 		B8FC3F88239A9FCE006EB478 /* HCSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCSettingViewController.swift; sourceTree = "<group>"; };
 		B8FC3F8A239AA0C5006EB478 /* HCSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCSettingViewModel.swift; sourceTree = "<group>"; };
@@ -1212,7 +1229,6 @@
 		C40448A824EB6B1D00AD1610 /* HCMineInServerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCMineInServerCell.swift; sourceTree = "<group>"; };
 		C40448AA24EB721E00AD1610 /* HCMineHealthArchivesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCMineHealthArchivesCell.swift; sourceTree = "<group>"; };
 		C40448B024EB7E0100AD1610 /* HCHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCHome.swift; sourceTree = "<group>"; };
-		C40448B324EBB07900AD1610 /* HCHomeArticleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCHomeArticleCell.swift; sourceTree = "<group>"; };
 		C4193D8322A7649F007A9E07 /* TYClickedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TYClickedButton.swift; sourceTree = "<group>"; };
 		C41A12C022BCF49100214216 /* String+Operation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Operation.swift"; sourceTree = "<group>"; };
 		C42132EB22054462006C10C4 /* 爱乐孕.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "爱乐孕.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1325,9 +1341,7 @@
 		C494135824DE4C5800045749 /* HCMineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCMineViewModel.swift; sourceTree = "<group>"; };
 		C494136424DE54A100045749 /* HCCustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCCustomButton.swift; sourceTree = "<group>"; };
 		C494137024DE9E3600045749 /* HCHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCHomeViewController.swift; sourceTree = "<group>"; };
-		C494137224DE9EF000045749 /* HCHomeViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCHomeViewContainer.swift; sourceTree = "<group>"; };
 		C494137424DE9EFC00045749 /* HCHomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCHomeViewModel.swift; sourceTree = "<group>"; };
-		C494137624DEA12B00045749 /* HCHomeHeaderReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCHomeHeaderReusableView.swift; sourceTree = "<group>"; };
 		C497E93423443DB100328B47 /* FindDoctorHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindDoctorHeaderView.swift; sourceTree = "<group>"; };
 		C497E93723444E4600328B47 /* HCHomeConsultingVolumeReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCHomeConsultingVolumeReusableView.swift; sourceTree = "<group>"; };
 		C497E93823444E4600328B47 /* HCHomeConsultingVolumeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HCHomeConsultingVolumeCell.xib; sourceTree = "<group>"; };
@@ -1358,8 +1372,6 @@
 		C497E9702344728200328B47 /* HCHomeBabyTuinaClassroomReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HCHomeBabyTuinaClassroomReusableView.xib; sourceTree = "<group>"; };
 		C497E97623447E6F00328B47 /* HCHomeBabyTuinaClassroomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCHomeBabyTuinaClassroomCell.swift; sourceTree = "<group>"; };
 		C497E97723447E6F00328B47 /* HCHomeBabyTuinaClassroomCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HCHomeBabyTuinaClassroomCell.xib; sourceTree = "<group>"; };
-		C4AB271024E4E9AA0095F693 /* HCNewsReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCNewsReusableView.swift; sourceTree = "<group>"; };
-		C4AB271224E4EAD70095F693 /* HCMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCMenuView.swift; sourceTree = "<group>"; };
 		C4AB271924E52AB90095F693 /* HCToolViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCToolViewController.swift; sourceTree = "<group>"; };
 		C4AB271B24E52AD50095F693 /* HCToolViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCToolViewModel.swift; sourceTree = "<group>"; };
 		C4AB271D24E52AF20095F693 /* HCToolViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCToolViewContainer.swift; sourceTree = "<group>"; };
@@ -1376,8 +1388,6 @@
 		C4AB272F24E53D6F0095F693 /* HCBaseListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCBaseListCell.swift; sourceTree = "<group>"; };
 		C4AB273024E53D6F0095F693 /* HCListDetailInputCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCListDetailInputCell.swift; sourceTree = "<group>"; };
 		C4B185332345B03400F37197 /* HCSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCSearch.swift; sourceTree = "<group>"; };
-		C4C11AD524E4151E001CBE74 /* HCMenuItemShadowCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCMenuItemShadowCell.swift; sourceTree = "<group>"; };
-		C4C11AD724E41C6F001CBE74 /* HCMenuHorizontalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCMenuHorizontalCell.swift; sourceTree = "<group>"; };
 		C4C3257A2205B8490091783C /* ScrollTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollTextView.swift; sourceTree = "<group>"; };
 		C4C3257C2205C3AC0091783C /* UIView+XIB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+XIB.swift"; sourceTree = "<group>"; };
 		C4C8EB3D235175660054A295 /* HCHomePreparePregnantInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCHomePreparePregnantInfoCell.swift; sourceTree = "<group>"; };
@@ -2545,6 +2555,29 @@
 			path = Record;
 			sourceTree = "<group>";
 		};
+		B8F90E5F24F2604A00A1D68C /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				B8F90E6024F2604A00A1D68C /* HCMenuView.swift */,
+				B8F90E6124F2604A00A1D68C /* HCHomeHeaderReusableView.swift */,
+				B8F90E6224F2604A00A1D68C /* HCMenuHorizontalCell.swift */,
+				B8F90E6324F2604A00A1D68C /* HCHomeViewContainer.swift */,
+				B8F90E6424F2604A00A1D68C /* HCMenuItemShadowCell.swift */,
+				B8F90E6524F2604A00A1D68C /* HCNewsReusableView.swift */,
+				B8F90E6624F2604A00A1D68C /* HCHomeArticleCell.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		B8F90E6724F2604A00A1D68C /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				B8F90E6F24F2605E00A1D68C /* HCMessageContainer.swift */,
+				B8F90E7124F260B600A1D68C /* HCMessageCell.swift */,
+			);
+			path = Message;
+			sourceTree = "<group>";
+		};
 		C404489B24EA71CC00AD1610 /* HCPicker */ = {
 			isa = PBXGroup;
 			children = (
@@ -3253,6 +3286,7 @@
 			isa = PBXGroup;
 			children = (
 				C494137424DE9EFC00045749 /* HCHomeViewModel.swift */,
+				B8F90E5B24F25FBB00A1D68C /* HCMessageViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -3261,6 +3295,7 @@
 			isa = PBXGroup;
 			children = (
 				C494137024DE9E3600045749 /* HCHomeViewController.swift */,
+				B8F90E5724F25F8E00A1D68C /* HCMessageViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3269,6 +3304,7 @@
 			isa = PBXGroup;
 			children = (
 				C40448B024EB7E0100AD1610 /* HCHome.swift */,
+				B8F90E5D24F25FD100A1D68C /* HCMessage.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3276,13 +3312,8 @@
 		C494136F24DE9E2400045749 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				C494137224DE9EF000045749 /* HCHomeViewContainer.swift */,
-				C494137624DEA12B00045749 /* HCHomeHeaderReusableView.swift */,
-				C4C11AD524E4151E001CBE74 /* HCMenuItemShadowCell.swift */,
-				C4C11AD724E41C6F001CBE74 /* HCMenuHorizontalCell.swift */,
-				C4AB271024E4E9AA0095F693 /* HCNewsReusableView.swift */,
-				C4AB271224E4EAD70095F693 /* HCMenuView.swift */,
-				C40448B324EBB07900AD1610 /* HCHomeArticleCell.swift */,
+				B8F90E5F24F2604A00A1D68C /* Home */,
+				B8F90E6724F2604A00A1D68C /* Message */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3703,7 +3734,6 @@
 				B870E52F238A7CAD0085AFA3 /* HCAskViewController.swift in Sources */,
 				B816EB48221DABF400F024D5 /* ZXEmailAddressParsedResult.m in Sources */,
 				B816EB3C221DABF400F024D5 /* ZXURLTOResultParser.m in Sources */,
-				C494137724DEA12B00045749 /* HCHomeHeaderReusableView.swift in Sources */,
 				C421332622056F24006C10C4 /* FrameView.swift in Sources */,
 				C4F139BB235419EF00D777F6 /* TYFont.swift in Sources */,
 				B816EB25221DABF400F024D5 /* ZXUPCEANExtension5Support.m in Sources */,
@@ -3743,6 +3773,7 @@
 				B816EB5A221DACA600F024D5 /* ScanViewModel.swift in Sources */,
 				B816EB4F221DABF400F024D5 /* ZXExpandedProductParsedResult.m in Sources */,
 				B82456D124EFDBD0006356BB /* HCSearchHealthyCourseViewController.swift in Sources */,
+				B8F90E6E24F2604A00A1D68C /* HCHomeArticleCell.swift in Sources */,
 				B892FF9423AB52CD00A137C0 /* HCArticleDetailViewController.swift in Sources */,
 				C42AF1A324EA1D6A0034DBEF /* HCRealNameAuthorViewController.swift in Sources */,
 				C42133702205961D006C10C4 /* SharedSequenceConvertibleType+Extension.swift in Sources */,
@@ -3770,10 +3801,10 @@
 				B816EB02221DABF400F024D5 /* ZXOneDimensionalCodeWriter.m in Sources */,
 				B816EB21221DABF400F024D5 /* ZXCode128Writer.m in Sources */,
 				B8FC3F872396D74D006EB478 /* HCDoctorInfoViewModel.swift in Sources */,
+				B8F90E6924F2604A00A1D68C /* HCHomeHeaderReusableView.swift in Sources */,
 				B82456DF24EFE17B006356BB /* HCCoupon.swift in Sources */,
 				B816EAB1221DABF400F024D5 /* ZXStringUtils.m in Sources */,
 				C497E9712344728200328B47 /* HCHomeBabyTuinaClassroomReusableView.swift in Sources */,
-				C4C11AD824E41C6F001CBE74 /* HCMenuHorizontalCell.swift in Sources */,
 				B816EA8E221DABF400F024D5 /* ZXAztecBinaryShiftToken.m in Sources */,
 				B816EB42221DABF400F024D5 /* ZXURIParsedResult.m in Sources */,
 				C40448A324EA722A00AD1610 /* HCPickerData.swift in Sources */,
@@ -3804,6 +3835,7 @@
 				B816EB29221DABF400F024D5 /* ZXCode128Reader.m in Sources */,
 				B86993D623373A6500086A77 /* TYSearchBar.swift in Sources */,
 				B816EA8A221DABF400F024D5 /* ZXByQuadrantReader.m in Sources */,
+				B8F90E5E24F25FD100A1D68C /* HCMessage.swift in Sources */,
 				B8D4D47F2394299E00AA3D52 /* HCPicAndTextAskFooterReusableView.swift in Sources */,
 				B816EB1F221DABF400F024D5 /* ZXAbstractRSSReader.m in Sources */,
 				B816EAD2221DABF400F024D5 /* ZXModulusGF.m in Sources */,
@@ -3821,6 +3853,7 @@
 				C4DDE09224F140470001201C /* HCMyConsult.swift in Sources */,
 				B8BE351122147AE600EF16F1 /* HCEditUserIconViewController.swift in Sources */,
 				B821E34D23070907009A11A3 /* HCLocationManager.swift in Sources */,
+				B8F90E6824F2604A00A1D68C /* HCMenuView.swift in Sources */,
 				C4481E2422154D66007F4B0C /* BaseWKWebViewViewController.swift in Sources */,
 				B8F90E5624F25BF900A1D68C /* HCPicConsultRecordCell.swift in Sources */,
 				B892FFA023ABB50800A137C0 /* TYFiliterView.swift in Sources */,
@@ -3848,6 +3881,7 @@
 				B816EA79221DABF400F024D5 /* LBXScanNetAnimation.m in Sources */,
 				C4AB273224E53D6F0095F693 /* HCListDetailIconCell.swift in Sources */,
 				B816EA7F221DABF400F024D5 /* ZXResult.m in Sources */,
+				B8F90E5C24F25FBB00A1D68C /* HCMessageViewModel.swift in Sources */,
 				B816EAD4221DABF400F024D5 /* ZXPDF417DecodedBitStreamParser.m in Sources */,
 				B816EAF9221DABF400F024D5 /* ZXCode93Reader.m in Sources */,
 				B8454EDB23A5361200E88BAD /* TYColorLineView.swift in Sources */,
@@ -3871,7 +3905,6 @@
 				B816EAEE221DABF400F024D5 /* ZXDataMatrixDecodedBitStreamParser.m in Sources */,
 				B870E54B2390134B0085AFA3 /* TYListMenuData.swift in Sources */,
 				C421338C2205A544006C10C4 /* Home.swift in Sources */,
-				C4C11AD624E4151E001CBE74 /* HCMenuItemShadowCell.swift in Sources */,
 				B870E552239039A40085AFA3 /* HCExpertConsultViewModel.swift in Sources */,
 				B816EB37221DABF400F024D5 /* ZXProductResultParser.m in Sources */,
 				B816EB2B221DABF400F024D5 /* ZXUPCEANExtension2Support.m in Sources */,
@@ -3883,7 +3916,6 @@
 				B816EA8B221DABF400F024D5 /* ZXAztecDetectorResult.m in Sources */,
 				B8D4D47B2394258C00AA3D52 /* HCPicAndTextAskViewController.swift in Sources */,
 				C40448AC24EB7D3800AD1610 /* HCClassRoomViewController.swift in Sources */,
-				C40448B424EBB07900AD1610 /* HCHomeArticleCell.swift in Sources */,
 				B8F90E4924F25A4200A1D68C /* HCMyRecordViewController.swift in Sources */,
 				C46E4D6923AE40A800A67F02 /* TYCurveTimeView.swift in Sources */,
 				C421332B22056F24006C10C4 /* HUD.swift in Sources */,
@@ -3922,10 +3954,11 @@
 				B85CD93323BE602E00B1A1C3 /* HCEditUserCityController.swift in Sources */,
 				B826AF85221C7205000428C1 /* ArticleCell.swift in Sources */,
 				C497E9612344610500328B47 /* HCHomePregnancyClassroomReusableView.swift in Sources */,
-				C4AB271124E4E9AA0095F693 /* HCNewsReusableView.swift in Sources */,
+				B8F90E5824F25F8E00A1D68C /* HCMessageViewController.swift in Sources */,
 				B816EACC221DABF400F024D5 /* ZXPDF417Dimensions.m in Sources */,
 				B8F90E2D24F24E7F00A1D68C /* HCMyOrderViewController.swift in Sources */,
 				B816EB58221DABF400F024D5 /* LBXZXCapture.m in Sources */,
+				B8F90E7024F2605E00A1D68C /* HCMessageContainer.swift in Sources */,
 				C421334C220587DC006C10C4 /* HandyJSON+MapModel.swift in Sources */,
 				B870E534238A878A0085AFA3 /* HCAskViewModel.swift in Sources */,
 				C4F139B8235419EF00D777F6 /* Timer.swift in Sources */,
@@ -3995,7 +4028,6 @@
 				C421338722059B8C006C10C4 /* DBCtrl.swift in Sources */,
 				B816EA95221DABF400F024D5 /* ZXAztecDetector.m in Sources */,
 				B892FFA423ABB70700A137C0 /* TYFiliterViewData.swift in Sources */,
-				C4AB271324E4EAD70095F693 /* HCMenuView.swift in Sources */,
 				C4382C0A24E628DA000C00CE /* HCMenstruationSettingContainer.swift in Sources */,
 				B82456D424EFDBD0006356BB /* HCSearchAllViewController.swift in Sources */,
 				B870E545238EE0570085AFA3 /* HCExpertConsultViewController.swift in Sources */,
@@ -4009,6 +4041,7 @@
 				B816EB0F221DABF400F024D5 /* ZXAI01393xDecoder.m in Sources */,
 				B88497E324E7F8E500B91262 /* APIServer.swift in Sources */,
 				C4AB271C24E52AD50095F693 /* HCToolViewModel.swift in Sources */,
+				B8F90E6A24F2604A00A1D68C /* HCMenuHorizontalCell.swift in Sources */,
 				B8BE35092214738000EF16F1 /* EditUserInfoModel.swift in Sources */,
 				B816EB0E221DABF400F024D5 /* ZXRSSExpandedDecodedObject.m in Sources */,
 				C43F09BE22143B5200910437 /* BaseWebViewController.swift in Sources */,
@@ -4081,6 +4114,7 @@
 				B816EA84221DABF400F024D5 /* ZXLuminanceSource.m in Sources */,
 				B8F90E3A24F255A600A1D68C /* HCReservation.swift in Sources */,
 				B8CD926923A2967D00C9C061 /* HCRecordSuggestReusableView.swift in Sources */,
+				B8F90E6B24F2604A00A1D68C /* HCHomeViewContainer.swift in Sources */,
 				B816EA83221DABF400F024D5 /* ZXRGBLuminanceSource.m in Sources */,
 				B819AF7424C6E85B00F88BA7 /* HCNavBarFloatView.swift in Sources */,
 				B82456D224EFDBD0006356BB /* HCSearchRecommendDoctorViewController.swift in Sources */,
@@ -4094,6 +4128,7 @@
 				B8BE1AED23A7E92F00DF472A /* HCSearchHeaderView.swift in Sources */,
 				B816EA74221DABF400F024D5 /* LBXScanViewController.m in Sources */,
 				C421333F220586D4006C10C4 /* HCConsultViewController.swift in Sources */,
+				B8F90E6C24F2604A00A1D68C /* HCMenuItemShadowCell.swift in Sources */,
 				C4F139BC235419EF00D777F6 /* Debug.swift in Sources */,
 				B81D422124E7FB99003EA388 /* FileUpload.swift in Sources */,
 				C4AB272124E535E30095F693 /* HCRecordRemindView.swift in Sources */,
@@ -4132,7 +4167,6 @@
 				B816EA89221DABF400F024D5 /* ZXGenericMultipleBarcodeReader.m in Sources */,
 				B816EAC3221DABF400F024D5 /* ZXReedSolomonDecoder.m in Sources */,
 				B816EB23221DABF400F024D5 /* ZXUPCAWriter.m in Sources */,
-				C494137324DE9EF000045749 /* HCHomeViewContainer.swift in Sources */,
 				B816EB32221DABF400F024D5 /* ZXURIResultParser.m in Sources */,
 				B8F1587A24EF642C0046B107 /* HCMyDoctorViewController.swift in Sources */,
 				C497E94A23444E4600328B47 /* HCHomePreparePregnantCell.swift in Sources */,
@@ -4157,6 +4191,7 @@
 				B816EB05221DABF400F024D5 /* ZXAI01weightDecoder.m in Sources */,
 				B8BE1AEB23A7E39700DF472A /* HCSearchDoctorCell.swift in Sources */,
 				B816EAB4221DABF400F024D5 /* ZXByteArray.m in Sources */,
+				B8F90E6D24F2604A00A1D68C /* HCNewsReusableView.swift in Sources */,
 				B816EA99221DABF400F024D5 /* ZXQRCode.m in Sources */,
 				B8F90E4624F2576000A1D68C /* HCRegisterReservationController.swift in Sources */,
 				B816EA94221DABF400F024D5 /* ZXAztecReader.m in Sources */,
@@ -4169,6 +4204,7 @@
 				B816EADB221DABF400F024D5 /* ZXPDF417DetectionResult.m in Sources */,
 				B816EB19221DABF400F024D5 /* ZXBitArrayBuilder.m in Sources */,
 				B816EAE1221DABF400F024D5 /* ZXDataMatrixReader.m in Sources */,
+				B8F90E7224F260B600A1D68C /* HCMessageCell.swift in Sources */,
 				B82456D324EFDBD0006356BB /* HCSearchPopularScienceViewController.swift in Sources */,
 				C4AB273724E53D6F0095F693 /* HCListDetailButtonCell.swift in Sources */,
 				C421331A22056E55006C10C4 /* BaseViewController.swift in Sources */,

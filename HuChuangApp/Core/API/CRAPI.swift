@@ -154,7 +154,9 @@ enum API{
     case myCoupon(orderSn: String, useStatus: Int, pageSize: Int, pageNum: Int)
     /// 我的问诊
     case myConsult(consultType: Int, pageSize: Int, pageNum: Int)
-
+    /// 消息中心
+    case messageCenter
+    
     // --------------- 2.0接口
     /// 向app服务器注册友盟token
     case UMAdd(deviceToken: String)
@@ -260,6 +262,9 @@ extension API: TargetType{
             return "api/coupon/myCoupon"
         case .myConsult(_, _, _):
             return "api/consult/myConsult"
+        case .messageCenter:
+            return "api/messageCenter/groupMsg"
+            
             
         case .UMAdd(_):
             return "api/umeng/add"

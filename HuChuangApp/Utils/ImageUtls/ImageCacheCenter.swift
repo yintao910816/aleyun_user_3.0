@@ -89,6 +89,10 @@ enum ImageStrategy {
     
     case userIconMen
     case userIconWomen
+    /// 交易消息图标
+    case messageTransaction
+    /// 系统消息图标
+    case messageSystom
 }
 
 extension ImageStrategy {
@@ -106,6 +110,10 @@ extension ImageStrategy {
             return UIImage.init(named: "default_women_icon")
         case .userIconMen:
             return UIImage.init(named: "default_men_icon")
+        case .messageTransaction:
+            return UIImage.init(named: "message_transaction")
+        case .messageSystom:
+            return UIImage.init(named: "message_system")
         }
     }
 }

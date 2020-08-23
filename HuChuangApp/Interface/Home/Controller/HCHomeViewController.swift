@@ -35,8 +35,8 @@ class HCHomeViewController: BaseViewController {
             self.navigationController?.pushViewController(HCSearchViewController(), animated: true)
         }
         
-        searchBar.rightItemTapBack = {
-
+        searchBar.rightItemTapBack = { [weak self] in
+            self?.navigationController?.pushViewController(HCMessageViewController(), animated: true)
         }
         
         containerView = HCHomeViewContainer.init(frame: .init(x: 0, y: 0, width: view.width, height: view.height))
