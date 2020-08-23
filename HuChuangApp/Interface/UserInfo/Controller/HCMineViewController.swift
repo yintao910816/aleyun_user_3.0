@@ -41,7 +41,7 @@ class HCMineViewController: BaseViewController {
             case .consult:
                 self?.navigationController?.pushViewController(HCMyConsultViewController(), animated: true)
             case .reservation:
-                break
+                self?.navigationController?.pushViewController(HCReservationViewController(), animated: true)
             case .order:
                 self?.navigationController?.pushViewController(HCMyOrderViewController(), animated: true)
             case .record:

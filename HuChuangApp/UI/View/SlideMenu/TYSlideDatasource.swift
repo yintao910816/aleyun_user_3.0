@@ -99,7 +99,22 @@ extension TYSlideItemModel {
                                  isSelected: false)]
     }
 
-    
+    /// 我的预约
+    internal static func createMyReservationData() ->[TYSlideItemModel] {
+        return [TYSlideItemModel(title: "预约挂号",
+                                 textColor: RGB(153, 153, 153),
+                                 selectedTextColor: HC_MAIN_COLOR,
+                                 lineColor: HC_MAIN_COLOR,
+                                 textFont: .font(fontSize: 16),
+                                 isSelected: true),
+                TYSlideItemModel(title: "精准预约",
+                                 textColor: RGB(153, 153, 153),
+                                 selectedTextColor: HC_MAIN_COLOR,
+                                 lineColor: HC_MAIN_COLOR,
+                                 textFont: .font(fontSize: 16),
+                                 isSelected: false)]
+    }
+
     /// 搜索结果数据
     internal static func createSearchResultData() ->[TYSlideItemModel] {
         return [TYSlideItemModel(title: "专家",

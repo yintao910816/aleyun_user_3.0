@@ -365,6 +365,12 @@
 		B8F90E2F24F24E8700A1D68C /* HCMyOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F90E2E24F24E8700A1D68C /* HCMyOrder.swift */; };
 		B8F90E3224F24EC200A1D68C /* HCMyOrderContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F90E3124F24EC200A1D68C /* HCMyOrderContainer.swift */; };
 		B8F90E3424F24F8E00A1D68C /* HCMyOrderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F90E3324F24F8E00A1D68C /* HCMyOrderCell.swift */; };
+		B8F90E3A24F255A600A1D68C /* HCReservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F90E3924F255A600A1D68C /* HCReservation.swift */; };
+		B8F90E3C24F255B800A1D68C /* HCReservationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F90E3B24F255B800A1D68C /* HCReservationViewController.swift */; };
+		B8F90E3E24F255C400A1D68C /* HCReservationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F90E3D24F255C400A1D68C /* HCReservationViewModel.swift */; };
+		B8F90E4224F256F200A1D68C /* HCAccurateReservationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F90E4124F256F200A1D68C /* HCAccurateReservationCell.swift */; };
+		B8F90E4424F2572B00A1D68C /* HCAccurateReservationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F90E4324F2572B00A1D68C /* HCAccurateReservationController.swift */; };
+		B8F90E4624F2576000A1D68C /* HCRegisterReservationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F90E4524F2576000A1D68C /* HCRegisterReservationController.swift */; };
 		B8FC3F872396D74D006EB478 /* HCDoctorInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FC3F862396D74D006EB478 /* HCDoctorInfoViewModel.swift */; };
 		B8FC3F8D239AA626006EB478 /* HCSettingFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FC3F8C239AA626006EB478 /* HCSettingFooterView.swift */; };
 		B8FE96B72388301B0077B9BF /* TYCirCleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FE96B62388301B0077B9BF /* TYCirCleView.swift */; };
@@ -1170,6 +1176,12 @@
 		B8F90E2E24F24E8700A1D68C /* HCMyOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCMyOrder.swift; sourceTree = "<group>"; };
 		B8F90E3124F24EC200A1D68C /* HCMyOrderContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCMyOrderContainer.swift; sourceTree = "<group>"; };
 		B8F90E3324F24F8E00A1D68C /* HCMyOrderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCMyOrderCell.swift; sourceTree = "<group>"; };
+		B8F90E3924F255A600A1D68C /* HCReservation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCReservation.swift; sourceTree = "<group>"; };
+		B8F90E3B24F255B800A1D68C /* HCReservationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCReservationViewController.swift; sourceTree = "<group>"; };
+		B8F90E3D24F255C400A1D68C /* HCReservationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCReservationViewModel.swift; sourceTree = "<group>"; };
+		B8F90E4124F256F200A1D68C /* HCAccurateReservationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCAccurateReservationCell.swift; sourceTree = "<group>"; };
+		B8F90E4324F2572B00A1D68C /* HCAccurateReservationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCAccurateReservationController.swift; sourceTree = "<group>"; };
+		B8F90E4524F2576000A1D68C /* HCRegisterReservationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCRegisterReservationController.swift; sourceTree = "<group>"; };
 		B8FC3F862396D74D006EB478 /* HCDoctorInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCDoctorInfoViewModel.swift; sourceTree = "<group>"; };
 		B8FC3F88239A9FCE006EB478 /* HCSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCSettingViewController.swift; sourceTree = "<group>"; };
 		B8FC3F8A239AA0C5006EB478 /* HCSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCSettingViewModel.swift; sourceTree = "<group>"; };
@@ -2482,6 +2494,24 @@
 			path = Order;
 			sourceTree = "<group>";
 		};
+		B8F90E3524F2556800A1D68C /* Reservation */ = {
+			isa = PBXGroup;
+			children = (
+				B8F90E3B24F255B800A1D68C /* HCReservationViewController.swift */,
+				B8F90E4324F2572B00A1D68C /* HCAccurateReservationController.swift */,
+				B8F90E4524F2576000A1D68C /* HCRegisterReservationController.swift */,
+			);
+			path = Reservation;
+			sourceTree = "<group>";
+		};
+		B8F90E3624F2558400A1D68C /* Reservation */ = {
+			isa = PBXGroup;
+			children = (
+				B8F90E4124F256F200A1D68C /* HCAccurateReservationCell.swift */,
+			);
+			path = Reservation;
+			sourceTree = "<group>";
+		};
 		C404489B24EA71CC00AD1610 /* HCPicker */ = {
 			isa = PBXGroup;
 			children = (
@@ -3082,6 +3112,7 @@
 				B82456DA24EFE139006356BB /* HCCouponViewModel.swift */,
 				C4DDE09624F140790001201C /* HCMyConsultViewModel.swift */,
 				B8F90E2A24F24E6200A1D68C /* HCMyOrderViewModel.swift */,
+				B8F90E3D24F255C400A1D68C /* HCReservationViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -3089,6 +3120,7 @@
 		C494135124DE4B5700045749 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				B8F90E3524F2556800A1D68C /* Reservation */,
 				B8F90E2924F24E4200A1D68C /* Order */,
 				C4DDE09324F140570001201C /* Consult */,
 				B82456D724EFE0E4006356BB /* Coupon */,
@@ -3110,6 +3142,7 @@
 				B82456DE24EFE17B006356BB /* HCCoupon.swift */,
 				C4DDE09124F140470001201C /* HCMyConsult.swift */,
 				B8F90E2E24F24E8700A1D68C /* HCMyOrder.swift */,
+				B8F90E3924F255A600A1D68C /* HCReservation.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3117,6 +3150,7 @@
 		C494135324DE4B5700045749 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B8F90E3624F2558400A1D68C /* Reservation */,
 				B8F90E3024F24EB500A1D68C /* Order */,
 				C4DDE0A024F14EF10001201C /* Consult */,
 				C4382BFB24E560CB000C00CE /* Setting */,
@@ -3833,6 +3867,7 @@
 				B816EAA3221DABF400F024D5 /* ZXQRCodeVersion.m in Sources */,
 				B816EAF7221DABF400F024D5 /* ZXMaxiCodeBitMatrixParser.m in Sources */,
 				B816EAF3221DABF400F024D5 /* ZXDataMatrixDetector.m in Sources */,
+				B8F90E4424F2572B00A1D68C /* HCAccurateReservationController.swift in Sources */,
 				B816EB03221DABF400F024D5 /* ZXEAN13Reader.m in Sources */,
 				B816EB3E221DABF400F024D5 /* ZXISBNResultParser.m in Sources */,
 				B816EB57221DABF400F024D5 /* ZXingWrapper.m in Sources */,
@@ -3880,6 +3915,7 @@
 				C497E95523444ECF00328B47 /* HCHomeGoodNewsReusableView.swift in Sources */,
 				B816EA87221DABF400F024D5 /* ZXBinaryBitmap.m in Sources */,
 				B816EAF6221DABF400F024D5 /* ZXMaxiCodeDecodedBitStreamParser.m in Sources */,
+				B8F90E4224F256F200A1D68C /* HCAccurateReservationCell.swift in Sources */,
 				C42133942205B1E9006C10C4 /* CarouselView.swift in Sources */,
 				B816EB10221DABF400F024D5 /* ZXAI01320xDecoder.m in Sources */,
 				B870E541238C37050085AFA3 /* HCMenstruationHistoryViewController.swift in Sources */,
@@ -4001,6 +4037,7 @@
 				C4382C0324E56A89000C00CE /* HCEditInfoContainer.swift in Sources */,
 				B816EAF2221DABF400F024D5 /* ZXDataMatrixVersion.m in Sources */,
 				B816EA84221DABF400F024D5 /* ZXLuminanceSource.m in Sources */,
+				B8F90E3A24F255A600A1D68C /* HCReservation.swift in Sources */,
 				B8CD926923A2967D00C9C061 /* HCRecordSuggestReusableView.swift in Sources */,
 				B816EA83221DABF400F024D5 /* ZXRGBLuminanceSource.m in Sources */,
 				B819AF7424C6E85B00F88BA7 /* HCNavBarFloatView.swift in Sources */,
@@ -4044,6 +4081,8 @@
 				B816EAF5221DABF400F024D5 /* ZXMaxiCodeDecoder.m in Sources */,
 				B8DE28282396CB1000D5046D /* HCDoctorInfoViewController.swift in Sources */,
 				C4AB273624E53D6F0095F693 /* HCListButtonCell.swift in Sources */,
+				B8F90E3C24F255B800A1D68C /* HCReservationViewController.swift in Sources */,
+				B8F90E3E24F255C400A1D68C /* HCReservationViewModel.swift in Sources */,
 				B816EA82221DABF400F024D5 /* ZXResultPoint.m in Sources */,
 				B816EAA7221DABF400F024D5 /* ZXQRCodeFormatInformation.m in Sources */,
 				B816EA90221DABF400F024D5 /* ZXAztecHighLevelEncoder.m in Sources */,
@@ -4075,6 +4114,7 @@
 				B8BE1AEB23A7E39700DF472A /* HCSearchDoctorCell.swift in Sources */,
 				B816EAB4221DABF400F024D5 /* ZXByteArray.m in Sources */,
 				B816EA99221DABF400F024D5 /* ZXQRCode.m in Sources */,
+				B8F90E4624F2576000A1D68C /* HCRegisterReservationController.swift in Sources */,
 				B816EA94221DABF400F024D5 /* ZXAztecReader.m in Sources */,
 				C494135524DE4B7900045749 /* HCMineViewController.swift in Sources */,
 				C42B218F24ECCB1500B2A665 /* HCSettingViewModel.swift in Sources */,
