@@ -66,7 +66,11 @@ class TYSlideMenuController: UIViewController {
     
     public var menuCtrls: [HCSlideItemController] = [] {
         didSet {
-                        
+            
+            for idx in 0..<menuCtrls.count {
+                menuCtrls[idx].pageIdx = idx
+            }
+            
             if menuCtrls.count > currentPage {
                 let ctrl = menuCtrls[currentPage]
                 ctrl.view.frame = pageCtrl.view.bounds

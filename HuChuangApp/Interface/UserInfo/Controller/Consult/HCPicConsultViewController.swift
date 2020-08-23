@@ -15,8 +15,18 @@ class HCPicConsultViewController: HCSlideItemController {
     private var datasource: [HCPicConsultItemModel] = []
 
     public var pushH5CallBack:((String)->())?
-
-    override func setupUI() {
+   
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        
+        initUI()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func initUI() {
         tableView = UITableView.init(frame: .zero, style: .grouped)
         tableView.backgroundColor = .white
         tableView.separatorStyle = .none

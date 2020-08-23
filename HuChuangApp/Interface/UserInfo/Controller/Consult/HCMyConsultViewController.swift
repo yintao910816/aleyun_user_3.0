@@ -32,7 +32,7 @@ class HCMyConsultViewController: BaseViewController {
         slideCtrl.menuCtrls = [picConsultCtrl, videoConsultCtrl, cloudClinicConsultCtrl]
         
         slideCtrl.pageScroll = { [weak self] page in
-            //            self?.viewModel.requestTodayListSubject.onNext(page)
+            self?.viewModel.changeMenuSignal.onNext(page)
         }
     }
     
@@ -40,7 +40,9 @@ class HCMyConsultViewController: BaseViewController {
         viewModel = HCMyConsultViewModel()
         
         picConsultCtrl.bind(viewModel: viewModel, canRefresh: true, canLoadMore: true, isAddNoMoreContent: false)
-        
+        videoConsultCtrl.bind(viewModel: viewModel, canRefresh: true, canLoadMore: true, isAddNoMoreContent: false)
+        cloudClinicConsultCtrl.bind(viewModel: viewModel, canRefresh: true, canLoadMore: true, isAddNoMoreContent: false)
+
         viewModel.datasource.asDriver()
             .drive(onNext: { [weak self] in
                 guard let strongSelf = self else { return }
@@ -48,7 +50,7 @@ class HCMyConsultViewController: BaseViewController {
                 case .picConsult:
                     strongSelf.picConsultCtrl.reloadData(data: $0)
                 case .videoConsult:
-                    strongSelf.picConsultCtrl.reloadData(data: $0)
+                    strongSelf.videoConsultCtrl.reloadData(data: $0)
                 case .cloudClinic:
                     strongSelf.cloudClinicConsultCtrl.reloadData(data: $0)
                 }
