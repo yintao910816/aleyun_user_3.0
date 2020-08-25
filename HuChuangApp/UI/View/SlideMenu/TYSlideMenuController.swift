@@ -163,6 +163,8 @@ extension TYSlideMenuController: UIPageViewControllerDataSource, UIPageViewContr
 class TYSlideMenu: UIView {
     
     private var collectionView: UICollectionView!
+    private var lineView: UIView!
+    
     private var lastSelected: Int = 0
     public var menuSelect: ((Int)->())?
     public var isFullScreen: Bool = true
@@ -183,7 +185,12 @@ class TYSlideMenu: UIView {
         collectionView.backgroundColor = .clear
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.isPagingEnabled = true
+        
+        lineView = UIView()
+        lineView.backgroundColor = RGB(243, 243, 243)
+        
         addSubview(collectionView)
+        addSubview(lineView)
         
         collectionView.register(TYSlideCell.self, forCellWithReuseIdentifier: UICollectionViewCell_identifier)
     }
@@ -200,7 +207,7 @@ class TYSlideMenu: UIView {
         lastSelected = index
     }
     
-    fileprivate var datasource: [TYSlideItemModel] = [] {
+    public var datasource: [TYSlideItemModel] = [] {
         didSet {
             collectionView.reloadData()
         }
@@ -209,7 +216,8 @@ class TYSlideMenu: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        collectionView.frame = bounds
+        collectionView.frame = .init(x: 0, y: 0, width: width, height: height - 0.5)
+        lineView.frame = .init(x: 0, y: collectionView.frame.maxY, width: width, height: 0.5)
     }
 }
 
@@ -247,6 +255,7 @@ extension TYSlideMenu: UICollectionViewDataSource, UICollectionViewDelegateFlowL
 private let UICollectionViewCell_identifier = "UICollectionViewCell"
 class TYSlideCell: UICollectionViewCell {
     private var titleLabel: UILabel!
+    private var iconImgV: UIImageView!
     private var bottomLine: UIView!
     
     override init(frame: CGRect) {
@@ -256,6 +265,10 @@ class TYSlideCell: UICollectionViewCell {
         titleLabel.backgroundColor = .clear
         titleLabel.textAlignment = .center
         titleLabel.font = .font(fontSize: 14)
+        
+        iconImgV = UIImageView()
+        
+        addSubview(iconImgV)
         addSubview(titleLabel)
         
         bottomLine = UIView()
@@ -270,17 +283,34 @@ class TYSlideCell: UICollectionViewCell {
         didSet {
             titleLabel.text = model.title
             titleLabel.font = model.textFont
+            iconImgV.image = model.icon
             
             titleLabel.textColor = model.isSelected ? model.selectedTextColor : model.textColor
             bottomLine.backgroundColor = model.lineColor
             bottomLine.isHidden = !model.isSelected
+            
+            setNeedsLayout()
+            layoutIfNeeded()
         }
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        titleLabel.frame = bounds
+        if iconImgV.image == nil {
+            titleLabel.frame = bounds
+        }else {
+            var titleWidth: CGFloat = titleLabel.sizeThatFits(.init(width: CGFloat(MAXFLOAT), height: height)).width
+            var x: CGFloat = (width - titleWidth - 7) / 2.0
+
+            if x < 0 {
+                x = 7
+                titleWidth = width - 21 - 10
+            }
+            
+            titleLabel.frame = .init(x: x, y: 0, width: titleWidth, height: height)
+            iconImgV.frame = .init(x: titleLabel.frame.maxX + 7, y: (height - 5) / 2.0, width: 10, height: 5)
+        }
         bottomLine.frame = .init(x: (width - model.lineWidth) / 2, y: height - 2, width: model.lineWidth, height: 2)
     }
 }

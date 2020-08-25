@@ -1,0 +1,51 @@
+{
+  "images" : [
+    {
+      "filename" : "doctor_hospital.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "doctor_hospital@2x.png",
+      "idiom" : "universal",
+      "resizing" : {
+        "cap-insets" : {
+          "bottom" : 20,
+          "left" : 20,
+          "right" : 20,
+          "top" : 19
+        },
+        "center" : {
+          "height" : 1,
+          "mode" : "tile",
+          "width" : 1
+        },
+        "mode" : "9-part"
+      },
+      "scale" : "2x"
+    },
+    {
+      "filename" : "doctor_hospital@3x.png",
+      "idiom" : "universal",
+      "resizing" : {
+        "cap-insets" : {
+          "bottom" : 30,
+          "left" : 30,
+          "right" : 30,
+          "top" : 29
+        },
+        "center" : {
+          "height" : 1,
+          "mode" : "tile",
+          "width" : 1
+        },
+        "mode" : "9-part"
+      },
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

@@ -170,7 +170,8 @@ enum API{
     case allProvice
     /// 获取市
     case city(id: String)
-    
+    /// 专家列表
+    case doctorList(areaCode: String, sortType: String, consultType: String, pageSize: Int, pageNum: Int)
     
     
     // --------------- 2.0接口
@@ -288,6 +289,9 @@ extension API: TargetType{
             return "api/area/allProvice"
         case .city(let id):
             return "api/area/city/\(id)"
+        case .doctorList(_, _, _, _, _):
+            return "api/doctor/doctorList"
+            
             
         case .UMAdd(_):
             return "api/umeng/add"
@@ -451,6 +455,12 @@ extension API {
         case .myDoctor(let lng, let lat):
             params["lng"] = lng
             params["lat"] = lat
+        case .doctorList(let areaCode, let sortType, let consultType, let pageSize, let pageNum):
+            params["areaCode"] = areaCode
+            params["sortType"] = sortType
+            params["consultType"] = consultType
+            params["pageSize"] = pageSize
+            params["pageNum"] = pageNum
 
 
             

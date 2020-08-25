@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct TYSlideItemModel {
+class TYSlideItemModel {
     var title: String = ""
     var textColor: UIColor = RGB(51, 51, 51)
     var selectedTextColor: UIColor = RGB(255, 102, 149)
@@ -17,44 +17,33 @@ struct TYSlideItemModel {
     var lineWidth: CGFloat = 20
     
     var isSelected: Bool = false
-    
-    var dataModel: HomeColumnItemModel!
+    var icon: UIImage? = nil
+        
+    init(title: String,
+         textColor: UIColor = RGB(51, 51, 51),
+         selectedTextColor: UIColor = RGB(255, 102, 149),
+         lineColor: UIColor = .red,
+         textFont: UIFont = .font(fontSize: 14, fontName: .PingFMedium),
+         lineWidth: CGFloat = 20,
+         isSelected: Bool = false,
+         icon: UIImage? = nil) {
+        
+        self.title = title
+        self.textColor = textColor
+        self.selectedTextColor = selectedTextColor
+        self.lineColor = lineColor
+        self.textFont = textFont
+        self.lineWidth = lineWidth
+        self.isSelected = isSelected
+        self.icon = icon
+    }
     
     public lazy var contentWidth: CGFloat = {
         return self.title.ty_textSize(font: self.textFont, width: CGFloat(MAXFLOAT), height: 30).width + 30
     }()
-    
-    public static func creatSimple(for titles: [String]) ->[TYSlideItemModel] {
-        var dataModels: [TYSlideItemModel] = []
-        for title in titles {
-            var itemModel = TYSlideItemModel()
-            itemModel.isSelected = dataModels.count == 0
-            
-            let columItem = HomeColumnItemModel()
-            columItem.name = title
-            itemModel.dataModel = columItem
-            
-            dataModels.append(itemModel)
-        }
-        return dataModels
-    }
 }
 
 extension TYSlideItemModel {
-    /// 课堂数据    
-    internal static func mapData(models: [HomeColumnItemModel]) ->[TYSlideItemModel] {
-        var datas: [TYSlideItemModel] = []
-        
-        for idx in 0..<models.count {
-            var m = TYSlideItemModel()
-            m.dataModel = models[idx]
-            m.isSelected = idx == 0
-            datas.append(m)
-        }
-        
-        return datas
-    }
-    
     /// 搜藏数据
     internal static func createAttentionStoreData() ->[TYSlideItemModel] {
         return [TYSlideItemModel(title: "我的医生",
@@ -165,6 +154,32 @@ extension TYSlideItemModel {
                                  textFont: .font(fontSize: 16),
                                  isSelected: false)]
     }
+    
+    /// 专家问诊
+    internal static func createExpertConsultationData() ->[TYSlideItemModel] {
+        return [TYSlideItemModel(title: "全国",
+                                 textColor: RGB(51, 51, 51),
+                                 selectedTextColor: RGB(51, 51, 51),
+                                 lineColor: HC_MAIN_COLOR,
+                                 textFont: .font(fontSize: 16),
+                                 isSelected: true,
+                                 icon: UIImage(named: "login_arrow_down")),
+                TYSlideItemModel(title: "推荐排序",
+                                 textColor: RGB(51, 51, 51),
+                                 selectedTextColor: RGB(51, 51, 51),
+                                 lineColor: HC_MAIN_COLOR,
+                                 textFont: .font(fontSize: 16),
+                                 isSelected: false,
+                                 icon: UIImage(named: "login_arrow_down")),
+                TYSlideItemModel(title: "咨询方式",
+                                 textColor: RGB(51, 51, 51),
+                                 selectedTextColor: RGB(51, 51, 51),
+                                 lineColor: HC_MAIN_COLOR,
+                                 textFont: .font(fontSize: 16),
+                                 isSelected: false,
+                                 icon: UIImage(named: "login_arrow_down"))]
+    }
+
 }
 
 class HCSlideItemController: BaseViewController {

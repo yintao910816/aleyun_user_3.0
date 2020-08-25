@@ -28,13 +28,29 @@ class HCCustomTextButton: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public func setupText(first: String, second: String) {
+    public func setupText(first: String,
+                          second: String,
+                          firstTitleFont: UIFont = .font(fontSize: 20, fontName: .PingFSemibold),
+                          secondTitleFont: UIFont = .font(fontSize: 14),
+                          firstTitleColor: UIColor = RGB(51, 51, 51),
+                          secondTitleColor: UIColor = RGB(153, 153, 153),
+                          backGroundColor: UIColor = .clear) {
+        self.backgroundColor = backGroundColor
+        titleLabel.textColor = firstTitleColor
+        titleLabel.font = firstTitleFont
+        
         firstString = first
         secondString = second
+        
         let string = NSMutableAttributedString.init(string: "\(firstString)\n\(secondString)")
-        string.addAttributes([NSAttributedString.Key.foregroundColor : RGB(51, 51, 51),
-                              NSAttributedString.Key.font : UIFont.font(fontSize: 20)],
+        
+        string.addAttributes([NSAttributedString.Key.foregroundColor : firstTitleColor,
+                              NSAttributedString.Key.font : firstTitleFont],
                              range: NSRange.init(location: 0, length: firstString.count))
+        
+        string.addAttributes([NSAttributedString.Key.foregroundColor : secondTitleColor,
+                              NSAttributedString.Key.font : secondTitleFont],
+                             range: NSRange.init(location: firstString.count + 1, length: secondString.count))
         titleLabel.attributedText = string
     }
     

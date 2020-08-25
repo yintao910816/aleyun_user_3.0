@@ -7,9 +7,9 @@
 //
 
 import Foundation
+import HandyJSON
 
-
-class HCBannerModel: HJModel {
+class HCBannerModel: HJModel, CarouselSource {
     var bak: String = ""
     var beginDate: String = ""
     var code: String = ""
@@ -27,13 +27,19 @@ class HCBannerModel: HJModel {
     var title: String = ""
     var type: String = ""
     var unitId: String = ""
-    var url: String = ""
+    var link: String = ""
+    
+    override func mapping(mapper: HelpingMapper) {
+        mapper.specify(property: &link, name: "url")
+    }
+    
+    var url: String? { return path }
 }
 
 class HCStatisticsDoctorHopitalModel: HJModel {
-    var expertDoctor: String = ""
-    var reproductiveCenter: String = ""
-    var tripleA: String = ""
+    var expertDoctor: String = "0"
+    var reproductiveCenter: String = "0"
+    var tripleA: String = "0"
 }
 
 class HCDoctorListItemModel: HJModel {
@@ -87,4 +93,49 @@ class HCDoctorListItemModel: HJModel {
     var unitName: String = ""
     var viewProfile: String = ""
     var wubiCode: String = ""
+    
+    public lazy var doctorInfoText: NSAttributedString = {
+        let string = NSMutableAttributedString.init(string: "\(self.name) \(self.technicalPost)")
+        string.addAttribute(NSAttributedString.Key.font,
+                            value: UIFont.font(fontSize: 14),
+                            range: .init(location: self.name.count + 1, length: self.technicalPost.count))
+        return string
+    }()
+    
+    public lazy var briefText: NSAttributedString = {
+        let string = NSMutableAttributedString.init(string: "咨询数\(self.consultNum)，回复率\(self.numbers)，好评率\(self.prasiRat)")
+        
+        string.addAttribute(NSAttributedString.Key.foregroundColor,
+                            value: RGB(244, 174, 62),
+                            range: .init(location: 3, length: self.consultNum.count))
+        string.addAttribute(NSAttributedString.Key.font,
+                            value: UIFont.font(fontSize: 12, fontName: .PingFSemibold),
+                            range: .init(location: 3, length: self.consultNum.count))
+
+        string.addAttribute(NSAttributedString.Key.foregroundColor,
+                            value: RGB(244, 174, 62),
+                            range: .init(location: 3 + self.consultNum.count + 4,
+                                         length: self.numbers.count))
+        string.addAttribute(NSAttributedString.Key.font,
+                            value: UIFont.font(fontSize: 12, fontName: .PingFSemibold),
+                            range: .init(location: 3 + self.consultNum.count + 4,
+                                         length: self.numbers.count))
+
+        string.addAttribute(NSAttributedString.Key.foregroundColor,
+                            value: RGB(244, 174, 62),
+                            range: .init(location: 3 + self.consultNum.count + 4 + self.numbers.count + 4,
+                                         length: self.prasiRat.count))
+        string.addAttribute(NSAttributedString.Key.font,
+                            value: UIFont.font(fontSize: 12, fontName: .PingFSemibold),
+                            range: .init(location: 3 + self.consultNum.count + 4 + self.numbers.count + 4,
+                                         length: self.prasiRat.count))
+
+        
+        return string
+    }()
+
+}
+
+class HCHCDoctorListModel: HJModel {
+    var records: [HCDoctorListItemModel] = []
 }

@@ -548,6 +548,7 @@
 		C4AB273824E53D6F0095F693 /* HCBaseListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AB272F24E53D6F0095F693 /* HCBaseListCell.swift */; };
 		C4AB273924E53D6F0095F693 /* HCListDetailInputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AB273024E53D6F0095F693 /* HCListDetailInputCell.swift */; };
 		C4B185342345B03400F37197 /* HCSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B185332345B03400F37197 /* HCSearch.swift */; };
+		C4BDAB0F24F54EBF00954F6E /* HCDoctorListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BDAB0E24F54EBF00954F6E /* HCDoctorListCell.swift */; };
 		C4C3257B2205B8490091783C /* ScrollTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C3257A2205B8490091783C /* ScrollTextView.swift */; };
 		C4C3257D2205C3AD0091783C /* UIView+XIB.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C3257C2205C3AC0091783C /* UIView+XIB.swift */; };
 		C4C8EB3F235175660054A295 /* HCHomePreparePregnantInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C8EB3D235175660054A295 /* HCHomePreparePregnantInfoCell.swift */; };
@@ -571,6 +572,8 @@
 		C4DDE0C624F4FBC80001201C /* HCListFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DDE0C524F4FBC80001201C /* HCListFilterViewController.swift */; };
 		C4DDE0C824F4FE070001201C /* HCListFilterLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DDE0C724F4FE070001201C /* HCListFilterLayout.swift */; };
 		C4DDE0CA24F4FE4F0001201C /* HCListFilterContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DDE0C924F4FE4F0001201C /* HCListFilterContainer.swift */; };
+		C4DDE0CC24F50E680001201C /* HCExpertConsultationReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DDE0CB24F50E680001201C /* HCExpertConsultationReusableView.swift */; };
+		C4DDE0CE24F529B80001201C /* HCDoctorCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DDE0CD24F529B80001201C /* HCDoctorCardCell.swift */; };
 		C4E254EA233E0793006922DB /* TYSlideMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E254E9233E0792006922DB /* TYSlideMenuController.swift */; };
 		C4E254EC233E0D4D006922DB /* TYSlideDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E254EB233E0D4D006922DB /* TYSlideDatasource.swift */; };
 		C4E254EF233E1C36006922DB /* HCClassRoomItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E254EE233E1C36006922DB /* HCClassRoomItemController.swift */; };
@@ -1400,6 +1403,7 @@
 		C4AB272F24E53D6F0095F693 /* HCBaseListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCBaseListCell.swift; sourceTree = "<group>"; };
 		C4AB273024E53D6F0095F693 /* HCListDetailInputCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCListDetailInputCell.swift; sourceTree = "<group>"; };
 		C4B185332345B03400F37197 /* HCSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCSearch.swift; sourceTree = "<group>"; };
+		C4BDAB0E24F54EBF00954F6E /* HCDoctorListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCDoctorListCell.swift; sourceTree = "<group>"; };
 		C4C3257A2205B8490091783C /* ScrollTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollTextView.swift; sourceTree = "<group>"; };
 		C4C3257C2205C3AC0091783C /* UIView+XIB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+XIB.swift"; sourceTree = "<group>"; };
 		C4C8EB3D235175660054A295 /* HCHomePreparePregnantInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCHomePreparePregnantInfoCell.swift; sourceTree = "<group>"; };
@@ -1423,6 +1427,8 @@
 		C4DDE0C524F4FBC80001201C /* HCListFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCListFilterViewController.swift; sourceTree = "<group>"; };
 		C4DDE0C724F4FE070001201C /* HCListFilterLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCListFilterLayout.swift; sourceTree = "<group>"; };
 		C4DDE0C924F4FE4F0001201C /* HCListFilterContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCListFilterContainer.swift; sourceTree = "<group>"; };
+		C4DDE0CB24F50E680001201C /* HCExpertConsultationReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCExpertConsultationReusableView.swift; sourceTree = "<group>"; };
+		C4DDE0CD24F529B80001201C /* HCDoctorCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCDoctorCardCell.swift; sourceTree = "<group>"; };
 		C4E254E4233E069C006922DB /* HCClassRoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCClassRoomViewController.swift; sourceTree = "<group>"; };
 		C4E254E9233E0792006922DB /* TYSlideMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TYSlideMenuController.swift; sourceTree = "<group>"; };
 		C4E254EB233E0D4D006922DB /* TYSlideDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TYSlideDatasource.swift; sourceTree = "<group>"; };
@@ -3499,6 +3505,9 @@
 			isa = PBXGroup;
 			children = (
 				C4DDE0B124F4D9A40001201C /* HCExpertConsultationContainer.swift */,
+				C4DDE0CB24F50E680001201C /* HCExpertConsultationReusableView.swift */,
+				C4DDE0CD24F529B80001201C /* HCDoctorCardCell.swift */,
+				C4BDAB0E24F54EBF00954F6E /* HCDoctorListCell.swift */,
 			);
 			path = ExpertConsultation;
 			sourceTree = "<group>";
@@ -3969,6 +3978,7 @@
 				B816EAFD221DABF400F024D5 /* ZXOneDReader.m in Sources */,
 				B85CD93523BE609A00B1A1C3 /* HCEditUserCityViewModel.swift in Sources */,
 				B816EB11221DABF400F024D5 /* ZXRSSExpandedCurrentParsingState.m in Sources */,
+				C4DDE0CC24F50E680001201C /* HCExpertConsultationReusableView.swift in Sources */,
 				B8D4D47D239426B400AA3D52 /* HCPicAndTextAskViewModel.swift in Sources */,
 				B816EACF221DABF400F024D5 /* ZXPDF417.m in Sources */,
 				C4AB273524E53D6F0095F693 /* HCListSwitchCell.swift in Sources */,
@@ -3990,6 +4000,7 @@
 				B816EAF9221DABF400F024D5 /* ZXCode93Reader.m in Sources */,
 				B8454EDB23A5361200E88BAD /* TYColorLineView.swift in Sources */,
 				B816EAE8221DABF400F024D5 /* ZXDataMatrixASCIIEncoder.m in Sources */,
+				C4BDAB0F24F54EBF00954F6E /* HCDoctorListCell.swift in Sources */,
 				B816EADF221DABF400F024D5 /* ZXPDF417Reader.m in Sources */,
 				B816EA9D221DABF400F024D5 /* ZXMultiFinderPatternFinder.m in Sources */,
 				C497E94823444E4600328B47 /* HCHomePreparePregnantReusableView.swift in Sources */,
@@ -4002,6 +4013,7 @@
 				B816EADA221DABF400F024D5 /* ZXPDF417Codeword.m in Sources */,
 				B816EAD9221DABF400F024D5 /* ZXPDF417DetectionResultColumn.m in Sources */,
 				B816EAB3221DABF400F024D5 /* ZXGridSampler.m in Sources */,
+				C4DDE0CE24F529B80001201C /* HCDoctorCardCell.swift in Sources */,
 				B8BE351922147B4000EF16F1 /* HCEditSynopsisViewController.swift in Sources */,
 				C4DDE0CA24F4FE4F0001201C /* HCListFilterContainer.swift in Sources */,
 				B8699401233794A700086A77 /* UIView+Layer.swift in Sources */,
