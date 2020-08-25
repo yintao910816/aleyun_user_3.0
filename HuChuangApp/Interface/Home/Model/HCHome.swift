@@ -22,7 +22,8 @@ class HCFunctionsMenuModel: HJModel {
     var modifyDate: String = ""
     var modifys: String = ""
     var name: String = ""
-    var primordial: String = ""
+    /// 为1则跳转原生界面，0跳转h5
+    var primordial: Int = 0
     var recom: Int = 0
     var sort: Int = 0
     var type: String = ""

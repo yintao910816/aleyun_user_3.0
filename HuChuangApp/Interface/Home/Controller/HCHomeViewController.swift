@@ -50,12 +50,7 @@ class HCHomeViewController: BaseViewController {
 //            self?.navigationController?.pushViewController(webVC, animated: true)
         }
         
-        containerView.funcItemClicked = { [weak self] in
-            let webVC = BaseWebViewController()
-            webVC.url = $0.functionUrl
-            webVC.title = $0.name
-            self?.navigationController?.pushViewController(webVC, animated: true)
-        }
+        containerView.funcItemClicked = { [weak self] in self?.functionMenuClicked(functionModel: $0) }
         
         containerView.cmsRecommendItemClicked = { [weak self] in
             let webVC = BaseWebViewController()
@@ -91,5 +86,20 @@ class HCHomeViewController: BaseViewController {
         }
 
         containerView.frame = view.bounds
+    }
+}
+
+extension HCHomeViewController {
+    
+    private func functionMenuClicked(functionModel: HCFunctionsMenuModel) {
+        if functionModel.primordial == 1 && functionModel.name == "专家问诊" {
+            navigationController?.pushViewController(HCExpertConsultationController(), animated: true)
+            return
+        }
+        
+        let webVC = BaseWebViewController()
+        webVC.url = functionModel.functionUrl
+        webVC.title = functionModel.name
+        navigationController?.pushViewController(webVC, animated: true)
     }
 }

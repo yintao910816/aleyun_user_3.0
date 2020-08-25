@@ -40,6 +40,10 @@ enum HCMergeProOpType: String {
     case temperature = "temperature"
 }
 
+enum HCBannerCode: String {
+    case bannerdoctor = "bannerdoctor"
+}
+
 enum H5Type: String {
     /// 好孕消息
     case goodNews = "goodnews"
@@ -156,6 +160,18 @@ enum API{
     case myConsult(consultType: Int, pageSize: Int, pageNum: Int)
     /// 消息中心
     case messageCenter
+    /// banner
+    case selectBanner(code: HCBannerCode)
+    /// 医生/医院数量统计 - 专家问诊
+    case statisticsDoctorHopital
+    /// 我的医生 - 专家问诊
+    case myDoctor(lng: String, lat: String)
+    /// 获取所有省
+    case allProvice
+    /// 获取市
+    case city(id: String)
+    
+    
     
     // --------------- 2.0接口
     /// 向app服务器注册友盟token
@@ -167,8 +183,6 @@ enum API{
     case selectInfo
     /// 修改用户信息
     case updateInfo(param: [String: String])
-    /// 首页banner
-    case selectBanner
     /// 首页功能列表
     case functionList
     /// 好消息
@@ -264,7 +278,16 @@ extension API: TargetType{
             return "api/consult/myConsult"
         case .messageCenter:
             return "api/messageCenter/groupMsg"
-            
+        case .selectBanner(let code):
+            return "api/advert/banner/\(code.rawValue)"
+        case .statisticsDoctorHopital:
+            return "api/statistics/doctorHopital"
+        case .myDoctor(_, _):
+            return "api/doctor/myDoctor"
+        case .allProvice:
+            return "api/area/allProvice"
+        case .city(let id):
+            return "api/area/city/\(id)"
             
         case .UMAdd(_):
             return "api/umeng/add"
@@ -274,8 +297,6 @@ extension API: TargetType{
             return "api/member/selectInfo"
         case .updateInfo(_):
             return "api/member/updateInfo"
-        case .selectBanner:
-            return "api/index/selectBanner"
         case .functionList:
             return "api/index/select"
         case .noticeList(_):
@@ -427,6 +448,10 @@ extension API {
             params["consultType"] = consultType
             params["pageSize"] = pageSize
             params["pageNum"] = pageNum
+        case .myDoctor(let lng, let lat):
+            params["lng"] = lng
+            params["lat"] = lat
+
 
             
         case .UMAdd(let deviceToken):
@@ -442,8 +467,6 @@ extension API {
             params["smsCode"] = smsCode
         case .updateInfo(let param):
             params = param
-        case .selectBanner:
-            params["code"] = "activity"
 
         case .noticeList(let type, let pageNum, let pageSize):
             params["type"] = type
