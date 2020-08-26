@@ -102,6 +102,11 @@ extension HCHomeViewController {
             return
         }
         
+        if functionModel.primordial == 1 && functionModel.name == "生殖中心" {
+            navigationController?.pushViewController(HCHospitalListViewController(), animated: true)
+            return
+        }
+
         let webVC = BaseWebViewController()
         webVC.url = functionModel.functionUrl
         webVC.title = functionModel.name

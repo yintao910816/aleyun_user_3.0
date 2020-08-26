@@ -180,6 +180,24 @@ extension TYSlideItemModel {
                                  icon: UIImage(named: "login_arrow_down"))]
     }
 
+    /// 生殖中心
+    internal static func createHospitalListData() ->[TYSlideItemModel] {
+        return [TYSlideItemModel(title: "全国",
+                                 textColor: RGB(51, 51, 51),
+                                 selectedTextColor: RGB(51, 51, 51),
+                                 lineColor: HC_MAIN_COLOR,
+                                 textFont: .font(fontSize: 16),
+                                 isSelected: true,
+                                 icon: UIImage(named: "login_arrow_down")),
+                TYSlideItemModel(title: "筛选",
+                                 textColor: RGB(51, 51, 51),
+                                 selectedTextColor: RGB(51, 51, 51),
+                                 lineColor: HC_MAIN_COLOR,
+                                 textFont: .font(fontSize: 16),
+                                 isSelected: false,
+                                 icon: UIImage(named: "login_arrow_down"))]
+    }
+
 }
 
 class HCSlideItemController: BaseViewController {

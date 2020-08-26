@@ -174,6 +174,8 @@ enum API{
     case doctorList(areaCode: String, sortType: String, consultType: String, pageSize: Int, pageNum: Int)
     /// 分组文章
     case groupCmsArticle(code: HCCmsType)
+    /// 生殖中心
+    case hospitalList(searchWords: String, areaCode: String, level: String)
     
     
     // --------------- 2.0接口
@@ -295,7 +297,8 @@ extension API: TargetType{
             return "api/doctor/doctorList"
         case .groupCmsArticle(let code):
             return "api/cms/groupCmsArticle/\(code.rawValue)"
-
+        case .hospitalList(_, _, _):
+            return "api/hospital/list"
             
         case .UMAdd(_):
             return "api/umeng/add"
@@ -465,6 +468,10 @@ extension API {
             params["consultType"] = consultType
             params["pageSize"] = pageSize
             params["pageNum"] = pageNum
+        case .hospitalList(let searchWords, let areaCode, let level):
+            params["searchWords"] = searchWords
+            params["areaCode"] = areaCode
+            params["level"] = level
 
 
             
