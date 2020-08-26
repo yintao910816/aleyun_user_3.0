@@ -553,6 +553,10 @@
 		C4C3257D2205C3AD0091783C /* UIView+XIB.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C3257C2205C3AC0091783C /* UIView+XIB.swift */; };
 		C4C8EB3F235175660054A295 /* HCHomePreparePregnantInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C8EB3D235175660054A295 /* HCHomePreparePregnantInfoCell.swift */; };
 		C4C8EB40235175660054A295 /* HCHomePreparePregnantInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4C8EB3E235175660054A295 /* HCHomePreparePregnantInfoCell.xib */; };
+		C4D1DB3A24F691DD001EF30F /* HCTestTubeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D1DB3924F691DD001EF30F /* HCTestTubeViewController.swift */; };
+		C4D1DB3D24F6922C001EF30F /* HCTestTubeContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D1DB3C24F6922C001EF30F /* HCTestTubeContainer.swift */; };
+		C4D1DB3F24F6923A001EF30F /* HCTestTubeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D1DB3E24F6923A001EF30F /* HCTestTubeViewModel.swift */; };
+		C4D1DB4124F69421001EF30F /* HCTestTube.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D1DB4024F69421001EF30F /* HCTestTube.swift */; };
 		C4DDE09224F140470001201C /* HCMyConsult.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DDE09124F140470001201C /* HCMyConsult.swift */; };
 		C4DDE09524F140670001201C /* HCMyConsultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DDE09424F140670001201C /* HCMyConsultViewController.swift */; };
 		C4DDE09724F140790001201C /* HCMyConsultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DDE09624F140790001201C /* HCMyConsultViewModel.swift */; };
@@ -1408,6 +1412,10 @@
 		C4C3257C2205C3AC0091783C /* UIView+XIB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+XIB.swift"; sourceTree = "<group>"; };
 		C4C8EB3D235175660054A295 /* HCHomePreparePregnantInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCHomePreparePregnantInfoCell.swift; sourceTree = "<group>"; };
 		C4C8EB3E235175660054A295 /* HCHomePreparePregnantInfoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HCHomePreparePregnantInfoCell.xib; sourceTree = "<group>"; };
+		C4D1DB3924F691DD001EF30F /* HCTestTubeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCTestTubeViewController.swift; sourceTree = "<group>"; };
+		C4D1DB3C24F6922C001EF30F /* HCTestTubeContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCTestTubeContainer.swift; sourceTree = "<group>"; };
+		C4D1DB3E24F6923A001EF30F /* HCTestTubeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCTestTubeViewModel.swift; sourceTree = "<group>"; };
+		C4D1DB4024F69421001EF30F /* HCTestTube.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCTestTube.swift; sourceTree = "<group>"; };
 		C4DDE09124F140470001201C /* HCMyConsult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCMyConsult.swift; sourceTree = "<group>"; };
 		C4DDE09424F140670001201C /* HCMyConsultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCMyConsultViewController.swift; sourceTree = "<group>"; };
 		C4DDE09624F140790001201C /* HCMyConsultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCMyConsultViewModel.swift; sourceTree = "<group>"; };
@@ -3320,6 +3328,7 @@
 				C494137424DE9EFC00045749 /* HCHomeViewModel.swift */,
 				B8F90E5B24F25FBB00A1D68C /* HCMessageViewModel.swift */,
 				C4DDE0B324F4D9D00001201C /* HCExpertConsultationViewModel.swift */,
+				C4D1DB3E24F6923A001EF30F /* HCTestTubeViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -3327,6 +3336,7 @@
 		C494136D24DE9E2400045749 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				C4D1DB3824F691CC001EF30F /* TestTube */,
 				C4DDE0AB24F4D9670001201C /* ExpertConsultation */,
 				C494137024DE9E3600045749 /* HCHomeViewController.swift */,
 				B8F90E5724F25F8E00A1D68C /* HCMessageViewController.swift */,
@@ -3340,6 +3350,7 @@
 				C40448B024EB7E0100AD1610 /* HCHome.swift */,
 				B8F90E5D24F25FD100A1D68C /* HCMessage.swift */,
 				C4DDE0AE24F4D9810001201C /* HCExpertConsultation.swift */,
+				C4D1DB4024F69421001EF30F /* HCTestTube.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3347,6 +3358,7 @@
 		C494136F24DE9E2400045749 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				C4D1DB3B24F69212001EF30F /* TestTube */,
 				C4DDE0B024F4D9910001201C /* ExpertConsultation */,
 				B8F90E5F24F2604A00A1D68C /* Home */,
 				B8F90E6724F2604A00A1D68C /* Message */,
@@ -3472,6 +3484,22 @@
 				B8BE1AEC23A7E92F00DF472A /* HCSearchHeaderView.swift */,
 			);
 			path = HCSearch;
+			sourceTree = "<group>";
+		};
+		C4D1DB3824F691CC001EF30F /* TestTube */ = {
+			isa = PBXGroup;
+			children = (
+				C4D1DB3924F691DD001EF30F /* HCTestTubeViewController.swift */,
+			);
+			path = TestTube;
+			sourceTree = "<group>";
+		};
+		C4D1DB3B24F69212001EF30F /* TestTube */ = {
+			isa = PBXGroup;
+			children = (
+				C4D1DB3C24F6922C001EF30F /* HCTestTubeContainer.swift */,
+			);
+			path = TestTube;
 			sourceTree = "<group>";
 		};
 		C4DDE09324F140570001201C /* Consult */ = {
@@ -3963,6 +3991,7 @@
 				C4382BF724E560C2000C00CE /* HCMineEmptyHeathyDataCell.swift in Sources */,
 				C4DDE09724F140790001201C /* HCMyConsultViewModel.swift in Sources */,
 				B816EAEB221DABF400F024D5 /* ZXDataMatrixDefaultPlacement.m in Sources */,
+				C4D1DB3A24F691DD001EF30F /* HCTestTubeViewController.swift in Sources */,
 				C4DDE09224F140470001201C /* HCMyConsult.swift in Sources */,
 				B8BE351122147AE600EF16F1 /* HCEditUserIconViewController.swift in Sources */,
 				B821E34D23070907009A11A3 /* HCLocationManager.swift in Sources */,
@@ -4058,6 +4087,7 @@
 				B816EAA3221DABF400F024D5 /* ZXQRCodeVersion.m in Sources */,
 				B816EAF7221DABF400F024D5 /* ZXMaxiCodeBitMatrixParser.m in Sources */,
 				B816EAF3221DABF400F024D5 /* ZXDataMatrixDetector.m in Sources */,
+				C4D1DB3D24F6922C001EF30F /* HCTestTubeContainer.swift in Sources */,
 				B8F90E4424F2572B00A1D68C /* HCAccurateReservationController.swift in Sources */,
 				B816EB03221DABF400F024D5 /* ZXEAN13Reader.m in Sources */,
 				B816EB3E221DABF400F024D5 /* ZXISBNResultParser.m in Sources */,
@@ -4065,6 +4095,7 @@
 				C4F139B7235419EF00D777F6 /* Validate.swift in Sources */,
 				C421338222059B8C006C10C4 /* UserDefaults+Cache.swift in Sources */,
 				B816EAA4221DABF400F024D5 /* ZXQRCodeBitMatrixParser.m in Sources */,
+				C4D1DB4124F69421001EF30F /* HCTestTube.swift in Sources */,
 				C421334D220587DC006C10C4 /* Single+ModelMapper.swift in Sources */,
 				B816EA81221DABF400F024D5 /* ZXDimension.m in Sources */,
 				B870E53F238C34AB0085AFA3 /* HCHealthyArchivesHeaderTitleView.swift in Sources */,
@@ -4136,6 +4167,7 @@
 				B8BE34FB221470B800EF16F1 /* HCEditUserInfoViewController.swift in Sources */,
 				B8F1587524E801400046B107 /* HCUser.swift in Sources */,
 				C497E94F23444E4600328B47 /* HCHomeCollectionHeaderReusableView.swift in Sources */,
+				C4D1DB3F24F6923A001EF30F /* HCTestTubeViewModel.swift in Sources */,
 				B816EA96221DABF400F024D5 /* ZXAztecWriter.m in Sources */,
 				C40448A924EB6B1D00AD1610 /* HCMineInServerCell.swift in Sources */,
 				B816EADE221DABF400F024D5 /* ZXPDF417Detector.m in Sources */,

@@ -97,6 +97,11 @@ extension HCHomeViewController {
             return
         }
         
+        if functionModel.primordial == 1 && functionModel.name == "试管百科" {
+            navigationController?.pushViewController(HCTestTubeViewController(), animated: true)
+            return
+        }
+        
         let webVC = BaseWebViewController()
         webVC.url = functionModel.functionUrl
         webVC.title = functionModel.name

@@ -63,10 +63,27 @@ class HCMenuItemCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    /// 个人中心
     public var mode: HCMenuItemCellMode! {
         didSet {
             icon.image = mode.modeIcon
             title.text = mode.modeString
+        }
+    }
+    
+    /// 试管百科
+    public var articleVoListItem: HCArticleVoListItemModel! {
+        didSet {
+            icon.setImage(articleVoListItem.picPath, .original)
+            title.text = articleVoListItem.title
+        }
+    }
+    
+    public var titleFont: UIFont = .font(fontSize: 14) {
+        didSet {
+            title.font = titleFont
+            setNeedsLayout()
+            layoutIfNeeded()
         }
     }
     
@@ -85,8 +102,10 @@ class HCMenuItemCell: UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        icon.frame = .init(x: (width - 25) / 2.0, y: 0, width: 25, height: 25)
-        title.frame = .init(x: 0, y: icon.frame.maxY + 10, width: width, height: 20)
+        let titleSize: CGSize = title.sizeThatFits(.init(width: width, height: CGFloat(MAXFLOAT)))
+        let iconH: CGFloat = height - 10 - titleSize.height
+        icon.frame = .init(x: (width - iconH) / 2.0, y: 0, width: iconH, height: iconH)
+        title.frame = .init(x: 0, y: icon.frame.maxY + 10, width: width, height: titleSize.height)
     }
 }
 
