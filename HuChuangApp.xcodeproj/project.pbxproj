@@ -562,6 +562,10 @@
 		C4D1DB4924F6B702001EF30F /* HCHospitalListContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D1DB4824F6B702001EF30F /* HCHospitalListContainer.swift */; };
 		C4D1DB4B24F6B7FC001EF30F /* HCHospitalListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D1DB4A24F6B7FC001EF30F /* HCHospitalListCell.swift */; };
 		C4D1DB4F24F6B81A001EF30F /* HCHospitalListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D1DB4E24F6B81A001EF30F /* HCHospitalListViewModel.swift */; };
+		C4D1DB5324F6C306001EF30F /* HCMedicine.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D1DB5224F6C306001EF30F /* HCMedicine.swift */; };
+		C4D1DB5524F6C314001EF30F /* HCMedicineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D1DB5424F6C314001EF30F /* HCMedicineViewModel.swift */; };
+		C4D1DB5724F6C350001EF30F /* HCMedicineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D1DB5624F6C350001EF30F /* HCMedicineViewController.swift */; };
+		C4D1DB5924F6C470001EF30F /* HCMedicineContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D1DB5824F6C470001EF30F /* HCMedicineContainer.swift */; };
 		C4DDE09224F140470001201C /* HCMyConsult.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DDE09124F140470001201C /* HCMyConsult.swift */; };
 		C4DDE09524F140670001201C /* HCMyConsultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DDE09424F140670001201C /* HCMyConsultViewController.swift */; };
 		C4DDE09724F140790001201C /* HCMyConsultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DDE09624F140790001201C /* HCMyConsultViewModel.swift */; };
@@ -1426,6 +1430,10 @@
 		C4D1DB4824F6B702001EF30F /* HCHospitalListContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCHospitalListContainer.swift; sourceTree = "<group>"; };
 		C4D1DB4A24F6B7FC001EF30F /* HCHospitalListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCHospitalListCell.swift; sourceTree = "<group>"; };
 		C4D1DB4E24F6B81A001EF30F /* HCHospitalListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCHospitalListViewModel.swift; sourceTree = "<group>"; };
+		C4D1DB5224F6C306001EF30F /* HCMedicine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCMedicine.swift; sourceTree = "<group>"; };
+		C4D1DB5424F6C314001EF30F /* HCMedicineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCMedicineViewModel.swift; sourceTree = "<group>"; };
+		C4D1DB5624F6C350001EF30F /* HCMedicineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCMedicineViewController.swift; sourceTree = "<group>"; };
+		C4D1DB5824F6C470001EF30F /* HCMedicineContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCMedicineContainer.swift; sourceTree = "<group>"; };
 		C4DDE09124F140470001201C /* HCMyConsult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCMyConsult.swift; sourceTree = "<group>"; };
 		C4DDE09424F140670001201C /* HCMyConsultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCMyConsultViewController.swift; sourceTree = "<group>"; };
 		C4DDE09624F140790001201C /* HCMyConsultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCMyConsultViewModel.swift; sourceTree = "<group>"; };
@@ -3340,6 +3348,7 @@
 				C4DDE0B324F4D9D00001201C /* HCExpertConsultationViewModel.swift */,
 				C4D1DB3E24F6923A001EF30F /* HCTestTubeViewModel.swift */,
 				C4D1DB4E24F6B81A001EF30F /* HCHospitalListViewModel.swift */,
+				C4D1DB5424F6C314001EF30F /* HCMedicineViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -3347,6 +3356,7 @@
 		C494136D24DE9E2400045749 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				C4D1DB5024F6C2EB001EF30F /* Medicine */,
 				C4D1DB4224F6B6C3001EF30F /* HospitalList */,
 				C4D1DB3824F691CC001EF30F /* TestTube */,
 				C4DDE0AB24F4D9670001201C /* ExpertConsultation */,
@@ -3364,6 +3374,7 @@
 				C4DDE0AE24F4D9810001201C /* HCExpertConsultation.swift */,
 				C4D1DB4024F69421001EF30F /* HCTestTube.swift */,
 				C4D1DB4324F6B6CD001EF30F /* HCHospitalList.swift */,
+				C4D1DB5224F6C306001EF30F /* HCMedicine.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3371,6 +3382,7 @@
 		C494136F24DE9E2400045749 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				C4D1DB5124F6C2FC001EF30F /* Medicine */,
 				C4D1DB4524F6B6DC001EF30F /* HospitalList */,
 				C4D1DB3B24F69212001EF30F /* TestTube */,
 				C4DDE0B024F4D9910001201C /* ExpertConsultation */,
@@ -3531,6 +3543,22 @@
 				C4D1DB4A24F6B7FC001EF30F /* HCHospitalListCell.swift */,
 			);
 			path = HospitalList;
+			sourceTree = "<group>";
+		};
+		C4D1DB5024F6C2EB001EF30F /* Medicine */ = {
+			isa = PBXGroup;
+			children = (
+				C4D1DB5624F6C350001EF30F /* HCMedicineViewController.swift */,
+			);
+			path = Medicine;
+			sourceTree = "<group>";
+		};
+		C4D1DB5124F6C2FC001EF30F /* Medicine */ = {
+			isa = PBXGroup;
+			children = (
+				C4D1DB5824F6C470001EF30F /* HCMedicineContainer.swift */,
+			);
+			path = Medicine;
 			sourceTree = "<group>";
 		};
 		C4DDE09324F140570001201C /* Consult */ = {
@@ -3989,6 +4017,7 @@
 				B816EAD6221DABF400F024D5 /* ZXPDF417BarcodeMetadata.m in Sources */,
 				B816EB1D221DABF400F024D5 /* ZXRSSPair.m in Sources */,
 				C42AF1A524EA1D830034DBEF /* HCRealNameAuthorContainer.swift in Sources */,
+				C4D1DB5924F6C470001EF30F /* HCMedicineContainer.swift in Sources */,
 				B816EA75221DABF400F024D5 /* LBXScanViewStyle.m in Sources */,
 				B816EB20221DABF400F024D5 /* ZXRSSFinderPattern.m in Sources */,
 				B816EACB221DABF400F024D5 /* ZXPDF417BarcodeMatrix.m in Sources */,
@@ -4032,6 +4061,7 @@
 				B8F90E5624F25BF900A1D68C /* HCPicConsultRecordCell.swift in Sources */,
 				B892FFA023ABB50800A137C0 /* TYFiliterView.swift in Sources */,
 				C421332C22056F24006C10C4 /* TYHUD.swift in Sources */,
+				C4D1DB5324F6C306001EF30F /* HCMedicine.swift in Sources */,
 				B816EAAA221DABF400F024D5 /* ZXQRCodeFinderPatternInfo.m in Sources */,
 				C42133582205883D006C10C4 /* BaseViewModel.swift in Sources */,
 				B816EAEC221DABF400F024D5 /* ZXDataMatrixHighLevelEncoder.m in Sources */,
@@ -4175,6 +4205,7 @@
 				B8F90E4224F256F200A1D68C /* HCAccurateReservationCell.swift in Sources */,
 				C42133942205B1E9006C10C4 /* CarouselView.swift in Sources */,
 				B816EB10221DABF400F024D5 /* ZXAI01320xDecoder.m in Sources */,
+				C4D1DB5524F6C314001EF30F /* HCMedicineViewModel.swift in Sources */,
 				B870E541238C37050085AFA3 /* HCMenstruationHistoryViewController.swift in Sources */,
 				B816EAE2221DABF400F024D5 /* ZXDataMatrixX12Encoder.m in Sources */,
 				B8BE351D221484C600EF16F1 /* UINavigationController+BarButtonItem.swift in Sources */,
@@ -4271,6 +4302,7 @@
 				C4C3257D2205C3AD0091783C /* UIView+XIB.swift in Sources */,
 				C4DDE0A224F14F0C0001201C /* HCPicConsultCell.swift in Sources */,
 				B8BE351722147B1E00EF16F1 /* HCEditBirthdayViewController.swift in Sources */,
+				C4D1DB5724F6C350001EF30F /* HCMedicineViewController.swift in Sources */,
 				B816EAD0221DABF400F024D5 /* ZXPDF417CodewordDecoder.m in Sources */,
 				B8CD926F23A29C6800C9C061 /* HCRecordActionItemCell.swift in Sources */,
 				C4382BED24E5604D000C00CE /* HCAccountSettingViewController.swift in Sources */,

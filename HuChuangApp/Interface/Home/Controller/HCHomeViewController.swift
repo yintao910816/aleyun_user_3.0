@@ -106,6 +106,11 @@ extension HCHomeViewController {
             navigationController?.pushViewController(HCHospitalListViewController(), animated: true)
             return
         }
+        
+        if functionModel.primordial == 1 && functionModel.name == "药品百科" {
+            navigationController?.pushViewController(HCMedicineViewController(), animated: true)
+            return
+        }
 
         let webVC = BaseWebViewController()
         webVC.url = functionModel.functionUrl

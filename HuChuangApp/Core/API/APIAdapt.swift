@@ -65,6 +65,11 @@ struct APIAssistance {
         return "\(APIAssistance.base)api/cms/detail/\(id)"
     }
     
+    /// id 拼接药品详情链接
+    static public func medicineDetail(with id: String) ->String {
+        return "\(APIAssistance.base)api/cms/medicineDetail/\(id)"
+    }
+    
     /**
      请求方式
      */
