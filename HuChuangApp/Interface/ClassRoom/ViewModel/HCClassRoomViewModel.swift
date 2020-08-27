@@ -9,7 +9,7 @@
 import Foundation
 import RxSwift
 
-class HCClassRoomViewModel: RefreshVM<HCArticleItemModel> {
+class HCClassRoomViewModel: BaseViewModel {
     
     public let reloadSignal = PublishSubject<([HCClassRoomSectionModel], [HCBannerModel])>()
     

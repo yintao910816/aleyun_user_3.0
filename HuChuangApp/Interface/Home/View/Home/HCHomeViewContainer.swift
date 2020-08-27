@@ -74,7 +74,7 @@ extension HCHomeViewContainer {
 
         collectionView.register(HCMenuItemShadowCell.self, forCellWithReuseIdentifier: HCMenuItemShadowCell_identifier)
         collectionView.register(HCMenuHorizontalCell.self, forCellWithReuseIdentifier: HCMenuHorizontalCell_identifier)
-        collectionView.register(HCHomeArticleCell.self, forCellWithReuseIdentifier: HCHomeArticleCell_identifier)
+        collectionView.register(HCRealTimeCell.self, forCellWithReuseIdentifier: HCRealTimeCell_identifier)
     }
 
 }
@@ -111,8 +111,8 @@ extension HCHomeViewContainer: UICollectionViewDataSource, UICollectionViewDeleg
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: HCMenuHorizontalCell_identifier, for: indexPath)
             (cell as? HCMenuHorizontalCell)?.mode = cmsRecommendDatas[indexPath.row]
         }else if indexPath.section == 2 {
-            cell = collectionView.dequeueReusableCell(withReuseIdentifier: HCHomeArticleCell_identifier, for: indexPath)
-            (cell as? HCHomeArticleCell)?.model = articleDatas[indexPath.row]
+            cell = collectionView.dequeueReusableCell(withReuseIdentifier: HCRealTimeCell_identifier, for: indexPath)
+            (cell as? HCRealTimeCell)?.model = articleDatas[indexPath.row]
         }
         
         return cell
@@ -125,7 +125,7 @@ extension HCHomeViewContainer: UICollectionViewDataSource, UICollectionViewDeleg
 //            return .init(width: cmsRecommendDatas[indexPath.row].itemW, height: HCMenuHorizontalCell_height)
             return .init(width: (width - 20 * 2 - 10 * 2 - 1) / 3.0, height: HCMenuHorizontalCell_height)
         }else if indexPath.section == 2 {
-            return .init(width: width, height: HCHomeArticleCell_height)
+            return .init(width: width, height: HCRealTimeCell_height)
         }
         return .zero
     }

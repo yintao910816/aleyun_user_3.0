@@ -42,7 +42,7 @@ class HCStatisticsDoctorHopitalModel: HJModel {
     var tripleA: String = "0"
 }
 
-class HCDoctorListItemModel: HJModel {
+class HCDoctorListItemModel: HJModel, HCSearchDataProtocol {
     var account: String = ""
     var age: String = ""
     var areaCode: String = ""

@@ -8,10 +8,10 @@
 
 import UIKit
 
-public let HCHomeArticleCell_identifier = "HCHomeArticleCell"
-public let HCHomeArticleCell_height: CGFloat = 100
+public let HCRealTimeCell_identifier = "HCRealTimeCell"
+public let HCRealTimeCell_height: CGFloat = 110
 
-class HCHomeArticleCell: UICollectionViewCell {
+class HCRealTimeCell: UICollectionViewCell {
     
     private var titleLable: UILabel!
     private var coverImg: UIImageView!
@@ -38,15 +38,24 @@ class HCHomeArticleCell: UICollectionViewCell {
         }
     }
     
+    public var realTimeModel: HCRealTimeListItemModel! {
+        didSet {
+            coverImg.setImage(realTimeModel.picPath, .original)
+            titleLable.text = realTimeModel.title
+            viewNumLabel.text = realTimeModel.readNumber
+            collectionNumLabel.text = realTimeModel.store
+        }
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        let coverH: CGFloat = height - 20
+        let coverH: CGFloat = height - 30
         let coverW: CGFloat = coverH * 4 / 3
-        coverImg.frame = .init(x: width - 10 - coverW, y: 10, width: coverW, height: coverH)
+        coverImg.frame = .init(x: width - 10 - coverW, y: 15, width: coverW, height: coverH)
         
-        titleLable.frame = .init(x: 15, y: 10, width: coverImg.x - 15 - 10, height: 20)
-        viewNumIcon.frame = .init(x: titleLable.x, y: height - 10 - 15, width: 15, height: 15)
+        titleLable.frame = .init(x: 15, y: coverImg.y, width: coverImg.x - 15 - 10, height: 20)
+        viewNumIcon.frame = .init(x: titleLable.x, y: height - 15 - 15, width: 15, height: 15)
         var tempSize = viewNumLabel.sizeThatFits(.init(width: CGFloat(MAXFLOAT), height: 15))
         viewNumLabel.frame = .init(x: viewNumIcon.frame.maxX + 5, y: viewNumIcon.y, width: tempSize.width, height: 15)
         
@@ -58,7 +67,7 @@ class HCHomeArticleCell: UICollectionViewCell {
     }
 }
 
-extension HCHomeArticleCell {
+extension HCRealTimeCell {
     
     private func initUI() {
         coverImg = UIImageView()

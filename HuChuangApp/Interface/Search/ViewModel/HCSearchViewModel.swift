@@ -10,20 +10,21 @@ import Foundation
 import RxSwift
 import RxDataSources
 
-class HCSearchViewModel: RefreshVM<HCBaseSearchItemModel> {
+class HCSearchViewModel: RefreshVM<HCSearchDataProtocol> {
         
-    private var menuPageListData: [HCsearchModule: [HCBaseSearchItemModel]] = [:]
+    private var menuPageListData: [HCsearchModule: [HCSearchDataProtocol]] = [:]
     // 记录当前第几页数据
     private var module: HCsearchModule = .doctor
 
     public let keyWordObser = Variable("")
-//    public let pageListData = PublishSubject<([HCBaseSearchItemModel], HCsearchModule)>()
-    /// 全部-医生-课程-文章
-    public let pageListData = PublishSubject<([HCSearchDataModel], [HCSearchDoctorItemModel], [HCSearchCourseItemModel], [HCSearchArticleItemModel], HCsearchModule)>()
 
-    public let requestSearchListSubject = PublishSubject<HCsearchModule>()
+    public let expertDataSignal = PublishSubject<[HCSearchDataProtocol]>()
+    public let realTimeDataSignal = PublishSubject<[HCSearchDataProtocol]>()
+    public let courseDataSignal = PublishSubject<[HCSearchDataProtocol]>()
+    public let liveVideoDataSignal = PublishSubject<[HCSearchDataProtocol]>()
     /// 绑定当前滑动到哪个栏目
     public let currentPageObser = Variable(HCsearchModule.doctor)
+
     /// 关键字搜索 - 是否添加到本地数据库
     public let requestSearchSubject = PublishSubject<Bool>()
     /// 清除本地缓存记录
@@ -40,21 +41,30 @@ class HCSearchViewModel: RefreshVM<HCBaseSearchItemModel> {
             self?.searchRecordsObser.value = TYSearchSectionModel.recordsCreate(datas: records)
         }
         
-//        requestSearchListSubject
-//            .subscribe(onNext: { [unowned self] module in
-//                self.module = module
-//                if let list = self.menuPageListData[module] {
-//                    self.pageListData.onNext((list, module))
-//                }else {
-//                    self.requestData(true)
-//                }
-//            })
-//            .disposed(by: disposeBag)
-        
+        currentPageObser.asDriver()
+            .drive(onNext: { [weak self] in
+                guard let strongSelf = self else { return }
+                strongSelf.module = $0
+                if strongSelf.menuPageListData.keys.contains($0) == true {
+                    switch $0 {
+                    case .doctor:
+                        strongSelf.expertDataSignal.onNext(strongSelf.menuPageListData[$0]!)
+                    case .article:
+                        strongSelf.realTimeDataSignal.onNext(strongSelf.menuPageListData[$0]!)
+                    case .course:
+                        strongSelf.courseDataSignal.onNext(strongSelf.menuPageListData[$0]!)
+                    case .live:
+                        strongSelf.liveVideoDataSignal.onNext(strongSelf.menuPageListData[$0]!)
+                    }
+                }else {
+                    strongSelf.requestData(true)
+                }
+            })
+            .disposed(by: disposeBag)
+                
         requestSearchSubject
             .subscribe(onNext: { [unowned self] cache in
                 if cache { self.cacheSearchRecord() }
-                self.module = .doctor
                 self.requestData(true)
             })
             .disposed(by: disposeBag)
@@ -75,149 +85,93 @@ class HCSearchViewModel: RefreshVM<HCBaseSearchItemModel> {
     }
     
     override func requestData(_ refresh: Bool) {
-        
         updatePage(for: module.rawValue, refresh: refresh)
         
-        HCProvider.request(.search(moduleType: module,
-                                   searchWords: keyWordObser.value,
-                                   pageSize: pageSize(for: module.rawValue),
-                                   pageNum: currentPage(for: module.rawValue)))
-            .map(model: HCSearchDataModel.self)
-            .subscribe(onSuccess: { [weak self] in self?.dealSuccess(data: $0, refresh: refresh) },
-                       onError: { [weak self] in self?.dealFailure(error: $0) })
-            .disposed(by: disposeBag)
-
+        if !menuPageListData.keys.contains(module) {
+            menuPageListData[module] = []
+        }
         
-//        updatePage(for: module.rawValue, refresh: refresh)
-//
-//        let requestProvider = HCProvider.request(.search(pageNum: currentPage(for: module.rawValue),
-//                                                         pageSize: pageSize(for: module.rawValue),
-//                                                         searchModule: module,
-//                                                         searchName: keyWordObser.value))
-//
-//        switch module {
-//        case .all:
-//            requestProvider
-//                .map(model: HCSearchDataModel.self)
-//                .subscribe(onSuccess: { [weak self] in self?.dealSuccess(data: $0, refresh: refresh) },
-//                           onError: { [weak self] in self?.dealFailure(error: $0) })
-//                .disposed(by: disposeBag)
-//        case .article:
-//            requestProvider
-//                .map(model: HCSearchArticleModel.self)
-//                .subscribe(onSuccess: { [weak self] in self?.dealSuccess(data: $0, refresh: refresh) },
-//                           onError: { [weak self] in self?.dealFailure(error: $0) })
-//                .disposed(by: disposeBag)
-//        case .course:
-//            requestProvider
-//                .map(model: HCSearchCourseModel.self)
-//                .subscribe(onSuccess: { [weak self] in self?.dealSuccess(data: $0, refresh: refresh) },
-//                           onError: { [weak self] in self?.dealFailure(error: $0) })
-//                .disposed(by: disposeBag)
-//        case .doctor:
-//            requestProvider
-//                .map(model: HCSearchDoctorModel.self)
-//                .subscribe(onSuccess: { [weak self] in self?.dealSuccess(data: $0, refresh: refresh) },
-//                           onError: { [weak self] in self?.dealFailure(error: $0) })
-//                .disposed(by: disposeBag)
-//        }
+        let requestProvider = HCProvider.request(.search(moduleType: module,
+                                                         searchWords: keyWordObser.value,
+                                                         pageSize: pageSize(for: module.rawValue),
+                                                         pageNum: currentPage(for: module.rawValue)))
+        
+        switch module {
+        case .doctor:
+            requestProvider
+                .map(model: HCDoctorListModel.self)
+                .subscribe(onSuccess: { [weak self] in
+                    guard let strongSelf = self else { return }
+                    strongSelf.updateRefresh(refresh: refresh,
+                                             models: $0.records,
+                                             dataModels: &strongSelf.menuPageListData[strongSelf.module]!,
+                                             pages: $0.total,
+                                             pageKey: strongSelf.module.rawValue)
+                    strongSelf.expertDataSignal.onNext(strongSelf.menuPageListData[strongSelf.module]!)
+                    },
+                           onError: { [weak self] _ in
+                            guard let strongSelf = self else { return }
+                            self?.revertCurrentPageAndRefreshStatus(pageKey: strongSelf.module.rawValue)
+                })
+                .disposed(by: disposeBag)
+        case .article:
+            requestProvider
+                .map(model: HCRealTimeListModel.self)
+                .subscribe(onSuccess: { [weak self] in
+                    guard let strongSelf = self else { return }
+                    strongSelf.updateRefresh(refresh: refresh,
+                                             models: $0.records,
+                                             dataModels: &strongSelf.menuPageListData[strongSelf.module]!,
+                                             pages: $0.total,
+                                             pageKey: strongSelf.module.rawValue)
+                    strongSelf.realTimeDataSignal.onNext(strongSelf.menuPageListData[strongSelf.module]!)
+                    },
+                           onError: { [weak self] _ in
+                            guard let strongSelf = self else { return }
+                            self?.revertCurrentPageAndRefreshStatus(pageKey: strongSelf.module.rawValue)
+                })
+                .disposed(by: disposeBag)
+        case .course:
+            requestProvider
+                .map(model: HCCourseListModel.self)
+                .subscribe(onSuccess: { [weak self] in
+                    guard let strongSelf = self else { return }
+                    strongSelf.updateRefresh(refresh: refresh,
+                                             models: $0.records,
+                                             dataModels: &strongSelf.menuPageListData[strongSelf.module]!,
+                                             pages: $0.total,
+                                             pageKey: strongSelf.module.rawValue)
+                    strongSelf.courseDataSignal.onNext(strongSelf.menuPageListData[strongSelf.module]!)
+                    },
+                           onError: { [weak self] _ in
+                            guard let strongSelf = self else { return }
+                            self?.revertCurrentPageAndRefreshStatus(pageKey: strongSelf.module.rawValue)
+                })
+                .disposed(by: disposeBag)
+        case .live:
+            requestProvider
+                .map(model: HCLiveVideoListModel.self)
+                .subscribe(onSuccess: { [weak self] in
+                    guard let strongSelf = self else { return }
+                    strongSelf.updateRefresh(refresh: refresh,
+                                             models: $0.records,
+                                             dataModels: &strongSelf.menuPageListData[strongSelf.module]!,
+                                             pages: $0.total,
+                                             pageKey: strongSelf.module.rawValue)
+                    strongSelf.liveVideoDataSignal.onNext(strongSelf.menuPageListData[strongSelf.module]!)
+                    },
+                           onError: { [weak self] _ in
+                            guard let strongSelf = self else { return }
+                            self?.revertCurrentPageAndRefreshStatus(pageKey: strongSelf.module.rawValue)
+                })
+                .disposed(by: disposeBag)
+        }
     }
 
 }
 
 extension HCSearchViewModel {
-    
-    private func dealSuccess(data: HCBaseSearchItemModel, refresh: Bool) {
-        if menuPageListData[module] == nil {
-            menuPageListData[module] = [HCBaseSearchItemModel]()
-        }
         
-        var datas = [HCBaseSearchItemModel]()
-        switch module {
-        case .doctor:
-            if menuPageListData[HCsearchModule.doctor] == nil {
-                menuPageListData[HCsearchModule.doctor] = [HCBaseSearchItemModel]()
-            }
-            if menuPageListData[HCsearchModule.course] == nil {
-                menuPageListData[HCsearchModule.course] = [HCBaseSearchItemModel]()
-            }
-            if menuPageListData[HCsearchModule.article] == nil {
-                menuPageListData[HCsearchModule.article] = [HCBaseSearchItemModel]()
-            }
-
-            datas = [data]
-            
-            let searchData = data as! HCSearchDataModel
-            
-            updateRefresh(refresh: true,
-                          models: searchData.doctor,
-                          dataModels: &(menuPageListData[.doctor])!,
-                          pages: 10,
-                          pageKey: HCsearchModule.doctor.rawValue)
-
-            updateRefresh(refresh: true,
-                          models: searchData.course,
-                          dataModels: &(menuPageListData[.course])!,
-                          pages: 10,
-                          pageKey: HCsearchModule.course.rawValue)
-
-            updateRefresh(refresh: true,
-                          models: searchData.article,
-                          dataModels: &(menuPageListData[.article])!,
-                          pages: 10,
-                          pageKey: HCsearchModule.article.rawValue)
-        case .article:
-            datas = (data as? HCSearchArticleModel)?.records ?? [HCBaseSearchItemModel]()
-        case .course:
-            datas = (data as? HCSearchDoctorModel)?.records ?? [HCBaseSearchItemModel]()
-        case .live:
-            datas = (data as? HCSearchCourseModel)?.records ?? [HCBaseSearchItemModel]()
-            break
-        }
-        
-        updateRefresh(refresh: refresh,
-                      models: datas,
-                      dataModels: &(menuPageListData[module])!,
-                      pages: data.pages,
-                      pageKey: module.rawValue)
-                
-        let allData = HCSearchDataModel.init()
-        if let allSource = menuPageListData[.doctor]?.first as? HCSearchDataModel {
-            allData.doctor = allSource.doctor.count > 3 ? Array(allSource.doctor[0...2]) : allSource.doctor
-            allData.course = allSource.course.count > 3 ? Array(allSource.course[0...2]) : allSource.course
-            allData.article = allSource.article.count > 3 ? Array(allSource.article[0...2]) : allSource.article
-        }
-        
-        var doctorData = [HCSearchDoctorItemModel]()
-        if let dotorSource = menuPageListData[.doctor] as? [HCSearchDoctorItemModel] {
-            doctorData = dotorSource
-        }
-        
-        var courseData = [HCSearchCourseItemModel]()
-        if let courseSource = menuPageListData[.course] as? [HCSearchCourseItemModel] {
-            courseData = courseSource
-        }
-
-        var articleData = [HCSearchArticleItemModel]()
-        if let articleSource = menuPageListData[.article] as? [HCSearchArticleItemModel] {
-            articleData = articleSource
-        }
-
-        pageListData.onNext(([allData], doctorData, courseData, articleData, module))
-        
-        if keyWordObser.value.count > 0 {
-            hud.noticeHidden()
-        }
-    }
-    
-    private func dealFailure(error: Error) {
-        if keyWordObser.value.count > 0 {
-            hud.failureHidden(errorMessage(error))
-        }else {
-            revertCurrentPageAndRefreshStatus(pageKey: module.rawValue)
-        }
-    }
-    
     private func cacheSearchRecord() {
         if keyWordObser.value.count > 0 {
             var datas = searchRecordsObser.value

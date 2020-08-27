@@ -15,6 +15,11 @@ class HCSearchViewController: BaseViewController {
     private var searchRecordView: TYSearchRecordView!
     private var slideCtrl: TYSlideMenuController!
     
+    private var expertCtrl: HCExpertViewController!
+    private var realTimeCtrl: HCRealTimeViewController!
+    private var courseCtrl: HCCourseViewController!
+    private var liveVideoCtrl: HCLiveVideoViewController!
+
     private var pageIds: [HCsearchModule] = [.doctor, .article, .course, .live]
     
     private var viewModel: HCSearchViewModel!
@@ -28,7 +33,7 @@ class HCSearchViewController: BaseViewController {
         
         searchBar = TYSearchBar.init(frame: .init(x: 0, y: 0, width: view.width, height: TYSearchBar.baseHeight + (UIDevice.current.isX ? 0 : 24)))
         searchBar.coverButtonEnable = false
-        searchBar.searchPlaceholder = "搜索症状/疾病/药品/医生/科室"
+        searchBar.searchPlaceholder = "搜索"
         searchBar.rightItemTitle = "取消"
         searchBar.leftItemIcon = "navigationButtonReturnClick"
         searchBar.inputBackGroundColor = RGB(240, 240, 240)
@@ -56,7 +61,15 @@ class HCSearchViewController: BaseViewController {
         slideCtrl = TYSlideMenuController()
         addChild(slideCtrl)
         view.addSubview(slideCtrl.view)
-                
+        
+        expertCtrl = HCExpertViewController()
+        realTimeCtrl = HCRealTimeViewController()
+        courseCtrl = HCCourseViewController()
+        liveVideoCtrl = HCLiveVideoViewController()
+
+        slideCtrl.menuItems = TYSlideItemModel.createSearchResultData()
+        slideCtrl.menuCtrls = [expertCtrl, realTimeCtrl, courseCtrl, liveVideoCtrl]
+
         searchRecordView = TYSearchRecordView.init(frame: .init(x: 0, y: searchBar.frame.maxY, width: view.width, height: searchBar.frame.maxY))
         searchRecordView.isHidden = false
         view.addSubview(searchRecordView)
@@ -76,6 +89,11 @@ class HCSearchViewController: BaseViewController {
     override func rxBind() {
         viewModel = HCSearchViewModel()
         
+        expertCtrl.bind(viewModel: viewModel, canRefresh: true, canLoadMore: true, isAddNoMoreContent: false)
+        realTimeCtrl.bind(viewModel: viewModel, canRefresh: true, canLoadMore: true, isAddNoMoreContent: false)
+        courseCtrl.bind(viewModel: viewModel, canRefresh: true, canLoadMore: true, isAddNoMoreContent: false)
+        liveVideoCtrl.bind(viewModel: viewModel, canRefresh: true, canLoadMore: true, isAddNoMoreContent: false)
+
         searchBar.textObser
             .bind(to: viewModel.keyWordObser)
             .disposed(by: disposeBag)
@@ -86,93 +104,26 @@ class HCSearchViewController: BaseViewController {
             })
             .disposed(by: disposeBag)
         
-        let allCtrl = HCSearchAllViewController()
-        allCtrl.pageIdx = 0
-        allCtrl.view.backgroundColor = .white
-//        allCtrl.bind(viewModel: viewModel, canRefresh: true, canLoadMore: false, isAddNoMoreContent: false)
-        allCtrl.pushH5CallBack = { [unowned self] in
-            switch $0.1 {
-            case .doctor:
-                let ctrl = HCDoctorHomeController()
-                ctrl.prepare(parameters: HCDoctorHomeController.preprare(model: HCDoctorItemModel.transform(model: $0.0 as! HCSearchDoctorItemModel)))
-                self.navigationController?.pushViewController(ctrl, animated: true)
-            case .article, .course:
-                let ctrl = HCArticleDetailViewController()
-                ctrl.prepare(parameters: HCArticleDetailViewController.preprare(model: HCArticleItemModel.transform(model: $0.0 as! HCSearchArticleItemModel)))
-                self.navigationController?.pushViewController(ctrl, animated: true)
-            default:
-                break
-            }
-        }
-        allCtrl.clickedMoreCallBack = { [unowned self] modul in
-            self.slideCtrl.selectedPage(page: self.pageIds.lastIndex(of: modul)!,
-                                        needCallBack: false,
-                                        needMenuScroll: true)
-        }
-        
-        let doctorCtrl = HCSearchRecommendDoctorViewController()
-        doctorCtrl.pageIdx = 1
-        doctorCtrl.view.backgroundColor = .white
-//        doctorCtrl.bind(viewModel: viewModel, canRefresh: true, canLoadMore: true, isAddNoMoreContent: false)
-        doctorCtrl.didSelectedCallBack = { [unowned self] in
-            let ctrl = HCDoctorHomeController()
-            ctrl.prepare(parameters: HCDoctorHomeController.preprare(model: HCDoctorItemModel.transform(model: $0)))
-            self.navigationController?.pushViewController(ctrl, animated: true)
-        }
-        
-        let classCtrl = HCSearchHealthyCourseViewController()
-        classCtrl.pageIdx = 2
-        classCtrl.view.backgroundColor = .white
-//        classCtrl.bind(viewModel: viewModel, canRefresh: true, canLoadMore: true, isAddNoMoreContent: false)
-        classCtrl.pushH5CallBack = { [unowned self] _ in
-//            let ctrl = HCArticleDetailViewController()
-//            ctrl.prepare(parameters: HCArticleDetailViewController.preprare(model: HCArticleItemModel.transform(model: $0)))
-//            self.navigationController?.pushViewController(ctrl, animated: true)
-        }
-        
-        let popularScienceCtrl = HCSearchPopularScienceViewController()
-        popularScienceCtrl.pageIdx = 3
-        popularScienceCtrl.view.backgroundColor = .white
-//        popularScienceCtrl.bind(viewModel: viewModel, canRefresh: true, canLoadMore: true, isAddNoMoreContent: false)
-        popularScienceCtrl.pushH5CallBack = { [unowned self] in
-            let ctrl = HCArticleDetailViewController()
-            ctrl.prepare(parameters: HCArticleDetailViewController.preprare(model: HCArticleItemModel.transform(model: $0)))
-            self.navigationController?.pushViewController(ctrl, animated: true)
-        }
-
-        slideCtrl.menuItems = TYSlideItemModel.createSearchResultData()
-        slideCtrl.menuCtrls = [allCtrl, doctorCtrl, classCtrl, popularScienceCtrl]
-        
-        viewModel.pageListData
-            .subscribe(onNext: { [weak self] data in
-                guard let strongSelf = self else { return }
-                switch data.4 {
-                case .doctor:
-                    strongSelf.slideCtrl.reloadList(listMode: data.0, page: strongSelf.pageIds.lastIndex(of: .doctor)!)
-                    strongSelf.slideCtrl.reloadList(listMode: data.1, page: strongSelf.pageIds.lastIndex(of: .article)!)
-                    strongSelf.slideCtrl.reloadList(listMode: data.2, page: strongSelf.pageIds.lastIndex(of: .course)!)
-                    strongSelf.slideCtrl.reloadList(listMode: data.3, page: strongSelf.pageIds.lastIndex(of: .live)!)
-                case .article:
-                    strongSelf.slideCtrl.reloadList(listMode: data.1, page: strongSelf.pageIds.lastIndex(of: .article)!)
-                case .course:
-                    strongSelf.slideCtrl.reloadList(listMode: data.2, page: strongSelf.pageIds.lastIndex(of: .course)!)
-                case .live:
-                    strongSelf.slideCtrl.reloadList(listMode: data.3, page: strongSelf.pageIds.lastIndex(of: .live)!)
-                }
-            })
+        viewModel.expertDataSignal
+            .subscribe(onNext: { [weak self] in self?.expertCtrl.reloadData(data: $0) })
             .disposed(by: disposeBag)
         
+        viewModel.realTimeDataSignal
+            .subscribe(onNext: { [weak self] in self?.realTimeCtrl.reloadData(data: $0) })
+            .disposed(by: disposeBag)
+
+        viewModel.courseDataSignal
+            .subscribe(onNext: { [weak self] in self?.courseCtrl.reloadData(data: $0) })
+            .disposed(by: disposeBag)
+
+        viewModel.liveVideoDataSignal
+            .subscribe(onNext: { [weak self] in self?.liveVideoCtrl.reloadData(data: $0) })
+            .disposed(by: disposeBag)
+
         slideCtrl.pageScrollSubject
             .map{ [unowned self] in self.pageIds[$0] }
             .bind(to: viewModel.currentPageObser)
             .disposed(by: disposeBag)
-        
-//        slideCtrl.pageScroll = { [weak self] page in
-//            guard let strongSelf = self else { return }
-//            strongSelf.viewModel.requestSearchListSubject.onNext(strongSelf.pageIds[page])
-//        }
-
-//        viewModel.requestSearchListSubject.onNext(.all)
     }
     
     override func viewDidLayoutSubviews() {
