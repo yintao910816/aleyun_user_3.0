@@ -170,6 +170,8 @@ class TYSearchBar: UIView {
         didSet {
             leftItem.snp.updateConstraints { $0.centerY.equalTo(snp.centerY).offset(safeArea.top / 2.0) }
             contentContainer.snp.updateConstraints { $0.top.equalTo(snp.top).offset(7 + safeArea.top) }
+            setNeedsLayout()
+            layoutIfNeeded()
         }
     }
     
