@@ -60,6 +60,7 @@ class HCMineHeaderView: UICollectionReusableView {
         didSet {
             avatarButton.setImage(userModel.headPath, userModel.userIconType)
             phoneLabel.text = userModel.mobileInfo
+            verifyButton.isHidden = userModel.realNameStatus == 1
         }
     }
     
@@ -100,6 +101,7 @@ extension HCMineHeaderView {
         phoneLabel.font = .font(fontSize: 16)
         
         verifyButton = UIButton()
+        verifyButton.isHidden = true
         verifyButton.setTitle("去认证", for: .normal)
         verifyButton.setTitleColor(.white, for: .normal)
         verifyButton.backgroundColor = HC_MAIN_COLOR

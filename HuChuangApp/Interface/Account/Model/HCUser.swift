@@ -56,6 +56,9 @@ class HCUserModel: HJModel {
     var cityName: String = ""
     var areaCode: String = ""
     
+    /// 实名认证状态 1为已认证
+    var realNameStatus: Int = 0
+    
     var sexText: String {
         get { return sex == 1 ? "男" : "女" }
     }
