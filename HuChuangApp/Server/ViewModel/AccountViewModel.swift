@@ -54,7 +54,7 @@ class LoginViewModel: BaseViewModel {
             })
             .filter{ $0 != nil }
             .map { $0! }
-            .flatMap { [unowned self] in self.getAuthMemberInfoRequest(socialInfo: $0!) }
+            .flatMap { [unowned self] in self.getAuthMemberInfoRequest(socialInfo: $0) }
             .subscribe(onNext: { [weak self] data in
                 if data.0.code == RequestCode.unBindPhone.rawValue {
                     self?.hud.noticeHidden()

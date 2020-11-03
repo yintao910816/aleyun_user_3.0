@@ -67,5 +67,9 @@ class HCCmsRecommendModel: HJModel {
 }
 
 class HCCmsArticleListModel: HJModel {
-    
+    var id: String = ""
+    var picPath: String = ""
+    var readNumber: Int = 0
+    var store: Int = 0
+    var title: String = ""
 }

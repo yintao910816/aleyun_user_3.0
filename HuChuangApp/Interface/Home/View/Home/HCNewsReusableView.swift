@@ -18,7 +18,7 @@ class HCNewsReusableView: UICollectionReusableView {
     
     private var datasource: [HCMenuItemModel] = []
     
-    public var menuChanged: ((HCMenuItemModel)->())?
+    public var menuChanged: (((HCMenuItemModel,Int))->())?
     
     override init(frame: CGRect) {
         super.init(frame: frame)

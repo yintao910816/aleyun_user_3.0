@@ -84,6 +84,12 @@ class HCSearchViewController: BaseViewController {
             self?.searchBar.reloadInput(content: $0)
             self?.viewModel.selectedSearchRecordSubject.onNext($0)
         }
+        
+        expertCtrl.cellDidselected = { [weak self] in
+            let web = BaseWebViewController()
+            web.prepare(parameters: ["url": APIAssistance.consultationHome(with: $0.id), "title": "咨询"])
+            self?.navigationController?.pushViewController(web, animated: true)
+        }
     }
     
     override func rxBind() {

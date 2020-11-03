@@ -4625,7 +4625,7 @@
 				MARKETING_VERSION = 3.01.0000;
 				PRODUCT_BUNDLE_IDENTIFIER = com.huchuang.aileyun;
 				PRODUCT_NAME = "爱乐孕";
-				PROVISIONING_PROFILE_SPECIFIER = aleyun_user_old_hoc_pro;
+				PROVISIONING_PROFILE_SPECIFIER = aleyun_user_old_hoc;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/HuChuangApp/Main/Config/HcChuangApp-Bridge-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

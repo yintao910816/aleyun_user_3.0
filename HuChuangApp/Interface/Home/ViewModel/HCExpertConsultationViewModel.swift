@@ -11,9 +11,9 @@ import RxSwift
 
 class HCExpertConsultationViewModel: RefreshVM<HCDoctorListItemModel> {
     
-    private var areaCode: String = "1"
+    private var areaCode: String = "0"
     private var sortType: String = "1"
-    private var consultType: String = "1"
+    private var consultType: String = "0"
     
     private var slideData: [TYSlideItemModel] = []
     

@@ -33,8 +33,10 @@ class HCRealTimeCell: UICollectionViewCell {
     
     public var model: HCCmsArticleListModel! {
         didSet {
-//            coverImg.setImage(model.picPath)
-//            titleLable.text = model.title
+            coverImg.setImage(model.picPath, .original)
+            titleLable.text = model.title
+            viewNumLabel.text = "\(model.readNumber)"
+            collectionNumLabel.text = "\(model.store)"
         }
     }
     

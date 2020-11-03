@@ -18,7 +18,7 @@ class HCHomeViewContainer: UIView {
     private var cmsRecommendDatas: [HCCmsRecommendModel] = []
     private var pageIdx: Int = 0
     
-    public var menuChanged: ((HCMenuItemModel)->())?
+    public var menuChanged: (((HCMenuItemModel,Int))->())?
     public var articleClicked: ((HCCmsArticleListModel)->())?
     public var funcItemClicked: ((HCFunctionsMenuModel)->())?
     public var cmsRecommendItemClicked: ((HCCmsRecommendModel)->())?
@@ -89,7 +89,7 @@ extension HCHomeViewContainer: UICollectionViewDataSource, UICollectionViewDeleg
         switch section {
         case 0:
             if menuItems.count > 3 {
-                return menuItems.count - 3
+                return min(menuItems.count - 3, 4)
             }
             return 0
         case 1:

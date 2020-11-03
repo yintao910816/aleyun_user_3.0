@@ -45,11 +45,12 @@ import Moya
 
 struct APIAssistance {
         
-    public static let base   = "https://ileyun.ivfcn.com/hc-patient-web-test/"
-//    public static let base   = "https://ileyun.ivfcn.com/hc-patient/"
+    /// 测试地址最后加s，正式去掉
+    public static let base   = "https://ileyun.ivfcn.com/hc-patient-webs/"
     public static let fileBase = "https://ileyun.ivfcn.com/hc-files/"
-//    public static let baseH5Host = "https://ileyun.ivfcn.com/patient-c/"
-    public static let baseH5Host = "https://ileyun.ivfcn.com/consult/"
+    
+    /// 测试地址最后加s，正式去掉
+    public static let baseH5Host = "https://ileyun.ivfcn.com/consults/"
 
     static public func baseURL(API: API) ->URL{
         switch API {
@@ -58,16 +59,6 @@ struct APIAssistance {
         default:
             return URL(string: base)!
         }
-    }
-    
-    /// id拼接文章详情跳转链接
-    static public func link(with id: String) ->String {
-        return "\(APIAssistance.base)api/cms/detail/\(id)"
-    }
-    
-    /// id 拼接药品详情链接
-    static public func medicineDetail(with id: String) ->String {
-        return "\(APIAssistance.base)api/cms/medicineDetail/\(id)"
     }
     
     /**
@@ -82,4 +73,30 @@ struct APIAssistance {
         }
     }
     
+    /// id拼接文章详情跳转链接
+    static public func link(with id: String) ->String {
+        return "\(APIAssistance.base)api/cms/detail/\(id)"
+    }
+    
+    /// id 拼接药品详情链接
+    static public func medicineDetail(with id: String) ->String {
+        return "\(APIAssistance.base)api/cms/medicineDetail/\(id)"
+    }
+
+    /// 咨询主页
+    static public func consultationHome(with doctorId: String) ->String {
+        return "\(APIAssistance.baseH5Host)#/consultationHome/\(doctorId)"
+    }
 }
+
+/**
+ public static final String base_url = "https://ileyun.ivfcn.com/consults/#";
+ public static final String DRUG_URL = base_url + "/drugActivityDetails/"; //药品详情;
+ public static final String UNIT_URL = base_url + "/hospitalDetails/"; //医院详情;
+ public static final String DOCTOR_URL = base_url + "/doctorHome/"; //医生主页;
+ public static final String CONSULT_URL = base_url + "/consultationHome/"; //咨询主页;
+ public static final String HEALTH_RECORD_URL = base_url + "/HealthRecords/"; //咨询主页;
+ public static final String HEALTH_ORDER_URL = base_url + "/payOrder/"; //订单页面;
+ public static final String HEALTH_CONSULT_DETAIL_URL = base_url + "/chatConsultation/"; //咨询详情;
+ public static final String HEALTH_CONSULT_HISTORY_URL = base_url + "/openInquiryHistory/"; //咨询详情;
+ */

@@ -15,7 +15,7 @@ class HCMenuView: UIView {
     
     private var lastSelectedIdx: IndexPath = .init(row: 0, section: 0)
     
-    public var menuChanged: ((HCMenuItemModel)->())?
+    public var menuChanged: (((HCMenuItemModel,Int))->())?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -140,7 +140,7 @@ extension HCMenuView: UICollectionViewDataSource, UICollectionViewDelegateFlowLa
             
             beginAnimotion(to: indexPath, animotion: true)
             
-            menuChanged?(datasource[indexPath.row])
+            menuChanged?((datasource[indexPath.row], indexPath.row))
         }
     }
 }
