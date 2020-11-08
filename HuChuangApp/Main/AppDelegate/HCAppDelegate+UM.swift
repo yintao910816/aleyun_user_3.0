@@ -91,6 +91,8 @@ extension HCAppDelegate : UNUserNotificationCenterDelegate{
         
         self.deviceToken = deviceTokenString
         uploadUMToken()
+        
+        TRTCCalling.shareInstance().deviceToken = deviceToken
     }
     
     //收到远程推送消息

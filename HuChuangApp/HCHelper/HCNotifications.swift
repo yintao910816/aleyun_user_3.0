@@ -44,4 +44,14 @@ extension Notification.Name {
         static let wChatPayFinish = Notification.Name(rawValue: "org.Pay.notification.name.wChatPayFinish")
     }
 
+    public struct ChatCall {
+        /// 发起视频通话对方接受
+        static let videoCallAccept = Notification.Name(rawValue: "org.UILogic.notification.name.videoCallAccept")
+        /// 对方离开通话
+        static let otherLeaveVideoCall = Notification.Name(rawValue: "org.UILogic.notification.name.otherLeaveVideoCall")
+        /// 对方拒绝通话
+        static let otherRejectVideoCall = Notification.Name(rawValue: "org.UILogic.notification.name.otherRejectVideoCall")
+        /// 占线中 onLineBusy
+        static let onLineBusyVideoCall = Notification.Name(rawValue: "org.UILogic.notification.name.onLineBusyVideoCall")
+    }
 }

@@ -25,4 +25,10 @@
 #import <UShareUI/UShareUI.h>
 #import "YYText.h"
 
+#import "TRTCCloud.h"
+#import "GenerateTestUserSig.h"
+#import <ImSDK/ImSDK.h>
+
+#import "TRTCCalling.h"
+
 #endif /* HcChuangApp_Bridge_Header_h */

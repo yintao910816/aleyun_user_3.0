@@ -25,6 +25,8 @@ class HCAppDelegate: UIResponder, UIApplicationDelegate {
     private var disposeBag = DisposeBag()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        TRTCCalling.shareInstance().add(self)
 
         HCHelper.setupHelper()
         

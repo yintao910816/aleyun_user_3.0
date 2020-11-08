@@ -290,6 +290,19 @@
 		B870E55A2391A0150085AFA3 /* HCEditAvatarHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B870E5592391A0150085AFA3 /* HCEditAvatarHeaderView.swift */; };
 		B879A060221AF0B200E573C9 /* MineFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B879A05F221AF0B200E573C9 /* MineFooterView.swift */; };
 		B879A062221AF0BB00E573C9 /* MineFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B879A061221AF0BB00E573C9 /* MineFooterView.xib */; };
+		B87CCB4A25569E7200792F76 /* GenerateTestUserSig.m in Sources */ = {isa = PBXBuildFile; fileRef = B87CCB3425569E7200792F76 /* GenerateTestUserSig.m */; };
+		B87CCB4B25569E7200792F76 /* TRTCCalling.m in Sources */ = {isa = PBXBuildFile; fileRef = B87CCB3725569E7200792F76 /* TRTCCalling.m */; };
+		B87CCB4C25569E7200792F76 /* TRTCCallingUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = B87CCB3825569E7200792F76 /* TRTCCallingUtils.m */; };
+		B87CCB4D25569E7200792F76 /* TRTCCallingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B87CCB3E25569E7200792F76 /* TRTCCallingModel.m */; };
+		B87CCB4E25569E7200792F76 /* TRTCCalling+Signal.m in Sources */ = {isa = PBXBuildFile; fileRef = B87CCB3F25569E7200792F76 /* TRTCCalling+Signal.m */; };
+		B87CCB4F25569E7200792F76 /* CallingViewControllerResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87CCB4125569E7200792F76 /* CallingViewControllerResponder.swift */; };
+		B87CCB5025569E7200792F76 /* TrtcUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87CCB4325569E7200792F76 /* TrtcUtils.swift */; };
+		B87CCB5125569E7200792F76 /* CallUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87CCB4425569E7200792F76 /* CallUserModel.swift */; };
+		B87CCB5225569E7200792F76 /* VideoCallUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87CCB4625569E7200792F76 /* VideoCallUserCell.swift */; };
+		B87CCB5325569E7200792F76 /* HCConsultVideoCallController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87CCB4725569E7200792F76 /* HCConsultVideoCallController.swift */; };
+		B87CCB5425569E7200792F76 /* VideoCallingRenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87CCB4825569E7200792F76 /* VideoCallingRenderView.swift */; };
+		B87CCB5525569E7200792F76 /* HCTRTCCloudManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87CCB4925569E7200792F76 /* HCTRTCCloudManager.swift */; };
+		B87CCB5825569F2D00792F76 /* HCAppDelegate+TRTC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87CCB5725569F2C00792F76 /* HCAppDelegate+TRTC.swift */; };
 		B88497DC24E7F6FB00B91262 /* HCVerifyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88497DB24E7F6FB00B91262 /* HCVerifyViewModel.swift */; };
 		B88497E124E7F8E500B91262 /* APIAdapt.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88497DE24E7F8E500B91262 /* APIAdapt.swift */; };
 		B88497E224E7F8E500B91262 /* CRAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88497DF24E7F8E500B91262 /* CRAPI.swift */; };
@@ -1133,6 +1146,26 @@
 		B870E5592391A0150085AFA3 /* HCEditAvatarHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCEditAvatarHeaderView.swift; sourceTree = "<group>"; };
 		B879A05F221AF0B200E573C9 /* MineFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineFooterView.swift; sourceTree = "<group>"; };
 		B879A061221AF0BB00E573C9 /* MineFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MineFooterView.xib; sourceTree = "<group>"; };
+		B87CCB3425569E7200792F76 /* GenerateTestUserSig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenerateTestUserSig.m; sourceTree = "<group>"; };
+		B87CCB3525569E7200792F76 /* GenerateTestUserSig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenerateTestUserSig.h; sourceTree = "<group>"; };
+		B87CCB3725569E7200792F76 /* TRTCCalling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRTCCalling.m; sourceTree = "<group>"; };
+		B87CCB3825569E7200792F76 /* TRTCCallingUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRTCCallingUtils.m; sourceTree = "<group>"; };
+		B87CCB3925569E7200792F76 /* TRTCCallingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRTCCallingModel.h; sourceTree = "<group>"; };
+		B87CCB3A25569E7200792F76 /* TRTCCalling+Signal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TRTCCalling+Signal.h"; sourceTree = "<group>"; };
+		B87CCB3B25569E7200792F76 /* TRTCCallingDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRTCCallingDelegate.h; sourceTree = "<group>"; };
+		B87CCB3C25569E7200792F76 /* TRTCCallingUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRTCCallingUtils.h; sourceTree = "<group>"; };
+		B87CCB3D25569E7200792F76 /* TRTCCalling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRTCCalling.h; sourceTree = "<group>"; };
+		B87CCB3E25569E7200792F76 /* TRTCCallingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRTCCallingModel.m; sourceTree = "<group>"; };
+		B87CCB3F25569E7200792F76 /* TRTCCalling+Signal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TRTCCalling+Signal.m"; sourceTree = "<group>"; };
+		B87CCB4025569E7200792F76 /* TRTCCallingHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRTCCallingHeader.h; sourceTree = "<group>"; };
+		B87CCB4125569E7200792F76 /* CallingViewControllerResponder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallingViewControllerResponder.swift; sourceTree = "<group>"; };
+		B87CCB4325569E7200792F76 /* TrtcUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrtcUtils.swift; sourceTree = "<group>"; };
+		B87CCB4425569E7200792F76 /* CallUserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallUserModel.swift; sourceTree = "<group>"; };
+		B87CCB4625569E7200792F76 /* VideoCallUserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCallUserCell.swift; sourceTree = "<group>"; };
+		B87CCB4725569E7200792F76 /* HCConsultVideoCallController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCConsultVideoCallController.swift; sourceTree = "<group>"; };
+		B87CCB4825569E7200792F76 /* VideoCallingRenderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCallingRenderView.swift; sourceTree = "<group>"; };
+		B87CCB4925569E7200792F76 /* HCTRTCCloudManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCTRTCCloudManager.swift; sourceTree = "<group>"; };
+		B87CCB5725569F2C00792F76 /* HCAppDelegate+TRTC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HCAppDelegate+TRTC.swift"; sourceTree = "<group>"; };
 		B88497DB24E7F6FB00B91262 /* HCVerifyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCVerifyViewModel.swift; sourceTree = "<group>"; };
 		B88497DE24E7F8E500B91262 /* APIAdapt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIAdapt.swift; sourceTree = "<group>"; };
 		B88497DF24E7F8E500B91262 /* CRAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CRAPI.swift; sourceTree = "<group>"; };
@@ -2389,6 +2422,64 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		B87CCB3225569E7200792F76 /* TRTC */ = {
+			isa = PBXGroup;
+			children = (
+				B87CCB3325569E7200792F76 /* TrtcUserSig */,
+				B87CCB3625569E7200792F76 /* Impl */,
+				B87CCB4225569E7200792F76 /* Model */,
+				B87CCB4525569E7200792F76 /* View */,
+				B87CCB4925569E7200792F76 /* HCTRTCCloudManager.swift */,
+			);
+			path = TRTC;
+			sourceTree = "<group>";
+		};
+		B87CCB3325569E7200792F76 /* TrtcUserSig */ = {
+			isa = PBXGroup;
+			children = (
+				B87CCB3425569E7200792F76 /* GenerateTestUserSig.m */,
+				B87CCB3525569E7200792F76 /* GenerateTestUserSig.h */,
+			);
+			path = TrtcUserSig;
+			sourceTree = "<group>";
+		};
+		B87CCB3625569E7200792F76 /* Impl */ = {
+			isa = PBXGroup;
+			children = (
+				B87CCB3725569E7200792F76 /* TRTCCalling.m */,
+				B87CCB3825569E7200792F76 /* TRTCCallingUtils.m */,
+				B87CCB3925569E7200792F76 /* TRTCCallingModel.h */,
+				B87CCB3A25569E7200792F76 /* TRTCCalling+Signal.h */,
+				B87CCB3B25569E7200792F76 /* TRTCCallingDelegate.h */,
+				B87CCB3C25569E7200792F76 /* TRTCCallingUtils.h */,
+				B87CCB3D25569E7200792F76 /* TRTCCalling.h */,
+				B87CCB3E25569E7200792F76 /* TRTCCallingModel.m */,
+				B87CCB3F25569E7200792F76 /* TRTCCalling+Signal.m */,
+				B87CCB4025569E7200792F76 /* TRTCCallingHeader.h */,
+				B87CCB4125569E7200792F76 /* CallingViewControllerResponder.swift */,
+			);
+			path = Impl;
+			sourceTree = "<group>";
+		};
+		B87CCB4225569E7200792F76 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B87CCB4325569E7200792F76 /* TrtcUtils.swift */,
+				B87CCB4425569E7200792F76 /* CallUserModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B87CCB4525569E7200792F76 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B87CCB4625569E7200792F76 /* VideoCallUserCell.swift */,
+				B87CCB4725569E7200792F76 /* HCConsultVideoCallController.swift */,
+				B87CCB4825569E7200792F76 /* VideoCallingRenderView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		B88497DD24E7F8E500B91262 /* API */ = {
 			isa = PBXGroup;
 			children = (
@@ -2724,6 +2815,7 @@
 		C421330922056B59006C10C4 /* AppDelegate */ = {
 			isa = PBXGroup;
 			children = (
+				B87CCB5725569F2C00792F76 /* HCAppDelegate+TRTC.swift */,
 				C421330A22056B59006C10C4 /* HCAppDelegate.swift */,
 				B842D1FD22258CC000A4F8DF /* HCAppDelegate+UM.swift */,
 			);
@@ -3108,6 +3200,7 @@
 		C4783B2624DD39E800737479 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
+				B87CCB3225569E7200792F76 /* TRTC */,
 				C4D1DB8924F7B366001EF30F /* Search */,
 				C4DDE0C024F4FB8D0001201C /* ListFilter */,
 				C4DDE0B524F4E5F50001201C /* CitySelected */,
@@ -4031,6 +4124,7 @@
 				B816EB1D221DABF400F024D5 /* ZXRSSPair.m in Sources */,
 				C42AF1A524EA1D830034DBEF /* HCRealNameAuthorContainer.swift in Sources */,
 				C4D1DB5924F6C470001EF30F /* HCMedicineContainer.swift in Sources */,
+				B87CCB4F25569E7200792F76 /* CallingViewControllerResponder.swift in Sources */,
 				B816EA75221DABF400F024D5 /* LBXScanViewStyle.m in Sources */,
 				B816EB20221DABF400F024D5 /* ZXRSSFinderPattern.m in Sources */,
 				B816EACB221DABF400F024D5 /* ZXPDF417BarcodeMatrix.m in Sources */,
@@ -4052,12 +4146,14 @@
 				B8F90E5E24F25FD100A1D68C /* HCMessage.swift in Sources */,
 				B8D4D47F2394299E00AA3D52 /* HCPicAndTextAskFooterReusableView.swift in Sources */,
 				B816EB1F221DABF400F024D5 /* ZXAbstractRSSReader.m in Sources */,
+				B87CCB4D25569E7200792F76 /* TRTCCallingModel.m in Sources */,
 				B816EAD2221DABF400F024D5 /* ZXModulusGF.m in Sources */,
 				B86993E12337547700086A77 /* BaseLayout.swift in Sources */,
 				B8F90E5124F25AC800A1D68C /* HCVideoConsultRecordViewController.swift in Sources */,
 				B816EAC6221DABF400F024D5 /* ZXIntArray.m in Sources */,
 				B816EAE3221DABF400F024D5 /* ZXDataMatrixEdifactEncoder.m in Sources */,
 				C497E97823447E6F00328B47 /* HCHomeBabyTuinaClassroomCell.swift in Sources */,
+				B87CCB5525569E7200792F76 /* HCTRTCCloudManager.swift in Sources */,
 				B816EB4A221DABF400F024D5 /* ZXTelParsedResult.m in Sources */,
 				B816EABA221DABF400F024D5 /* ZXMonochromeRectangleDetector.m in Sources */,
 				B870E537238A88D50085AFA3 /* HCAskCell.swift in Sources */,
@@ -4079,6 +4175,7 @@
 				B816EAEC221DABF400F024D5 /* ZXDataMatrixHighLevelEncoder.m in Sources */,
 				C4382BFF24E56281000C00CE /* HCAccountSettingViewModel.swift in Sources */,
 				B816EAFD221DABF400F024D5 /* ZXOneDReader.m in Sources */,
+				B87CCB5125569E7200792F76 /* CallUserModel.swift in Sources */,
 				B85CD93523BE609A00B1A1C3 /* HCEditUserCityViewModel.swift in Sources */,
 				B816EB11221DABF400F024D5 /* ZXRSSExpandedCurrentParsingState.m in Sources */,
 				C4DDE0CC24F50E680001201C /* HCExpertConsultationReusableView.swift in Sources */,
@@ -4122,9 +4219,11 @@
 				C4DDE0CE24F529B80001201C /* HCDoctorCardCell.swift in Sources */,
 				B8BE351922147B4000EF16F1 /* HCEditSynopsisViewController.swift in Sources */,
 				C4DDE0CA24F4FE4F0001201C /* HCListFilterContainer.swift in Sources */,
+				B87CCB4B25569E7200792F76 /* TRTCCalling.m in Sources */,
 				B8699401233794A700086A77 /* UIView+Layer.swift in Sources */,
 				B816EAC2221DABF400F024D5 /* ZXGenericGF.m in Sources */,
 				C4DDE0B224F4D9A40001201C /* HCExpertConsultationContainer.swift in Sources */,
+				B87CCB5425569E7200792F76 /* VideoCallingRenderView.swift in Sources */,
 				B816EAEE221DABF400F024D5 /* ZXDataMatrixDecodedBitStreamParser.m in Sources */,
 				B870E54B2390134B0085AFA3 /* TYListMenuData.swift in Sources */,
 				B816EB37221DABF400F024D5 /* ZXProductResultParser.m in Sources */,
@@ -4236,11 +4335,13 @@
 				C4382BFA24E560C2000C00CE /* HCMineEmptyConsultCell.swift in Sources */,
 				B816EAE4221DABF400F024D5 /* ZXDataMatrixErrorCorrection.m in Sources */,
 				C421338622059B8C006C10C4 /* DB.swift in Sources */,
+				B87CCB4C25569E7200792F76 /* TRTCCallingUtils.m in Sources */,
 				B816EAD8221DABF400F024D5 /* ZXPDF417BarcodeValue.m in Sources */,
 				C421338422059B8C006C10C4 /* DBQueue.swift in Sources */,
 				C497E94E23444E4600328B47 /* HCHomeConsultingVolumeCell.swift in Sources */,
 				B8BE34FB221470B800EF16F1 /* HCEditUserInfoViewController.swift in Sources */,
 				C4D1DBA624F7DEF6001EF30F /* HCCourseCell.swift in Sources */,
+				B87CCB4A25569E7200792F76 /* GenerateTestUserSig.m in Sources */,
 				B8F1587524E801400046B107 /* HCUser.swift in Sources */,
 				C4D1DB3F24F6923A001EF30F /* HCTestTubeViewModel.swift in Sources */,
 				C4D1DB4724F6B6ED001EF30F /* HCHospitalListViewController.swift in Sources */,
@@ -4257,6 +4358,7 @@
 				C4382C0A24E628DA000C00CE /* HCMenstruationSettingContainer.swift in Sources */,
 				C421338522059B8C006C10C4 /* DBProtocol.swift in Sources */,
 				C4F139B6235419EF00D777F6 /* AppLaunchView.swift in Sources */,
+				B87CCB5025569E7200792F76 /* TrtcUtils.swift in Sources */,
 				B816EB4B221DABF400F024D5 /* ZXBookmarkDoCoMoResultParser.m in Sources */,
 				B816EB54221DABF400F024D5 /* ZXImage.m in Sources */,
 				C40448AB24EB721E00AD1610 /* HCMineHealthArchivesCell.swift in Sources */,
@@ -4285,6 +4387,7 @@
 				B879A060221AF0B200E573C9 /* MineFooterView.swift in Sources */,
 				C4DDE0C424F4FBB20001201C /* HCListFilter.swift in Sources */,
 				C4F139B9235419EF00D777F6 /* TYIcon.swift in Sources */,
+				B87CCB5825569F2D00792F76 /* HCAppDelegate+TRTC.swift in Sources */,
 				C42133A12205B41C006C10C4 /* BaseFilesOwner.swift in Sources */,
 				B816EAC1221DABF400F024D5 /* ZXBitSource.m in Sources */,
 				B816EB26221DABF400F024D5 /* ZXMultiFormatOneDReader.m in Sources */,
@@ -4340,6 +4443,7 @@
 				C497E94D23444E4600328B47 /* HCHomeAdvCell.swift in Sources */,
 				C4382C0324E56A89000C00CE /* HCEditInfoContainer.swift in Sources */,
 				B816EAF2221DABF400F024D5 /* ZXDataMatrixVersion.m in Sources */,
+				B87CCB5225569E7200792F76 /* VideoCallUserCell.swift in Sources */,
 				B816EA84221DABF400F024D5 /* ZXLuminanceSource.m in Sources */,
 				B8F90E3A24F255A600A1D68C /* HCReservation.swift in Sources */,
 				B8CD926923A2967D00C9C061 /* HCRecordSuggestReusableView.swift in Sources */,
@@ -4408,6 +4512,7 @@
 				B816EB0D221DABF400F024D5 /* ZXAI01AndOtherAIs.m in Sources */,
 				B816EAFA221DABF400F024D5 /* ZXEANManufacturerOrgSupport.m in Sources */,
 				B816EAA1221DABF400F024D5 /* ZXQRCodeDataMask.m in Sources */,
+				B87CCB4E25569E7200792F76 /* TRTCCalling+Signal.m in Sources */,
 				B816EA8F221DABF400F024D5 /* ZXAztecCode.m in Sources */,
 				B88497E224E7F8E500B91262 /* CRAPI.swift in Sources */,
 				C4382BF624E560C2000C00CE /* HCMineHeaderView.swift in Sources */,
@@ -4429,6 +4534,7 @@
 				B816EAD7221DABF400F024D5 /* ZXPDF417ScanningDecoder.m in Sources */,
 				C421331C22056E83006C10C4 /* ViewControllerServer.swift in Sources */,
 				C40448A124EA721200AD1610 /* HCDatePickerViewController.swift in Sources */,
+				B87CCB5325569E7200792F76 /* HCConsultVideoCallController.swift in Sources */,
 				B816EADB221DABF400F024D5 /* ZXPDF417DetectionResult.m in Sources */,
 				B816EB19221DABF400F024D5 /* ZXBitArrayBuilder.m in Sources */,
 				B816EAE1221DABF400F024D5 /* ZXDataMatrixReader.m in Sources */,
@@ -4590,6 +4696,7 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1.1;
 				DEVELOPMENT_TEAM = GMPPSEQW73;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = HuChuangApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -4616,6 +4723,7 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1.1;
 				DEVELOPMENT_TEAM = GMPPSEQW73;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = HuChuangApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (

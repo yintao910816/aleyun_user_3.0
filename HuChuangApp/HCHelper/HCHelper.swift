@@ -73,7 +73,14 @@ extension HCHelper {
     }
     
     class func saveLogin(user: HCUserModel) {
-//        NoticesCenter.alert(message: "更新unitId为\(user.unitId)")
+        TRTCCalling.shareInstance().login(sdkAppID: trtc_appid,
+                                          user: user.uid,
+                                          userSig: GenerateTestUserSig.genTestUserSig(user.uid)) {
+            PrintLog("trtc登录成功")
+        } failed: { (code, des) in
+          PrintLog("trtc登录失败: code - \(code)\ninfo\(des)")
+        }
+
         userDefault.uid = user.uid
         userDefault.token = user.token
         userDefault.unitId = user.unitId
