@@ -14,7 +14,7 @@ class HCPicConsultViewController: HCSlideItemController {
         
     private var datasource: [HCPicConsultItemModel] = []
 
-    public var pushH5CallBack:((String)->())?
+    public var pushH5CallBack:((HCPicConsultItemModel)->())?
    
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -104,5 +104,6 @@ extension HCPicConsultViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        pushH5CallBack?(datasource[indexPath.row])
     }
 }

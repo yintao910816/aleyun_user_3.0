@@ -18,7 +18,9 @@ class HCExpertConsultationContainer: UIView {
     public var collectionView: UICollectionView!
     
     public var menuSelect: ((Int)->())?
+    public var cellDidSelected: ((HCDoctorListItemModel)->())?
 
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -113,6 +115,7 @@ extension HCExpertConsultationContainer: UICollectionViewDataSource, UICollectio
                                doctorListDatas: doctorListDatas,
                                slideMenuData: slideMenuData)
             header.menuSelect = { [weak self] in self?.menuSelect?($0) }
+            header.cellDidSelected = { [weak self] in self?.cellDidSelected?($0) }
             return header
         }
         return UICollectionReusableView()
@@ -120,5 +123,9 @@ extension HCExpertConsultationContainer: UICollectionViewDataSource, UICollectio
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return .init(width: width, height: HCExpertConsultationReusableView_height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        cellDidSelected?(colDatasource[indexPath.row])
     }
 }

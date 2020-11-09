@@ -37,6 +37,11 @@ class BaseWebViewController: BaseViewController, VMNavigation {
         }
     }
 
+    public class func createWeb(url: String, title: String?) ->BaseWebViewController {
+        let web = BaseWebViewController()
+        web.prepare(parameters: ["url": url, "title": title ?? ""])
+        return web
+    }
     
     private lazy var webView: UIWebView = {
         let w = UIWebView()

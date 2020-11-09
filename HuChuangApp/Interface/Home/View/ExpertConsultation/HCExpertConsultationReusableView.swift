@@ -34,6 +34,7 @@ class HCExpertConsultationReusableView: UICollectionReusableView {
     private var slideMenu: TYSlideMenu!
 
     public var menuSelect: ((Int)->())?
+    public var cellDidSelected: ((HCDoctorListItemModel)->())?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -219,5 +220,9 @@ extension HCExpertConsultationReusableView: UICollectionViewDelegateFlowLayout, 
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HCDoctorCardCell_identifier, for: indexPath) as! HCDoctorCardCell
         cell.model = doctorListDatas[indexPath.row]
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        cellDidSelected?(doctorListDatas[indexPath.row])
     }
 }

@@ -25,6 +25,13 @@ class HCMyConsultViewController: BaseViewController {
         view.addSubview(slideCtrl.view)
         
         picConsultCtrl = HCPicConsultViewController()
+        picConsultCtrl.pushH5CallBack = { [weak self] in
+            let url = APIAssistance.consultationChat(with: $0.consultId)
+            self?.navigationController?.pushViewController(BaseWebViewController.createWeb(url: url,
+                                                                                           title: $0.userName),
+                                                           animated: true)
+        }
+        
         videoConsultCtrl = HCVideoConsultViewController()
         cloudClinicConsultCtrl = HCCloudClinicConsultViewController()
         

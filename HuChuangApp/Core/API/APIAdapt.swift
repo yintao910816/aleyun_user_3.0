@@ -83,9 +83,14 @@ struct APIAssistance {
         return "\(APIAssistance.base)api/cms/medicineDetail/\(id)"
     }
 
-    /// 咨询主页
+    /// 咨询医生主页
     static public func consultationHome(with doctorId: String) ->String {
         return "\(APIAssistance.baseH5Host)#/consultationHome/\(doctorId)"
+    }
+    
+    /// 咨询聊天室
+    static public func consultationChat(with consultId: String) ->String {
+        return "\(APIAssistance.baseH5Host)#/chatConsultation/\(consultId)"
     }
 }
 
@@ -96,7 +101,8 @@ struct APIAssistance {
  public static final String DOCTOR_URL = base_url + "/doctorHome/"; //医生主页;
  public static final String CONSULT_URL = base_url + "/consultationHome/"; //咨询主页;
  public static final String HEALTH_RECORD_URL = base_url + "/HealthRecords/"; //咨询主页;
- public static final String HEALTH_ORDER_URL = base_url + "/payOrder/"; //订单页面;
+ public static final String HEALTH_ORDER_URL = base_url + "/payOrder/"; //订单支付;
+ public static final String HEALTH_ORDER_DETAIL_URL = base_url + "/chatConsulOrderDetails/"; //订单页面;
  public static final String HEALTH_CONSULT_DETAIL_URL = base_url + "/chatConsultation/"; //咨询详情;
  public static final String HEALTH_CONSULT_HISTORY_URL = base_url + "/openInquiryHistory/"; //咨询详情;
  */
