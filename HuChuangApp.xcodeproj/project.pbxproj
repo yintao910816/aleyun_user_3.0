@@ -259,6 +259,8 @@
 		B826AF80221C671B000428C1 /* ColunmCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B826AF7E221C671B000428C1 /* ColunmCollectionViewCell.xib */; };
 		B826AF82221C6C24000428C1 /* String+Extends.swift in Sources */ = {isa = PBXBuildFile; fileRef = B826AF81221C6C23000428C1 /* String+Extends.swift */; };
 		B826AF86221C7205000428C1 /* ArticleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B826AF84221C7205000428C1 /* ArticleCell.xib */; };
+		B830C4252559356C002F63BC /* HCVideoCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = B830C4242559356C002F63BC /* HCVideoCall.swift */; };
+		B830C42C255936BA002F63BC /* Date+Extends.swift in Sources */ = {isa = PBXBuildFile; fileRef = B830C42B255936BA002F63BC /* Date+Extends.swift */; };
 		B842D1FE22258CC000A4F8DF /* HCAppDelegate+UM.swift in Sources */ = {isa = PBXBuildFile; fileRef = B842D1FD22258CC000A4F8DF /* HCAppDelegate+UM.swift */; };
 		B8454ED123A3E19300E88BAD /* HCCurveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8454ED023A3E19300E88BAD /* HCCurveCell.swift */; };
 		B8454ED323A3EF5200E88BAD /* TYDateCalculate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8454ED223A3EF5200E88BAD /* TYDateCalculate.swift */; };
@@ -1106,6 +1108,8 @@
 		B826AF81221C6C23000428C1 /* String+Extends.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extends.swift"; sourceTree = "<group>"; };
 		B826AF83221C7205000428C1 /* ArticleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleCell.swift; sourceTree = "<group>"; };
 		B826AF84221C7205000428C1 /* ArticleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArticleCell.xib; sourceTree = "<group>"; };
+		B830C4242559356C002F63BC /* HCVideoCall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCVideoCall.swift; sourceTree = "<group>"; };
+		B830C42B255936BA002F63BC /* Date+Extends.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Extends.swift"; sourceTree = "<group>"; };
 		B842D1FD22258CC000A4F8DF /* HCAppDelegate+UM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HCAppDelegate+UM.swift"; sourceTree = "<group>"; };
 		B842D1FF22258D7F00A4F8DF /* HuChuangApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HuChuangApp.entitlements; sourceTree = "<group>"; };
 		B8454ED023A3E19300E88BAD /* HCCurveCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCCurveCell.swift; sourceTree = "<group>"; };
@@ -2464,6 +2468,7 @@
 		B87CCB4225569E7200792F76 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B830C4242559356C002F63BC /* HCVideoCall.swift */,
 				B87CCB4325569E7200792F76 /* TrtcUtils.swift */,
 				B87CCB4425569E7200792F76 /* CallUserModel.swift */,
 			);
@@ -2899,6 +2904,7 @@
 		C421333022056F96006C10C4 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				B830C42B255936BA002F63BC /* Date+Extends.swift */,
 				B89C397023A141B200CAB651 /* TYMarkString.swift */,
 				B8699400233794A700086A77 /* UIView+Layer.swift */,
 				C41A12C022BCF49100214216 /* String+Operation.swift */,
@@ -4219,6 +4225,7 @@
 				C4DDE0CE24F529B80001201C /* HCDoctorCardCell.swift in Sources */,
 				B8BE351922147B4000EF16F1 /* HCEditSynopsisViewController.swift in Sources */,
 				C4DDE0CA24F4FE4F0001201C /* HCListFilterContainer.swift in Sources */,
+				B830C42C255936BA002F63BC /* Date+Extends.swift in Sources */,
 				B87CCB4B25569E7200792F76 /* TRTCCalling.m in Sources */,
 				B8699401233794A700086A77 /* UIView+Layer.swift in Sources */,
 				B816EAC2221DABF400F024D5 /* ZXGenericGF.m in Sources */,
@@ -4410,6 +4417,7 @@
 				B816EB3D221DABF400F024D5 /* ZXVINResultParser.m in Sources */,
 				C40448AD24EB7D4300AD1610 /* HCClassRoomViewModel.swift in Sources */,
 				C4D1DB5D24F75698001EF30F /* HCClassRoom.swift in Sources */,
+				B830C4252559356C002F63BC /* HCVideoCall.swift in Sources */,
 				C4D1DBA224F7B366001EF30F /* HCExpertViewController.swift in Sources */,
 				B816EB51221DABF400F024D5 /* ZXCalendarParsedResult.m in Sources */,
 				C4C3257D2205C3AD0091783C /* UIView+XIB.swift in Sources */,

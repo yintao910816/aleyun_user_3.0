@@ -11,6 +11,8 @@ import Foundation
 enum RequestCode: Int {
     /// 请求成功
     case success = 200
+    /// 各种报错
+    case serverError = 400
     /// 身份验证不通过，需要重新登录
     case invalid = 401
     /// 未实名认证

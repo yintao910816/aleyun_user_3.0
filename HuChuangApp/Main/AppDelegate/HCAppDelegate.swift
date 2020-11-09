@@ -26,7 +26,7 @@ class HCAppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        TRTCCalling.shareInstance().add(self)
+        TRTCCalling.shareInstance().addDelegate(self)
 
         HCHelper.setupHelper()
         

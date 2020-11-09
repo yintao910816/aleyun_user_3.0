@@ -29,6 +29,6 @@
 #import "GenerateTestUserSig.h"
 #import <ImSDK/ImSDK.h>
 
-#import "TRTCCalling.h"
+#import "TRTCCalling+Signal.h"
 
 #endif /* HcChuangApp_Bridge_Header_h */

@@ -179,6 +179,19 @@ enum API{
     /// 药品百科
     case medicine(searchWords: String)
     
+    /// 获取视频签名 医生用userId 患者用memberId
+    case videoChatSignature(memberId: String)
+    /**
+     * 接听电话获取头像姓名信息
+     */
+    case consultVideoUserInfo(memberId: String, userId: String, consultId: String)
+    /// 接听电话
+    case consultReceivePhone(memberId: String, userId: String, consultId: String)
+    /// 拨打电话
+    case consultStartPhone(memberId: String, userId: String)
+    /// 结束通话
+    case consultEndPhone(memberId: String, userId: String, watchTime: String)
+
     
     // --------------- 2.0接口
     /// 向app服务器注册友盟token
@@ -303,7 +316,18 @@ extension API: TargetType{
             return "api/hospital/list"
         case .medicine(_):
             return "api/cms/medicine"
-            
+        
+        case .videoChatSignature(_):
+            return "api/consult/signature"
+        case .consultVideoUserInfo(_, _, _):
+            return "api/consult/videoUserInfo"
+        case .consultReceivePhone(_, _, _):
+            return "api/consult/receivePhone"
+        case .consultStartPhone(_, _):
+            return "api/consult/startPhone"
+        case .consultEndPhone(_, _, _):
+            return "api/consult/endPhone"
+
             
         case .UMAdd(_):
             return "api/umeng/add"
@@ -480,6 +504,23 @@ extension API {
         case .medicine(let searchWords):
             params["searchWords"] = searchWords
 
+        case .videoChatSignature(let memberId):
+            params["memberId"] = memberId
+        case .consultVideoUserInfo(let memberId, let userId, let consultId):
+            params["memberId"] = memberId
+            params["userId"] = userId
+            params["consultId"] = consultId
+        case .consultReceivePhone(let memberId, let userId, let consultId):
+            params["memberId"] = memberId
+            params["userId"] = userId
+            params["consultId"] = consultId
+        case .consultStartPhone(let memberId, let userId):
+            params["memberId"] = memberId
+            params["userId"] = userId
+        case .consultEndPhone(let memberId, let userId, let watchTime):
+            params["memberId"] = memberId
+            params["userId"] = userId
+            params["watchTime"] = watchTime
 
             
         case .UMAdd(let deviceToken):

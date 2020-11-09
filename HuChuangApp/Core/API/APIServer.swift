@@ -42,7 +42,7 @@ public final class RequestLoadingPlugin: PluginType {
                 let apath = api.baseURL.absoluteString + api.path + ((parameters as NSDictionary?)?.keyValues() ?? "")
                 print("发送请求地址：\(apath)")
             default:
-                print(api.baseURL.absoluteString + api.path)
+                print("发送请求地址：\(api.baseURL.absoluteString + api.path)")
             }
         #endif
 
@@ -55,7 +55,7 @@ public final class RequestLoadingPlugin: PluginType {
             do {
                 let json = try JSONSerialization.jsonObject(with: response.data, options: .allowFragments)
                 
-                PrintLog("didReceive -- \(target) -- \(json)")
+                PrintLog("返回json -- \(target) -- \(json)")
                 
                 guard let rdic = json as? [String : Any] else { return }
                 

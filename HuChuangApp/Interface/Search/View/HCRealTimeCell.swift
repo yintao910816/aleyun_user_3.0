@@ -81,7 +81,7 @@ extension HCRealTimeCell {
         titleLable.font = .font(fontSize: 16, fontName: .PingFSemibold)
         
         viewNumIcon = UIImageView()
-        viewNumIcon.backgroundColor = .yellow
+        viewNumIcon.image = UIImage(named: "view_count")
         
         viewNumLabel = UILabel()
         viewNumLabel.textColor = RGB(153, 153, 153)
@@ -89,7 +89,7 @@ extension HCRealTimeCell {
         viewNumLabel.font = .font(fontSize: 11)
         
         collectionNumIcon = UIImageView()
-        collectionNumIcon.backgroundColor = .yellow
+        collectionNumIcon.image = UIImage(named: "col_count")
         
         collectionNumLabel = UILabel()
         collectionNumLabel.textColor = RGB(153, 153, 153)

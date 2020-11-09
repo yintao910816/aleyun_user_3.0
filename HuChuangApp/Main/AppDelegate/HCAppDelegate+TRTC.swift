@@ -12,39 +12,43 @@ extension HCAppDelegate: TRTCCallingDelegate {
 
     // 被邀请通话
     func onInvited(sponsor: String, userIds: [String], isFromGroup: Bool, callType: CallType) {
-        var curUser = CallingUserModel()
-        curUser.name = "对方用户名"
-        curUser.avatarUrl = ""
-        curUser.userId = sponsor
-        curUser.isVideoAvaliable = true
-        curUser.isEnter = true
-        
-        let callVC = HCConsultVideoCallController(sponsor: curUser)
-        
-        callVC.dismissBlock = { }
-        
-        callVC.modalPresentationStyle = .fullScreen
-        callVC.resetWithUserList(users: [curUser], isInit: true)
-        NSObject().visibleViewController?.present(callVC, animated: true, completion: nil)
-        
-        print("\(curUser.name) 邀请你通话")
+        _ = HCHelper.requestVideoCallUserInfo(userId: sponsor, consultId: "\(TRTCCalling.shareInstance().curRoomID)")
+            .subscribe(onNext: {
+                if let callingUser = $0 {
+                    let callVC = HCConsultVideoCallController(sponsor: callingUser)
+                    
+                    callVC.dismissBlock = { }
+                    
+                    callVC.modalPresentationStyle = .fullScreen
+                    callVC.resetWithUserList(users: [callingUser], isInit: true)
+                    NSObject().visibleViewController?.present(callVC, animated: true, completion: nil)
+                    
+                    print("\(callingUser.name) 邀请你通话")
+                }
+            })
     }
     
     // 进入通话回调
     func onUserEnter(uid: String) {
-        var curUser = CallingUserModel()
-        curUser.name = "对方用户名"
-        curUser.avatarUrl = ""
-        curUser.userId = uid
-        curUser.isVideoAvaliable = true
-        curUser.isEnter = true
-        NotificationCenter.default.post(name: NotificationName.ChatCall.videoCallAccept, object: curUser)
+        _ = HCHelper.requestVideoCallUserInfo(userId: uid, consultId: "\(TRTCCalling.shareInstance().curRoomID)")
+            .subscribe(onNext: { user in
+                if let callingUser = user {
+                    NotificationCenter.default.post(name: NotificationName.ChatCall.videoCallAccept, object: callingUser)
+                    
+                    print("\(callingUser.name) 进入通话")
+                }
+            })
+        
+        _ = HCHelper.requestReceivePhone(memberId: uid, consultId: "\(TRTCCalling.shareInstance().curRoomID)")
+            .subscribe(onNext: { _ in })
     }
     
     // 离开通话回调
     func onUserLeave(uid: String) {
         print("离开通话")
         NotificationCenter.default.post(name: NotificationName.ChatCall.otherLeaveVideoCall, object: nil)
+        _ = HCHelper.requestEndPhone(userId: uid, watchTime: "100")
+            .subscribe(onNext:{ _ in })
     }
     
     // 拒绝通话回调-仅邀请者受到通知,其他用户应使用
