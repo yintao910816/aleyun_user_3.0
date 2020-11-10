@@ -20,10 +20,10 @@ class HCMedicineViewController: BaseViewController {
         view.addSubview(container)
         
         container.cellDidSelected = { [weak self] in
-            let web = BaseWebViewController()
-            web.navigationItem.title = "详情"
-            web.url = APIAssistance.medicineDetail(with: $0.id)
-            self?.navigationController?.pushViewController(web, animated: true)
+            let url = APIAssistance.medicineDetail(with: $0.id)
+            self?.navigationController?.pushViewController(BaseWebViewController.createWeb(url: url,
+                                                                                           title: "详情"),
+                                                           animated: true)
         }
     }
     

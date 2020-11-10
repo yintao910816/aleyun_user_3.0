@@ -26,7 +26,7 @@ class HCMineViewController: BaseViewController {
         containerView.excuteAction = { [weak self] in
             switch $0 {
             case .verify:
-                break
+                self?.navigationController?.pushViewController(HCRealNameAuthorViewController(), animated: true)
             case .avatar:
                 self?.navigationController?.pushViewController(HCAccountSettingViewController(), animated: true)
             case .coupon:

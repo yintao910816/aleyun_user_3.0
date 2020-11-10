@@ -11,9 +11,10 @@ import UIKit
 class HCRealTimeViewController: HCSlideItemController {
 
     private var collectionView: UICollectionView!
-
     private var datasource: [HCRealTimeListItemModel] = []
     
+    public var cellSelectedCallBack:((HCRealTimeListItemModel)->())?
+
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         
@@ -75,6 +76,6 @@ extension HCRealTimeViewController: UICollectionViewDataSource, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        cellDidselected?(datasource[indexPath.row])
+        cellSelectedCallBack?(datasource[indexPath.row])
     }
 }

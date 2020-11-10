@@ -31,7 +31,7 @@ extension HCSettingViewModel {
         var items: [HCListCellItem] = []
         
         let titles: [String] = ["消息通知", "清除缓存", "法律声明", "隐私", "鼓励我们，给我们评分"]
-        let subTitles: [String] = ["", "", "20M", "", "", ""]
+        let subTitles: [String] = ["", "20M", "", "", "", ""]
         for idx in 0..<titles.count {
             let item = HCListCellItem()
             item.title = titles[idx]

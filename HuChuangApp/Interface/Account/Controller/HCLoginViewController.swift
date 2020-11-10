@@ -27,9 +27,9 @@ class HCLoginViewController: BaseViewController {
         view.addSubview(containerView)
 
         containerView.agreementTap = { [weak self] in
-            let webVC = BaseWebViewController()
-            webVC.url = "https://ileyun.ivfcn.com/cms/alyyhxy.html"
-            self?.navigationController?.pushViewController(webVC, animated: true)
+            let url = "https://ileyun.ivfcn.com/cms/alyyhxy.html"
+            self?.navigationController?.pushViewController(BaseWebViewController.createWeb(url: url),
+                                                           animated: true)
         }
     }
     

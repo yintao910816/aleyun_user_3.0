@@ -27,19 +27,38 @@ class BaseWebViewController: BaseViewController, VMNavigation {
     
     public var url: String = "" {
         didSet {
-            PrintLog("h5拼接前地址：\(url)")
-            if url.contains("?") == false {
-                correctURL = "\(url)?token=\(userDefault.token)&unitId=\(userDefault.unitId)"
-            }else {
-                correctURL = "\(url)&token=\(userDefault.token)&unitId=\(userDefault.unitId)"
-            }
-            PrintLog("h5拼接后地址：\(url)")
+            configURLStr(urlPreStr: url)
         }
     }
+    
+    public func configURLStr(urlPreStr: String, needUnitId: Bool = true) {
+        PrintLog("h5拼接前地址：\(urlPreStr)")
 
-    public class func createWeb(url: String, title: String?) ->BaseWebViewController {
+        var userInfoStr = ""
+        if let userInfo = HCHelper.share.userInfoModel?.toJSONString(), let encodeInfo = userInfo.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)  {
+            userInfoStr = encodeInfo
+        }
+
+        if urlPreStr.contains("?") == false {
+            correctURL = "\(urlPreStr)?token=\(userDefault.token)&facilityType=APP&t=\(Date.timepStr())"
+        }else {
+            correctURL = "\(urlPreStr)&token=\(userDefault.token)&facilityType=APP&t=\(Date.timepStr())"
+        }
+        
+        if userInfoStr.count > 0 {
+            correctURL = "\(correctURL)&userInfo=\(userInfoStr)"
+        }
+        
+        if needUnitId {
+            correctURL = "\(correctURL)&unitId=\(userDefault.unitId)"
+        }
+        
+        PrintLog("h5拼接后地址：\(correctURL)")
+    }
+
+    public class func createWeb(url: String, title: String? = nil, needUnitId: Bool = true) ->BaseWebViewController {
         let web = BaseWebViewController()
-        web.prepare(parameters: ["url": url, "title": title ?? ""])
+        web.prepare(parameters: ["url": url, "title": title ?? "", "needUnitId": needUnitId])
         return web
     }
     
@@ -56,8 +75,14 @@ class BaseWebViewController: BaseViewController, VMNavigation {
             return
         }
         
+        var needUnitId: Bool = true
+        if let unid = parameters?["needUnitId"] as? Bool {
+            needUnitId = unid
+        }
+        
         webTitle = (parameters?["title"] as? String)
-        url = _url
+        
+        configURLStr(urlPreStr: _url, needUnitId: needUnitId)
     }
     
     func webCanBack(_ goBack: Bool = true) -> Bool {
@@ -68,7 +93,7 @@ class BaseWebViewController: BaseViewController, VMNavigation {
     }
     
     func requestData(){
-        if url.count == 0 { return }
+        if url.count == 0 && correctURL.count == 0 { return }
         
         if url.contains("OnlineAuther") {
             locationManager = HCLocationManager()

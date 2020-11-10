@@ -84,8 +84,8 @@ struct APIAssistance {
     }
 
     /// 咨询医生主页
-    static public func consultationHome(with doctorId: String) ->String {
-        return "\(APIAssistance.baseH5Host)#/consultationHome/\(doctorId)"
+    static public func consultationHome(with doctorId: String, unitId: String) ->String {
+        return "\(APIAssistance.baseH5Host)#/consultationHome/\(doctorId)?unitId=\(unitId)"
     }
     
     /// 咨询聊天室

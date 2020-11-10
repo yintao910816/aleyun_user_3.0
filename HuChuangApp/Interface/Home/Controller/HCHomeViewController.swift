@@ -43,20 +43,20 @@ class HCHomeViewController: BaseViewController {
         view.insertSubview(containerView, belowSubview: searchBar)
         
         containerView.menuChanged = { [weak self] in self?.viewModel.articleTypeChangeSignal.onNext($0) }
-        containerView.articleClicked = { [weak self] _ in
-            PrintLog("点击")
-//            let webVC = BaseWebViewController()
-//            webVC.url = $0.picPath
-//            self?.navigationController?.pushViewController(webVC, animated: true)
+        containerView.articleClicked = { [weak self] in
+            let url = APIAssistance.link(with: $0.id)
+            self?.navigationController?.pushViewController(BaseWebViewController.createWeb(url: url,
+                                                                                           title: $0.title),
+                                                           animated: true)
         }
         
         containerView.funcItemClicked = { [weak self] in self?.functionMenuClicked(functionModel: $0) }
         
         containerView.cmsRecommendItemClicked = { [weak self] in
-            let webVC = BaseWebViewController()
-            webVC.url = APIAssistance.link(with: $0.id)
-            webVC.title = $0.title
-            self?.navigationController?.pushViewController(webVC, animated: true)
+            let url = APIAssistance.link(with: $0.id)
+            self?.navigationController?.pushViewController(BaseWebViewController.createWeb(url: url,
+                                                                                           title: $0.title),
+                                                           animated: true)
         }
     }
     
@@ -112,9 +112,8 @@ extension HCHomeViewController {
             return
         }
 
-        let webVC = BaseWebViewController()
-        webVC.url = functionModel.functionUrl
-        webVC.title = functionModel.name
-        navigationController?.pushViewController(webVC, animated: true)
+        navigationController?.pushViewController(BaseWebViewController.createWeb(url: functionModel.functionUrl,
+                                                                                 title: functionModel.name),
+                                                 animated: true)
     }
 }

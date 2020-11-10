@@ -3357,7 +3357,6 @@
 			isa = PBXGroup;
 			children = (
 				C4AB272724E53D6F0095F693 /* HCCellItem */,
-				C494136224DE547400045749 /* BaseCtrl */,
 				C494136124DE547400045749 /* CustomView */,
 			);
 			path = Base;
@@ -3371,13 +3370,6 @@
 				C494136324DE549200045749 /* HCCustomButton */,
 			);
 			path = CustomView;
-			sourceTree = "<group>";
-		};
-		C494136224DE547400045749 /* BaseCtrl */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = BaseCtrl;
 			sourceTree = "<group>";
 		};
 		C494136324DE549200045749 /* HCCustomButton */ = {

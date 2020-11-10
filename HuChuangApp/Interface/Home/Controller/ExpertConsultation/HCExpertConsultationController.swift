@@ -20,8 +20,11 @@ class HCExpertConsultationController: BaseViewController {
         view.addSubview(containerView)
         
         containerView.cellDidSelected = { [unowned self] in
-            let url = APIAssistance.consultationHome(with: $0.id)
-            self.navigationController?.pushViewController(BaseWebViewController.createWeb(url: url, title: $0.name), animated: true)
+            let url = APIAssistance.consultationHome(with: $0.id, unitId: $0.unitId)
+            self.navigationController?.pushViewController(BaseWebViewController.createWeb(url: url,
+                                                                                          title: $0.name,
+                                                                                          needUnitId: false),
+                                                          animated: true)
         }
         
         containerView.menuSelect = { [weak self] in

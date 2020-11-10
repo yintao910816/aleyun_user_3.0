@@ -102,11 +102,7 @@ extension HCMineHeaderView {
         
         verifyButton = UIButton()
         verifyButton.isHidden = true
-        verifyButton.setTitle("去认证", for: .normal)
-        verifyButton.setTitleColor(.white, for: .normal)
-        verifyButton.backgroundColor = HC_MAIN_COLOR
-        verifyButton.layer.cornerRadius = 14
-        verifyButton.clipsToBounds = true
+        verifyButton.setImage(UIImage(named: "account_authentication"), for: .normal)
         verifyButton.addTarget(self, action: #selector(buttonAction(_:)), for: .touchUpInside)
         
         couponButton = HCCustomTextButton()

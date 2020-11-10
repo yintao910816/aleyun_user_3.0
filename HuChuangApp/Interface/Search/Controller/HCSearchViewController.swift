@@ -86,9 +86,18 @@ class HCSearchViewController: BaseViewController {
         }
         
         expertCtrl.cellDidselected = { [weak self] in
-            let web = BaseWebViewController()
-            web.prepare(parameters: ["url": APIAssistance.consultationHome(with: $0.id), "title": "咨询"])
-            self?.navigationController?.pushViewController(web, animated: true)
+            let url = APIAssistance.consultationHome(with: $0.id, unitId: $0.unitId)
+            self?.navigationController?.pushViewController(BaseWebViewController.createWeb(url: url,
+                                                                                           title: "咨询",
+                                                                                           needUnitId: false),
+                                                           animated: true)
+        }
+        
+        realTimeCtrl.cellSelectedCallBack = { [weak self] in
+            let url = APIAssistance.link(with: $0.id)
+            self?.navigationController?.pushViewController(BaseWebViewController.createWeb(url: url,
+                                                                                           title: $0.title),
+                                                           animated: true)
         }
     }
     

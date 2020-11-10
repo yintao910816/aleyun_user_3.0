@@ -20,10 +20,10 @@ class HCTestTubeViewController: BaseViewController {
         view.addSubview(container)
         
         container.cellDidSelected = { [weak self] in
-            let web = BaseWebViewController()
-            web.navigationItem.title = $0.title
-            web.url = APIAssistance.link(with: $0.id)
-            self?.navigationController?.pushViewController(web, animated: true)
+            let url = APIAssistance.link(with: $0.id)
+            self?.navigationController?.pushViewController(BaseWebViewController.createWeb(url: url,
+                                                                                           title: $0.title),
+                                                           animated: true)
         }
     }
     

@@ -18,4 +18,12 @@ extension Date {
         let dateStr = formatter.string(from: date)
         return dateStr
     }
+    
+    /// 获取当前时间戳
+    public static func timepStr() ->String {
+        let dat:Date = Date.init(timeIntervalSinceNow: 0)
+        let a:TimeInterval = dat.timeIntervalSince1970
+        let timep = UInt64(a)
+        return "\(timep)"
+    }
 }
