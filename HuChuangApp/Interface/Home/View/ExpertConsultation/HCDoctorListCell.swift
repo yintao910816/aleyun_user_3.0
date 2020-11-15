@@ -9,14 +9,13 @@
 import UIKit
 
 public let HCDoctorListCell_identifier = "HCDoctorListCell"
-public let HCDoctorListCell_height: CGFloat = 210
 
 class HCDoctorListCell: UICollectionViewCell {
 
     private var avatar: UIImageView!
     private var doctorInfoLabel: UILabel!
     private var hospitalBg: UIImageView!
-    private var hospitalLabel: UILabel!
+    private var hospitalLvLabel: UILabel!
     private var hospitalAdressLabel: UILabel!
     private var skidInLabel: UILabel!
     private var doctorBriefLabel: UILabel!
@@ -39,11 +38,20 @@ class HCDoctorListCell: UICollectionViewCell {
         didSet {
             avatar.setImage(model.headPath, .userIconWomen)
             doctorInfoLabel.attributedText = model.doctorInfoText
-            hospitalLabel.text = model.departmentName
-            skidInLabel.text = "擅长: \(model.skin)"
+            hospitalLvLabel.text = model.departmentName
+            hospitalAdressLabel.text = model.unitName
+            skidInLabel.text = "擅长: \(model.skilledIn)"
             doctorBriefLabel.attributedText = model.briefText
-            consultFirstPriceLabel.text = "图文¥\(model.consultPrice.count > 0 ? model.consultPrice : "0")"
-            consultSecondPriceLabel.text = "电话¥\(model.consultPrice.count > 0 ? model.consultPrice : "0")"
+
+            for idx in 0..<model.consultProject.count {
+                if idx == 0 {
+                    let consultProjectModel = model.consultProject[0]
+                    consultFirstPriceLabel.text = "\(consultProjectModel.name)¥\(consultProjectModel.price)"
+                }else if idx == 1 {
+                    let consultProjectModel = model.consultProject[1]
+                    consultSecondPriceLabel.text = "\(consultProjectModel.name)¥\(consultProjectModel.price)"
+                }
+            }
         }
     }
     
@@ -52,7 +60,7 @@ class HCDoctorListCell: UICollectionViewCell {
         
         avatar.frame = .init(x: 15, y: 10, width: 40, height: 40)
         
-        let hospitalSize = hospitalLabel.sizeThatFits(.init(width: CGFloat(MAXFLOAT), height: 15))
+        let hospitalSize = hospitalLvLabel.sizeThatFits(.init(width: CGFloat(MAXFLOAT), height: 15))
         var tempSize = doctorInfoLabel.sizeThatFits(.init(width: CGFloat(MAXFLOAT), height: 25))
         
         let maxW: CGFloat = width - avatar.frame.maxX - 10 - 15 - 15
@@ -61,9 +69,9 @@ class HCDoctorListCell: UICollectionViewCell {
                                      y: avatar.y + 3,
                                      width: hospitalSize.width + 20,
                                      height: 20)
-            hospitalLabel.frame = .init(x: 10,
-                                        y: (hospitalBg.height - 15) / 2.0,
-                                        width: hospitalSize.width, height: 15)
+            hospitalLvLabel.frame = .init(x: 10,
+                                          y: (hospitalBg.height - 15) / 2.0,
+                                          width: hospitalSize.width, height: 15)
             let doctorInfoLabelW: CGFloat = maxW - (hospitalSize.width + 20) - 15
             doctorInfoLabel.frame = .init(x: avatar.frame.maxX + 10,
                                           y: avatar.y + 3,
@@ -79,20 +87,20 @@ class HCDoctorListCell: UICollectionViewCell {
                                      y: avatar.y + 3,
                                      width: hospitalSize.width + 20,
                                      height: 20)
-            hospitalLabel.frame = .init(x: 10,
-                                        y: (hospitalBg.height - 15) / 2.0,
-                                        width: hospitalSize.width, height: 15)
+            hospitalLvLabel.frame = .init(x: 10,
+                                          y: (hospitalBg.height - 15) / 2.0,
+                                          width: hospitalSize.width, height: 15)
         }
         
         hospitalAdressLabel.frame = .init(x: doctorInfoLabel.x,
-                                          y: doctorInfoLabel.frame.maxY + 5,
+                                          y: doctorInfoLabel.frame.maxY + 2,
                                           width: width - (avatar.frame.maxX + 10 + 15),
                                           height: 20)
         
         skidInLabel.frame = .init(x: doctorInfoLabel.x,
-                                  y: hospitalAdressLabel.frame.maxY + 15,
+                                  y: hospitalAdressLabel.frame.maxY + 10,
                                   width: width - doctorInfoLabel.x - 15,
-                                  height: 45)
+                                  height: model.getSkidInHeight)
         
         doctorBriefLabel.frame = .init(x: doctorInfoLabel.x,
                                        y: skidInLabel.frame.maxY + 15,
@@ -101,7 +109,7 @@ class HCDoctorListCell: UICollectionViewCell {
 
         tempSize = consultFirstPriceLabel.sizeThatFits(.init(width: CGFloat(MAXFLOAT), height: 20))
         consultFirstPriceLabel.frame = .init(x: doctorInfoLabel.x,
-                                             y: doctorBriefLabel.frame.maxY + 30,
+                                             y: doctorBriefLabel.frame.maxY + 25,
                                              width: tempSize.width,
                                              height: 17)
 
@@ -112,7 +120,6 @@ class HCDoctorListCell: UICollectionViewCell {
                                               height: 17)
         
         consultButton.frame = .init(x: width - 15 - 80, y: doctorBriefLabel.frame.maxY + 15, width: 80, height: 30)
-        
         bottomLine.frame = .init(x: 0, y: height - 0.5, width: width, height: 0.5)
     }
 }
@@ -130,9 +137,9 @@ extension HCDoctorListCell {
         doctorInfoLabel.font = .font(fontSize: 18, fontName: .PingFSemibold)
         
         hospitalBg = UIImageView(image: UIImage.init(named: "doctor_hospital"))
-        hospitalLabel = UILabel()
-        hospitalLabel.textColor = RGB(20, 115, 230)
-        hospitalLabel.font = .font(fontSize: 11)
+        hospitalLvLabel = UILabel()
+        hospitalLvLabel.textColor = RGB(20, 115, 230)
+        hospitalLvLabel.font = .font(fontSize: 11)
         
         hospitalAdressLabel = UILabel()
         hospitalAdressLabel.textColor = RGB(51, 51, 51)
@@ -141,6 +148,7 @@ extension HCDoctorListCell {
         skidInLabel = UILabel()
         skidInLabel.textColor = RGB(153, 153, 153)
         skidInLabel.font = .font(fontSize: 14)
+        skidInLabel.numberOfLines = 2
 
         doctorBriefLabel = UILabel()
         doctorBriefLabel.textColor = RGB(178, 178, 178)
@@ -168,7 +176,7 @@ extension HCDoctorListCell {
         addSubview(avatar)
         addSubview(doctorInfoLabel)
         addSubview(hospitalBg)
-        hospitalBg.addSubview(hospitalLabel)
+        hospitalBg.addSubview(hospitalLvLabel)
         addSubview(hospitalAdressLabel)
         addSubview(skidInLabel)
         addSubview(doctorBriefLabel)

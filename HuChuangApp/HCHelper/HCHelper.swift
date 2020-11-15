@@ -85,18 +85,20 @@ extension HCHelper {
         
         HCHelper.share.userInfoHasReload.onNext(user)
         
-        _ = HCHelper.requestVideoChatSignature()
-            .subscribe(onNext: { userSig in
-                if let sign = userSig {
-                    TRTCCalling.shareInstance().login(sdkAppID: trtc_appid,
-                                                      user: user.uid,
-                                                      userSig: sign) {
-                        PrintLog("trtc登录成功")
-                    } failed: { (code, des) in
-                        PrintLog("trtc登录失败: code - \(code)\ninfo\(des)")
+        if user.uid.count > 0 {
+            _ = HCHelper.requestVideoChatSignature()
+                .subscribe(onNext: { userSig in
+                    if let sign = userSig {
+                        TRTCCalling.shareInstance().login(sdkAppID: trtc_appid,
+                                                          user: user.uid,
+                                                          userSig: sign) {
+                            PrintLog("trtc登录成功")
+                        } failed: { (code, des) in
+                            PrintLog("trtc登录失败: code - \(code)\ninfo\(des)")
+                        }
                     }
-                }
-            })
+                })
+        }
     }
 
 }

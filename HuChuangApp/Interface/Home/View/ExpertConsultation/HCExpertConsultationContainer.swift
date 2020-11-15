@@ -98,7 +98,7 @@ extension HCExpertConsultationContainer: UICollectionViewDataSource, UICollectio
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return .init(width: width, height: HCDoctorListCell_height)
+        return .init(width: width, height: colDatasource[indexPath.row].getCellHeight)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

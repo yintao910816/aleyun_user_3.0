@@ -17,6 +17,7 @@ enum CellIconType {
 class HCListCellItem {
     
     var title: String = ""
+    var titleFont: UIFont = .font(fontSize: 15)
     var titleIcon: String = ""
     var titleIconSize: CGSize = .init(width: 25, height: 25)
     

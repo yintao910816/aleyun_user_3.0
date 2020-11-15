@@ -94,6 +94,11 @@ class HCDoctorListItemModel: HJModel, HCSearchDataProtocol {
     var viewProfile: String = ""
     var wubiCode: String = ""
     
+    var consultProject: [HCConsultProjectModel] = []
+
+    private var skidInHeight: CGFloat?
+    private var cellHeight: CGFloat?
+    
     public lazy var doctorInfoText: NSAttributedString = {
         let string = NSMutableAttributedString.init(string: "\(self.name) \(self.technicalPost)")
         string.addAttribute(NSAttributedString.Key.font,
@@ -134,6 +139,37 @@ class HCDoctorListItemModel: HJModel, HCSearchDataProtocol {
         return string
     }()
 
+    public lazy var skidInText: String = {
+        let text = "擅长: \(skilledIn)"
+        return text
+    }()
+    
+    public var getSkidInHeight: CGFloat {
+        get {
+            if skidInHeight == nil {
+                let h = skidInText.ty_textSize(font: .font(fontSize: 14), width: PPScreenW - 80, height: CGFloat.greatestFiniteMagnitude).height
+                skidInHeight = min(40, h)
+            }
+            return skidInHeight!
+        }
+    }
+    
+    public var getCellHeight: CGFloat {
+        get {
+            if cellHeight == nil {
+                cellHeight = 156 + getSkidInHeight
+            }
+            return cellHeight!
+        }
+    }
+}
+
+class HCConsultProjectModel: HJModel {
+    var type: Int = 1
+    var name: String = ""
+    var open: Bool = true
+    var price: String = "0.0"
+    var unit: Int = 1
 }
 
 class HCHCDoctorListModel: HJModel {

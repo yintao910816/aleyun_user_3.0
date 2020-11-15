@@ -130,6 +130,13 @@ extension HCExpertConsultationViewModel {
     }
     
     private func requestMyDoctorData() ->Observable<[HCDoctorListItemModel]> {
+        if UIDevice.current.isSimulator() {
+            return HCProvider.request(.myDoctor(lng: "114.3", lat: "30.5"))
+                .map(models: HCDoctorListItemModel.self)
+                .asObservable()
+                .catchErrorJustReturn([HCDoctorListItemModel]())
+        }
+        
         if locationManager != nil {
             locationManager = nil
         }

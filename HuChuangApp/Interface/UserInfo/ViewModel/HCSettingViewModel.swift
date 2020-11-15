@@ -30,11 +30,12 @@ extension HCSettingViewModel {
     private func prepareCellItems() {
         var items: [HCListCellItem] = []
         
-        let titles: [String] = ["消息通知", "清除缓存", "法律声明", "隐私", "鼓励我们，给我们评分"]
-        let subTitles: [String] = ["", "20M", "", "", "", ""]
+        let titles: [String] = ["账号设置", "消息通知", "清除缓存", "法律声明", "隐私", "鼓励我们，给我们评分"]
+        let subTitles: [String] = ["", "", "20M", "", "", ""]
         for idx in 0..<titles.count {
             let item = HCListCellItem()
             item.title = titles[idx]
+            item.titleFont = .font(fontSize: 16, fontName: .PingFMedium)
             item.detailTitle = subTitles[idx]
             item.titleColor = RGB(51, 51, 51)
             item.cellIdentifier = HCListDetailCell_identifier

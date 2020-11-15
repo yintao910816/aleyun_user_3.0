@@ -22,6 +22,8 @@ class HCSettingViewController: BaseViewController {
         containerView.didSelected = { [weak self] in
             if $0.title == "退出登陆" {
                 HCHelper.presentLogin()
+            }else if $0.title == "账号设置" {
+                self?.navigationController?.pushViewController(HCAccountSettingViewController(), animated: true)
             }
         }
     }
