@@ -94,6 +94,12 @@ struct APIAssistance {
     static public func consultationChat(with consultId: String) ->String {
         return "\(APIAssistance.consultsH5Host)#/chatConsultation/\(consultId)"
     }
+    
+    /// 医院详情链接
+    static public func hospitalDetails(with id: String) ->String {
+        return "\(APIAssistance.consultsH5Host)#/hospitalDetails/\(id)"
+    }
+
 }
 
 /**

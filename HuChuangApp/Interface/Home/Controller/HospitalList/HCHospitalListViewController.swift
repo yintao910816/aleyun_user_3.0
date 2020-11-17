@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HCHospitalListViewController: BaseViewController {
+class HCHospitalListViewController: BaseViewController, VMNavigation {
 
     private var viewModel: HCHospitalListViewModel!
     private var container: HCHospitalListContainer!
@@ -38,6 +38,11 @@ class HCHospitalListViewController: BaseViewController {
             }
         }
         
+        container.cellDidSelected = {
+            HCHospitalListViewController.push(BaseWebViewController.self,
+                                              ["url": APIAssistance.hospitalDetails(with: $0.id), "title":$0.name])
+        }
+        
         container.beginSearch = { [unowned self] in self.viewModel.keyWordsFilterSubject.onNext($0) }
     }
     
@@ -53,7 +58,7 @@ class HCHospitalListViewController: BaseViewController {
         viewModel.datasource.asDriver()
             .drive(onNext: { [weak self] in self?.container.hospitalDatas = $0 })
             .disposed(by: disposeBag)
-        
+                
         viewModel.reloadSubject.onNext(Void())
         
         container.tableView.headerRefreshing()

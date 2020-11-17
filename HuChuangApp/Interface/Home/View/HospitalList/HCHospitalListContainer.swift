@@ -16,6 +16,7 @@ class HCHospitalListContainer: UIView {
     
     public var menuSelect: ((Int)->())?
     public var beginSearch: ((String)->())?
+    public var cellDidSelected: ((HCHospitalListItemModel)->())?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -94,5 +95,7 @@ extension HCHospitalListContainer: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        cellDidSelected?(hospitalDatas[indexPath.row])
     }
 }
