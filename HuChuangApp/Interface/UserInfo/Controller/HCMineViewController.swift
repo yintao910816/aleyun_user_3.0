@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HCMineViewController: BaseViewController {
+class HCMineViewController: BaseViewController, VMNavigation {
 
     private var containerView: HCMineViewContainer!
     private var viewModel: HCMineViewModel!
@@ -17,6 +17,8 @@ class HCMineViewController: BaseViewController {
         navigationController?.navigationBar.barTintColor = RGB(255, 244, 251)
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : RGB(51, 51, 51),
                                                                    NSAttributedString.Key.font : UIFont.font(fontSize: 18, fontName: .PingFRegular)]
+        
+        viewModel.reloadSubject.onNext(Void())
     }
     
     override func setupUI() {
@@ -49,6 +51,15 @@ class HCMineViewController: BaseViewController {
             }
         }
         
+        containerView.excuteHealthyAction = { [unowned self] _ in
+//            if $0 {
+//
+//            }else {
+                HCMineViewController.push(BaseWebViewController.self, ["url":APIAssistance.HealthRecords(),
+                                                                       "title":"健康档案"])
+//            }
+        }
+        
         addBarItem(normal: "setting", right: true)
             .drive(onNext: { [weak self] in
                 self?.navigationController?.pushViewController(HCSettingViewController(), animated: true)
@@ -68,8 +79,6 @@ class HCMineViewController: BaseViewController {
             .asDriver()
             .drive(onNext: { [weak self] in self?.containerView.userModel = $0 })
             .disposed(by: disposeBag)
-
-        viewModel.reloadSubject.onNext(Void())
     }
     
     override func viewDidLayoutSubviews() {

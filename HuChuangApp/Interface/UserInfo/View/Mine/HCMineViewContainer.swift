@@ -15,6 +15,8 @@ class HCMineViewContainer: UIView {
     
     public var excuteAction: ((HCMineHeaderView.HCMineHeaderAction)->())?
     public var excuteMyServerAction: ((HCMenuItemCellMode)->())?
+    /// Bool - 是否已经有健康档案
+    public var excuteHealthyAction: ((Bool)->())?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -199,7 +201,7 @@ extension HCMineViewContainer: UICollectionViewDataSource, UICollectionViewDeleg
         case 1:
             excuteMyServerAction?(myServerModes[indexPath.row])
         case 2:
-            break
+            excuteHealthyAction?(model.healthArchives != nil)
         default:
             break
         }

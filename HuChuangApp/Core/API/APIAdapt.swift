@@ -105,6 +105,11 @@ struct APIAssistance {
         return "\(APIAssistance.consultsH5Host)#/drugActivityDetails/\(id)"
     }
 
+    /// 添加健康档案链接
+    static public func HealthRecords() ->String {
+        return "\(APIAssistance.consultsH5Host)#/HealthRecords"
+    }
+
 }
 
 /**
