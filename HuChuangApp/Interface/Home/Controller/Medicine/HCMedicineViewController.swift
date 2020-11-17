@@ -19,12 +19,13 @@ class HCMedicineViewController: BaseViewController {
         container = HCMedicineContainer.init(frame: view.bounds)
         view.addSubview(container)
         
-        container.cellDidSelected = { [weak self] in
-            let url = APIAssistance.medicineDetail(with: $0.id)
-            self?.navigationController?.pushViewController(BaseWebViewController.createWeb(url: url,
-                                                                                           title: "详情"),
-                                                           animated: true)
+        container.cellDidSelected = {
+            HCHospitalListViewController.push(BaseWebViewController.self,
+                                              ["url": APIAssistance.drugActivityDetails(with: $0.id),
+                                               "title":$0.medicineName])
         }
+        
+        container.beginSearch = { [unowned self] in self.viewModel.keyWordsFilterSubject.onNext($0) }
     }
     
     override func rxBind() {

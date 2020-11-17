@@ -8,13 +8,23 @@
 
 import Foundation
 
+import RxSwift
+
 class HCMedicineViewModel: RefreshVM<HCMedicineItemModel> {
     
     private var searchWords: String = ""
     
+    public let keyWordsFilterSubject = PublishSubject<String>()
+
     override init() {
         super.init()
         
+        keyWordsFilterSubject
+            .subscribe(onNext: { [unowned self] in
+                self.searchWords = $0
+                self.requestData(true)
+            })
+            .disposed(by: disposeBag)
     }
     
     override func requestData(_ refresh: Bool) {
