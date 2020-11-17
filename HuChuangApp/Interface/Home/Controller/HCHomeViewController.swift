@@ -108,7 +108,9 @@ extension HCHomeViewController {
         }
 
         if functionModel.functionUrl.contains("underdev") && !functionModel.functionUrl.contains("http") {
-            HCHelper.pushLocalH5(type: .underDev)
+//            HCHelper.pushLocalH5(type: .underDev)
+            navigationController?.pushViewController(HCUnderDevController.ctrlCreat(navTitle: functionModel.name),
+                                                     animated: true)
         }else {
             navigationController?.pushViewController(BaseWebViewController.createWeb(url: functionModel.functionUrl,
                                                                                      title: functionModel.name),

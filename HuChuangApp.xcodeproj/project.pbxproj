@@ -316,6 +316,7 @@
 		B892FFA223ABB5AE00A137C0 /* TYFiliterLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B892FFA123ABB5AE00A137C0 /* TYFiliterLayout.swift */; };
 		B892FFA423ABB70700A137C0 /* TYFiliterViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B892FFA323ABB70700A137C0 /* TYFiliterViewData.swift */; };
 		B89A73C325639B0F0094E13A /* HCTestTubeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89A73C225639B0F0094E13A /* HCTestTubeCell.swift */; };
+		B89A73CA2563AA170094E13A /* HCUnderDevController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89A73C92563AA170094E13A /* HCUnderDevController.swift */; };
 		B89C396A23A0C90100CAB651 /* TYCurveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89C396923A0C90100CAB651 /* TYCurveView.swift */; };
 		B89C397123A141B200CAB651 /* TYMarkString.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89C397023A141B200CAB651 /* TYMarkString.swift */; };
 		B8BE1AE423A698C300DF472A /* HCAccountManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8BE1AE323A698C300DF472A /* HCAccountManager.swift */; };
@@ -1186,6 +1187,7 @@
 		B892FFA123ABB5AE00A137C0 /* TYFiliterLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TYFiliterLayout.swift; sourceTree = "<group>"; };
 		B892FFA323ABB70700A137C0 /* TYFiliterViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TYFiliterViewData.swift; sourceTree = "<group>"; };
 		B89A73C225639B0F0094E13A /* HCTestTubeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCTestTubeCell.swift; sourceTree = "<group>"; };
+		B89A73C92563AA170094E13A /* HCUnderDevController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCUnderDevController.swift; sourceTree = "<group>"; };
 		B89C396923A0C90100CAB651 /* TYCurveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TYCurveView.swift; sourceTree = "<group>"; };
 		B89C397023A141B200CAB651 /* TYMarkString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TYMarkString.swift; sourceTree = "<group>"; };
 		B8AFDE5A233E702B00196064 /* HCRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCRecordViewController.swift; sourceTree = "<group>"; };
@@ -2874,6 +2876,7 @@
 				C421331722056D5E006C10C4 /* MainNavigationController.swift */,
 				C43F09BD22143B5200910437 /* BaseWebViewController.swift */,
 				C4481E2322154D66007F4B0C /* BaseWKWebViewViewController.swift */,
+				B89A73C92563AA170094E13A /* HCUnderDevController.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -4139,6 +4142,7 @@
 				C40448A724EAAFB500AD1610 /* HCPersonalCenter.swift in Sources */,
 				C4382C0124E56A59000C00CE /* HCEditInfoViewController.swift in Sources */,
 				B816EB29221DABF400F024D5 /* ZXCode128Reader.m in Sources */,
+				B89A73CA2563AA170094E13A /* HCUnderDevController.swift in Sources */,
 				B86993D623373A6500086A77 /* TYSearchBar.swift in Sources */,
 				B816EA8A221DABF400F024D5 /* ZXByQuadrantReader.m in Sources */,
 				B8F90E5E24F25FD100A1D68C /* HCMessage.swift in Sources */,
