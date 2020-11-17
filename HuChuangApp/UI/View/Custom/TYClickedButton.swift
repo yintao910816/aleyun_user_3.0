@@ -90,58 +90,6 @@ class TYClickedButton: UIButton {
     }
 }
 
-//extension PTClickedButton: SelfAware {
-//
-//    static func awake() {
-//        swizzleMethod
-//    }
-//
-//    private static let swizzleMethod: Void = {
-//        let originalSelector = #selector(point(inside:with:))
-//        let swizzledSelector = #selector(swizzled_point(inside:with:))
-//
-//        swizzlingForClass(UIViewController.self, originalSelector: originalSelector, swizzledSelector: swizzledSelector)
-//    }()
-//
-//    @objc func swizzled_point(inside point: CGPoint, with event: UIEvent?) -> Bool {
-////        print("swizzled_point")
-////        return swizzled_point(inside: point, with: event)
-////        BOOL result = [self swz_pointInside:point withEvent:event];
-////        CGRect responseHitArea = [self responseHitArea];
-////        BOOL ret = ( result
-////            ||CGRectEqualToRect(responseHitArea, CGRectZero)
-////            ||!self.isUserInteractionEnabled
-////            ||self.isHidden);
-////        if (ret) return result;
-////        return CGRectContainsPoint(responseHitArea, point);
-//        let result = swizzled_point(inside: point, with: event)
-//        let responseHitArea = enlargedRect()
-//        let ret = (result || !isUserInteractionEnabled || isHidden)
-//        if ret { return result }
-//
-//        return responseHitArea.contains(point)
-//    }
-//
-//    /**
-//     /*!
-//     @method 可以响应点击事件的rect
-//     */
-//     - (CGRect)responseHitArea {
-//     CGRect extendedHitArea = [objc_getAssociatedObject(self, @selector(extendedHitArea)) CGRectValue];
-//     if (!CGRectEqualToRect(extendedHitArea, CGRectZero)) {
-//     return                       CGRectMake(
-//     self.bounds.origin.x-extendedHitArea.origin.x,
-//     self.bounds.origin.y-extendedHitArea.origin.y,
-//     self.bounds.size.width+extendedHitArea.origin.x+extendedHitArea.size.width,
-//     self.bounds.size.height+extendedHitArea.origin.y+extendedHitArea.size.height);
-//
-//     } else {
-//     return self.bounds;
-//     }
-//     }
-//
-//     */
-//}
 
 func associatedObject<ValueType: AnyObject>(
     base: AnyObject,

@@ -166,7 +166,7 @@ extension RefreshVM {
         if refresh {
             // 下拉刷新处理
             isEmptyContentObser.value = retData.count == 0
-            refreshStatus.value = .DropDownSuccess
+            refreshStatus.value = pageModel.hasNext ? .DropDownSuccess : .DropDownSuccessAndNoMoreData
             datasource.value = retData
         } else {
             // 上拉刷新处理

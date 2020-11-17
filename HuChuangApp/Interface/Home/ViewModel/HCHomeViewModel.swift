@@ -103,7 +103,7 @@ extension HCHomeViewModel {
         HCProvider.request(.cmsDetail(articleId: data.id))
             .map(model: HCCmsDetailModel.self)
             .subscribe { [weak self] linkM in
-                HCHomeViewModel.push(BaseWebViewController.self, ["url": linkM.hrefUrl, "title": linkM.title])
+                HCHomeViewModel.push(HCArticleDetailViewController.self, ["model": HCShareArticleModel.transformCmsModel(model: linkM)])
                 self?.hud.noticeHidden()
             } onError: { [weak self] in
                 self?.hud.failureHidden(self?.errorMessage($0))

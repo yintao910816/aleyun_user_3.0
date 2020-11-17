@@ -12,16 +12,16 @@ import RxCocoa
 
 class HCArticleDetailViewModel: BaseViewModel {
     
-    private var articleModel: HCArticleItemModel!
-    
+    private var shareModel: HCShareArticleModel!
+
     public let articleStatusObser = Variable(HCStoreAndStatusModel())
     public let storeEnable = Variable(false)
 
-    init(articleModel: HCArticleItemModel,
+    init(shareModel: HCShareArticleModel,
          tap:(storeDriver: Driver<Bool>, shareDriver: Driver<Void>)) {
         super.init()
-        
-        self.articleModel = articleModel
+
+        self.shareModel = shareModel
         
         reloadSubject
             .subscribe(onNext: { [weak self] _ in
@@ -39,27 +39,42 @@ class HCArticleDetailViewModel: BaseViewModel {
         
         tap.shareDriver
             .drive(onNext: { [unowned self] in
-                let link = HCAccountManager.articleLink(forUrl: self.articleModel.hrefUrl)
-                HCAccountManager.presentShare(thumbURL: self.articleModel.picPath,
+                let link = APIAssistance.articleLink(forUrl: self.shareModel.link)
+                HCAccountManager.presentShare(thumbURL: self.shareModel.picPath,
                                               title: "您的孕期好帮手",
-                                              descr: self.articleModel.title,
+                                              descr: self.shareModel.title,
                                               webpageUrl: link)
             })
             .disposed(by: disposeBag)
     }
     
     private func requestArticleStatus() {
-        HCProvider.request(.storeAndStatus(articleId: articleModel.id))
-            .map(model: HCStoreAndStatusModel.self)
+        HCProvider.request(.cmsFollow(articleId: shareModel.id))
+            .mapJSON()
             .asObservable()
+            .map({ res -> HCStoreAndStatusModel in
+                let staModel = HCStoreAndStatusModel()
+                if let dic = res as? [String: Any], let s = dic["data"] as? Bool {
+                    staModel.status = s
+                }
+                return staModel
+            })
             .do(onNext: { [weak self] _ in self?.storeEnable.value = true })
             .catchErrorJustReturn(HCStoreAndStatusModel())
             .bind(to: articleStatusObser)
             .disposed(by: disposeBag)
+
+//        HCProvider.request(.storeAndStatus(articleId: shareModel.id))
+//            .map(model: HCStoreAndStatusModel.self)
+//            .asObservable()
+//            .do(onNext: { [weak self] _ in self?.storeEnable.value = true })
+//            .catchErrorJustReturn(HCStoreAndStatusModel())
+//            .bind(to: articleStatusObser)
+//            .disposed(by: disposeBag)
     }
     
     private func postChangeStatus(status: Bool) {
-        HCProvider.request(.articelStore(articleId: articleModel.id, status: status))
+        HCProvider.request(.articelStore(articleId: shareModel.id, storeStatus: status))
             .mapResponse()
             .subscribe(onSuccess: { [weak self] data in
                 guard let strongSelf = self else { return }

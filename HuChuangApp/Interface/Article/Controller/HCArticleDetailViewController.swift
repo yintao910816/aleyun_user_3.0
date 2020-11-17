@@ -11,7 +11,7 @@ import UIKit
 class HCArticleDetailViewController: BaseWebViewController {
 
     private var viewModel: HCArticleDetailViewModel!
-    private var articleModel: HCArticleItemModel!
+    private var shareModel: HCShareArticleModel!
     
     private var storeButton: TYClickedButton!
     private var shareButton: TYClickedButton!
@@ -30,7 +30,7 @@ class HCArticleDetailViewController: BaseWebViewController {
     override func setupUI() {
         super.setupUI()
         
-        title = articleModel.title
+        title = shareModel.title
         
         storeButton = TYClickedButton.init(type: .custom)
         storeButton.frame = .init(x: 0, y: 0, width: 30, height: 30)
@@ -58,12 +58,12 @@ class HCArticleDetailViewController: BaseWebViewController {
         let storeDriver = storeButton.rx.tap.asDriver()
             .map{ [unowned self] in !self.storeButton.isSelected }
         
-        viewModel = HCArticleDetailViewModel.init(articleModel: articleModel,
+        viewModel = HCArticleDetailViewModel.init(shareModel: shareModel,
                                                   tap: (storeDriver: storeDriver,
                                                         shareDriver: shareButton.rx.tap.asDriver()))
         
         viewModel.storeEnable.asDriver()
-            .drive(storeButton.rx.enabled)
+            .drive(storeButton.rx.isUserInteractionEnabled)
             .disposed(by: disposeBag)
         
         viewModel.articleStatusObser.asDriver()
@@ -78,15 +78,8 @@ class HCArticleDetailViewController: BaseWebViewController {
     }
     
     override func prepare(parameters: [String : Any]?) {
-        articleModel = (parameters!["model"] as! HCArticleItemModel)
+        shareModel = (parameters!["model"] as! HCShareArticleModel)
 
-        super.prepare(parameters: ["url": articleModel.hrefUrl])
-    }
-}
-
-extension HCArticleDetailViewController {
-    
-    public class func preprare(model: HCArticleItemModel) ->[String: HCArticleItemModel] {
-        return ["model": model]
+        super.prepare(parameters: ["url": shareModel.href])
     }
 }

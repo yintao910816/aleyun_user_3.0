@@ -127,10 +127,9 @@ class HCCmsDetailModel: HJModel {
     var seoKeywords: String = ""
     var shopId: String = ""
     var sort: Int = 99
-    var store: String = ""
+    var store: Int = 0
     var storeStatus: Int = 0
     var title: String = ""
     var top: Int = 0
     var unitId: String = ""
-
 }

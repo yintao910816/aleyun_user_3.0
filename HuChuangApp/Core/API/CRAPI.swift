@@ -19,16 +19,6 @@ enum HCCmsType: String {
     case webCms001 = "webCms001"
 }
 
-/// 列表类型
-enum HCMenuListModuleType: String {
-    /// 我的医生
-    case doctor = "doctor"
-    /// 我的课程
-    case course = "course"
-    /// 我的资讯
-    case information = "information"
-}
-
 enum HCMergeProOpType: String {
     /// 标记月经
     case menstruationDate = "menstruationDate"
@@ -154,6 +144,10 @@ enum API{
     case cmsDetail(articleId: String)
     /// 关注与收藏
     case attentionStore(moduleType: HCMenuListModuleType, pageNum: Int, pageSize: Int)
+    /// 文章收藏取消 - storeStatus: 收藏 ture , 取消 false
+    case articelStore(articleId: String, storeStatus: Bool)
+    /// 是否已收藏
+    case cmsFollow(articleId: String)
     /// 搜索
     case search(moduleType: HCsearchModule, searchWords: String, pageSize: Int, pageNum: Int)
     /// 我的优惠卷
@@ -251,8 +245,6 @@ enum API{
     case getAuthMember(openId: String)
     /// 文章当前收藏数量
     case storeAndStatus(articleId: String)
-    /// 文章收藏取消
-    case articelStore(articleId: String, status: Bool)
     /// 区域城市
     case allCity
     /// 添加标记排卵日,添加同房记录
@@ -290,6 +282,10 @@ extension API: TargetType{
             return "api/cms/cmsChanelList/\(cmsCode.rawValue)"
         case .cmsArticleList(let channelId):
             return "api/cms/articleList/\(channelId)"
+        case .articelStore(_):
+            return "api/cms/store"
+        case .cmsFollow(let articleId):
+            return "api/cms/follow/\(articleId)"
         case .cmsDetail(let articleId):
             return "api/cms/detail/\(articleId)"
         case .attentionStore(_, _, _):
@@ -384,8 +380,6 @@ extension API: TargetType{
             return "api/login/getAuthMember"
         case .storeAndStatus(_):
             return "api/cms/storeAndStatus"
-        case .articelStore(_):
-            return "api/cms/store"
         case .allCity:
             return "api/area/allCity"
         case .mergePro(_):
@@ -591,7 +585,7 @@ extension API {
             params["articleId"] = articleId
         case .articelStore(let articleId, let status):
             params["articleId"] = articleId
-            params["status"] = status
+            params["storeStatus"] = status
         case .mergePro(let opType, let date, let data):
             params["opType"] = opType.rawValue
             params["date"] = date

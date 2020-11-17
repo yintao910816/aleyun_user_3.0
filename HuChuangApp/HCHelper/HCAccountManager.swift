@@ -54,15 +54,6 @@ extension HCAccountManager {
         }
     }
     
-    /// 拼接医生主页分享链接
-    class func doctorHomeLink(forShare userId: String) ->String {
-        let urlString = "\(APIAssistance.baseH5Host)?from=groupmessage#/\(H5Type.doctorHome)?userId=\(userId)&share=1"
-        return urlString
-    }
-    /// 拼接文章分享链接
-    class func articleLink(forUrl url: String) ->String {
-        return "\(url)?share=1&from=groupmessage"
-    }
     /// App Store下载地址
     class func appstoreURL() ->String {
         let urlStr = "itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=\(ileyun_appid)"

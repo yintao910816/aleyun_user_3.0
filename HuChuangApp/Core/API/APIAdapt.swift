@@ -75,6 +75,16 @@ struct APIAssistance {
         }
     }
     
+    /// 拼接医生主页分享链接
+    static func doctorHomeLink(forShare userId: String) ->String {
+        let urlString = "\(APIAssistance.baseH5Host)?from=groupmessage#/\(H5Type.doctorHome)?userId=\(userId)&share=1"
+        return urlString
+    }
+    /// 拼接文章分享链接
+    static func articleLink(forUrl url: String) ->String {
+        return "\(url)?share=1&from=groupmessage"
+    }
+
     /// id拼接文章详情跳转链接
     static public func link(with id: String) ->String {
         return "\(APIAssistance.base)api/cms/detail/\(id)"

@@ -7,53 +7,84 @@
 //
 
 import Foundation
+import RxSwift
 
-class HCCollectionViewModel: RefreshVM<HCAttentionStoreModel> {
+class HCCollectionDoctorViewModel: RefreshVM<HCDoctorListItemModel> {
     
-    // 记录当前第几页数据
-    private var page: Int = 0
+    override init() {
+        super.init()
+    }
+    
+    override func requestData(_ refresh: Bool) {
+        super.requestData(refresh)
+        
+        HCProvider.request(.attentionStore(moduleType: .doctor, pageNum: pageModel.currentPage, pageSize: pageModel.pageSize))
+            .map(model: HCCollectionDoctorData.self)
+            .subscribe(onSuccess: { [weak self] in
+                self?.updateRefresh(refresh, $0.records, $0.pages)
+            }) { [weak self] _ in
+                self?.revertCurrentPageAndRefreshStatus()
+            }
+            .disposed(by: disposeBag)
+    }
+
+}
+
+class HCCollectionCourseViewModel: RefreshVM<HCCollectionCourseModel> {
+    
+    override init() {
+        super.init()
+    }
+
+    override func requestData(_ refresh: Bool) {
+        super.requestData(refresh)
+        
+        HCProvider.request(.attentionStore(moduleType: .course, pageNum: pageModel.currentPage, pageSize: pageModel.pageSize))
+            .map(model: HCCollectionCourseData.self)
+            .subscribe(onSuccess: { [weak self] in
+                self?.updateRefresh(refresh, $0.records, $0.pages)
+            }) { [weak self] _ in
+                self?.revertCurrentPageAndRefreshStatus()
+            }
+            .disposed(by: disposeBag)
+    }
+}
+
+class HCCollectionInformationViewModel: RefreshVM<HCCmsArticleListModel> {
+
+    public let articleDetailSignal = PublishSubject<HCCmsArticleListModel>()
 
     override init() {
         super.init()
         
-        requestData(true)
+        articleDetailSignal
+            ._doNext(forNotice: hud)
+            .subscribe(onNext: { [unowned self] in self.requestArticleDetail(data: $0) })
+            .disposed(by: disposeBag)
     }
-    
+
     override func requestData(_ refresh: Bool) {
+        super.requestData(refresh)
         
-        updatePage(for: "\(page)", refresh: refresh)
-        var signal = HCProvider.request(.attentionStore(moduleType: .information, pageNum: currentPage(for: "\(page)"), pageSize: pageSize(for: "\(page)")))
-            .mapJSON()
-        if page == 0 {
-            
-        }else {
-            
-        }
-        
-        signal
-            .subscribe(onSuccess: { res in
-                
-            })
-        .disposed(by: disposeBag)
-        
-//        if page == 0 {
-//            //            signal = HCProvider.request(.allChannelArticle(cmsType: .webCms001, pageNum: currentPage(for: "\(page)"), pageSize: pageSize(for: "\(page)")))
-//            //                .map(model: HCArticlePageDataModel.self)
-//        }
-//
-//        signal.subscribe(onSuccess: { [weak self] data in
-//            guard let strongSelf = self else { return }
-//            if strongSelf.menuPageListData[strongSelf.page] == nil {
-//                strongSelf.menuPageListData[strongSelf.page] = [HCArticleItemModel]()
-//            }
-//            strongSelf.updateRefresh(refresh: refresh, models: data.records, dataModels: &(strongSelf.menuPageListData[strongSelf.page])!, pages: data.pages, pageKey: "\(strongSelf.page)")
-//            self?.pageListData.onNext((strongSelf.menuPageListData[strongSelf.page]!, strongSelf.page))
-//        }) { [weak self] error in
-//            guard let strongSelf = self else { return }
-//            strongSelf.revertCurrentPageAndRefreshStatus(pageKey: "\(strongSelf.page)")
-//        }
-//        .disposed(by: disposeBag)
-        
+        HCProvider.request(.attentionStore(moduleType: .information, pageNum: pageModel.currentPage, pageSize: pageModel.pageSize))
+            .map(model: HCCollectionInformationData.self)
+            .subscribe(onSuccess: { [weak self] in
+                self?.updateRefresh(refresh, $0.records, $0.pages)
+            }) { [weak self] _ in
+                self?.revertCurrentPageAndRefreshStatus()
+            }
+            .disposed(by: disposeBag)
     }
     
+    private func requestArticleDetail(data: HCCmsArticleListModel) {
+        HCProvider.request(.cmsDetail(articleId: data.id))
+            .map(model: HCCmsDetailModel.self)
+            .subscribe { [weak self] linkM in
+                HCHomeViewModel.push(HCArticleDetailViewController.self, ["model": HCShareArticleModel.transformCmsModel(model: linkM)])
+                self?.hud.noticeHidden()
+            } onError: { [weak self] in
+                self?.hud.failureHidden(self?.errorMessage($0))
+            }
+            .disposed(by: disposeBag)
+    }
 }
