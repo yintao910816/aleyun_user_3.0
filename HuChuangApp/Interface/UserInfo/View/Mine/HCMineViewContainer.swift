@@ -15,8 +15,10 @@ class HCMineViewContainer: UIView {
     
     public var excuteAction: ((HCMineHeaderView.HCMineHeaderAction)->())?
     public var excuteMyServerAction: ((HCMenuItemCellMode)->())?
-    /// Bool - 是否已经有健康档案
-    public var excuteHealthyAction: ((Bool)->())?
+    /// 点击健康档案
+    public var excuteHealthyAction: (()->())?
+    /// 点击进行中的服务
+    public var excuteInServerAction: ((HCPersonalProgressServiceModel)->())?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -197,11 +199,13 @@ extension HCMineViewContainer: UICollectionViewDataSource, UICollectionViewDeleg
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
-            break
+            if model.progressServices.count > 0 {
+                excuteInServerAction?(model.progressServices[indexPath.row])
+            }
         case 1:
             excuteMyServerAction?(myServerModes[indexPath.row])
         case 2:
-            excuteHealthyAction?(model.healthArchives != nil)
+            excuteHealthyAction?()
         default:
             break
         }

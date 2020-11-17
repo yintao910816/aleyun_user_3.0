@@ -20,8 +20,12 @@ class HCMineHeaderView: UICollectionReusableView {
         case avatar
         /// 优惠卷
         case coupon
+        /// 服务包
+        case serverBags
         /// 收藏
         case attentionStore
+        /// 查看全部进行中的服务
+        case allInServer
     }
     
     private var avatarButton: UIButton!
@@ -111,6 +115,7 @@ extension HCMineHeaderView {
 
         serverButton = HCCustomTextButton()
         serverButton.setupText(first: "0", second: "服务包")
+        serverButton.actionCallBack = { [weak self] in self?.excuteAction?(.serverBags) }
 
         collectionButton = HCCustomTextButton()
         collectionButton.setupText(first: "0", second: "收藏")
@@ -119,6 +124,7 @@ extension HCMineHeaderView {
         bottomTitleView = HCCollectionSectionTitleView()
         bottomTitleView.title = "进行中的服务"
         bottomTitleView.detailTitle = "查看全部"
+        bottomTitleView.detailClickedAction = { [unowned self] _ in self.excuteAction?(.allInServer) }
 
         addSubview(avatarButton)
         addSubview(phoneLabel)

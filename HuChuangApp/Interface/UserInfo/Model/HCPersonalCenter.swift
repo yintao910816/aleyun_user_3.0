@@ -27,10 +27,11 @@ class HCPersonalHealthArchivesModel: HJModel {
 }
 
 class HCPersonalProgressServiceModel: HJModel {
-    var headPath: String = ""
-    var serverType: Int = 0
-    var technicalPost: String = ""
-    var unitName: String = ""
     var userId: String = ""
     var userName: String = ""
+    var headPath: String = ""
+    var unitName: String = ""
+    var technicalPost: String = ""
+    var serverType: Int = 0
+    var consultId: String = ""
 }

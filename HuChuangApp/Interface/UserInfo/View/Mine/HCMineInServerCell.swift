@@ -35,7 +35,6 @@ class HCMineInServerCell: UICollectionViewCell {
             nameLabel.text = model.userName
             jobLabel.text = model.technicalPost
             hospitalLabel.text = model.unitName
-            detailButton.setTitle("未知状态", for: .normal)
         }
     }
     
@@ -81,7 +80,8 @@ extension HCMineInServerCell {
         detailButton = UIButton()
         detailButton.setTitleColor(HC_MAIN_COLOR, for: .normal)
         detailButton.titleLabel?.font = .font(fontSize: 14)
-        
+        detailButton.setTitle("进行中", for: .normal)
+
         hospitalLabel = UILabel()
         hospitalLabel.textColor = RGB(153, 153, 153)
         hospitalLabel.font = .font(fontSize: 14)

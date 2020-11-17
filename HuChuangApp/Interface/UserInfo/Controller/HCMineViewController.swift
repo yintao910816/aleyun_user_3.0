@@ -33,8 +33,13 @@ class HCMineViewController: BaseViewController, VMNavigation {
                 self?.navigationController?.pushViewController(HCAccountSettingViewController(), animated: true)
             case .coupon:
                 self?.navigationController?.pushViewController(HCCouponViewController(), animated: true)
+            case .serverBags:
+                self?.navigationController?.pushViewController(HCUnderDevController.ctrlCreat(navTitle: "服务包"),
+                                                               animated: true)
             case .attentionStore:
                 self?.navigationController?.pushViewController(HCCollectionViewController(), animated: true)
+            case .allInServer:
+                self?.navigationController?.pushViewController(HCMyConsultViewController(), animated: true)
             }
         }
         
@@ -51,13 +56,16 @@ class HCMineViewController: BaseViewController, VMNavigation {
             }
         }
         
-        containerView.excuteHealthyAction = { [unowned self] _ in
-//            if $0 {
-//
-//            }else {
-                HCMineViewController.push(BaseWebViewController.self, ["url":APIAssistance.HealthRecords(),
-                                                                       "title":"健康档案"])
-//            }
+        containerView.excuteHealthyAction = {
+            HCMineViewController.push(BaseWebViewController.self, ["url":APIAssistance.HealthRecords(),
+                                                                   "title":"健康档案"])
+        }
+        
+        containerView.excuteInServerAction = { [unowned self] in
+            let url = APIAssistance.consultationChat(with: $0.consultId)
+            self.navigationController?.pushViewController(BaseWebViewController.createWeb(url: url,
+                                                                                          title: $0.userName),
+                                                          animated: true)
         }
         
         addBarItem(normal: "setting", right: true)
