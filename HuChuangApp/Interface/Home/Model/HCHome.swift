@@ -51,6 +51,12 @@ class HCFunctionsMenuModel: HJModel {
 //    }
 }
 
+/// 试管百科
+class HCGroupCmsArticleModel: HJModel {
+    var articleVoList: [HCCmsArticleListModel] = []
+    var name: String = ""
+}
+
 /// 文章栏目菜单
 class HCCmsCmsChanelListModel: HJModel {
     var bak: String = ""

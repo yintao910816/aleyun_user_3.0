@@ -174,7 +174,7 @@ enum API{
     case city(id: String)
     /// 专家列表
     case doctorList(areaCode: String, sortType: String, consultType: String, pageSize: Int, pageNum: Int)
-    /// 分组文章
+    /// 试管百科
     case groupCmsArticle(code: HCCmsType)
     /// 生殖中心
     case hospitalList(searchWords: String, areaCode: String, level: String)
@@ -315,7 +315,7 @@ extension API: TargetType{
         case .doctorList(_, _, _, _, _):
             return "api/doctor/doctorList"
         case .groupCmsArticle(let code):
-            return "api/cms/groupCmsArticle/\(code.rawValue)"
+            return "api/cms/getCmsArticleByCode/\(code.rawValue)"
         case .hospitalList(_, _, _):
             return "api/hospital/list"
         case .medicine(_):

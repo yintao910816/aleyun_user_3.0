@@ -73,15 +73,7 @@ class HCMenuItemCell: UICollectionViewCell {
             title.text = mode.modeString
         }
     }
-    
-    /// 试管百科
-    public var articleVoListItem: HCArticleVoListItemModel! {
-        didSet {
-            icon.setImage(articleVoListItem.picPath, .original)
-            title.text = articleVoListItem.title
-        }
-    }
-    
+        
     /// 药品百科
     public var medicineItem: HCMedicineItemModel! {
         didSet {

@@ -315,6 +315,7 @@
 		B892FFA023ABB50800A137C0 /* TYFiliterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B892FF9F23ABB50800A137C0 /* TYFiliterView.swift */; };
 		B892FFA223ABB5AE00A137C0 /* TYFiliterLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B892FFA123ABB5AE00A137C0 /* TYFiliterLayout.swift */; };
 		B892FFA423ABB70700A137C0 /* TYFiliterViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B892FFA323ABB70700A137C0 /* TYFiliterViewData.swift */; };
+		B89A73C325639B0F0094E13A /* HCTestTubeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89A73C225639B0F0094E13A /* HCTestTubeCell.swift */; };
 		B89C396A23A0C90100CAB651 /* TYCurveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89C396923A0C90100CAB651 /* TYCurveView.swift */; };
 		B89C397123A141B200CAB651 /* TYMarkString.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89C397023A141B200CAB651 /* TYMarkString.swift */; };
 		B8BE1AE423A698C300DF472A /* HCAccountManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8BE1AE323A698C300DF472A /* HCAccountManager.swift */; };
@@ -541,7 +542,6 @@
 		C4D1DB3A24F691DD001EF30F /* HCTestTubeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D1DB3924F691DD001EF30F /* HCTestTubeViewController.swift */; };
 		C4D1DB3D24F6922C001EF30F /* HCTestTubeContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D1DB3C24F6922C001EF30F /* HCTestTubeContainer.swift */; };
 		C4D1DB3F24F6923A001EF30F /* HCTestTubeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D1DB3E24F6923A001EF30F /* HCTestTubeViewModel.swift */; };
-		C4D1DB4124F69421001EF30F /* HCTestTube.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D1DB4024F69421001EF30F /* HCTestTube.swift */; };
 		C4D1DB4424F6B6CD001EF30F /* HCHospitalList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D1DB4324F6B6CD001EF30F /* HCHospitalList.swift */; };
 		C4D1DB4724F6B6ED001EF30F /* HCHospitalListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D1DB4624F6B6ED001EF30F /* HCHospitalListViewController.swift */; };
 		C4D1DB4924F6B702001EF30F /* HCHospitalListContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D1DB4824F6B702001EF30F /* HCHospitalListContainer.swift */; };
@@ -1185,6 +1185,7 @@
 		B892FF9F23ABB50800A137C0 /* TYFiliterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TYFiliterView.swift; sourceTree = "<group>"; };
 		B892FFA123ABB5AE00A137C0 /* TYFiliterLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TYFiliterLayout.swift; sourceTree = "<group>"; };
 		B892FFA323ABB70700A137C0 /* TYFiliterViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TYFiliterViewData.swift; sourceTree = "<group>"; };
+		B89A73C225639B0F0094E13A /* HCTestTubeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCTestTubeCell.swift; sourceTree = "<group>"; };
 		B89C396923A0C90100CAB651 /* TYCurveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TYCurveView.swift; sourceTree = "<group>"; };
 		B89C397023A141B200CAB651 /* TYMarkString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TYMarkString.swift; sourceTree = "<group>"; };
 		B8AFDE5A233E702B00196064 /* HCRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCRecordViewController.swift; sourceTree = "<group>"; };
@@ -1443,7 +1444,6 @@
 		C4D1DB3924F691DD001EF30F /* HCTestTubeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCTestTubeViewController.swift; sourceTree = "<group>"; };
 		C4D1DB3C24F6922C001EF30F /* HCTestTubeContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCTestTubeContainer.swift; sourceTree = "<group>"; };
 		C4D1DB3E24F6923A001EF30F /* HCTestTubeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCTestTubeViewModel.swift; sourceTree = "<group>"; };
-		C4D1DB4024F69421001EF30F /* HCTestTube.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCTestTube.swift; sourceTree = "<group>"; };
 		C4D1DB4324F6B6CD001EF30F /* HCHospitalList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCHospitalList.swift; sourceTree = "<group>"; };
 		C4D1DB4624F6B6ED001EF30F /* HCHospitalListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCHospitalListViewController.swift; sourceTree = "<group>"; };
 		C4D1DB4824F6B702001EF30F /* HCHospitalListContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCHospitalListContainer.swift; sourceTree = "<group>"; };
@@ -3430,7 +3430,6 @@
 				C40448B024EB7E0100AD1610 /* HCHome.swift */,
 				B8F90E5D24F25FD100A1D68C /* HCMessage.swift */,
 				C4DDE0AE24F4D9810001201C /* HCExpertConsultation.swift */,
-				C4D1DB4024F69421001EF30F /* HCTestTube.swift */,
 				C4D1DB4324F6B6CD001EF30F /* HCHospitalList.swift */,
 				C4D1DB5224F6C306001EF30F /* HCMedicine.swift */,
 			);
@@ -3582,6 +3581,7 @@
 			isa = PBXGroup;
 			children = (
 				C4D1DB3C24F6922C001EF30F /* HCTestTubeContainer.swift */,
+				B89A73C225639B0F0094E13A /* HCTestTubeCell.swift */,
 			);
 			path = TestTube;
 			sourceTree = "<group>";
@@ -4265,7 +4265,6 @@
 				C4F139B7235419EF00D777F6 /* Validate.swift in Sources */,
 				C421338222059B8C006C10C4 /* UserDefaults+Cache.swift in Sources */,
 				B816EAA4221DABF400F024D5 /* ZXQRCodeBitMatrixParser.m in Sources */,
-				C4D1DB4124F69421001EF30F /* HCTestTube.swift in Sources */,
 				C4D1DB6124F76160001EF30F /* HCClassRoomHeaderReusableView.swift in Sources */,
 				C421334D220587DC006C10C4 /* Single+ModelMapper.swift in Sources */,
 				B816EA81221DABF400F024D5 /* ZXDimension.m in Sources */,
@@ -4428,6 +4427,7 @@
 				C4382C0524E56C37000C00CE /* HCEditInfoViewModel.swift in Sources */,
 				C4DDE09F24F14ACB0001201C /* HCCloudClinicConsultViewController.swift in Sources */,
 				C4C8EB3F235175660054A295 /* HCHomePreparePregnantInfoCell.swift in Sources */,
+				B89A73C325639B0F0094E13A /* HCTestTubeCell.swift in Sources */,
 				B816EAB2221DABF400F024D5 /* ZXDetectorResult.m in Sources */,
 				C4C3257B2205B8490091783C /* ScrollTextView.swift in Sources */,
 				C4D1DB9924F7B366001EF30F /* HCSearchViewModel.swift in Sources */,

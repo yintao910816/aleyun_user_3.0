@@ -47,8 +47,8 @@ class HCHospitalListCell: UITableViewCell {
     
     public var model: HCHospitalListItemModel! {
         didSet {
-            titleLabel.text = "标题"
-            subTitleLabel.text = "副标题"
+            titleLabel.text = model.name
+            subTitleLabel.text = model.address
         }
     }
     

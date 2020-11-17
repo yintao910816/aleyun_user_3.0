@@ -12,7 +12,7 @@ class HCTestTubeContainer: UIView {
 
     private var collectionView: UICollectionView!
     
-    public var cellDidSelected: ((HCArticleVoListItemModel) ->())?
+    public var cellDidSelected: ((HCCmsArticleListModel) ->())?
 
     public var datasource: [HCGroupCmsArticleModel] = [] {
         didSet {
@@ -51,7 +51,7 @@ extension HCTestTubeContainer {
         
         collectionView.register(HCCollectionSectionTitleView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HCCollectionSectionTitleView_identifier)
 
-        collectionView.register(HCMenuItemCell.self, forCellWithReuseIdentifier: HCMenuItemCell_identifier)
+        collectionView.register(HCTestTubeCell.self, forCellWithReuseIdentifier: HCTestTubeCell_identifier)
     }
 }
 
@@ -66,14 +66,14 @@ extension HCTestTubeContainer: UICollectionViewDataSource, UICollectionViewDeleg
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HCMenuItemCell_identifier, for: indexPath) as! HCMenuItemCell
-        cell.articleVoListItem = datasource[indexPath.section].articleVoList[indexPath.row]
-        cell.titleFont = .font(fontSize: 15, fontName: .PingFMedium)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HCTestTubeCell_identifier, for: indexPath) as! HCTestTubeCell
+        cell.model = datasource[indexPath.section].articleVoList[indexPath.row]
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return .init(width: (width - 15 * 2 - 10 * 3) / 4.0, height: HCMenuItemCell_height)
+        let size = (width - 15 * 2 - 10 * 3) / 4.0
+        return .init(width: size, height: size)
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -87,15 +87,15 @@ extension HCTestTubeContainer: UICollectionViewDataSource, UICollectionViewDeleg
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return .init(width: width, height: HCCollectionSectionTitleView_height)
+        return .init(width: width, height: 45)
     }
         
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return .init(top: 20, left: 15, bottom: 15, right: 15)
+        return .init(top: 0, left: 15, bottom: 15, right: 15)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 25
+        return 10
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {

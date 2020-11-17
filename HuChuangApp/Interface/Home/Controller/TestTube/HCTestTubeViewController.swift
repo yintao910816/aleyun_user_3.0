@@ -19,12 +19,7 @@ class HCTestTubeViewController: BaseViewController {
         container = HCTestTubeContainer.init(frame: view.bounds)
         view.addSubview(container)
         
-        container.cellDidSelected = { [weak self] in
-            let url = APIAssistance.link(with: $0.id)
-            self?.navigationController?.pushViewController(BaseWebViewController.createWeb(url: url,
-                                                                                           title: $0.title),
-                                                           animated: true)
-        }
+        container.cellDidSelected = { [weak self] in self?.viewModel.articleDetailSignal.onNext($0) }
     }
     
     override func rxBind() {

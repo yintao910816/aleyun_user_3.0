@@ -15,6 +15,7 @@ class HCHospitalListContainer: UIView {
     public var tableView: UITableView!
     
     public var menuSelect: ((Int)->())?
+    public var beginSearch: ((String)->())?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -56,6 +57,7 @@ extension HCHospitalListContainer {
         searchBar.inputBackGroundColor = RGB(243, 243, 243)
         searchBar.leftItelColor = .white
         searchBar.backgroundColor = .white
+        searchBar.beginSearch = { [weak self] in self?.beginSearch?($0) }
 
         slideMenu = TYSlideMenu()
         slideMenu.menuSelect = { [weak self] in self?.menuSelect?($0) }

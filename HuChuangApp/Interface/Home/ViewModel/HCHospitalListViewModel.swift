@@ -13,14 +13,15 @@ class HCHospitalListViewModel: RefreshVM<HCHospitalListItemModel> {
     
     private var slideData: [TYSlideItemModel] = []
 
-    private var searchWords: String = "同济"
-    private var areaCode: String = "1"
+    private var searchWords: String = ""
+    private var areaCode: String = ""
     private var level: String = ""
 
     public let slideDataSignal = PublishSubject<([TYSlideItemModel])>()
 
     public let areaFilterSubject = PublishSubject<(HCAreaProvinceModel, HCAreaCityModel)>()
     public let levelFilterSubject = PublishSubject<String>()
+    public let keyWordsFilterSubject = PublishSubject<String>()
 
     override init() {
         super.init()
@@ -32,6 +33,13 @@ class HCHospitalListViewModel: RefreshVM<HCHospitalListItemModel> {
                 strongSelf.slideData.first?.title = $0.1.name
                 strongSelf.slideDataSignal.onNext(strongSelf.slideData)
                 strongSelf.requestData(true)
+            })
+            .disposed(by: disposeBag)
+        
+        keyWordsFilterSubject
+            .subscribe(onNext: { [unowned self] in
+                self.searchWords = $0
+                self.requestData(true)
             })
             .disposed(by: disposeBag)
         
@@ -68,8 +76,8 @@ class HCHospitalListViewModel: RefreshVM<HCHospitalListItemModel> {
         
         HCProvider.request(.hospitalList(searchWords: searchWords, areaCode: areaCode, level: level))
             .map(models: HCHospitalListItemModel.self)
-            .subscribe(onSuccess: { [weak self] _ in
-                self?.updateRefresh(refresh, [HCHospitalListItemModel(), HCHospitalListItemModel()], 1)
+            .subscribe(onSuccess: { [weak self] in
+                self?.updateRefresh(refresh, $0, 1)
             })
             .disposed(by: disposeBag)
     }

@@ -12,9 +12,15 @@ import RxSwift
 class HCTestTubeViewModel: BaseViewModel {
     
     public let datasource = Variable([HCGroupCmsArticleModel]())
-    
+    public let articleDetailSignal = PublishSubject<HCCmsArticleListModel>()
+
     override init() {
         super.init()
+
+        articleDetailSignal
+            ._doNext(forNotice: hud)
+            .subscribe(onNext: { [unowned self] in self.requestArticleDetail(data: $0) })
+            .disposed(by: disposeBag)
 
         reloadSubject
             .subscribe(onNext: { [weak self] in self?.requestGroupCmsArticle() })
@@ -33,5 +39,17 @@ class HCTestTubeViewModel: BaseViewModel {
         }
         .disposed(by: disposeBag)
         
+    }
+    
+    private func requestArticleDetail(data: HCCmsArticleListModel) {
+        HCProvider.request(.cmsDetail(articleId: data.id))
+            .map(model: HCCmsDetailModel.self)
+            .subscribe { [weak self] linkM in
+                HCHomeViewModel.push(BaseWebViewController.self, ["url": linkM.hrefUrl, "title": linkM.title])
+                self?.hud.noticeHidden()
+            } onError: { [weak self] in
+                self?.hud.failureHidden(self?.errorMessage($0))
+            }
+            .disposed(by: disposeBag)
     }
 }

@@ -37,6 +37,8 @@ class HCHospitalListViewController: BaseViewController {
                 break
             }
         }
+        
+        container.beginSearch = { [unowned self] in self.viewModel.keyWordsFilterSubject.onNext($0) }
     }
     
     override func rxBind() {
