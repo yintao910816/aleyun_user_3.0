@@ -51,8 +51,9 @@ class HCDoctorListItemModel: HJModel, HCSearchDataProtocol {
     var brief: String = ""
     var cityName: String = ""
     var consult: String = ""
-    var consultNum: String = ""
-    var prasiRat: String = ""
+    var consultNum: Int = 0
+    var replyNum: Int = 0
+    var prasiRat: Float = 0
     var respRate: Float = 0
     var consultPrice: String = ""
     var createDate: String = ""
@@ -107,34 +108,51 @@ class HCDoctorListItemModel: HJModel, HCSearchDataProtocol {
         return string
     }()
     
+    /**
+     String prise = "咨询数<font color='#F4AE3E' size='12'>"
+             + (item.getConsultNum() == null ? 0 : item.getConsultNum()) + "</font>，"
+             
+     + "回复率<font color='#F4AE3E' size='12'>"
+             + ((item.getReplyNum() == null || item.getConsultNum() == null || item.getConsultNum() == 0) ? "良好" : item.getReplyNum() / item.getConsultNum() < 0.8 ? "良好" : "高") + "</font>，"
+     +
+             "好评率<font color='#F4AE3E' size='12'>" + ((TextUtils.isEmpty(item.getPrasiRat()) || item.getPrasiRat().equals("0.00")) ? "100"
+             : Double.valueOf(100 * Double.valueOf(item.getPrasiRat())).intValue()) + "%</font>";
+     */
+    
     public lazy var briefText: NSAttributedString = {
-        let replyText = self.respRate > 0.5 ? "良好" : "一般"
-        let string = NSMutableAttributedString.init(string: "咨询数\(self.consultNum)，回复率\(replyText)，好评率\(self.prasiRat)")
+        // 咨询数
+        let consultText = "\(consultNum)"
+        // 回复率
+        let replyText = consultNum == 0 ? "良好" : Float(replyNum / consultNum) < 0.8 ? "良好" : "高"
+        // 好评率
+        let praiseText = prasiRat == 0 ? "100%" : "\(Int(prasiRat * 100))%"
+        
+        let string = NSMutableAttributedString.init(string: "咨询数\(consultText)，回复率\(replyText)，好评率\(praiseText)")
         
         string.addAttribute(NSAttributedString.Key.foregroundColor,
                             value: RGB(244, 174, 62),
-                            range: .init(location: 3, length: self.consultNum.count))
+                            range: .init(location: 3, length: consultText.count))
         string.addAttribute(NSAttributedString.Key.font,
                             value: UIFont.font(fontSize: 12, fontName: .PingFSemibold),
-                            range: .init(location: 3, length: self.consultNum.count))
+                            range: .init(location: 3, length: consultText.count))
 
         string.addAttribute(NSAttributedString.Key.foregroundColor,
                             value: RGB(244, 174, 62),
-                            range: .init(location: 3 + self.consultNum.count + 4,
+                            range: .init(location: 3 + consultText.count + 4,
                                          length: replyText.count))
         string.addAttribute(NSAttributedString.Key.font,
                             value: UIFont.font(fontSize: 12, fontName: .PingFSemibold),
-                            range: .init(location: 3 + self.consultNum.count + 4,
+                            range: .init(location: 3 + consultText.count + 4,
                                          length: replyText.count))
 
         string.addAttribute(NSAttributedString.Key.foregroundColor,
                             value: RGB(244, 174, 62),
-                            range: .init(location: 3 + self.consultNum.count + 4 + replyText.count + 4,
-                                         length: self.prasiRat.count))
+                            range: .init(location: 3 + consultText.count + 4 + replyText.count + 4,
+                                         length: praiseText.count))
         string.addAttribute(NSAttributedString.Key.font,
                             value: UIFont.font(fontSize: 12, fontName: .PingFSemibold),
-                            range: .init(location: 3 + self.consultNum.count + 4 + replyText.count + 4,
-                                         length: self.prasiRat.count))
+                            range: .init(location: 3 + consultText.count + 4 + replyText.count + 4,
+                                         length: praiseText.count))
         
         return string
     }()
