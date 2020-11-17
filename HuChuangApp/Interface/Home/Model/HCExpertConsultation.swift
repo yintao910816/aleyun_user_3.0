@@ -52,6 +52,8 @@ class HCDoctorListItemModel: HJModel, HCSearchDataProtocol {
     var cityName: String = ""
     var consult: String = ""
     var consultNum: String = ""
+    var prasiRat: String = ""
+    var respRate: Float = 0
     var consultPrice: String = ""
     var createDate: String = ""
     var creates: String = ""
@@ -73,10 +75,8 @@ class HCDoctorListItemModel: HJModel, HCSearchDataProtocol {
     var name: String = ""
     var numbers: String = ""
     var practitionerYear: String = ""
-    var prasiRat: String = ""
     var provinceName: String = ""
     var recom: String = ""
-    var respRate: String = ""
     var sex: String = ""
     var skilledIn: String = ""
     var skilledInIds: String = ""
@@ -108,7 +108,8 @@ class HCDoctorListItemModel: HJModel, HCSearchDataProtocol {
     }()
     
     public lazy var briefText: NSAttributedString = {
-        let string = NSMutableAttributedString.init(string: "咨询数\(self.consultNum)，回复率\(self.numbers)，好评率\(self.prasiRat)")
+        let replyText = self.respRate > 0.5 ? "良好" : "一般"
+        let string = NSMutableAttributedString.init(string: "咨询数\(self.consultNum)，回复率\(replyText)，好评率\(self.prasiRat)")
         
         string.addAttribute(NSAttributedString.Key.foregroundColor,
                             value: RGB(244, 174, 62),
@@ -120,21 +121,20 @@ class HCDoctorListItemModel: HJModel, HCSearchDataProtocol {
         string.addAttribute(NSAttributedString.Key.foregroundColor,
                             value: RGB(244, 174, 62),
                             range: .init(location: 3 + self.consultNum.count + 4,
-                                         length: self.numbers.count))
+                                         length: replyText.count))
         string.addAttribute(NSAttributedString.Key.font,
                             value: UIFont.font(fontSize: 12, fontName: .PingFSemibold),
                             range: .init(location: 3 + self.consultNum.count + 4,
-                                         length: self.numbers.count))
+                                         length: replyText.count))
 
         string.addAttribute(NSAttributedString.Key.foregroundColor,
                             value: RGB(244, 174, 62),
-                            range: .init(location: 3 + self.consultNum.count + 4 + self.numbers.count + 4,
+                            range: .init(location: 3 + self.consultNum.count + 4 + replyText.count + 4,
                                          length: self.prasiRat.count))
         string.addAttribute(NSAttributedString.Key.font,
                             value: UIFont.font(fontSize: 12, fontName: .PingFSemibold),
-                            range: .init(location: 3 + self.consultNum.count + 4 + self.numbers.count + 4,
+                            range: .init(location: 3 + self.consultNum.count + 4 + replyText.count + 4,
                                          length: self.prasiRat.count))
-
         
         return string
     }()

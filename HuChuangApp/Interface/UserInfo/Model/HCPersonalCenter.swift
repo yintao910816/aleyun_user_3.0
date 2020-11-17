@@ -21,8 +21,8 @@ class HCPersonalCenterInfoModel: HJModel {
 }
 
 class HCPersonalHealthArchivesModel: HJModel {
-    var memberName: String = "张三"
-    var age: String = "25"
+    var memberName: String = ""
+    var age: String = ""
     var sex: Int = 0
 }
 

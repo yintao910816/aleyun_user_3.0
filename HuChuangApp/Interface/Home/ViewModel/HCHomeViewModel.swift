@@ -10,16 +10,23 @@ import Foundation
 
 import RxSwift
 
-class HCHomeViewModel: BaseViewModel {
+class HCHomeViewModel: BaseViewModel, VMNavigation {
     
     private var allArticleDatas: [String: [HCCmsArticleListModel]] = [:]
     
     public let functionsMenuSignal = Variable(([HCFunctionsMenuModel](), [HCCmsCmsChanelListModel](), [HCCmsRecommendModel](), 0))
     public let articleDataSignal = PublishSubject<([HCCmsArticleListModel], Int)>()
     public let articleTypeChangeSignal = PublishSubject<((HCMenuItemModel,Int))>()
-
+    /// 获取文章详情链接
+    public let articleDetailSignal = PublishSubject<HCCmsArticleListModel>()
+    
     override init() {
         super.init()
+        
+        articleDetailSignal
+            ._doNext(forNotice: hud)
+            .subscribe(onNext: { [unowned self] in self.requestArticleDetail(data: $0) })
+            .disposed(by: disposeBag)
         
         articleTypeChangeSignal
             .subscribe(onNext: { [unowned self] in
@@ -89,6 +96,18 @@ extension HCHomeViewModel {
                 self?.articleDataSignal.onNext(($0, page))
                 self?.hud.noticeHidden()
             })
+            .disposed(by: disposeBag)
+    }
+    
+    private func requestArticleDetail(data: HCCmsArticleListModel) {
+        HCProvider.request(.cmsDetail(articleId: data.id))
+            .map(model: HCCmsDetailModel.self)
+            .subscribe { [weak self] linkM in
+                HCHomeViewModel.push(BaseWebViewController.self, ["url": linkM.hrefUrl, "title": linkM.title])
+                self?.hud.noticeHidden()
+            } onError: { [weak self] in
+                self?.hud.failureHidden(self?.errorMessage($0))
+            }
             .disposed(by: disposeBag)
     }
 }

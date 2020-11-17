@@ -29,6 +29,26 @@ class HCFunctionsMenuModel: HJModel {
     var type: String = ""
     var unitId: String = ""
     var unitName: String = ""
+    
+//    /// 暂时写死的菜单
+//    public class func homeFuncs() ->[HCFunctionsMenuModel] {
+//        let codes = ["QGH", "ZJWZ", "KSWZ", "SGBK", "SZZX", "SGRJ", "YPBK"]
+//        let titles = ["去挂号", "专家问诊", "快速问诊", "试管百科", "生殖中心", "试管日记", "药品百科"]
+//        let baks = ["海量生殖专家", "一对一咨询", "快问快答", "", "", "", ""]
+//        let iconPaths = ["func_gh", "func_zjwz", "func_kswz", "func_sgbk", "func_szzx", "func_sgrj", "func_ypbk"]
+//
+//        var datas: [HCFunctionsMenuModel] = []
+//        
+//        for idx in 0..<codes.count {
+//            let m = HCFunctionsMenuModel()
+//            m.name = titles[idx]
+//            m.bak = baks[idx]
+//            m.code = codes[idx]
+//            m.iconPath = iconPaths[idx]
+//            datas.append(m)
+//        }
+//        return datas
+//    }
 }
 
 /// 文章栏目菜单
@@ -72,4 +92,39 @@ class HCCmsArticleListModel: HJModel {
     var readNumber: Int = 0
     var store: Int = 0
     var title: String = ""
+}
+
+//MARK: 获取的文章详情h5链接
+class HCCmsDetailModel: HJModel {
+    var author: String = ""
+    var bak: String = ""
+    var channelId: Int = 0
+    var code: String = ""
+    var content: String = ""
+    var createDate: String = ""
+    var creates: String = ""
+    var del: Bool = false
+    var hrefUrl: String = ""
+    var id: String = ""
+    var info: String = ""
+    var linkTypes: Int = 1
+    var linkUrls: String = ""
+    var memberId: String = ""
+    var modifyDate: String = ""
+    var modifys: String = ""
+    var picPath: String = ""
+    var publishDate: String = ""
+    var readNumber: String = ""
+    var recom: String = ""
+    var release: String = ""
+    var seoDescription: String = ""
+    var seoKeywords: String = ""
+    var shopId: String = ""
+    var sort: Int = 99
+    var store: String = ""
+    var storeStatus: Int = 0
+    var title: String = ""
+    var top: Int = 0
+    var unitId: String = ""
+
 }

@@ -150,6 +150,8 @@ enum API{
     case cmsCmsChanelList(cmsCode: HCCmsType)
     /// 热门资讯—文章列表
     case cmsArticleList(channelId: String)
+    /// 获取文章详情h5链接
+    case cmsDetail(articleId: String)
     /// 关注与收藏
     case attentionStore(moduleType: HCMenuListModuleType, pageNum: Int, pageSize: Int)
     /// 搜索
@@ -288,6 +290,8 @@ extension API: TargetType{
             return "api/cms/cmsChanelList/\(cmsCode.rawValue)"
         case .cmsArticleList(let channelId):
             return "api/cms/articleList/\(channelId)"
+        case .cmsDetail(let articleId):
+            return "api/cms/detail/\(articleId)"
         case .attentionStore(_, _, _):
             return "api/attentionStore/attentionStore"
         case .search(_, _, _, _):

@@ -33,7 +33,8 @@ class HCMineHealthArchivesCell: UICollectionViewCell {
         didSet {
             let gender = (HCGender(rawValue: model.sex) ?? HCGender.female)
             sexLabel.text = gender.genderText
-            bgView.backgroundColor = gender == .female ? HC_MAIN_COLOR : RGB(225, 237, 253)
+            bgView.backgroundColor = gender == .female ? RGB(250, 228, 228) : RGB(225, 237, 253)
+            sexIcon.image = gender == .female ? UIImage(named: "mine_female") : UIImage(named: "mine_male")
 
             nameLabel.text = model.memberName
             ageLabel.text = "\(model.age)岁"
@@ -45,7 +46,17 @@ class HCMineHealthArchivesCell: UICollectionViewCell {
         
         bgView.frame = .init(x: 0, y: 0, width: 215, height: height)
         
-        sexIcon.frame = .init(x: bgView.width - bgView.height, y: 0, width: bgView.height, height: bgView.height)
+        var sexIconH: CGFloat = sexIcon.image?.size.height ?? bgView.height
+        var sexIconW: CGFloat = sexIcon.image?.size.width ?? bgView.height
+        if sexIconH > bgView.height {
+            sexIconW = sexIconW * bgView.height / sexIconH
+            sexIconH = bgView.height
+        }
+            
+        sexIcon.frame = .init(x: bgView.width - sexIconW,
+                              y: (bgView.height - sexIconH) / 2,
+                              width: sexIconW,
+                              height: sexIconH)
         nameLabel.frame = .init(x: 15, y: 15, width: sexIcon.x - 15 - 15, height: 26)
         
         var tempSize = ageLabel.sizeThatFits(.init(width: CGFloat(MAXFLOAT), height: 20))

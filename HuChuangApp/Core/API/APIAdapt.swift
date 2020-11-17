@@ -50,7 +50,9 @@ struct APIAssistance {
     public static let fileBase = "https://ileyun.ivfcn.com/hc-files/"
     
     /// 测试地址最后加s，正式去掉
-    public static let baseH5Host = "https://ileyun.ivfcn.com/consults/"
+    public static let baseH5Host = "https://ileyun.ivfcn.com/hc-patient-webs/"
+    /// 咨询相关h5主页
+    public static let consultsH5Host = "https://ileyun.ivfcn.com/consults/"
 
     static public func baseURL(API: API) ->URL{
         switch API {
@@ -85,12 +87,12 @@ struct APIAssistance {
 
     /// 咨询医生主页
     static public func consultationHome(with doctorId: String, unitId: String) ->String {
-        return "\(APIAssistance.baseH5Host)#/consultationHome/\(doctorId)?unitId=\(unitId)"
+        return "\(APIAssistance.consultsH5Host)#/consultationHome/\(doctorId)?unitId=\(unitId)"
     }
     
     /// 咨询聊天室
     static public func consultationChat(with consultId: String) ->String {
-        return "\(APIAssistance.baseH5Host)#/chatConsultation/\(consultId)"
+        return "\(APIAssistance.consultsH5Host)#/chatConsultation/\(consultId)"
     }
 }
 

@@ -43,12 +43,7 @@ class HCHomeViewController: BaseViewController {
         view.insertSubview(containerView, belowSubview: searchBar)
         
         containerView.menuChanged = { [weak self] in self?.viewModel.articleTypeChangeSignal.onNext($0) }
-        containerView.articleClicked = { [weak self] in
-            let url = APIAssistance.link(with: $0.id)
-            self?.navigationController?.pushViewController(BaseWebViewController.createWeb(url: url,
-                                                                                           title: $0.title),
-                                                           animated: true)
-        }
+        containerView.articleClicked = { [weak self] in self?.viewModel.articleDetailSignal.onNext($0) }
         
         containerView.funcItemClicked = { [weak self] in self?.functionMenuClicked(functionModel: $0) }
         
@@ -112,8 +107,12 @@ extension HCHomeViewController {
             return
         }
 
-        navigationController?.pushViewController(BaseWebViewController.createWeb(url: functionModel.functionUrl,
-                                                                                 title: functionModel.name),
-                                                 animated: true)
+        if functionModel.functionUrl.contains("underdev") && !functionModel.functionUrl.contains("http") {
+            HCHelper.pushLocalH5(type: .underDev)
+        }else {
+            navigationController?.pushViewController(BaseWebViewController.createWeb(url: functionModel.functionUrl,
+                                                                                     title: functionModel.name),
+                                                     animated: true)
+        }
     }
 }
