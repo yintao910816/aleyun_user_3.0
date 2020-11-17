@@ -46,9 +46,9 @@ class HCMyConsultViewController: BaseViewController {
     override func rxBind() {
         viewModel = HCMyConsultViewModel()
         
-        picConsultCtrl.bind(viewModel: viewModel, canRefresh: true, canLoadMore: true, isAddNoMoreContent: false)
-        videoConsultCtrl.bind(viewModel: viewModel, canRefresh: true, canLoadMore: true, isAddNoMoreContent: false)
-        cloudClinicConsultCtrl.bind(viewModel: viewModel, canRefresh: true, canLoadMore: true, isAddNoMoreContent: false)
+        picConsultCtrl.bind(viewModel: viewModel, canRefresh: true, canLoadMore: true, isAddNoMoreContent: true)
+        videoConsultCtrl.bind(viewModel: viewModel, canRefresh: true, canLoadMore: true, isAddNoMoreContent: true)
+        cloudClinicConsultCtrl.bind(viewModel: viewModel, canRefresh: true, canLoadMore: true, isAddNoMoreContent: true)
 
         viewModel.datasource.asDriver()
             .drive(onNext: { [weak self] in

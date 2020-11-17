@@ -16,7 +16,7 @@ extension UIScrollView {
     final func prepare<T>(_ ower: RefreshVM<T>,
                           showFooter: Bool = true,
                           showHeader: Bool = true,
-                          isAddNoMoreContent: Bool = false) {
+                          isAddNoMoreContent: Bool = true) {
         addFreshView(ower: ower, showFooter: showFooter, showHeader: showHeader)
         bind(ower, showFooter, showHeader, isAddNoMoreContent: isAddNoMoreContent)
     }
@@ -47,9 +47,6 @@ extension UIScrollView {
                 ower.requestData(false)
             })
             mj_footer.isHidden = true
-//            self.mj_footer = MJRefreshBackNormalFooter.init(refreshingBlock: {
-//                ower.requestData(false)
-//            })
         }
     }
     
@@ -68,55 +65,46 @@ extension UIScrollView {
                     }
                     if hasFooter == true {
                         self?.mj_footer.isHidden = false
-//                        self?.mj_footer.resetNoMoreData()
                     }
-//                    if isAddNoMoreContent == true { self?.addNoMoreDataFooter(isAdd: false) }
-                    break
                 case .DropDownSuccessAndNoMoreData:
                     if hasHeader {
                         self?.mj_header.endRefreshing()
                     }
                     if hasFooter == true {
                         self?.mj_footer.isHidden = true
-//                        self?.mj_footer.endRefreshingWithNoMoreData()
                     }
-//                    if isAddNoMoreContent == true { self?.addNoMoreDataFooter(isAdd: true) }
-                    break
                 case .PullSuccessHasMoreData:
                     if hasFooter == true { self?.mj_footer.endRefreshing() }
-                    
-//                    if isAddNoMoreContent == true { self?.addNoMoreDataFooter(isAdd: false) }
-                    break
                 case .PullSuccessNoMoreData:
                     if hasFooter == true {
                         self?.mj_footer.isHidden = true
-//                        self?.mj_footer.endRefreshingWithNoMoreData()
                     }
-//                    if isAddNoMoreContent == true { self?.addNoMoreDataFooter(isAdd: true) }
-                    break
                 case .InvalidData:
                     if hasHeader {
                         self?.mj_header.endRefreshing()
                     }
                     if hasFooter == true { self?.mj_footer.endRefreshing() }
-//                    if isAddNoMoreContent == true { self?.addNoMoreDataFooter(isAdd: false) }
-                    break
                 }
             })
+        
+        if isAddNoMoreContent {
+            _ = ower.isEmptyContentObser.asDriver()
+                .drive(onNext: { [weak self] in
+                    self?.addNoMoreDataFooter(isAdd: $0)
+                })
+        }
     }
     
-//    private func addNoMoreDataFooter(isAdd: Bool) {
-//        guard let tableView = self as? UITableView else {
-//            return
-//        }
-//
-//        if isAdd == true {
-//            let footer = NoMoreDataFooter()
-//            tableView.tableFooterView = footer.contentView
-//        }else {
-//            tableView.tableFooterView = nil
-//        }
-//    }
+    private func addNoMoreDataFooter(isAdd: Bool) {
+        viewWithTag(20020)?.removeFromSuperview()
+        isScrollEnabled = !isAdd
+
+        if isAdd {
+            let view = HCListEmptyView.init(frame: bounds)
+            view.tag = 20020
+            addSubview(view)
+        }
+    }
 
 }
 
@@ -268,4 +256,58 @@ extension RefreshVM {
         }
     }
 
+}
+
+//MARK: 列表空数据
+class HCListEmptyView: UIView {
+    private var contentView: UIView!
+    private var remindImgV: UIImageView!
+    private var remindLabel: UILabel!
+
+    private var remindText: String = "暂无数据"
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        backgroundColor = .clear
+        
+        contentView = UIView()
+        contentView.backgroundColor = backgroundColor
+        
+        remindImgV = UIImageView(image: UIImage.init(named: "underDev"))
+        
+        remindLabel = UILabel()
+        remindLabel.textColor = RGB(154, 159, 180)
+        remindLabel.font = .font(fontSize: 14)
+        remindLabel.text = remindText
+        remindLabel.textAlignment = .center
+        
+        addSubview(contentView)
+        contentView.addSubview(remindImgV)
+        contentView.addSubview(remindLabel)
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+       
+        let imgSize: CGSize = remindImgV.image?.size ?? .init(width: 160, height: 100)
+        let contentH: CGFloat = imgSize.height + 35 + 20
+        
+        contentView.frame = .init(x: 0,
+                                  y: (height - contentH) / 2,
+                                  width: width,
+                                  height: contentH)
+        remindImgV.frame = .init(x: (contentView.width - imgSize.width) / 2.0,
+                                 y: 0,
+                                 width: imgSize.width,
+                                 height: imgSize.height)
+        remindLabel.frame = .init(x: 15,
+                                  y: remindImgV.frame.maxY + 35,
+                                  width: contentView.width - 30,
+                                  height: 20)
+
+    }
 }

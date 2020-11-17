@@ -32,6 +32,7 @@ class HCMyConsultViewModel: RefreshVM<HCConsultModelAdapt> {
                 self.module = mode
                 if self.menuPageListData.keys.contains(mode) {
                     self.datasource.value = self.menuPageListData[mode]!
+                    self.isEmptyContentObser.value = self.datasource.value.count == 0
                 }else {
                     self.requestData(true)
                 }
