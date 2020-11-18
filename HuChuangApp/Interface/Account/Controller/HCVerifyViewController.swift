@@ -13,7 +13,8 @@ class HCVerifyViewController: BaseViewController {
     private var containerView: HCVerifyViewContainer!
     private var viewModel: HCVerifyViewModel!
     private var mobile: String = ""
-    
+    private var openId: String?
+
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
@@ -38,7 +39,7 @@ class HCVerifyViewController: BaseViewController {
     
     override func rxBind() {
         
-        viewModel = HCVerifyViewModel(mobile: mobile)
+        viewModel = HCVerifyViewModel(mobile: mobile, openId: openId)
         
         viewModel.beginTimer.onNext(Void())
         
@@ -61,5 +62,6 @@ class HCVerifyViewController: BaseViewController {
     
     override func prepare(parameters: [String : Any]?) {
         mobile = parameters!["mobile"] as! String
+        openId = parameters?["openId"] as? String
     }
 }

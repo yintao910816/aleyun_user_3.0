@@ -122,6 +122,10 @@ enum API{
     case validateCode(mobile: String)
     /// 登录
     case loginTel(mobile: String, smsCode: String)
+    /// 微信授权登录---获取绑定信息
+    case getAuthMember(openId: String)
+    /// 绑定微信
+    case bindAuthMember(openId: String, mobile: String, smsCode: String)
     /// 实名认证
     case realNameAuth(realName: String, sex: String, birthDay: String, certificateType: String, certificateNo: String)
     /// 账号设置 - 头像/昵称
@@ -193,8 +197,6 @@ enum API{
     /// 向app服务器注册友盟token
     case UMAdd(deviceToken: String)
 
-    /// 绑定微信
-    case bindAuthMember(userInfo: UMSocialUserInfoResponse, mobile: String, smsCode: String)
     /// 获取用户信息
     case selectInfo
     /// 修改用户信息
@@ -241,8 +243,6 @@ enum API{
     case getLast2This2NextWeekInfo
     /// 获取月经周期基础数据
     case getMenstruationBaseInfo
-    /// 微信授权登录---获取绑定信息
-    case getAuthMember(openId: String)
     /// 文章当前收藏数量
     case storeAndStatus(articleId: String)
     /// 区域城市
@@ -264,6 +264,10 @@ extension API: TargetType{
             return "api/login/validateCode"
         case .loginTel(_, _):
             return "api/login/loginTel"
+        case .getAuthMember(_):
+            return "api/login/getAuthMember"
+        case .bindAuthMember(_):
+            return "api/login/bindAuthMember"
         case .realNameAuth(_, _, _, _, _):
             return "api/consumer/realNameAuth"
         case .accountSetting(_, _):
@@ -331,8 +335,6 @@ extension API: TargetType{
             
         case .UMAdd(_):
             return "api/umeng/add"
-        case .bindAuthMember(_):
-            return "api/login/bindAuthMember"
         case .selectInfo:
             return "api/member/selectInfo"
         case .updateInfo(_):
@@ -376,8 +378,6 @@ extension API: TargetType{
             return "api/physiology/getLast2This2NextWeekInfo"
         case .getMenstruationBaseInfo:
             return "api/physiology/getMenstruationBaseInfo"
-        case .getAuthMember(_):
-            return "api/login/getAuthMember"
         case .storeAndStatus(_):
             return "api/cms/storeAndStatus"
         case .allCity:
@@ -525,9 +525,8 @@ extension API {
             params["deviceToken"] = deviceToken
             params["appPackage"] = Bundle.main.bundleIdentifier
             params["appType"] = "ios"
-        case .bindAuthMember(let userInfo, let mobile, let smsCode):
-            params["openId"] = userInfo.openid
-            params["accessToken"] = userInfo.accessToken
+        case .bindAuthMember(let openId, let mobile, let smsCode):
+            params["openId"] = openId
             params["appType"] = "IOS"
             params["oauthType"] = "weixin"
             params["mobile"] = mobile

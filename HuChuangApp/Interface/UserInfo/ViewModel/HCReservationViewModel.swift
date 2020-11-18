@@ -8,7 +8,19 @@
 
 import Foundation
 
-class HCReservationViewModel: RefreshVM<HCReservationItemModel> {
+class HCRegisterReservationViewModel: RefreshVM<HCReservationItemModel> {
+    
+    override init() {
+        super.init()
+    }
+    
+    override func requestData(_ refresh: Bool) {
+        super.requestData(refresh)
+    }
+
+}
+
+class HCAccurateReservationViewModel: RefreshVM<HCReservationItemModel> {
     
     override init() {
         super.init()

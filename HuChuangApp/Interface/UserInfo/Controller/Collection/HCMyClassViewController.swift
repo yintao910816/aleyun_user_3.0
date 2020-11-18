@@ -14,7 +14,7 @@ class HCMyClassViewController: HCSlideItemController {
     private var viewModel: HCCollectionCourseViewModel!
     
     override func setupUI() {
-        tableView = UITableView.init(frame: .zero, style: .plain)
+        tableView = UITableView.init(frame: view.bounds, style: .plain)
         tableView.separatorStyle = .none
         view.addSubview(tableView)
     }

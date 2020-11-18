@@ -9,8 +9,6 @@
 import UIKit
 
 class HCReservationViewController: BaseViewController {
-
-    private var viewModel: HCReservationViewModel!
     
     private var slideCtrl: TYSlideMenuController!
     private var registerReservationCtrl: HCRegisterReservationController!
@@ -35,23 +33,6 @@ class HCReservationViewController: BaseViewController {
     }
     
     override func rxBind() {
-        viewModel = HCReservationViewModel()
-        
-        accurateReservationCtrl.bind(viewModel: viewModel, canRefresh: true, canLoadMore: true, isAddNoMoreContent: false)
-
-        viewModel.datasource.asDriver()
-            .drive(onNext: { [weak self] _ in
-                guard let strongSelf = self else { return }
-//                switch strongSelf.viewModel.currentMode {
-//                case .picConsult:
-//                    strongSelf.picConsultCtrl.reloadData(data: $0)
-//                case .videoConsult:
-//                    strongSelf.videoConsultCtrl.reloadData(data: $0)
-//                case .cloudClinic:
-//                    strongSelf.cloudClinicConsultCtrl.reloadData(data: $0)
-//                }
-            })
-            .disposed(by: disposeBag)
         
     }
     

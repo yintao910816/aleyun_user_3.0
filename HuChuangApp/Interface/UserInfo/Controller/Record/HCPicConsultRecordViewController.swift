@@ -27,7 +27,7 @@ class HCPicConsultRecordViewController: HCSlideItemController {
     }
     
     private func initUI() {
-        tableView = UITableView.init(frame: .zero, style: .grouped)
+        tableView = UITableView.init(frame: view.bounds, style: .grouped)
         tableView.backgroundColor = .white
         tableView.separatorStyle = .none
         tableView.showsVerticalScrollIndicator = false

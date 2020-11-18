@@ -12,7 +12,8 @@ import RxSwift
 class HCVerifyViewModel: BaseViewModel, VMNavigation {
     
     private var mobile: String = ""
-    
+    private var openId: String?
+
     private var timer: CountdownTimer!
     
     public let codeSignal = PublishSubject<String>()
@@ -20,10 +21,11 @@ class HCVerifyViewModel: BaseViewModel, VMNavigation {
     public let popLoginSubject = PublishSubject<Void>()
     public let remindSectionSignal = Variable("")
     
-    init(mobile: String) {
+    init(mobile: String, openId: String?) {
         super.init()
         
         self.mobile = mobile
+        self.openId = openId
         
         timer = CountdownTimer.init(timeInterval: 1, totleCount: 60)
         
@@ -51,9 +53,12 @@ class HCVerifyViewModel: BaseViewModel, VMNavigation {
 extension HCVerifyViewModel {
     
     private func requestLogin(code: String) {
-//        HCLoginViewModel.push(HCRealNameAuthorViewController.self, nil)
-        HCProvider.request(.loginTel(mobile: mobile, smsCode: code))
-            .map(result: HCUserModel.self)
+        var signal = HCProvider.request(.loginTel(mobile: mobile, smsCode: code))
+        if let _op = openId, _op.count > 0 {
+            signal = HCProvider.request(.bindAuthMember(openId: _op, mobile: mobile, smsCode: code))
+        }
+
+        signal.map(result: HCUserModel.self)
             .subscribe(onSuccess: { [weak self] in
                 if RequestCode(rawValue: $0.code) == .unVerified {
                     if let user = $0.data {
@@ -65,7 +70,7 @@ extension HCVerifyViewModel {
                 }else if RequestCode(rawValue: $0.code) == .success {
                     if let user = $0.data {
                         self?.timer.timerRemove()
-
+                        
                         self?.hud.noticeHidden()
                         self?.popSubject.onNext(Void())
                         HCHelper.saveLogin(user: user)
@@ -75,7 +80,7 @@ extension HCVerifyViewModel {
                 }
             }) { [weak self] in
                 self?.hud.failureHidden(self?.errorMessage($0))
-        }
-        .disposed(by: disposeBag)
+            }
+            .disposed(by: disposeBag)
     }
 }

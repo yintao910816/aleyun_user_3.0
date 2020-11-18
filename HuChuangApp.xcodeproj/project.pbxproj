@@ -351,6 +351,8 @@
 		B8CD927023A29C6800C9C061 /* HCRecordActionItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8CD926E23A29C6800C9C061 /* HCRecordActionItemCell.xib */; };
 		B8D4D47D239426B400AA3D52 /* HCPicAndTextAskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D4D47C239426B400AA3D52 /* HCPicAndTextAskViewModel.swift */; };
 		B8D4D47F2394299E00AA3D52 /* HCPicAndTextAskFooterReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D4D47E2394299E00AA3D52 /* HCPicAndTextAskFooterReusableView.swift */; };
+		B8E60F2B2564C89A00B2259F /* HCBindPhoneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E60F2A2564C89A00B2259F /* HCBindPhoneViewModel.swift */; };
+		B8E60F2E2564C95800B2259F /* HCBindPhoneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E60F2D2564C95800B2259F /* HCBindPhoneController.swift */; };
 		B8EDA7E423AFD0920095891D /* HCRecordFullScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EDA7E323AFD0920095891D /* HCRecordFullScreenController.swift */; };
 		B8F1587524E801400046B107 /* HCUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F1587424E801400046B107 /* HCUser.swift */; };
 		B8F1587824EF64150046B107 /* HCCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F1587724EF64150046B107 /* HCCollectionViewController.swift */; };
@@ -490,7 +492,6 @@
 		C472525324DD564D006DEEC9 /* HCVerifyViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C472525224DD564D006DEEC9 /* HCVerifyViewContainer.swift */; };
 		C472525524DD7C80006DEEC9 /* HCCodeInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C472525424DD7C80006DEEC9 /* HCCodeInputView.swift */; };
 		C4783B2E24DD39E800737479 /* HCLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4783B2A24DD39E800737479 /* HCLoginViewController.swift */; };
-		C4783B2F24DD39E800737479 /* HCBindPhoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4783B2B24DD39E800737479 /* HCBindPhoneViewController.swift */; };
 		C4783B3124DD3BFC00737479 /* HCLoginViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4783B3024DD3BFC00737479 /* HCLoginViewContainer.swift */; };
 		C494135524DE4B7900045749 /* HCMineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C494135424DE4B7900045749 /* HCMineViewController.swift */; };
 		C494135924DE4C5800045749 /* HCMineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C494135824DE4C5800045749 /* HCMineViewModel.swift */; };
@@ -1229,6 +1230,8 @@
 		B8D4D47E2394299E00AA3D52 /* HCPicAndTextAskFooterReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCPicAndTextAskFooterReusableView.swift; sourceTree = "<group>"; };
 		B8DE28272396CB1000D5046D /* HCDoctorInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCDoctorInfoViewController.swift; sourceTree = "<group>"; };
 		B8DE28292396CC7700D5046D /* HCDoctorInfoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCDoctorInfoHeaderView.swift; sourceTree = "<group>"; };
+		B8E60F2A2564C89A00B2259F /* HCBindPhoneViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCBindPhoneViewModel.swift; sourceTree = "<group>"; };
+		B8E60F2D2564C95800B2259F /* HCBindPhoneController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCBindPhoneController.swift; sourceTree = "<group>"; };
 		B8EDA7E323AFD0920095891D /* HCRecordFullScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCRecordFullScreenController.swift; sourceTree = "<group>"; };
 		B8F1587424E801400046B107 /* HCUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCUser.swift; sourceTree = "<group>"; };
 		B8F1587724EF64150046B107 /* HCCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCCollectionViewController.swift; sourceTree = "<group>"; };
@@ -1384,7 +1387,6 @@
 		C472525224DD564D006DEEC9 /* HCVerifyViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCVerifyViewContainer.swift; sourceTree = "<group>"; };
 		C472525424DD7C80006DEEC9 /* HCCodeInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCCodeInputView.swift; sourceTree = "<group>"; };
 		C4783B2A24DD39E800737479 /* HCLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCLoginViewController.swift; sourceTree = "<group>"; };
-		C4783B2B24DD39E800737479 /* HCBindPhoneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCBindPhoneViewController.swift; sourceTree = "<group>"; };
 		C4783B3024DD3BFC00737479 /* HCLoginViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCLoginViewContainer.swift; sourceTree = "<group>"; };
 		C47E067823588FCD003A3320 /* TYCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TYCalendarView.swift; sourceTree = "<group>"; };
 		C47E067A23589355003A3320 /* TYCalendarDayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TYCalendarDayCell.swift; sourceTree = "<group>"; };
@@ -3290,6 +3292,7 @@
 		C4783B2824DD39E800737479 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				B8E60F2A2564C89A00B2259F /* HCBindPhoneViewModel.swift */,
 				C472524E24DD54B0006DEEC9 /* HCLoginViewModel.swift */,
 				B88497DB24E7F6FB00B91262 /* HCVerifyViewModel.swift */,
 				C42AF1A624EA1D8F0034DBEF /* HCRealNameAuthorViewModel.swift */,
@@ -3301,8 +3304,8 @@
 			isa = PBXGroup;
 			children = (
 				C4783B2A24DD39E800737479 /* HCLoginViewController.swift */,
+				B8E60F2D2564C95800B2259F /* HCBindPhoneController.swift */,
 				C472525024DD562A006DEEC9 /* HCVerifyViewController.swift */,
-				C4783B2B24DD39E800737479 /* HCBindPhoneViewController.swift */,
 				C42AF1A224EA1D6A0034DBEF /* HCRealNameAuthorViewController.swift */,
 			);
 			path = Controller;
@@ -4050,6 +4053,7 @@
 				B816EB04221DABF400F024D5 /* ZXRSSExpandedRow.m in Sources */,
 				B816EB0C221DABF400F024D5 /* ZXRSSExpandedFieldParser.m in Sources */,
 				B8F90E2B24F24E6200A1D68C /* HCMyOrderViewModel.swift in Sources */,
+				B8E60F2E2564C95800B2259F /* HCBindPhoneController.swift in Sources */,
 				B819AF7324C6E85B00F88BA7 /* HCNavBarOrderRecordModeView.swift in Sources */,
 				C497E95D23444FA300328B47 /* HCHomeGoodNewsCellItemCell.swift in Sources */,
 				C4AB273324E53D6F0095F693 /* HCListDetailCell.swift in Sources */,
@@ -4099,7 +4103,6 @@
 				C4F139BB235419EF00D777F6 /* TYFont.swift in Sources */,
 				B816EB25221DABF400F024D5 /* ZXUPCEANExtension5Support.m in Sources */,
 				B816EB07221DABF400F024D5 /* ZXRSSExpandedBlockParsedResult.m in Sources */,
-				C4783B2F24DD39E800737479 /* HCBindPhoneViewController.swift in Sources */,
 				B8BE34FD221470D900EF16F1 /* EditUserInfoViewModel.swift in Sources */,
 				B816EB16221DABF400F024D5 /* ZXAI01392xDecoder.m in Sources */,
 				B816EB56221DABF400F024D5 /* ZXCGImageLuminanceSource.m in Sources */,
@@ -4455,6 +4458,7 @@
 				B816EAE5221DABF400F024D5 /* ZXDataMatrixC40Encoder.m in Sources */,
 				B816EAE0221DABF400F024D5 /* ZXPDF417ResultMetadata.m in Sources */,
 				B816EB3F221DABF400F024D5 /* ZXAddressBookParsedResult.m in Sources */,
+				B8E60F2B2564C89A00B2259F /* HCBindPhoneViewModel.swift in Sources */,
 				B8F90E4D24F25A5F00A1D68C /* HCMyRecord.swift in Sources */,
 				B816EAA2221DABF400F024D5 /* ZXQRCodeDecoder.m in Sources */,
 				B816EAEF221DABF400F024D5 /* ZXDataMatrixBitMatrixParser.m in Sources */,

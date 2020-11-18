@@ -10,5 +10,17 @@ import UIKit
 
 class HCRegisterReservationController: HCSlideItemController {
 
-
+    private var viewModel: HCRegisterReservationViewModel!
+    
+    override func setupUI() {
+        
+    }
+    
+    override func rxBind() {
+        viewModel = HCRegisterReservationViewModel()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+    }
 }

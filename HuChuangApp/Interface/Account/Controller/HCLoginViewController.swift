@@ -11,7 +11,7 @@ import RxSwift
 
 class HCLoginViewController: BaseViewController {
     
-    private var containerView: HCLoginViewContainer!
+    public var containerView: HCLoginViewContainer!
     
     private var viewModel: HCLoginViewModel!
         
@@ -36,13 +36,18 @@ class HCLoginViewController: BaseViewController {
     override func rxBind() {
         viewModel = HCLoginViewModel.init(input: containerView.phoneTf.rx.text.orEmpty.asDriver(),
                                           tap: (codeTap: containerView.getCodeButton.rx.tap.asDriver(),
-                                                agreeTap: containerView.agreeSignal.asDriver()))
+                                                agreeTap: containerView.agreeSignal.asDriver(),
+                                                weChatTap: containerView.wchatLoginButton.rx.tap.asDriver()))
         viewModel.enableCode
             .do(onNext: { [weak self] flag in
                 self?.containerView.getCodeButton.backgroundColor = flag ? HC_MAIN_COLOR : RGB(242, 242, 242)
                 self?.containerView.getCodeButton.isSelected = flag
             })
             .drive(containerView.getCodeButton.rx.isUserInteractionEnabled)
+            .disposed(by: disposeBag)
+        
+        viewModel.popSubject
+            .subscribe(onNext: { [weak self] in self?.dismiss(animated: true, completion: nil) })
             .disposed(by: disposeBag)
         
     }

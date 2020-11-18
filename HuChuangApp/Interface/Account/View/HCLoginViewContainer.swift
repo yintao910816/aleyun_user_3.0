@@ -25,7 +25,7 @@ class HCLoginViewContainer: UIView {
     private var agreeButton: UIButton!
     private var agreeLabel: YYLabel!
     
-    private var platformContainer: UIView!
+    public var platformContainer: UIView!
     private var leftLine: UIView!
     private var platformRemindLabel: UILabel!
     private var rightLine: UIView!
