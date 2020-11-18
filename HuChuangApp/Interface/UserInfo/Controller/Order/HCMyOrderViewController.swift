@@ -28,7 +28,9 @@ class HCMyOrderViewController: BaseViewController {
             .drive(onNext: { [weak self] in self?.containerView.datasource = $0 })
             .disposed(by: disposeBag)
         
-        containerView.tableView.headerRefreshing()
+        viewModel.isEmptyContentObser.value = true
+        
+//        containerView.tableView.headerRefreshing()
     }
     
     override func viewDidLayoutSubviews() {

@@ -63,10 +63,10 @@ enum HCOrderDetailStatus: Int {
 
 /// 图文咨询
 class HCPicConsultListModel: HJModel {
-    var records: [HCPicConsultItemModel] = []
+    var records: [HCConsultItemModel] = []
 }
 
-class HCPicConsultItemModel: HJModel, HCConsultModelAdapt {
+class HCConsultItemModel: HJModel, HCConsultModelAdapt {
     var appointTimeDesc: String = ""
     var consultId: String = ""
     var consultTypeName: String = ""
@@ -104,11 +104,7 @@ class HCPicConsultItemModel: HJModel, HCConsultModelAdapt {
 
 /// 视频问诊
 class HCVideoConsultListModel: HJModel {
-    var records: [HCVideoConsultItemModel] = []
-}
-
-class HCVideoConsultItemModel: HJModel, HCConsultModelAdapt {
-
+    var records: [HCConsultItemModel] = []
 }
 
 /// 云门诊

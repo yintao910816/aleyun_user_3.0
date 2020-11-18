@@ -52,7 +52,7 @@ class HCMyConsultViewModel: RefreshVM<HCConsultModelAdapt> {
         
         switch module {
         case .picConsult:
-            HCProvider.request(.myConsult(consultType: 1, pageSize: 10, pageNum: 1))
+            HCProvider.request(.myConsult(consultType: 1, pageSize: 10, pageNum: 1, status: nil))
                 .map(result: HCPicConsultListModel.self)
                 .subscribe(onSuccess: { [weak self] data in
                     guard let strongSelf = self else { return }
@@ -67,7 +67,7 @@ class HCMyConsultViewModel: RefreshVM<HCConsultModelAdapt> {
             }
             .disposed(by: disposeBag)
         case .videoConsult:
-            HCProvider.request(.myConsult(consultType: 2, pageSize: 10, pageNum: 1))
+            HCProvider.request(.myConsult(consultType: 2, pageSize: 10, pageNum: 1, status: nil))
                 .map(result: HCVideoConsultListModel.self)
                 .subscribe(onSuccess: { [weak self] data in
                     guard let strongSelf = self else { return }
@@ -83,7 +83,7 @@ class HCMyConsultViewModel: RefreshVM<HCConsultModelAdapt> {
             .disposed(by: disposeBag)
 
         case .cloudClinic:
-            HCProvider.request(.myConsult(consultType: 3, pageSize: 10, pageNum: 1))
+            HCProvider.request(.myConsult(consultType: 3, pageSize: 10, pageNum: 1, status: nil))
                 .map(result: HCCloudClinicConsultListModel.self)
                 .subscribe(onSuccess: { [weak self] data in
                     guard let strongSelf = self else { return }

@@ -157,7 +157,7 @@ enum API{
     /// 我的优惠卷
     case myCoupon(orderSn: String, useStatus: Int, pageSize: Int, pageNum: Int)
     /// 我的问诊
-    case myConsult(consultType: Int, pageSize: Int, pageNum: Int)
+    case myConsult(consultType: Int, pageSize: Int, pageNum: Int, status: Int?)
     /// 消息中心
     case messageCenter
     /// banner
@@ -298,7 +298,7 @@ extension API: TargetType{
             return "api/search/search"
         case .myCoupon(_, _, _, _):
             return "api/coupon/myCoupon"
-        case .myConsult(_, _, _):
+        case .myConsult(_, _, _, _):
             return "api/consult/myConsult"
         case .messageCenter:
             return "api/messageCenter/groupMsg"
@@ -482,10 +482,13 @@ extension API {
             params["useStatus"] = useStatus
             params["pageSize"] = pageSize
             params["pageNum"] = pageNum
-        case .myConsult(let consultType, let pageSize, let pageNum):
+        case .myConsult(let consultType, let pageSize, let pageNum, let status):
             params["consultType"] = consultType
             params["pageSize"] = pageSize
             params["pageNum"] = pageNum
+            if let s = status {
+                params["status"] = s
+            }
         case .myDoctor(let lng, let lat):
             params["lng"] = lng
             params["lat"] = lat

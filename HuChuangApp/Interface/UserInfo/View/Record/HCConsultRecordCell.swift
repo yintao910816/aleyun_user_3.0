@@ -8,10 +8,10 @@
 
 import UIKit
 
-public let HCPicConsultRecordCell_identifier = "HCPicConsultRecordCell"
-public let HCPicConsultRecordCell_height: CGFloat = 80
+public let HCConsultRecordCell_identifier = "HCPicConsultRecordCell"
+public let HCConsultRecordCell_height: CGFloat = 80
 
-class HCPicConsultRecordCell: UITableViewCell {
+class HCConsultRecordCell: UITableViewCell {
     
     private var avatar: UIImageView!
     private var nameLabel: UILabel!
@@ -29,9 +29,12 @@ class HCPicConsultRecordCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public var model: HCMyRecordItemModel! {
+    public var model: HCConsultItemModel! {
         didSet {
-            
+            avatar.setImage(model.headPath)
+            nameLabel.text = model.userName
+            timeLabel.text = model.createDate.timeSeprate2()
+            contentLabel.text = model.content
         }
     }
     
@@ -49,15 +52,15 @@ class HCPicConsultRecordCell: UITableViewCell {
                                 height: 15)
         
         contentLabel.frame = .init(x: nameLabel.x,
-                                   y: avatar.frame.maxY - 3,
-                                   width: width - avatar.frame.maxX - 13 - 15,
+                                   y: nameLabel.frame.maxY + 7,
+                                   width: timeLabel.frame.minX - avatar.frame.maxX - 24,
                                    height: 17)
         
         lineView.frame = .init(x: 0, y: height - 0.5, width: width, height: 0.5)
     }
 }
 
-extension HCPicConsultRecordCell {
+extension HCConsultRecordCell {
     
     private func initUI() {
         avatar = UIImageView()
@@ -77,9 +80,13 @@ extension HCPicConsultRecordCell {
         contentLabel.textColor = RGB(153, 153, 153)
         contentLabel.font = .font(fontSize: 12)
         
+        lineView = UIView()
+        lineView.backgroundColor = RGB(243, 243, 243)
+        
         addSubview(avatar)
         addSubview(nameLabel)
         addSubview(timeLabel)
         addSubview(contentLabel)
+        addSubview(lineView)
     }
 }

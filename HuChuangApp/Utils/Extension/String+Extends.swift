@@ -180,7 +180,18 @@ extension String {
         
         return "\(month!).\(day!) \(hh!):\(mm!)"
     }
-    
+   
+    public func timeSeprate2() -> String {
+        let timeArr = self.components(separatedBy: " ")
+        let detailTime = timeArr.first?.components(separatedBy: "-")
+        
+        let year = detailTime?[0]
+        let month = detailTime?[1]
+        let day = detailTime?[2]
+        
+        return "\(year!)-\(month!)-\(day!)"
+    }
+
 }
 
 // MARK:

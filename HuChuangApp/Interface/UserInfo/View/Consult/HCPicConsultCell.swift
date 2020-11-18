@@ -31,14 +31,19 @@ class HCPicConsultCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    var model: HCPicConsultItemModel! {
+    var model: HCConsultItemModel! {
         didSet {
             avatar.setImage(model.headPath, .userIconWomen)
             nameLabel.attributedText = model.nameText
             payStatusLabel.text = model.statusMode.myConsultPayStatusText
-            contentLabel.text = model.content
             timeDesLabel.text = model.timeText
             actionButton.setTitle(model.statusMode.myConsultButtonText, for: .normal)
+            
+            if model.consultTypeName == "视频问诊" {
+                contentLabel.text = "预约时间  \(model.appointTimeDesc)"
+            }else {
+                contentLabel.text = model.content
+            }
         }
     }
     
@@ -81,6 +86,7 @@ extension HCPicConsultCell {
         avatar = UIImageView()
         avatar.contentMode = .scaleAspectFill
         avatar.clipsToBounds = true
+        avatar.layer.cornerRadius = 15
                 
         nameLabel = UILabel()
         nameLabel.textColor = RGB(51, 51, 51)
@@ -92,7 +98,7 @@ extension HCPicConsultCell {
 
         contentLabel = UILabel()
         contentLabel.textColor = RGB(51, 51, 51)
-        contentLabel.font = .font(fontSize: 16)
+        contentLabel.font = .font(fontSize: 14)
         contentLabel.numberOfLines = 2
 
         lineView = UIView()

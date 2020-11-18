@@ -11,16 +11,24 @@ import UIKit
 class HCRegisterReservationController: HCSlideItemController {
 
     private var viewModel: HCRegisterReservationViewModel!
+    private var tableView: UITableView!
     
     override func setupUI() {
-        
+        tableView = UITableView.init(frame: view.bounds, style: .plain)
+        tableView.separatorStyle = .none
+        view.addSubview(tableView)
     }
     
     override func rxBind() {
         viewModel = HCRegisterReservationViewModel()
+        tableView.prepare(viewModel)
+        
+        viewModel.isEmptyContentObser.value = true
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        
+        tableView.frame = view.bounds
     }
 }

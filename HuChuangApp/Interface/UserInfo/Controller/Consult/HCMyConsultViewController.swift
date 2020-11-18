@@ -33,6 +33,13 @@ class HCMyConsultViewController: BaseViewController {
         }
         
         videoConsultCtrl = HCVideoConsultViewController()
+        videoConsultCtrl.pushH5CallBack = { [weak self] in
+            let url = APIAssistance.consultationChat(with: $0.consultId)
+            self?.navigationController?.pushViewController(BaseWebViewController.createWeb(url: url,
+                                                                                           title: $0.userName),
+                                                           animated: true)
+        }
+
         cloudClinicConsultCtrl = HCCloudClinicConsultViewController()
         
         slideCtrl.menuItems = TYSlideItemModel.createMyConsultData()

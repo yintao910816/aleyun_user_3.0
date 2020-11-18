@@ -17,7 +17,7 @@ class HCAccurateReservationController: HCSlideItemController {
     public var pushH5CallBack:((String)->())?
    
     override func setupUI() {
-        tableView = UITableView.init(frame: .zero, style: .grouped)
+        tableView = UITableView.init(frame: view.bounds, style: .grouped)
         tableView.backgroundColor = .white
         tableView.separatorStyle = .none
         tableView.showsVerticalScrollIndicator = false
@@ -30,6 +30,10 @@ class HCAccurateReservationController: HCSlideItemController {
     
     override func rxBind() {
         viewModel = HCAccurateReservationViewModel()
+        
+        tableView.prepare(viewModel)
+        
+        viewModel.isEmptyContentObser.value = true
     }
                 
     override func viewDidLayoutSubviews() {

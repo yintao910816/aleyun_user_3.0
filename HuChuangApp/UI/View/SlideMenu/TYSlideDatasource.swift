@@ -106,13 +106,13 @@ extension TYSlideItemModel {
     
     /// 我的记录
     internal static func createMyRecordData() ->[TYSlideItemModel] {
-        return [TYSlideItemModel(title: "图文资讯",
+        return [TYSlideItemModel(title: "图文咨询",
                                  textColor: RGB(153, 153, 153),
                                  selectedTextColor: HC_MAIN_COLOR,
                                  lineColor: HC_MAIN_COLOR,
                                  textFont: .font(fontSize: 16),
                                  isSelected: true),
-                TYSlideItemModel(title: "视频资讯",
+                TYSlideItemModel(title: "视频咨询",
                                  textColor: RGB(153, 153, 153),
                                  selectedTextColor: HC_MAIN_COLOR,
                                  lineColor: HC_MAIN_COLOR,

@@ -9,8 +9,6 @@
 import UIKit
 
 class HCMyRecordViewController: BaseViewController {
-
-    private var viewModel: HCMyRecordViewModel!
     
     private var slideCtrl: TYSlideMenuController!
     private var picConsultRecordCtrl: HCPicConsultRecordViewController!
@@ -18,14 +16,28 @@ class HCMyRecordViewController: BaseViewController {
     private var accurateReservationRecordCtrl: HCAccurateReservationRecordController!
 
     override func setupUI() {
-        navigationItem.title = "我的预约"
+        navigationItem.title = "我的记录"
         
         slideCtrl = TYSlideMenuController()
         addChild(slideCtrl)
         view.addSubview(slideCtrl.view)
         
         picConsultRecordCtrl = HCPicConsultRecordViewController()
+        picConsultRecordCtrl.pushH5CallBack = { [weak self] in
+            let url = APIAssistance.consultationChat(with: $0.consultId)
+            self?.navigationController?.pushViewController(BaseWebViewController.createWeb(url: url,
+                                                                                           title: $0.userName),
+                                                           animated: true)
+        }
+
         videoConsultRecordCtrl = HCVideoConsultRecordViewController()
+        videoConsultRecordCtrl.pushH5CallBack = { [weak self] in
+            let url = APIAssistance.consultationChat(with: $0.consultId)
+            self?.navigationController?.pushViewController(BaseWebViewController.createWeb(url: url,
+                                                                                           title: $0.userName),
+                                                           animated: true)
+        }
+
         accurateReservationRecordCtrl = HCAccurateReservationRecordController()
 
         slideCtrl.menuItems = TYSlideItemModel.createMyRecordData()
@@ -35,29 +47,7 @@ class HCMyRecordViewController: BaseViewController {
 //            self?.viewModel.changeMenuSignal.onNext(page)
         }
     }
-    
-    override func rxBind() {
-        viewModel = HCMyRecordViewModel()
         
-        picConsultRecordCtrl.bind(viewModel: viewModel, canRefresh: true, canLoadMore: true, isAddNoMoreContent: false)
-
-        viewModel.datasource.asDriver()
-            .drive(onNext: { [weak self] _ in
-                guard let strongSelf = self else { return }
-//                switch strongSelf.viewModel.currentMode {
-//                case .picConsult:
-//                    strongSelf.picConsultCtrl.reloadData(data: $0)
-//                case .videoConsult:
-//                    strongSelf.videoConsultCtrl.reloadData(data: $0)
-//                case .cloudClinic:
-//                    strongSelf.cloudClinicConsultCtrl.reloadData(data: $0)
-//                }
-            })
-            .disposed(by: disposeBag)
-        
-        picConsultRecordCtrl.tableView.headerRefreshing()
-    }
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         

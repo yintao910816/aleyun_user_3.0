@@ -353,6 +353,7 @@
 		B8D4D47F2394299E00AA3D52 /* HCPicAndTextAskFooterReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D4D47E2394299E00AA3D52 /* HCPicAndTextAskFooterReusableView.swift */; };
 		B8E60F2B2564C89A00B2259F /* HCBindPhoneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E60F2A2564C89A00B2259F /* HCBindPhoneViewModel.swift */; };
 		B8E60F2E2564C95800B2259F /* HCBindPhoneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E60F2D2564C95800B2259F /* HCBindPhoneController.swift */; };
+		B8E60F322564E1C900B2259F /* HCConsultRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E60F312564E1C900B2259F /* HCConsultRecordCell.swift */; };
 		B8EDA7E423AFD0920095891D /* HCRecordFullScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EDA7E323AFD0920095891D /* HCRecordFullScreenController.swift */; };
 		B8F1587524E801400046B107 /* HCUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F1587424E801400046B107 /* HCUser.swift */; };
 		B8F1587824EF64150046B107 /* HCCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F1587724EF64150046B107 /* HCCollectionViewController.swift */; };
@@ -379,7 +380,6 @@
 		B8F90E4F24F25AAB00A1D68C /* HCPicConsultRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F90E4E24F25AAB00A1D68C /* HCPicConsultRecordViewController.swift */; };
 		B8F90E5124F25AC800A1D68C /* HCVideoConsultRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F90E5024F25AC800A1D68C /* HCVideoConsultRecordViewController.swift */; };
 		B8F90E5324F25AE500A1D68C /* HCAccurateReservationRecordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F90E5224F25AE500A1D68C /* HCAccurateReservationRecordController.swift */; };
-		B8F90E5624F25BF900A1D68C /* HCPicConsultRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F90E5524F25BF900A1D68C /* HCPicConsultRecordCell.swift */; };
 		B8F90E5824F25F8E00A1D68C /* HCMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F90E5724F25F8E00A1D68C /* HCMessageViewController.swift */; };
 		B8F90E5C24F25FBB00A1D68C /* HCMessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F90E5B24F25FBB00A1D68C /* HCMessageViewModel.swift */; };
 		B8F90E5E24F25FD100A1D68C /* HCMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F90E5D24F25FD100A1D68C /* HCMessage.swift */; };
@@ -1232,6 +1232,7 @@
 		B8DE28292396CC7700D5046D /* HCDoctorInfoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCDoctorInfoHeaderView.swift; sourceTree = "<group>"; };
 		B8E60F2A2564C89A00B2259F /* HCBindPhoneViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCBindPhoneViewModel.swift; sourceTree = "<group>"; };
 		B8E60F2D2564C95800B2259F /* HCBindPhoneController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCBindPhoneController.swift; sourceTree = "<group>"; };
+		B8E60F312564E1C900B2259F /* HCConsultRecordCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCConsultRecordCell.swift; sourceTree = "<group>"; };
 		B8EDA7E323AFD0920095891D /* HCRecordFullScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCRecordFullScreenController.swift; sourceTree = "<group>"; };
 		B8F1587424E801400046B107 /* HCUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCUser.swift; sourceTree = "<group>"; };
 		B8F1587724EF64150046B107 /* HCCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCCollectionViewController.swift; sourceTree = "<group>"; };
@@ -1258,7 +1259,6 @@
 		B8F90E4E24F25AAB00A1D68C /* HCPicConsultRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCPicConsultRecordViewController.swift; sourceTree = "<group>"; };
 		B8F90E5024F25AC800A1D68C /* HCVideoConsultRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCVideoConsultRecordViewController.swift; sourceTree = "<group>"; };
 		B8F90E5224F25AE500A1D68C /* HCAccurateReservationRecordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCAccurateReservationRecordController.swift; sourceTree = "<group>"; };
-		B8F90E5524F25BF900A1D68C /* HCPicConsultRecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCPicConsultRecordCell.swift; sourceTree = "<group>"; };
 		B8F90E5724F25F8E00A1D68C /* HCMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCMessageViewController.swift; sourceTree = "<group>"; };
 		B8F90E5B24F25FBB00A1D68C /* HCMessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCMessageViewModel.swift; sourceTree = "<group>"; };
 		B8F90E5D24F25FD100A1D68C /* HCMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCMessage.swift; sourceTree = "<group>"; };
@@ -2717,7 +2717,7 @@
 		B8F90E5424F25BD300A1D68C /* Record */ = {
 			isa = PBXGroup;
 			children = (
-				B8F90E5524F25BF900A1D68C /* HCPicConsultRecordCell.swift */,
+				B8E60F312564E1C900B2259F /* HCConsultRecordCell.swift */,
 			);
 			path = Record;
 			sourceTree = "<group>";
@@ -4223,7 +4223,7 @@
 				B821E34D23070907009A11A3 /* HCLocationManager.swift in Sources */,
 				B8F90E6824F2604A00A1D68C /* HCMenuView.swift in Sources */,
 				C4481E2422154D66007F4B0C /* BaseWKWebViewViewController.swift in Sources */,
-				B8F90E5624F25BF900A1D68C /* HCPicConsultRecordCell.swift in Sources */,
+				B8E60F322564E1C900B2259F /* HCConsultRecordCell.swift in Sources */,
 				B892FFA023ABB50800A137C0 /* TYFiliterView.swift in Sources */,
 				C421332C22056F24006C10C4 /* TYHUD.swift in Sources */,
 				C4D1DB5324F6C306001EF30F /* HCMedicine.swift in Sources */,

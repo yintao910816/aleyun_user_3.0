@@ -12,9 +12,9 @@ class HCVideoConsultViewController: HCSlideItemController {
 
     public var tableView: UITableView!
         
-    private var datasource: [HCPicConsultItemModel] = []
+    private var datasource: [HCConsultItemModel] = []
 
-    public var pushH5CallBack:((String)->())?
+    public var pushH5CallBack:((HCConsultItemModel)->())?
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -39,7 +39,7 @@ class HCVideoConsultViewController: HCSlideItemController {
     }
     
     override func reloadData(data: Any?) {
-        if let dataModels = data as? [HCPicConsultItemModel] {
+        if let dataModels = data as? [HCConsultItemModel] {
             datasource.removeAll()
             datasource.append(contentsOf: dataModels)
             tableView.reloadData()
@@ -104,5 +104,6 @@ extension HCVideoConsultViewController: UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        pushH5CallBack?(datasource[indexPath.row])
     }
 }

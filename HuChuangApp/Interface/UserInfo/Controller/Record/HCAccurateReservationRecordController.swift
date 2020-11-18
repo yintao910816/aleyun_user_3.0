@@ -10,21 +10,23 @@ import UIKit
 
 class HCAccurateReservationRecordController: HCSlideItemController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    private var viewModel: HCAccurateReservationRecordViewModel!
+    private var tableView: UITableView!
 
-        // Do any additional setup after loading the view.
+    override func setupUI() {
+        tableView = UITableView.init(frame: view.bounds, style: .grouped)
+        tableView.backgroundColor = .white
+        tableView.separatorStyle = .none
+        tableView.showsVerticalScrollIndicator = false
+//        tableView.delegate = self
+//        tableView.dataSource = self
+        view.addSubview(tableView)
     }
     
+    override func rxBind() {
+        viewModel = HCAccurateReservationRecordViewModel()
+        tableView.prepare(viewModel)
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        viewModel.isEmptyContentObser.value = true
     }
-    */
-
 }

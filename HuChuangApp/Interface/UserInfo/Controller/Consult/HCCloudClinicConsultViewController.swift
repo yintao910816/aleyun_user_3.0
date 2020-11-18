@@ -12,7 +12,7 @@ class HCCloudClinicConsultViewController: HCSlideItemController {
 
     public var tableView: UITableView!
         
-    private var datasource: [HCPicConsultItemModel] = []
+    private var datasource: [HCConsultItemModel] = []
 
     public var pushH5CallBack:((String)->())?
    
@@ -39,7 +39,7 @@ class HCCloudClinicConsultViewController: HCSlideItemController {
     }
     
     override func reloadData(data: Any?) {
-        if let dataModels = data as? [HCPicConsultItemModel] {
+        if let dataModels = data as? [HCConsultItemModel] {
             datasource.removeAll()
             datasource.append(contentsOf: dataModels)
             tableView.reloadData()
