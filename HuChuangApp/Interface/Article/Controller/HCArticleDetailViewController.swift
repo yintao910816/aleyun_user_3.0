@@ -38,8 +38,8 @@ class HCArticleDetailViewController: BaseWebViewController {
         storeButton.backgroundColor = .clear
         storeButton.setImage(UIImage(named: "button_collect_unsel"), for: .normal)
         storeButton.setImage(UIImage(named: "button_collect_sel"), for: .selected)
-        storeButton.titleLabel?.font = .font(fontSize: 10)
-        storeButton.imageEdgeInsets = .init(top: 0, left: 0, bottom: 0, right: 10)
+//        storeButton.titleLabel?.font = .font(fontSize: 10)
+//        storeButton.imageEdgeInsets = .init(top: 0, left: 0, bottom: 0, right: 10)
 //        storeButton.sizeToFit()
         
         shareButton = TYClickedButton.init(type: .custom)
@@ -70,7 +70,7 @@ class HCArticleDetailViewController: BaseWebViewController {
             .skip(0)
             .drive(onNext: { [weak self] data in
                 self?.storeButton.isSelected = data.status
-                self?.storeButton.setTitle("\(data.store)", for: .normal)
+//                self?.storeButton.setTitle("\(data.store)", for: .normal)
             })
             .disposed(by: disposeBag)
         
