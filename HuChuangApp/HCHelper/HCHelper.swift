@@ -215,6 +215,14 @@ extension HCHelper {
         let urlStr = "http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=\(ileyun_appid)&pageNumber=0&sortOrdering=2&type=Purple+Software&mt=8"
         UIApplication.shared.openURL(URL.init(string: urlStr)!)
     }
+    
+    /// 跳转系统设置
+    class func appSetting() {
+        let url = URL.init(string: UIApplication.openSettingsURLString)
+        if let u = url, UIApplication.shared.canOpenURL(u) {
+            UIApplication.shared.openURL(u)
+        }
+    }
 }
 
 //MARK: --- 视频通话相关接口

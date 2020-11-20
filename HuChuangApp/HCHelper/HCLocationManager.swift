@@ -20,10 +20,27 @@ class HCLocationManager: NSObject {
 
     override init() {
         super.init()
-        locationManager = CLLocationManager.init()
-        geocoder = CLGeocoder.init()
-        
-        reLocationAction()
+                
+        checkAuthorized()
+    }
+    
+    private func checkAuthorized() {
+        if (CLLocationManager.locationServicesEnabled()){
+            let status = CLLocationManager.authorizationStatus()
+            switch status {
+            case .authorizedWhenInUse, .authorizedAlways, .notDetermined:
+                reLocationAction()
+            default:
+                NoticesCenter.alert(title: "提示", message: "未开启定位权限", cancleTitle: "取消", okTitle: "去开启") { [unowned self] in
+                    self.locationSubject.onNext(CLLocation.init(latitude: 30.5, longitude: 114.3))
+                } callBackOK: {
+                    HCHelper.appSetting()
+                }
+            }
+        }else {
+            NoticesCenter.alert(message: "设备不支持定位功能")
+            locationSubject.onNext(CLLocation.init(latitude: 30.5, longitude: 114.3))
+        }
     }
     
     deinit {
@@ -32,6 +49,8 @@ class HCLocationManager: NSObject {
     }
     
     private func reLocationAction(){
+        locationManager = CLLocationManager.init()
+        geocoder = CLGeocoder.init()
         locationManager.delegate = self
 //        locationManager.requestAlwaysAuthorization()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest//定位最佳
@@ -51,7 +70,7 @@ extension HCLocationManager: CLLocationManagerDelegate {
                     locationManager.startUpdatingLocation()
                     print("定位开始")
                 }else {
-                    locationSubject.onNext(nil)
+                    locationSubject.onNext(CLLocation.init(latitude: 30.5, longitude: 114.3))
                 }
             default:
                 break
@@ -62,7 +81,7 @@ extension HCLocationManager: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didFinishDeferredUpdatesWithError error: Error?) {
         PrintLog("获取经纬度发生错误:\(error)")
-        locationSubject.onNext(nil)
+        locationSubject.onNext(CLLocation.init(latitude: 30.5, longitude: 114.3))
     }
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
         let thelocations:NSArray = locations as NSArray
