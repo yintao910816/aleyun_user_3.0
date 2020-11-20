@@ -143,9 +143,13 @@ extension HCHelper: VMNavigation {
         }
     }
     
-    public class func pushH5(href: String) {
+    public class func pushH5(href: String, title: String? = nil) {
         PrintLog("链接跳转地址: \(href)")
-        HCHelper.push(BaseWebViewController.self, ["url": href])
+        if let t = title {
+            HCHelper.push(BaseWebViewController.self, ["url": href, "title": t])
+        }else {
+            HCHelper.push(BaseWebViewController.self, ["url": href])
+        }
     }
     
     public class func pushLocalH5(type: H5Type) {

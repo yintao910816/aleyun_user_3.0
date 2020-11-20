@@ -40,31 +40,33 @@ class HCTabBarViewController: UITabBarController {
     }
 
     private func setupTabBar() {
-//        [nv.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor redColor]} forState:UIControlStateSelected];
+        if #available(iOS 13.0, *) {
+            tabBar.tintColor = RGB(51, 51, 51)
+            tabBar.unselectedItemTintColor = RGB(51, 51, 51)
+        }else {
+            UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor : RGB(51, 51, 51)], for: .normal)
+            UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor : RGB(51, 51, 51)], for: .selected)
+        }
 
         let homeCtrl = HCHomeViewController()
         let homeNav = MainNavigationController.init(rootViewController: homeCtrl)
         homeNav.tabBarItem.title = "首页"
         homeNav.tabBarItem.image = UIImage(named: "tabBar_home_unselected")
         homeNav.tabBarItem.selectedImage = UIImage(named: "tabBar_home_selected")
-        homeNav.tabBarItem.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : RGB(51, 51, 51)], for: .normal)
-        homeNav.tabBarItem.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : RGB(51, 51, 51)], for: .selected)
 
         let toolCtrl = HCToolViewController()
         let toolNav = MainNavigationController.init(rootViewController: toolCtrl)
         toolNav.tabBarItem.title = "工具"
         toolNav.tabBarItem.image = UIImage(named: "tabBar_tool_unselected")
         toolNav.tabBarItem.selectedImage = UIImage(named: "tabBar_tool_selected")
-        toolNav.tabBarItem.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : RGB(51, 51, 51)], for: .normal)
-        toolNav.tabBarItem.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : RGB(51, 51, 51)], for: .selected)
+//        toolNav.tabBarItem.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : RGB(51, 51, 51)], for: .normal)
+//        toolNav.tabBarItem.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : RGB(51, 51, 51)], for: .selected)
 
-        let classRoomCtrl = HCClassRoomViewController()
-        let classRoomNav = MainNavigationController.init(rootViewController: classRoomCtrl)
-        classRoomNav.tabBarItem.title = "课堂"
-        classRoomNav.tabBarItem.image = UIImage(named: "tabBar_classRoom_unselected")
-        classRoomNav.tabBarItem.selectedImage = UIImage(named: "tabBar_classRoom_selected")
-        classRoomNav.tabBarItem.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : RGB(51, 51, 51)], for: .normal)
-        classRoomNav.tabBarItem.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : RGB(51, 51, 51)], for: .selected)
+//        let classRoomCtrl = HCClassRoomViewController()
+//        let classRoomNav = MainNavigationController.init(rootViewController: classRoomCtrl)
+//        classRoomNav.tabBarItem.title = "课堂"
+//        classRoomNav.tabBarItem.image = UIImage(named: "tabBar_classRoom_unselected")
+//        classRoomNav.tabBarItem.selectedImage = UIImage(named: "tabBar_classRoom_selected")
 
         let mineCtrl = HCMineViewController()
         let mineNav = MainNavigationController.init(rootViewController: mineCtrl)
@@ -72,16 +74,15 @@ class HCTabBarViewController: UITabBarController {
         mineNav.tabBarItem.title = "我的"
         mineNav.tabBarItem.image = UIImage(named: "tabBar_mine_unselected")
         mineNav.tabBarItem.selectedImage = UIImage(named: "tabBar_mine_selected")
-        mineNav.tabBarItem.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : RGB(51, 51, 51)], for: .normal)
-        mineNav.tabBarItem.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : RGB(51, 51, 51)], for: .selected)
-
-        viewControllers = [homeNav, toolNav, classRoomNav, mineNav]
+        
+        viewControllers = [homeNav, toolNav, mineNav]
+//        viewControllers = [homeNav, toolNav, classRoomNav, mineNav]
     }
 }
 
 extension HCTabBarViewController: UITabBarControllerDelegate {
     
-    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+//    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
 //        if selectedIndex == 1 {
 //            if lastSelectedIndex != 1
 //            {
@@ -98,5 +99,5 @@ extension HCTabBarViewController: UITabBarControllerDelegate {
 //        {
 //            lastSelectedIndex = selectedIndex
 //        }
-    }
+//    }
 }

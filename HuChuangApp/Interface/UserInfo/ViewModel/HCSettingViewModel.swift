@@ -12,10 +12,24 @@ import RxSwift
 
 class HCSettingViewModel: BaseViewModel {
     
-    public let listItemSubject = PublishSubject<[[HCListCellItem]]>()
+    public let listItemSignal = Variable([[HCListCellItem]]())
+    public let clearCacheSignal = PublishSubject<Void>()
 
     override init() {
         super.init()
+        
+        clearCacheSignal
+            ._doNext(forNotice: hud)
+            .subscribe(onNext: { [weak self] in
+                guard let strongSelf = self else { return }
+                ImageCacheCenter.shared.clear {
+                    let tempD = strongSelf.listItemSignal.value
+                    tempD[0][2].detailTitle = "0M"
+                    self?.listItemSignal.value = tempD
+                    self?.hud.successHidden("清除成功")
+                }
+            })
+            .disposed(by: disposeBag)
         
         reloadSubject
             .subscribe(onNext: { [weak self] in
@@ -31,7 +45,7 @@ extension HCSettingViewModel {
         var items: [HCListCellItem] = []
         
         let titles: [String] = ["账号设置", "消息通知", "清除缓存", "法律声明", "隐私", "鼓励我们，给我们评分"]
-        let subTitles: [String] = ["", "", "20M", "", "", ""]
+        let subTitles: [String] = ["", "", "0M", "", "", ""]
         for idx in 0..<titles.count {
             let item = HCListCellItem()
             item.title = titles[idx]
@@ -47,6 +61,11 @@ extension HCSettingViewModel {
         loginOutItem.titleColor = RGB(51, 51, 51)
         loginOutItem.cellIdentifier = HCListDetailCell_identifier
         
-        listItemSubject.onNext([items, [loginOutItem]])
+        listItemSignal.value = [items, [loginOutItem]]
+        
+        ImageCacheCenter.shared.size { [weak self] size in
+            items[2].detailTitle = size
+            self?.listItemSignal.value = [items, [loginOutItem]]
+        }
     }
 }
