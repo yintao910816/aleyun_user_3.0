@@ -53,6 +53,10 @@ class HCHelper {
 
 extension HCHelper {
     
+    class func userIsLogin() ->Bool {
+        return userDefault.uid != noUID && userDefault.token.count > 0
+    }
+    
     class func presentLogin(presentVC: UIViewController? = nil, isPopToRoot: Bool = false, _ completion: (() ->())? = nil) {
         HCHelper.share.isPresentLogin = true
         
@@ -61,6 +65,7 @@ extension HCHelper {
         
         let newPresentV = presentVC == nil ? NSObject().visibleViewController : presentVC
         newPresentV?.present(loginControl, animated: true, completion: {
+            HCHelper.share.clearUser()
             if isPopToRoot {
                 newPresentV?.navigationController?.popViewController(animated: true)
             }
@@ -71,6 +76,7 @@ extension HCHelper {
     func clearUser() {
         userDefault.uid = noUID
         userDefault.token = ""
+        userDefault.loginInfoString = ""
         
         userInfoModel = nil
     }

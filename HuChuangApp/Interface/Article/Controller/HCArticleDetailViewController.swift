@@ -16,16 +16,16 @@ class HCArticleDetailViewController: BaseWebViewController {
     private var storeButton: TYClickedButton!
     private var shareButton: TYClickedButton!
 
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-
-        navBarColor = HC_MAIN_COLOR
-        (navigationController as? BaseNavigationController)?.backItemInterface = .red
-    }
+//    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+//        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+//
+//        navBarColor = HC_MAIN_COLOR
+//        (navigationController as? BaseNavigationController)?.backItemInterface = .red
+//    }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+//    required init?(coder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
     
     override func setupUI() {
         super.setupUI()
@@ -45,7 +45,7 @@ class HCArticleDetailViewController: BaseWebViewController {
         shareButton = TYClickedButton.init(type: .custom)
         shareButton.frame = .init(x: 0, y: 0, width: 30, height: 30)
         shareButton.setEnlargeEdge(top: 10, bottom: 10, left: 10, right: 10)
-        shareButton.setImage(UIImage(named: "button_share_white"), for: .normal)
+        shareButton.setImage(UIImage(named: "button_share_black"), for: .normal)
 //        shareButton.sizeToFit()
 
         navigationItem.rightBarButtonItems = [UIBarButtonItem.init(customView: shareButton),

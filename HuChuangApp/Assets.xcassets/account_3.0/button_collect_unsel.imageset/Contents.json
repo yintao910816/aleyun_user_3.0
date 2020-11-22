@@ -1,21 +1,23 @@
 {
   "images" : [
     {
+      "filename" : "button_collect_unsel.png",
       "idiom" : "universal",
-      "filename" : "ic_introduce_two.png",
       "scale" : "1x"
     },
     {
+      "filename" : "button_collect_unsel@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "button_collect_unsel@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
   ],
   "info" : {
-    "version" : 1,
-    "author" : "xcode"
+    "author" : "xcode",
+    "version" : 1
   }
 }

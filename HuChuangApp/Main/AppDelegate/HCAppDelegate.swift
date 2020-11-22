@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import StoreKit
 import RxSwift
 import HandyJSON
 
@@ -22,21 +21,13 @@ class HCAppDelegate: UIResponder, UIApplicationDelegate {
     
     public var allowRotation: Bool = false
     
-    private var disposeBag = DisposeBag()
+    public var disposeBag = DisposeBag()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         TRTCCalling.shareInstance().addDelegate(self)
-
-        HCHelper.setupHelper()
-        
-        DbManager.dbSetup()
-        
         setupUM(launchOptions: launchOptions)
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3) {
-            self.checkVersion()
-        }
-
+        
         window = UIWindow.init(frame: UIScreen.main.bounds)
         window?.backgroundColor = .white
         window?.makeKeyAndVisible()
@@ -46,22 +37,8 @@ class HCAppDelegate: UIResponder, UIApplicationDelegate {
             window?.overrideUserInterfaceStyle = .light
         }
         
-        if userDefault.loginInfoString.count == 0 {
-            HCProvider.request(.selectInfo)
-                .map(model: HCUserModel.self)
-                .subscribe(onSuccess: { user in
-                    HCHelper.saveLogin(user: user)
-                }) { error in
-                    PrintLog(error)
-                }
-                .disposed(by: disposeBag)
-        }else {
-            if let user = JSONDeserializer<HCUserModel>.deserializeFrom(json: userDefault.loginInfoString) {
-                HCHelper.saveLogin(user: user)
-            }
-        }
+        setupAppLogic()
         
-//        if userDefault.lanuchStatue != vLaunch { AppLaunchView().show() }
         return true
     }
 
@@ -73,40 +50,3 @@ class HCAppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 }
-
-import Alamofire
-extension HCAppDelegate {
-    
-    private func checkVersion() {
-        _ = HCProvider.request(.version)
-            .map(model: AppVersionModel.self)
-            .subscribe(onSuccess: { res in
-                
-                if Bundle.main.isNewest(version: res.versionName) == false
-                {
-                    NoticesCenter.alert(title: "有最新版本可以升级", message: "", cancleTitle: "取消", okTitle: "去更新", callBackOK: {
-                        let storeProductVC = SKStoreProductViewController()
-                        storeProductVC.delegate = self
-                        storeProductVC.loadProduct(withParameters: [SKStoreProductParameterITunesItemIdentifier: "1241588748"],
-                                                   completionBlock:
-                            { (flag, error) in
-                                if flag
-                                {
-                                    NSObject().visibleViewController?.present(storeProductVC, animated: true, completion: nil)
-                                }
-                        })
-                    })
-                }
-            }) { error in
-                print("--- \(error) -- 已是最新版本")
-            }
-    }
-}
-
-extension HCAppDelegate: SKStoreProductViewControllerDelegate {
-    
-    func productViewControllerDidFinish(_ viewController: SKStoreProductViewController) {
-        viewController.dismiss(animated: true, completion: nil)
-    }
-}
-

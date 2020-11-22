@@ -269,6 +269,7 @@
 		B8454ED923A5294C00E88BAD /* HCExchangeReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8454ED723A5294C00E88BAD /* HCExchangeReusableView.xib */; };
 		B8454EDB23A5361200E88BAD /* TYColorLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8454EDA23A5361200E88BAD /* TYColorLineView.swift */; };
 		B8504A0A256410D10088B7E1 /* HCCollectionDoctorListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8504A09256410D10088B7E1 /* HCCollectionDoctorListCell.swift */; };
+		B853CF20256A337600A3A90D /* HCAppDelegate+Logic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B853CF1F256A337600A3A90D /* HCAppDelegate+Logic.swift */; };
 		B85CD93323BE602E00B1A1C3 /* HCEditUserCityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85CD93223BE602E00B1A1C3 /* HCEditUserCityController.swift */; };
 		B85CD93523BE609A00B1A1C3 /* HCEditUserCityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85CD93423BE609A00B1A1C3 /* HCEditUserCityViewModel.swift */; };
 		B86993D32337395800086A77 /* TYButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86993D22337395800086A77 /* TYButton.swift */; };
@@ -1127,6 +1128,7 @@
 		B8508E322340FC9F008C24BA /* Doctor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Doctor.swift; sourceTree = "<group>"; };
 		B8508E992341BFB3008C24BA /* HCMineCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCMineCell.swift; sourceTree = "<group>"; };
 		B8508EB1234251D5008C24BA /* HCFindDoctorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCFindDoctorViewModel.swift; sourceTree = "<group>"; };
+		B853CF1F256A337600A3A90D /* HCAppDelegate+Logic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HCAppDelegate+Logic.swift"; sourceTree = "<group>"; };
 		B85CD93223BE602E00B1A1C3 /* HCEditUserCityController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCEditUserCityController.swift; sourceTree = "<group>"; };
 		B85CD93423BE609A00B1A1C3 /* HCEditUserCityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCEditUserCityViewModel.swift; sourceTree = "<group>"; };
 		B8688793235B842F00B9B10F /* HCRecordRemindView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCRecordRemindView.swift; sourceTree = "<group>"; };
@@ -2878,9 +2880,10 @@
 		C421330922056B59006C10C4 /* AppDelegate */ = {
 			isa = PBXGroup;
 			children = (
-				B87CCB5725569F2C00792F76 /* HCAppDelegate+TRTC.swift */,
 				C421330A22056B59006C10C4 /* HCAppDelegate.swift */,
+				B87CCB5725569F2C00792F76 /* HCAppDelegate+TRTC.swift */,
 				B842D1FD22258CC000A4F8DF /* HCAppDelegate+UM.swift */,
+				B853CF1F256A337600A3A90D /* HCAppDelegate+Logic.swift */,
 			);
 			path = AppDelegate;
 			sourceTree = "<group>";
@@ -4389,6 +4392,7 @@
 				B86993D32337395800086A77 /* TYButton.swift in Sources */,
 				B870E53D238C27F40085AFA3 /* PatientInfo.swift in Sources */,
 				B816EACE221DABF400F024D5 /* ZXPDF417BarcodeRow.m in Sources */,
+				B853CF20256A337600A3A90D /* HCAppDelegate+Logic.swift in Sources */,
 				B816EABD221DABF400F024D5 /* ZXPerspectiveTransform.m in Sources */,
 				B816EABB221DABF400F024D5 /* ZXMathUtils.m in Sources */,
 				C4382BFA24E560C2000C00CE /* HCMineEmptyConsultCell.swift in Sources */,

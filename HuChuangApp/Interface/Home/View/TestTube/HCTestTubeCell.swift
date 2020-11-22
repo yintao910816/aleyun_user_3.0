@@ -22,12 +22,12 @@ class HCTestTubeCell: UICollectionViewCell {
         bgImgV.contentMode = .scaleAspectFill
         bgImgV.clipsToBounds = true
         
-        titleLabel = UILabel()
-        titleLabel.textColor = RGB(142, 152, 195)
-        titleLabel.font = .font(fontSize: 13, fontName: .PingFSemibold)
+//        titleLabel = UILabel()
+//        titleLabel.textColor = RGB(142, 152, 195)
+//        titleLabel.font = .font(fontSize: 13, fontName: .PingFSemibold)
         
         addSubview(bgImgV)
-        bgImgV.addSubview(titleLabel)
+//        bgImgV.addSubview(titleLabel)
     }
     
     required init?(coder: NSCoder) {
@@ -37,7 +37,7 @@ class HCTestTubeCell: UICollectionViewCell {
     public var model: HCCmsArticleListModel! {
         didSet {
             bgImgV.setImage(model.picPath)
-            titleLabel.text = model.title
+//            titleLabel.text = model.title
         }
     }
     
@@ -45,6 +45,6 @@ class HCTestTubeCell: UICollectionViewCell {
         super.layoutSubviews()
         
         bgImgV.frame = bounds
-        titleLabel.frame = .init(x: 5, y: 10, width: bgImgV.width - 10, height: 15)
+//        titleLabel.frame = .init(x: 5, y: 10, width: bgImgV.width - 10, height: 15)
     }
 }
