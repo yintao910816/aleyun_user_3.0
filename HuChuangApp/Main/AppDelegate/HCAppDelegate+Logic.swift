@@ -39,7 +39,7 @@ extension HCAppDelegate: SKStoreProductViewControllerDelegate {
             }
         }
         
-        //        if userDefault.lanuchStatue != vLaunch { AppLaunchView().show() }
+        if userDefault.lanuchStatue != vLaunch { AppLaunchView().show() }
     }
     
     private func checkVersion() {

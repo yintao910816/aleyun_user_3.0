@@ -25,5 +25,5 @@ let kLoginInfoString         = "loginInfoString"
  * vLaunch 如果需要显示引导页，把该值+1
  */
 let kLoadLaunchKey    = "loadLaunchKey"
-let vLaunch   = "1"
+let vLaunch   = "2"
 
