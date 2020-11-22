@@ -175,8 +175,8 @@ extension HCAppDelegate : UNUserNotificationCenterDelegate{
 
 extension HCAppDelegate {
     
-    private func uploadUMToken() {
-        guard deviceToken.count > 0 else { return }
+    public func uploadUMToken() {
+        guard deviceToken.count > 0, HCHelper.userIsLogin() else { return }
 
         if #available(iOS 10.0, *) {
             UNUserNotificationCenter.current().getNotificationSettings { [weak self] (set) in

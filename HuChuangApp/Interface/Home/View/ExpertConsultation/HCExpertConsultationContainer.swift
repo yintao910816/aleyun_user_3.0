@@ -122,7 +122,7 @@ extension HCExpertConsultationContainer: UICollectionViewDataSource, UICollectio
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return .init(width: width, height: HCExpertConsultationReusableView_height)
+        return .init(width: width, height: HCExpertConsultationReusableView.viewHeight(myDoctorCount: doctorListDatas.count))
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

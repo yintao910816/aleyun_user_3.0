@@ -9,7 +9,6 @@
 import UIKit
 
 public let HCExpertConsultationReusableView_identifier = "HCExpertConsultationReusableView"
-public let HCExpertConsultationReusableView_height: CGFloat = 515
 
 class HCExpertConsultationReusableView: UICollectionReusableView {
         
@@ -115,15 +114,27 @@ class HCExpertConsultationReusableView: UICollectionReusableView {
                                                width: buttonW,
                                                height: 80)
 
-        let titleLabelSize = titleLabel.sizeThatFits(.init(width: CGFloat(MAXFLOAT), height: 25))
-        titleLabel.frame = .init(x: 15, y: expertDoctorButton.frame.maxY + 15, width: titleLabelSize.width, height: 25)
-        
-        collectionView.frame = .init(x: 15,
-                                     y: titleLabel.frame.maxY + 15,
-                                     width: width - 30,
-                                     height: 98)
-        
-        sepLine.frame = .init(x: 0, y: collectionView.frame.maxY + 15, width: width, height: 10)
+        if doctorListDatas.count > 0 {
+            if titleLabel.superview == nil {
+                addSubview(titleLabel)
+                addSubview(collectionView)
+            }
+            
+            let titleLabelSize = titleLabel.sizeThatFits(.init(width: CGFloat(MAXFLOAT), height: 25))
+            titleLabel.frame = .init(x: 15, y: expertDoctorButton.frame.maxY + 15, width: titleLabelSize.width, height: 25)
+            
+            collectionView.frame = .init(x: 15,
+                                         y: titleLabel.frame.maxY + 15,
+                                         width: width - 30,
+                                         height: 98)
+            sepLine.frame = .init(x: 0, y: collectionView.frame.maxY + 15, width: width, height: 10)
+        }else {
+            if titleLabel.superview != nil {
+                titleLabel.removeFromSuperview()
+                collectionView.removeFromSuperview()
+            }
+            sepLine.frame = .init(x: 0, y: expertDoctorButton.frame.maxY + 15, width: width, height: 10)
+        }
         
         slideMenu.frame = .init(x: 0, y: sepLine.frame.maxY, width: width, height: 50)
     }
@@ -172,8 +183,6 @@ extension HCExpertConsultationReusableView {
         addSubview(expertDoctorButton)
         addSubview(thirdHospitalButton)
         addSubview(reproductiveCenterButton)
-        addSubview(titleLabel)
-        addSubview(collectionView)
         addSubview(sepLine)
         addSubview(slideMenu)
 
@@ -224,5 +233,12 @@ extension HCExpertConsultationReusableView: UICollectionViewDelegateFlowLayout, 
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         cellDidSelected?(doctorListDatas[indexPath.row])
+    }
+}
+
+extension HCExpertConsultationReusableView {
+    
+    class func viewHeight(myDoctorCount: Int) ->CGFloat {
+        return myDoctorCount > 0 ? 515 : (515 - (55 + 98))
     }
 }

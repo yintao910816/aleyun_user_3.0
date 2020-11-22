@@ -92,6 +92,8 @@ extension HCHelper {
         HCHelper.share.userInfoHasReload.onNext(user)
         
         if user.uid.count > 0 {
+            (UIApplication.shared.delegate as! HCAppDelegate).uploadUMToken()
+            
             _ = HCHelper.requestVideoChatSignature()
                 .subscribe(onNext: { userSig in
                     if let sign = userSig {

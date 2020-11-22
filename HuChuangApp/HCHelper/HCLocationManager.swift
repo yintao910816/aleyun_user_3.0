@@ -44,8 +44,10 @@ class HCLocationManager: NSObject {
     }
     
     deinit {
-        locationManager.stopUpdatingLocation()
-        locationManager.delegate = nil
+        if locationManager != nil {
+            locationManager.stopUpdatingLocation()
+            locationManager.delegate = nil
+        }
     }
     
     private func reLocationAction(){
@@ -73,8 +75,7 @@ extension HCLocationManager: CLLocationManagerDelegate {
                     locationSubject.onNext(CLLocation.init(latitude: 30.5, longitude: 114.3))
                 }
             default:
-                break
-                
+                locationSubject.onNext(CLLocation.init(latitude: 30.5, longitude: 114.3))
             }
         }
     }
