@@ -59,13 +59,13 @@ extension HCHelper {
     
     class func presentLogin(presentVC: UIViewController? = nil, isPopToRoot: Bool = false, _ completion: (() ->())? = nil) {
         HCHelper.share.isPresentLogin = true
-        
+        HCHelper.share.clearUser()
+
         let loginControl = MainNavigationController.init(rootViewController: HCLoginViewController())
         loginControl.modalPresentationStyle = .fullScreen
         
         let newPresentV = presentVC == nil ? NSObject().visibleViewController : presentVC
         newPresentV?.present(loginControl, animated: true, completion: {
-            HCHelper.share.clearUser()
             if isPopToRoot {
                 newPresentV?.navigationController?.popViewController(animated: true)
             }

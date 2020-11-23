@@ -4771,7 +4771,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.01.0000;
+				MARKETING_VERSION = 3.01.0001;
 				PRODUCT_BUNDLE_IDENTIFIER = com.huchuang.aileyun;
 				PRODUCT_NAME = "爱乐孕";
 				PROVISIONING_PROFILE_SPECIFIER = aileyun_user_old_dev;
@@ -4798,7 +4798,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.01.0000;
+				MARKETING_VERSION = 3.01.0001;
 				PRODUCT_BUNDLE_IDENTIFIER = com.huchuang.aileyun;
 				PRODUCT_NAME = "爱乐孕";
 				PROVISIONING_PROFILE_SPECIFIER = aleyun_user_old_hoc;

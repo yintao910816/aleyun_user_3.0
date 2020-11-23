@@ -87,22 +87,27 @@ class HCHomeViewController: BaseViewController {
 extension HCHomeViewController {
     
     private func functionMenuClicked(functionModel: HCFunctionsMenuModel) {
-        if functionModel.primordial == 1 && functionModel.name == "专家问诊" {
+        
+        // 专家咨询
+        if functionModel.primordial == 1 && functionModel.code == "ZJWZ" {
             navigationController?.pushViewController(HCExpertConsultationController(), animated: true)
             return
         }
         
-        if functionModel.primordial == 1 && functionModel.name == "试管百科" {
+        // 试管百科
+        if functionModel.primordial == 1 && functionModel.code == "SGBK" {
             navigationController?.pushViewController(HCTestTubeViewController(), animated: true)
             return
         }
         
-        if functionModel.primordial == 1 && functionModel.name == "生殖中心" {
+        // 生殖中心
+        if functionModel.primordial == 1 && functionModel.code == "SZZX" {
             navigationController?.pushViewController(HCHospitalListViewController(), animated: true)
             return
         }
         
-        if functionModel.primordial == 1 && functionModel.name == "药品百科" {
+        // 药品百科
+        if functionModel.primordial == 1 && functionModel.code == "YPBK" {
             navigationController?.pushViewController(HCMedicineViewController(), animated: true)
             return
         }
