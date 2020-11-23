@@ -18,12 +18,12 @@ class HCExpertConsultationReusableView: UICollectionReusableView {
     private var slideMenuData: [TYSlideItemModel] = []
     
     private var carouselView: CarouselView!
-    /// 专家医师
-    private var expertDoctorButton: HCCustomTextButton!
-    /// 三甲医院
-    private var thirdHospitalButton: HCCustomTextButton!
-    /// 生殖中心
-    private var reproductiveCenterButton: HCCustomTextButton!
+//    /// 专家医师
+//    private var expertDoctorButton: HCCustomTextButton!
+//    /// 三甲医院
+//    private var thirdHospitalButton: HCCustomTextButton!
+//    /// 生殖中心
+//    private var reproductiveCenterButton: HCCustomTextButton!
     
     private var titleLabel: UILabel!
     
@@ -56,29 +56,29 @@ class HCExpertConsultationReusableView: UICollectionReusableView {
         
         carouselView.setData(source: bannberDatas)
         
-        expertDoctorButton.setupText(first: statisticsDoctorHopitalModel.expertDoctor,
-                                     second: "专家医师",
-                                     firstTitleFont: .font(fontSize: 22, fontName: .PingFSemibold),
-                                     secondTitleFont: .font(fontSize: 16),
-                                     firstTitleColor: RGB(51, 51, 51),
-                                     secondTitleColor: RGB(251, 180, 120),
-                                     backGroundColor: RGB(254, 242, 232))
-        
-        thirdHospitalButton.setupText(first: statisticsDoctorHopitalModel.tripleA,
-                                     second: "三甲医院",
-                                     firstTitleFont: .font(fontSize: 22, fontName: .PingFSemibold),
-                                     secondTitleFont: .font(fontSize: 16),
-                                     firstTitleColor: RGB(51, 51, 51),
-                                     secondTitleColor: RGB(115, 173, 246),
-                                     backGroundColor: RGB(222, 233, 247))
-
-        reproductiveCenterButton.setupText(first: statisticsDoctorHopitalModel.reproductiveCenter,
-                                     second: "生殖中心",
-                                     firstTitleFont: .font(fontSize: 22, fontName: .PingFSemibold),
-                                     secondTitleFont: .font(fontSize: 16),
-                                     firstTitleColor: RGB(51, 51, 51),
-                                     secondTitleColor: RGB(252, 208, 69),
-                                     backGroundColor: RGB(250, 243, 221))
+//        expertDoctorButton.setupText(first: statisticsDoctorHopitalModel.expertDoctor,
+//                                     second: "专家医师",
+//                                     firstTitleFont: .font(fontSize: 22, fontName: .PingFSemibold),
+//                                     secondTitleFont: .font(fontSize: 16),
+//                                     firstTitleColor: RGB(51, 51, 51),
+//                                     secondTitleColor: RGB(251, 180, 120),
+//                                     backGroundColor: RGB(254, 242, 232))
+//
+//        thirdHospitalButton.setupText(first: statisticsDoctorHopitalModel.tripleA,
+//                                     second: "三甲医院",
+//                                     firstTitleFont: .font(fontSize: 22, fontName: .PingFSemibold),
+//                                     secondTitleFont: .font(fontSize: 16),
+//                                     firstTitleColor: RGB(51, 51, 51),
+//                                     secondTitleColor: RGB(115, 173, 246),
+//                                     backGroundColor: RGB(222, 233, 247))
+//
+//        reproductiveCenterButton.setupText(first: statisticsDoctorHopitalModel.reproductiveCenter,
+//                                     second: "生殖中心",
+//                                     firstTitleFont: .font(fontSize: 22, fontName: .PingFSemibold),
+//                                     secondTitleFont: .font(fontSize: 16),
+//                                     firstTitleColor: RGB(51, 51, 51),
+//                                     secondTitleColor: RGB(252, 208, 69),
+//                                     backGroundColor: RGB(250, 243, 221))
 
         slideMenu.datasource = slideMenuData
         
@@ -100,19 +100,19 @@ class HCExpertConsultationReusableView: UICollectionReusableView {
         
         carouselView.frame = .init(x: 15, y: 0, width: width - 30, height: 180)
         
-        let buttonW: CGFloat = (width - 15 * 2 - 10 * 2) / 3.0
-        expertDoctorButton.frame = .init(x: 15,
-                                         y: carouselView.frame.maxY + 15,
-                                         width: buttonW,
-                                         height: 80)
-        thirdHospitalButton.frame = .init(x: expertDoctorButton.frame.maxX + 10,
-                                          y: expertDoctorButton.y,
-                                          width: buttonW,
-                                          height: 80)
-        reproductiveCenterButton.frame = .init(x: thirdHospitalButton.frame.maxX + 10,
-                                               y: expertDoctorButton.y,
-                                               width: buttonW,
-                                               height: 80)
+//        let buttonW: CGFloat = (width - 15 * 2 - 10 * 2) / 3.0
+//        expertDoctorButton.frame = .init(x: 15,
+//                                         y: carouselView.frame.maxY + 15,
+//                                         width: buttonW,
+//                                         height: 80)
+//        thirdHospitalButton.frame = .init(x: expertDoctorButton.frame.maxX + 10,
+//                                          y: expertDoctorButton.y,
+//                                          width: buttonW,
+//                                          height: 80)
+//        reproductiveCenterButton.frame = .init(x: thirdHospitalButton.frame.maxX + 10,
+//                                               y: expertDoctorButton.y,
+//                                               width: buttonW,
+//                                               height: 80)
 
         if doctorListDatas.count > 0 {
             if titleLabel.superview == nil {
@@ -121,7 +121,7 @@ class HCExpertConsultationReusableView: UICollectionReusableView {
             }
             
             let titleLabelSize = titleLabel.sizeThatFits(.init(width: CGFloat(MAXFLOAT), height: 25))
-            titleLabel.frame = .init(x: 15, y: expertDoctorButton.frame.maxY + 15, width: titleLabelSize.width, height: 25)
+            titleLabel.frame = .init(x: 15, y: carouselView.frame.maxY + 15, width: titleLabelSize.width, height: 25)
             
             collectionView.frame = .init(x: 15,
                                          y: titleLabel.frame.maxY + 15,
@@ -133,7 +133,7 @@ class HCExpertConsultationReusableView: UICollectionReusableView {
                 titleLabel.removeFromSuperview()
                 collectionView.removeFromSuperview()
             }
-            sepLine.frame = .init(x: 0, y: expertDoctorButton.frame.maxY + 15, width: width, height: 10)
+            sepLine.frame = .init(x: 0, y: carouselView.frame.maxY + 15, width: width, height: 10)
         }
         
         slideMenu.frame = .init(x: 0, y: sepLine.frame.maxY, width: width, height: 50)
@@ -145,14 +145,17 @@ extension HCExpertConsultationReusableView {
     private func initUI() {
         carouselView = CarouselView()
         carouselView.layer.cornerRadius = 3
-        
-        expertDoctorButton = HCCustomTextButton()
-        expertDoctorButton.layer.cornerRadius = 3
-        
-        thirdHospitalButton = HCCustomTextButton()
-        thirdHospitalButton.layer.cornerRadius = 3
-        reproductiveCenterButton = HCCustomTextButton()
-        reproductiveCenterButton.layer.cornerRadius = 3
+        carouselView.indicatorPosition = .bottomCenter
+        carouselView.pageContrl.currentPageIndicatorTintColor = HC_MAIN_COLOR
+        carouselView.pageContrl.pageIndicatorTintColor = RGB(214, 214, 214)
+
+//        expertDoctorButton = HCCustomTextButton()
+//        expertDoctorButton.layer.cornerRadius = 3
+//
+//        thirdHospitalButton = HCCustomTextButton()
+//        thirdHospitalButton.layer.cornerRadius = 3
+//        reproductiveCenterButton = HCCustomTextButton()
+//        reproductiveCenterButton.layer.cornerRadius = 3
         
         titleLabel = UILabel()
         titleLabel.text = "我的医生"
@@ -180,35 +183,35 @@ extension HCExpertConsultationReusableView {
         slideMenu.menuSelect = { [weak self] in self?.menuSelect?($0) }
                 
         addSubview(carouselView)
-        addSubview(expertDoctorButton)
-        addSubview(thirdHospitalButton)
-        addSubview(reproductiveCenterButton)
+//        addSubview(expertDoctorButton)
+//        addSubview(thirdHospitalButton)
+//        addSubview(reproductiveCenterButton)
         addSubview(sepLine)
         addSubview(slideMenu)
 
-        expertDoctorButton.setupText(first: "0",
-                                     second: "专家医师",
-                                     firstTitleFont: .font(fontSize: 22, fontName: .PingFSemibold),
-                                     secondTitleFont: .font(fontSize: 16),
-                                     firstTitleColor: RGB(51, 51, 51),
-                                     secondTitleColor: RGB(251, 180, 120),
-                                     backGroundColor: RGB(254, 242, 232))
-        
-        thirdHospitalButton.setupText(first: "0",
-                                     second: "三甲医院",
-                                     firstTitleFont: .font(fontSize: 22, fontName: .PingFSemibold),
-                                     secondTitleFont: .font(fontSize: 16),
-                                     firstTitleColor: RGB(51, 51, 51),
-                                     secondTitleColor: RGB(115, 173, 246),
-                                     backGroundColor: RGB(254, 242, 232))
-
-        reproductiveCenterButton.setupText(first: "0",
-                                     second: "生殖中心",
-                                     firstTitleFont: .font(fontSize: 22, fontName: .PingFSemibold),
-                                     secondTitleFont: .font(fontSize: 16),
-                                     firstTitleColor: RGB(51, 51, 51),
-                                     secondTitleColor: RGB(252, 208, 69),
-                                     backGroundColor: RGB(254, 242, 232))
+//        expertDoctorButton.setupText(first: "0",
+//                                     second: "专家医师",
+//                                     firstTitleFont: .font(fontSize: 22, fontName: .PingFSemibold),
+//                                     secondTitleFont: .font(fontSize: 16),
+//                                     firstTitleColor: RGB(51, 51, 51),
+//                                     secondTitleColor: RGB(251, 180, 120),
+//                                     backGroundColor: RGB(254, 242, 232))
+//
+//        thirdHospitalButton.setupText(first: "0",
+//                                     second: "三甲医院",
+//                                     firstTitleFont: .font(fontSize: 22, fontName: .PingFSemibold),
+//                                     secondTitleFont: .font(fontSize: 16),
+//                                     firstTitleColor: RGB(51, 51, 51),
+//                                     secondTitleColor: RGB(115, 173, 246),
+//                                     backGroundColor: RGB(254, 242, 232))
+//
+//        reproductiveCenterButton.setupText(first: "0",
+//                                     second: "生殖中心",
+//                                     firstTitleFont: .font(fontSize: 22, fontName: .PingFSemibold),
+//                                     secondTitleFont: .font(fontSize: 16),
+//                                     firstTitleColor: RGB(51, 51, 51),
+//                                     secondTitleColor: RGB(252, 208, 69),
+//                                     backGroundColor: RGB(254, 242, 232))
         
         collectionView.register(HCDoctorCardCell.self, forCellWithReuseIdentifier: HCDoctorCardCell_identifier)
     }
@@ -239,6 +242,7 @@ extension HCExpertConsultationReusableView: UICollectionViewDelegateFlowLayout, 
 extension HCExpertConsultationReusableView {
     
     class func viewHeight(myDoctorCount: Int) ->CGFloat {
-        return myDoctorCount > 0 ? 515 : (515 - (55 + 98))
+//        return myDoctorCount > 0 ? 515 : (515 - (55 + 98))
+        return myDoctorCount > 0 ? 420 : (420 - (55 + 98))
     }
 }

@@ -18,7 +18,7 @@ class AppLaunchView: UIView {
 
 //        imageSource = UIDevice.current.isX == true ? ["guide_x_01", "guide_x_02", "guide_x_03", "guide_x_04", "guide_x_05"]
 //            : ["guide_01", "guide_02", "guide_03", "guide_04", "guide_05"]
-        imageSource = ["launch_01", "launch_02"]
+        imageSource = ["launch_01", "launch_02", "launch_03"]
 
         addSubview(scroll)
         addImageView()

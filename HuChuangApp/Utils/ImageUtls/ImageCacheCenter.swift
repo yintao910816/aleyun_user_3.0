@@ -93,6 +93,8 @@ enum ImageStrategy {
     case messageTransaction
     /// 系统消息图标
     case messageSystom
+    /// 药品百科
+    case yaopinbaike
 }
 
 extension ImageStrategy {
@@ -114,6 +116,8 @@ extension ImageStrategy {
             return UIImage.init(named: "message_transaction")
         case .messageSystom:
             return UIImage.init(named: "message_system")
+        case .yaopinbaike:
+            return UIImage.init(named: "yaopinbaike_empt")
         }
     }
 }

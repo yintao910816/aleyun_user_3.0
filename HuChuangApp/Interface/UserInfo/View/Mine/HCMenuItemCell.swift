@@ -85,7 +85,7 @@ class HCMenuItemCell: UICollectionViewCell {
                 backgroundColor = .white
             }
             
-            icon.setImage(medicineItem.introudcePic, .original)
+            icon.setImage(medicineItem.introudcePic, .yaopinbaike)
             title.text = medicineItem.medicineName
             subTitle.text = medicineItem.aliasName
         }

@@ -11,9 +11,14 @@ import SnapKit
 import Kingfisher
 
 class CarouselView: UIView {
-
+    
+    enum IndicatorPosition {
+        case bottomRight
+        case bottomCenter
+    }
+    
     private var scroll: UIScrollView!
-    private var pageContrl: UIPageControl!
+    public var pageContrl: UIPageControl!
     
     // 上一个
     private var lastImageView: UIImageView!
@@ -29,6 +34,7 @@ class CarouselView: UIView {
     private var timer: Timer?
     
     public var tapCallBack: ((CarouselSource) ->Void)?
+    public var pageIdxChangeCallBack: ((Int)->())?
     
     public var timeInterval: TimeInterval = 4.0 {
         didSet {
@@ -73,6 +79,22 @@ class CarouselView: UIView {
             setCarouselImage()
             
             timer?.fireDate = Date.init(timeIntervalSinceNow: timeInterval)
+        }
+        
+        setNeedsLayout()
+        layoutIfNeeded()
+    }
+    
+    public var pageContrlIsHidden: Bool = false {
+        didSet {
+            pageContrl.isHidden = pageContrlIsHidden
+        }
+    }
+    
+    public var indicatorPosition: IndicatorPosition = .bottomRight {
+        didSet {
+            setNeedsLayout()
+            layoutIfNeeded()
         }
     }
     
@@ -140,30 +162,24 @@ class CarouselView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
-        scroll.snp.makeConstraints { $0.edges.equalTo(self).inset(UIEdgeInsets.zero) }
-        
-        lastImageView.snp.makeConstraints {
-            $0.left.equalTo(scroll)
-            $0.top.equalTo(scroll)
-            $0.size.equalTo(CGSize.init(width: width, height: height))
-        }
-        
-        currentImageView.snp.makeConstraints {
-            $0.left.equalTo(scroll).offset(width)
-            $0.top.equalTo(scroll)
-            $0.size.equalTo(CGSize.init(width: width, height: height))
-        }
-        
-        nextImageView.snp.makeConstraints {
-            $0.left.equalTo(scroll).offset(2 * width)
-            $0.top.equalTo(scroll)
-            $0.size.equalTo(CGSize.init(width: width, height: height))
-        }
-
-        pageContrl.snp.makeConstraints {
-            $0.right.equalTo(self).offset(-20)
-            $0.bottom.equalTo(self)
+                
+        scroll.frame = bounds
+        lastImageView.frame = .init(x: 0, y: 0, width: width, height: height)
+        currentImageView.frame = .init(x: scroll.width, y: 0, width: width, height: height)
+        nextImageView.frame = .init(x: 2 * width, y: 0, width: width, height: height)
+                
+        let size = pageContrl.sizeThatFits(.init(width: CGFloat.greatestFiniteMagnitude, height: 20))
+        switch indicatorPosition {
+        case .bottomRight:
+            pageContrl.frame = .init(x: width - 20 - size.width,
+                                     y: height - size.height,
+                                     width: size.width,
+                                     height: size.height)
+        case .bottomCenter:
+            pageContrl.frame = .init(x: (width - size.width) / 2,
+                                     y: height - size.height,
+                                     width: size.width,
+                                     height: size.height)
         }
         
         scroll.contentSize = .init(width: scroll.width * 3, height: scroll.height)

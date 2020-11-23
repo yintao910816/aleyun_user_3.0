@@ -48,7 +48,9 @@ struct APIAssistance {
     /// 测试地址最后加s，正式去掉
     public static let base   = "https://ileyun.ivfcn.com/hc-patient-webs/"
     public static let fileBase = "https://ileyun.ivfcn.com/hc-files/"
-    
+    /// 检测版本更新域名地址
+    public static let versionBase   = "https://ileyun.ivfcn.com/hc-patient/"
+
     /// 测试地址最后加s，正式去掉
     public static let baseH5Host = "https://ileyun.ivfcn.com/hc-patient-webs/"
     /// 咨询相关h5主页
@@ -58,6 +60,8 @@ struct APIAssistance {
         switch API {
         case .uploadIcon(_):
             return URL(string: fileBase)!
+        case .version:
+            return URL(string: versionBase)!
         default:
             return URL(string: base)!
         }
