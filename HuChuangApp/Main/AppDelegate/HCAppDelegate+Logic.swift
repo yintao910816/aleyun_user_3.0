@@ -19,10 +19,6 @@ extension HCAppDelegate: SKStoreProductViewControllerDelegate {
         DbManager.dbSetup()
         
         if HCHelper.userIsLogin() {
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3) {
-                self.checkVersion()
-            }
-            
             if userDefault.loginInfoString.count == 0 {
                 HCProvider.request(.selectInfo)
                     .map(model: HCUserModel.self)
@@ -40,6 +36,10 @@ extension HCAppDelegate: SKStoreProductViewControllerDelegate {
         }
         
         if userDefault.lanuchStatue != vLaunch { AppLaunchView().show() }
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3) {
+            self.checkVersion()
+        }
     }
     
     private func checkVersion() {
