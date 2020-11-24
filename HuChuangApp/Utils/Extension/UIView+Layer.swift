@@ -132,11 +132,11 @@ public struct UIRectSide : OptionSet {
 extension UIView {
   
     /**
-     * 设置阴影加圆角
-     * 设置四周阴影的view
-     * 这里只设置阴影
+     * 设置view四周阴影
+     * shadowRadius: 阴影圆角
+     * margin: 阴影于view的边框间距
      */
-    func setCornerAndShaow(shadowRadius: CGFloat = 1, shadowOpacity: Float = 0.1) {
+    func setCornerAndShaow(shadowRadius: CGFloat = 3, margin: CGFloat = 1, shadowOpacity: Float = 0.1) {
         setNeedsDisplay()
         layoutIfNeeded()
 
@@ -144,13 +144,14 @@ extension UIView {
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOpacity = shadowOpacity
         layer.shadowRadius = shadowRadius
+        layer.shadowOffset = .init(width: 0, height: 0)
         
         let path = UIBezierPath.init()
-        path.move(to: .init(x: -shadowRadius, y: -shadowRadius/2.0))
-        path.addLine(to: .init(x: frame.size.width + shadowRadius, y: -shadowRadius/2.0))
-        path.addLine(to: .init(x: frame.size.width + shadowRadius, y: frame.size.height + shadowRadius * 4))
-        path.addLine(to: .init(x: -shadowRadius, y: frame.size.height + shadowRadius * 4))
-        path.addLine(to: .init(x: -shadowRadius, y: -shadowRadius))
+        path.move(to: .init(x: -margin, y: -margin))
+        path.addLine(to: .init(x: frame.size.width + margin, y: -margin))
+        path.addLine(to: .init(x: frame.size.width + margin, y: frame.size.height + margin))
+        path.addLine(to: .init(x: -margin, y: frame.size.height + margin))
+        path.addLine(to: .init(x: -margin, y: -margin))
         
         layer.shadowPath = path.cgPath
     }

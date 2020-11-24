@@ -17,6 +17,7 @@ class TYSlideItemModel {
     var lineWidth: CGFloat = 20
     
     var isSelected: Bool = false
+    var isHiddenAnimotionView: Bool = false
     var icon: UIImage? = nil
         
     init(title: String,
@@ -26,6 +27,7 @@ class TYSlideItemModel {
          textFont: UIFont = .font(fontSize: 14, fontName: .PingFMedium),
          lineWidth: CGFloat = 20,
          isSelected: Bool = false,
+         isHiddenAnimotionView: Bool = false,
          icon: UIImage? = nil) {
         
         self.title = title
@@ -35,6 +37,7 @@ class TYSlideItemModel {
         self.textFont = textFont
         self.lineWidth = lineWidth
         self.isSelected = isSelected
+        self.isHiddenAnimotionView = isHiddenAnimotionView
         self.icon = icon
     }
     
@@ -163,21 +166,24 @@ extension TYSlideItemModel {
                                  lineColor: HC_MAIN_COLOR,
                                  textFont: .font(fontSize: 16),
                                  isSelected: true,
-                                 icon: UIImage(named: "login_arrow_down")),
+                                 isHiddenAnimotionView: true,
+                                 icon: UIImage(named: "arrow_down_gray")),
                 TYSlideItemModel(title: "推荐排序",
                                  textColor: RGB(51, 51, 51),
                                  selectedTextColor: RGB(51, 51, 51),
                                  lineColor: HC_MAIN_COLOR,
                                  textFont: .font(fontSize: 16),
                                  isSelected: false,
-                                 icon: UIImage(named: "login_arrow_down")),
+                                 isHiddenAnimotionView: true,
+                                 icon: UIImage(named: "arrow_down_gray")),
                 TYSlideItemModel(title: "咨询方式",
                                  textColor: RGB(51, 51, 51),
                                  selectedTextColor: RGB(51, 51, 51),
                                  lineColor: HC_MAIN_COLOR,
                                  textFont: .font(fontSize: 16),
                                  isSelected: false,
-                                 icon: UIImage(named: "login_arrow_down"))]
+                                 isHiddenAnimotionView: true,
+                                 icon: UIImage(named: "arrow_down_gray"))]
     }
 
     /// 生殖中心
@@ -188,14 +194,16 @@ extension TYSlideItemModel {
                                  lineColor: HC_MAIN_COLOR,
                                  textFont: .font(fontSize: 16),
                                  isSelected: true,
-                                 icon: UIImage(named: "login_arrow_down")),
+                                 isHiddenAnimotionView: true,
+                                 icon: UIImage(named: "arrow_down_gray")),
                 TYSlideItemModel(title: "筛选",
                                  textColor: RGB(51, 51, 51),
                                  selectedTextColor: RGB(51, 51, 51),
                                  lineColor: HC_MAIN_COLOR,
                                  textFont: .font(fontSize: 16),
                                  isSelected: false,
-                                 icon: UIImage(named: "login_arrow_down"))]
+                                 isHiddenAnimotionView: true,
+                                 icon: UIImage(named: "arrow_down_gray"))]
     }
 
 }

@@ -177,7 +177,7 @@ extension HCHomeViewContainer: UICollectionViewDataSource, UICollectionViewDeleg
         case 0:
             return .init(top: 20, left: 15, bottom: 0, right: 15)
         case 1:
-            return .init(top: 20, left: 20, bottom: 0, right: 20)
+            return .init(top: 5, left: 20, bottom: 0, right: 20)
         case 2:
             return .init(top: 15, left: 20, bottom: 0, right: 15)
 

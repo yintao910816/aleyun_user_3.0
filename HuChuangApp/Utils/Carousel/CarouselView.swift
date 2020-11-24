@@ -78,7 +78,13 @@ class CarouselView: UIView {
             
             setCarouselImage()
             
-            timer?.fireDate = Date.init(timeIntervalSinceNow: timeInterval)
+            if source.count > 1 {
+                timer?.fireDate = Date.init(timeIntervalSinceNow: timeInterval)
+                pageContrlIsHidden = false
+            }else {
+                timer?.fireDate = Date.distantFuture
+                pageContrlIsHidden = true
+            }
         }
         
         setNeedsLayout()

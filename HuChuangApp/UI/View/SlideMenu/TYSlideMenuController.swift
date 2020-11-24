@@ -287,7 +287,7 @@ class TYSlideCell: UICollectionViewCell {
             
             titleLabel.textColor = model.isSelected ? model.selectedTextColor : model.textColor
             bottomLine.backgroundColor = model.lineColor
-            bottomLine.isHidden = !model.isSelected
+            bottomLine.isHidden = (!model.isSelected || model.isHiddenAnimotionView)
             
             setNeedsLayout()
             layoutIfNeeded()

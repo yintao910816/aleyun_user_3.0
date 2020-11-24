@@ -14,7 +14,7 @@ class HCExpertConsultationController: BaseViewController {
     private var containerView: HCExpertConsultationContainer!
     
     override func setupUI() {
-        navigationItem.title = "专家问诊"
+        navigationItem.title = "专家咨询"
         
         containerView = HCExpertConsultationContainer.init(frame: view.bounds)
         view.addSubview(containerView)
