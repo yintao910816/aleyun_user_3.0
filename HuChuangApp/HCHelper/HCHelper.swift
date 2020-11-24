@@ -33,6 +33,9 @@ class HCHelper {
     public var userInfoModel: HCUserModel?
     public var isPresentLogin: Bool = false
     
+    public var enableWchatLoginSubjet = PublishSubject<Bool>()
+    public var enableWchatLogin: Bool = false
+
     init() {
         
         let userInfoSignal = HCProvider.request(.selectInfo)

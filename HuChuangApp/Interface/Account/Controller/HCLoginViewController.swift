@@ -31,9 +31,17 @@ class HCLoginViewController: BaseViewController {
             self?.navigationController?.pushViewController(BaseWebViewController.createWeb(url: url),
                                                            animated: true)
         }
+        
+        containerView.platformContainer.isHidden = !HCHelper.share.enableWchatLogin
     }
     
     override func rxBind() {
+        HCHelper.share.enableWchatLoginSubjet
+            .subscribe(onNext: { [weak self] in
+                self?.containerView.platformContainer.isHidden = !$0
+            })
+            .disposed(by: disposeBag)
+
         viewModel = HCLoginViewModel.init(input: containerView.phoneTf.rx.text.orEmpty.asDriver(),
                                           tap: (codeTap: containerView.getCodeButton.rx.tap.asDriver(),
                                                 agreeTap: containerView.agreeSignal.asDriver(),

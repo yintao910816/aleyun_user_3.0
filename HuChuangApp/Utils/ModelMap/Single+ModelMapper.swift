@@ -52,4 +52,13 @@ extension PrimitiveSequence where TraitType == SingleTrait, ElementType == Respo
             }
             .observeOn(MainScheduler.instance)
     }
+    
+    func map<T: HandyJSON>(models type: T.Type, transformKey: String, transformModelKey: String) -> Single<[T]> {
+        return observeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+            .flatMap { response -> Single<[T]> in
+                return Single.just(try response.map(model: type, transformKey: transformKey, transformModelKey: transformModelKey))
+            }
+            .observeOn(MainScheduler.instance)
+    }
+
 }

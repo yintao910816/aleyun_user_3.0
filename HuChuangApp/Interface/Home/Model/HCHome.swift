@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import HandyJSON
 
 /// 功能按钮
 class HCFunctionsMenuModel: HJModel {
@@ -98,6 +99,7 @@ class HCCmsArticleListModel: HJModel {
     var readNumber: Int = 0
     var store: Int = 0
     var title: String = ""
+    var tubeType: String = ""
 }
 
 //MARK: 获取的文章详情h5链接

@@ -30,7 +30,7 @@ class HCTestTubeViewModel: BaseViewModel {
     private func requestGroupCmsArticle() {
         hud.noticeLoading()
         HCProvider.request(.groupCmsArticle(code: .SGBK))
-            .map(models: HCGroupCmsArticleModel.self)
+            .map(models: HCGroupCmsArticleModel.self, transformKey: "name", transformModelKey: "articleVoList")
             .subscribe(onSuccess: { [weak self] data in
                 self?.datasource.value = data
                 self?.hud.noticeHidden()

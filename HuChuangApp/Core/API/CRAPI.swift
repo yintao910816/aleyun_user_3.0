@@ -404,7 +404,7 @@ extension API: TargetType{
             let formData = MultipartFormData(provider: .data(data), name: "file", fileName: dateStr, mimeType: "image/jpeg")
             return .uploadMultipart([formData])
         case .version:
-            return .requestParameters(parameters: ["type": "ios", "packageName": "com.huchuang.guangsanuser"],
+            return .requestParameters(parameters: ["type": "ios", "packageName": Bundle.main.bundleIdentifier],
                                       encoding: URLEncoding.default)
         default:
             if let _parameters = parameters {

@@ -90,7 +90,44 @@ public extension Response {
             throw MapperError.server(message: serverModel.message)
         }
     }
+   
+    internal func map<T: HandyJSON>(model type: T.Type, transformKey: String, transformModelKey: String) throws -> [T] {
+        guard let jsonDictionary = try mapJSON() as? [String: Any] else {
+            throw MapperError.json(message: "json解析失败")
+        }
+
+        var newJson: [String : Any] = [:]
+        for item in jsonDictionary {
+            if item.key != "data" {
+                newJson[item.key] = item.value
+            }
+        }
+        
+        var dataJson: [[String: Any]] = []
+        var order: [String] = []
+        if let d = jsonDictionary["data"] as? [String: Any] {
+            order.append(contentsOf: d.keys)
+            order = order.sorted(by: { (s1, s2) -> Bool in
+                return s1 > s2
+            })
+            
+            for idx in 0..<order.count {
+                dataJson.append([transformKey: order[idx], transformModelKey: d[order[idx]]!])
+            }            
+        }
+        
+        newJson["data"] = dataJson
+        
+        guard let serverModel = JSONDeserializer<DataModel<[T]>>.deserializeFrom(dict: newJson) else {
+            throw MapperError.json(message: "json解析失败")
+        }
     
+        if serverModel.code == RequestCode.success.rawValue, let models = serverModel.data {
+            return models
+        }else {
+            throw MapperError.server(message: serverModel.message)
+        }
+    }
 }
 
 enum MapperError: Swift.Error {
