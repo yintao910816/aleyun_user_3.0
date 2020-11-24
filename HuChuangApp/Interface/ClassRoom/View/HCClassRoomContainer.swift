@@ -46,10 +46,10 @@ class HCClassRoomContainer: UIView {
         
         if #available(iOS 11.0, *) {
             searchBar.frame = .init(x: 0, y: 0, width: width, height: TYSearchBar.baseHeight + safeAreaInsets.top)
-            searchBar.safeArea = safeAreaInsets
+//            searchBar.safeArea = safeAreaInsets
         } else {
             searchBar.frame = .init(x: 0, y: 0, width: width, height: TYSearchBar.baseHeight + 20)
-            searchBar.safeArea = .init(top: 20, left: 0, bottom: 0, right: 0)
+//            searchBar.safeArea = .init(top: 20, left: 0, bottom: 0, right: 0)
         }
 
         
@@ -61,9 +61,9 @@ extension HCClassRoomContainer {
     
     private func initUI() {
         searchBar = TYSearchBar()
-        searchBar.searchPlaceholder = "搜索"
-        searchBar.rightItemIcon = "nav_message_gray"
-        searchBar.inputBackGroundColor = RGB(243, 243, 243)
+//        searchBar.searchPlaceholder = "搜索"
+//        searchBar.rightItemIcon = "nav_message_gray"
+//        searchBar.inputBackGroundColor = RGB(243, 243, 243)
         searchBar.backgroundColor = .white
         
         collectionView = UICollectionView.init(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())

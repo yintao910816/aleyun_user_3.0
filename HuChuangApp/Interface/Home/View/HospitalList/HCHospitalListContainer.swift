@@ -43,7 +43,7 @@ class HCHospitalListContainer: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        searchBar.frame = .init(x: 0, y: 10, width: width, height: 55)
+        searchBar.frame = .init(x: 0, y: 10, width: width, height: 45)
         slideMenu.frame = .init(x: 0, y: searchBar.frame.maxY + 10, width: width, height: 50)
         tableView.frame = .init(x: 0, y: slideMenu.frame.maxY, width: width, height: height - slideMenu.frame.maxY)
     }
@@ -54,10 +54,8 @@ extension HCHospitalListContainer {
     private func initUI() {
         searchBar = TYSearchBar()
         searchBar.coverButtonEnable = false
-        searchBar.searchPlaceholder = "搜索医院"
-        searchBar.inputBackGroundColor = RGB(243, 243, 243)
-        searchBar.leftItelColor = .white
         searchBar.backgroundColor = .white
+        searchBar.viewConfig = TYSearchBarConfig.createSZZX()
         searchBar.beginSearch = { [weak self] in self?.beginSearch?($0) }
 
         slideMenu = TYSlideMenu()

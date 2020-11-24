@@ -47,9 +47,7 @@ extension HCMedicineContainer {
         
         searchBar = TYSearchBar()
         searchBar.coverButtonEnable = false
-        searchBar.searchPlaceholder = "搜索药物"
-        searchBar.inputBackGroundColor = RGB(243, 243, 243)
-        searchBar.leftItelColor = .white
+        searchBar.viewConfig = TYSearchBarConfig.createYPBK()
         searchBar.backgroundColor = .white
         searchBar.beginSearch = { [weak self] in self?.beginSearch?($0) }
 

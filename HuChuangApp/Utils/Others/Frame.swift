@@ -65,4 +65,9 @@ struct LayoutSize {
         }
     }
     
+    static var statusBarHeight: CGFloat {
+        get {
+            return UIApplication.shared.statusBarFrame.height
+        }
+    }
 }

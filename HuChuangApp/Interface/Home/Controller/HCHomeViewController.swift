@@ -23,12 +23,8 @@ class HCHomeViewController: BaseViewController {
         edgesForExtendedLayout = .all
         
         searchBar = TYSearchBar.init(frame: .init(x: 0, y: 0, width: view.width, height: TYSearchBar.baseHeight))
-        searchBar.searchPlaceholder = "搜索"
-        searchBar.leftItemTitle = "试管婴儿"
-        searchBar.rightItemIcon = "nav_message"
-        searchBar.inputBackGroundColor = .white
-        searchBar.leftItelColor = .white
         searchBar.backgroundColor = RGB(255, 79, 120)
+        searchBar.viewConfig = TYSearchBarConfig.createHomeSearch()
         view.addSubview(searchBar)
         
         searchBar.tapInputCallBack = { [unowned self] in
@@ -74,10 +70,8 @@ class HCHomeViewController: BaseViewController {
         
         if #available(iOS 11.0, *) {
             searchBar.frame = .init(x: 0, y: 0, width: view.width, height: TYSearchBar.baseHeight + view.safeAreaInsets.top)
-            searchBar.safeArea = view.safeAreaInsets
         } else {
-            searchBar.frame = .init(x: 0, y: 0, width: view.width, height: TYSearchBar.baseHeight + 20)
-            searchBar.safeArea = .init(top: 20, left: 0, bottom: 0, right: 0)
+            searchBar.frame = .init(x: 0, y: 0, width: view.width, height: TYSearchBar.baseHeight + LayoutSize.statusBarHeight)
         }
 
         containerView.frame = view.bounds

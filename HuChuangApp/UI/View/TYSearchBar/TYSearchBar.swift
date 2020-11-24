@@ -28,6 +28,9 @@ class TYSearchBar: UIView {
     /// 文字变化监听
     public let textObser = PublishSubject<String>()
 
+    /// 点击右边按钮是否搜索
+    public var isRightItemSearch: Bool = false
+    
     /// 搜索框高度
     public class var baseHeight: CGFloat {
         return 44.0
@@ -51,134 +54,150 @@ class TYSearchBar: UIView {
     
     private func setupUI() {
         backgroundColor = .clear
-        
-        leftItem.snp.makeConstraints{
-            $0.left.equalTo(snp.left).offset(17)
-            $0.centerY.equalTo(snp.centerY)
-            $0.size.equalTo(CGSize.init(width: 30, height: 30))
-        }
-
-        contentContainer.snp.makeConstraints{
-            $0.left.equalTo(leftItem.snp.right).offset(6)
-            $0.right.equalTo(rightItem.snp.left).offset(-10)
-            $0.top.equalTo(snp.top).offset(7)
-            $0.bottom.equalTo(snp.bottom).offset(-7)
-        }
-
-        searchIcon.snp.makeConstraints{
-            $0.left.equalTo(contentContainer.snp.left).offset(10)
-            $0.centerY.equalTo(contentContainer.snp.centerY)
-            $0.size.equalTo(CGSize.init(width: 15, height: 15))
-        }
-
-        searchTf.snp.makeConstraints{
-            $0.left.equalTo(searchIcon.snp.right).offset(12)
-            $0.right.equalTo(contentContainer.snp.right).offset(-12)
-            $0.centerY.equalTo(contentContainer.snp.centerY)
-            $0.height.equalTo(22)
-        }
-
-        rightItem.snp.makeConstraints{
-            $0.right.equalTo(snp.right).offset(-15)
-            $0.centerY.equalTo(leftItem.snp.centerY)
-            $0.size.equalTo(CGSize.init(width: 16, height: 14))
-        }
-        
-        bottomLine.snp.makeConstraints{
-            $0.left.bottom.right.equalTo(0)
-            $0.height.equalTo(1)
-        }
-        
-        inputCover.snp.makeConstraints {
-            $0.left.right.top.bottom.equalTo(contentContainer)
-        }
-        
+                
         searchTf.rx.text.asObservable()
             .map{ ($0 == nil ? "" : $0!) }
             .bind(to: textObser)
             .disposed(by: disposeBag)        
     }
-    
-    private func updateRightItem() {
-        if rightItemIcon.count > 0 {
-            rightItem.setTitle(nil, for: .normal)
-
-            rightItem.setImage(.image(for: rightItemIcon), for: .normal)
-        }else {
-            rightItem.setImage(nil, for: .normal)
-
-            rightItem.titleLabel?.font = .font(fontSize: 14)
-            rightItem.setTitle(rightItemTitle, for: .normal)
-            rightItem.setTitleColor(RGB(51, 51, 51), for: .normal)
-        }
         
-        setNeedsLayout()
-        layoutIfNeeded()
-    }
-    
-    private func updateLeftItem() {
-        if leftItemIcon.count > 0 {
-            leftItem.setTitle(nil, for: .normal)
-
-            leftItem.setImage(.image(for: leftItemIcon), for: .normal)
-        }else {
-            leftItem.setImage(nil, for: .normal)
-
-            leftItem.titleLabel?.font = .font(fontSize: 14)
-            leftItem.setTitle(leftItemTitle, for: .normal)
-            leftItem.setTitleColor(RGB(51, 51, 51), for: .normal)
-        }
-
-        setNeedsLayout()
-        layoutIfNeeded()
-    }
-    
     //MARK: - public
-    
-    /// 点击右边按钮是否搜索
-    public var isRightItemSearch: Bool = false
-    
-    public var returnKeyType: UIReturnKeyType = .default {
-        didSet {
-            searchTf.returnKeyType = .search
-        }
-    }
-    
-    public var searchPlaceholder: String? {
-        didSet {
-            if searchPlaceholder?.count ?? 0 > 0 {
-                let attributeText = NSMutableAttributedString.init(string: searchPlaceholder!)
-                attributeText.addAttributes([NSAttributedString.Key.foregroundColor: RGB(102, 102, 102)],
-                                            range: .init(location: 0, length: searchPlaceholder!.count))
-                attributeText.addAttributes([NSAttributedString.Key.font: UIFont.font(fontSize: 13)],
-                                            range: .init(location: 0, length: searchPlaceholder!.count))
-
-                searchTf.attributedPlaceholder = attributeText
-            }
-        }
-    }
-
-    public var tfBgColor: UIColor? {
-        didSet {
-            if tfBgColor != nil {
-                contentContainer.backgroundColor = tfBgColor
-            }
-        }
-    }
-    
-    public var safeArea: UIEdgeInsets = .zero {
-        didSet {
-            leftItem.snp.updateConstraints { $0.centerY.equalTo(snp.centerY).offset(safeArea.top / 2.0) }
-            contentContainer.snp.updateConstraints { $0.top.equalTo(snp.top).offset(7 + safeArea.top) }
-            setNeedsLayout()
-            layoutIfNeeded()
-        }
-    }
-    
     public var hasBottomLine: Bool = false {
         didSet {
             bottomLine.isHidden = !hasBottomLine
         }
+    }
+        
+    //MARK: - 控制UI显示
+    public var coverButtonEnable: Bool = true {
+        didSet {
+            inputCover.isUserInteractionEnabled = coverButtonEnable
+        }
+    }
+    
+    /// 初始化时，必须负值
+    public var viewConfig: TYSearchBarConfig = TYSearchBarConfig() {
+        didSet {
+            searchTf.returnKeyType = viewConfig.returnKeyType
+            contentContainer.backgroundColor = viewConfig.tfBackGroundColor
+            
+            if viewConfig.existLeftItem() {
+                leftItem.setImage(viewConfig.leftIcon, for: .normal)
+                leftItem.setTitle(viewConfig.leftTitle, for: .normal)
+                leftItem.titleLabel?.font = viewConfig.leftTitleFont
+                leftItem.setTitleColor(viewConfig.leftTitleColor, for: .normal)
+            }
+            
+            if viewConfig.existRightItem() {
+                rightItem.setImage(viewConfig.rightIcon, for: .normal)
+                rightItem.setTitle(viewConfig.rightTitle, for: .normal)
+                rightItem.titleLabel?.font = viewConfig.rightTitleFont
+                rightItem.setTitleColor(viewConfig.rightTitleColor, for: .normal)
+            }
+            
+            if viewConfig.tfSearchIcon != nil {
+                searchIcon.image = viewConfig.tfSearchIcon
+            }
+            
+            reloadPlaceholder()
+
+            setNeedsLayout()
+            layoutIfNeeded()
+        }
+    }
+        
+    //MARK: - private
+    
+    @objc private func tapAction() {
+        tapInputCallBack?()
+    }
+    
+    @objc private func leftItemTapAction() {
+        leftItemTapBack?()
+    }
+
+    @objc private func rightItemTapAction() {
+        searchTf.resignFirstResponder()
+        if isRightItemSearch {
+            beginSearch?(searchTf.text ?? "")
+        }else {
+            rightItemTapBack?()
+        }
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        var saftAreaTop: CGFloat = 0
+        if #available(iOS 11.0, *), viewConfig.isInNav {
+            saftAreaTop = safeAreaInsets.top
+        }
+
+        let layoutH: CGFloat = height - saftAreaTop
+        
+        var tfBgX: CGFloat = 15
+        var tfMaxBgX: CGFloat = width - viewConfig.inset.right
+
+        var tempSize: CGSize = .zero
+        if viewConfig.leftIcon != nil  {
+            leftItem.frame = .init(x: viewConfig.inset.left,
+                                   y: ((layoutH - viewConfig.leftIconSize.height) / 2) + saftAreaTop,
+                                   width: viewConfig.leftIconSize.width,
+                                   height: viewConfig.leftIconSize.height)
+            tfBgX = leftItem.frame.maxX + viewConfig.tfBGLeftMargin
+        }else if viewConfig.leftTitle.count > 0 {
+            tempSize = leftItem.sizeThatFits(.init(width: CGFloat.greatestFiniteMagnitude, height: layoutH))
+            leftItem.frame = .init(x: viewConfig.inset.left,
+                                   y: ((layoutH - tempSize.height) / 2) + saftAreaTop,
+                                   width: tempSize.width,
+                                   height: tempSize.height)
+            tfBgX = leftItem.frame.maxX + viewConfig.tfBGLeftMargin
+        }else {
+            
+        }
+        
+        if viewConfig.rightIcon != nil {
+            rightItem.frame = .init(x: width - viewConfig.inset.right - viewConfig.rightIconSize.width,
+                                   y: ((layoutH - viewConfig.rightIconSize.height) / 2) + saftAreaTop,
+                                   width: viewConfig.rightIconSize.width,
+                                   height: viewConfig.rightIconSize.height)
+            tfMaxBgX = rightItem.frame.minX - viewConfig.tfBGRightMargin
+        }else if viewConfig.rightTitle.count > 0 {
+            tempSize = rightItem.sizeThatFits(.init(width: CGFloat.greatestFiniteMagnitude, height: layoutH))
+            rightItem.frame = .init(x: width - viewConfig.inset.right - tempSize.width,
+                                    y: ((layoutH - tempSize.height) / 2) + saftAreaTop,
+                                    width: tempSize.width,
+                                    height: tempSize.height)
+            tfMaxBgX = rightItem.frame.minX - viewConfig.tfBGRightMargin
+        }else {
+            
+        }
+        
+        contentContainer.frame = .init(x: tfBgX,
+                                       y: viewConfig.inset.top + saftAreaTop,
+                                       width: tfMaxBgX - tfBgX,
+                                       height: layoutH - viewConfig.inset.top - viewConfig.inset.bottom)
+
+        if viewConfig.tfSearchIcon != nil {
+            searchIcon.frame = .init(x: viewConfig.tfOrSearchIconX,
+                                     y: (contentContainer.height - viewConfig.tfSearchIconSize.height) / 2,
+                                     width: viewConfig.tfSearchIconSize.width,
+                                     height: viewConfig.tfSearchIconSize.height)
+            
+            let tfX: CGFloat = searchIcon.frame.maxX + viewConfig.tfInset.left
+            searchTf.frame = .init(x: tfX,
+                                   y: viewConfig.tfInset.top,
+                                   width: contentContainer.width - viewConfig.tfInset.right - tfX,
+                                   height: (contentContainer.height - viewConfig.tfInset.top - viewConfig.tfInset.bottom))
+        }else {
+            searchTf.frame = .init(x: viewConfig.tfOrSearchIconX,
+                                   y: viewConfig.tfInset.top,
+                                   width: contentContainer.width - viewConfig.tfInset.right - viewConfig.tfOrSearchIconX,
+                                   height: (contentContainer.height - viewConfig.tfInset.top - viewConfig.tfInset.bottom))
+        }
+        
+        inputCover.frame = .init(x: 0, y: 0, width: contentContainer.width, height: contentContainer.height)
+        bottomLine.frame = .init(x: 0, y: height - 0.5, width: width, height: 0.5)
     }
     
     //MARK: - lazy
@@ -209,7 +228,7 @@ class TYSearchBar: UIView {
     }()
 
     private lazy var searchIcon: UIImageView = {
-        let imgV = UIImageView.init(image: .image(for: "searchBar_searchIcon"))
+        let imgV = UIImageView()
         imgV.contentMode = .scaleAspectFill
         imgV.clipsToBounds = true
         self.contentContainer.addSubview(imgV)
@@ -238,105 +257,22 @@ class TYSearchBar: UIView {
         let button = UIButton()
         button.backgroundColor = .clear
         button.addTarget(self, action: #selector(TYSearchBar.tapAction), for: .touchUpInside)
-        self.addSubview(button)
+        self.contentContainer.addSubview(button)
         return button
     }()
-    
-    //MARK: - 控制UI显示
-    public var coverButtonEnable: Bool = true {
-        didSet {
-            inputCover.isUserInteractionEnabled = coverButtonEnable
-        }
-    }
-    
-    public var leftItemIcon: String = "" {
-        didSet {
-            updateLeftItem()
-        }
-    }
-    
-    public var leftItemTitle: String = "" {
-        didSet {
-            updateLeftItem()
-        }
-    }
-    
-    public var leftItelColor: UIColor = RGB(51, 51, 51) {
-        didSet {
-            leftItem.setTitleColor(leftItelColor, for: .normal)
-        }
-    }
+}
 
-    public var rightItemIcon: String = "" {
-        didSet {
-            updateRightItem()
-        }
-    }
+extension TYSearchBar {
     
-    public var rightItemTitle: String = "" {
-        didSet {
-            updateRightItem()
-        }
-    }
-    
-    public var inputBackGroundColor: UIColor? {
-        didSet {
-            contentContainer.backgroundColor = inputBackGroundColor
-        }
-    }
-    
-    public var tfSearchIcon: String = "" {
-        didSet {
-            searchIcon.image = UIImage.init(named: tfSearchIcon)
-        }
-    }
-    
-    public var contentBgRadius: CGFloat = 0 {
-        didSet {
-            contentContainer.layer.cornerRadius = contentBgRadius
-        }
-    }
-    
-    //MARK: - private
-    
-    @objc private func tapAction() {
-        tapInputCallBack?()
-    }
-    
-    @objc private func leftItemTapAction() {
-        leftItemTapBack?()
-    }
+    private func reloadPlaceholder() {
+        if let placeholder = viewConfig.searchPlaceholder {
+            let attributeText = NSMutableAttributedString.init(string: placeholder)
+            attributeText.addAttributes([NSAttributedString.Key.foregroundColor: viewConfig.searchPlaceholderColor],
+                                        range: .init(location: 0, length: placeholder.count))
+            attributeText.addAttributes([NSAttributedString.Key.font: viewConfig.tfFont],
+                                        range: .init(location: 0, length: placeholder.count))
 
-    @objc private func rightItemTapAction() {
-        searchTf.resignFirstResponder()
-        if isRightItemSearch {
-            beginSearch?(searchTf.text ?? "")
-        }else {
-            rightItemTapBack?()
-        }
-    }
-
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        if rightItemIcon.count > 0 {
-            rightItem.snp.updateConstraints{ $0.size.equalTo(CGSize.init(width: 30, height: 30)) }
-        }else if rightItemTitle.count > 0 {
-            let cancelW = rightItemTitle.getTexWidth(fontSize: 14, height: 30, fontName: FontName.PingFRegular.rawValue)
-            rightItem.snp.updateConstraints{ $0.size.equalTo(CGSize.init(width: cancelW, height: 30)) }
-        }else {
-            rightItem.snp.updateConstraints{ $0.size.equalTo(CGSize.init(width: 0, height: 30)) }
-            contentContainer.snp.updateConstraints { $0.right.equalTo(rightItem.snp.left) }
-        }
-        
-        if leftItemIcon.count > 0 {
-            leftItem.snp.updateConstraints{ $0.size.equalTo(CGSize.init(width: 30, height: 30)) }
-        }else if leftItemTitle.count > 0 {
-            let leftTitleW = leftItemTitle.getTexWidth(fontSize: 14, height: 30, fontName: FontName.PingFRegular.rawValue)
-            leftItem.snp.updateConstraints{ $0.size.equalTo(CGSize.init(width: leftTitleW, height: 30)) }
-        }else {
-            leftItem.snp.updateConstraints{ $0.size.equalTo(CGSize.zero) }
-            contentContainer.snp.updateConstraints { $0.left.equalTo(leftItem.snp.right) }
+            searchTf.attributedPlaceholder = attributeText
         }
     }
 }
@@ -366,5 +302,71 @@ extension TYSearchBar {
     
     public func resignSearchFirstResponder() {
         searchTf.resignFirstResponder()
+    }
+}
+
+struct TYSearchBarConfig {
+    public var isInNav: Bool = true
+    
+    public var tfFont: UIFont = .font(fontSize: 14)
+    public var tfTextColor: UIColor = RGB(51, 51, 51)
+    public var searchPlaceholder: String?
+    public var searchPlaceholderColor: UIColor = RGB(203, 203, 203)
+
+    public var inset: UIEdgeInsets = .init(top: 5, left: 15, bottom: 5, right: 15)
+    /// 输入框与左边item的间距
+    public var tfBGLeftMargin: CGFloat = 12
+    /// 输入框与右边边item的间距
+    public var tfBGRightMargin: CGFloat = 12
+
+    public var leftTitle: String = ""
+    public var leftTitleFont: UIFont = .font(fontSize: 15)
+    public var leftTitleColor: UIColor = .white
+    
+    public var rightTitle: String = ""
+    public var rightTitleFont: UIFont = .font(fontSize: 15)
+    public var rightTitleColor: UIColor = .white
+
+    public var leftIcon: UIImage?
+    public var leftIconSize: CGSize = .zero
+    public var rightIcon: UIImage?
+    public var rightIconSize: CGSize = .zero
+
+    public var tfBackGroundRadius: CGFloat = 5
+    public var tfBackGroundColor: UIColor = .white
+    
+    public var tfSearchIcon: UIImage? = UIImage.init(named: "searchBar_searchIcon")
+    public var tfSearchIconSize: CGSize = .init(width: 14, height: 14)
+    public var tfInset: UIEdgeInsets = .init(top: 5, left: 10, bottom: 5, right: 10)
+    public var tfOrSearchIconX: CGFloat = 10
+
+    public var returnKeyType: UIReturnKeyType = .search
+    
+    public func existLeftItem() ->Bool {
+        return leftIcon != nil || leftTitle.count > 0
+    }
+    
+    public func existRightItem() ->Bool {
+        return rightIcon != nil || rightTitle.count > 0
+    }
+    
+    /// 首页
+    static public func createHomeSearch() ->TYSearchBarConfig {
+        return TYSearchBarConfig.init(searchPlaceholder: "搜索", leftTitle: "试管婴儿", leftTitleFont: .font(fontSize: 18), rightIcon: UIImage.init(named: "nav_message"), rightIconSize: .init(width: 24, height: 27), tfBackGroundRadius: 5)
+    }
+    
+    /// 搜索
+    static public func createSearch() ->TYSearchBarConfig {
+        return TYSearchBarConfig.init(searchPlaceholder: "搜索", rightTitle: "取消", rightTitleColor: RGB(51, 51, 51), leftIcon: UIImage(named: "navigationButtonReturnClick"), leftIconSize: .init(width: 30, height: 30), tfBackGroundColor: RGB(245, 245, 245))
+    }
+    
+    /// 生殖中心
+    static public func createSZZX() ->TYSearchBarConfig {
+        return TYSearchBarConfig.init(isInNav: false, tfFont: .font(fontSize: 16), searchPlaceholder: "搜索医院", searchPlaceholderColor: RGB(153, 153, 153), tfBackGroundColor: RGB(243, 243, 243))
+    }
+    
+    /// 药品百科
+    static public func createYPBK() ->TYSearchBarConfig {
+        return TYSearchBarConfig.init(isInNav: false, tfFont: .font(fontSize: 16), searchPlaceholder: "搜索药物", searchPlaceholderColor: RGB(153, 153, 153), inset: .init(top: 10, left: 15, bottom: 10, right: 15), tfBackGroundColor: RGB(243, 243, 243))
     }
 }
