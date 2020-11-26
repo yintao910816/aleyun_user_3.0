@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HCMessageViewController: BaseViewController {
+class HCMessageViewController: BaseViewController, VMNavigation {
 
     private var viewModel: HCMessageViewModel!
     private var container: HCMessageContainer!
@@ -18,6 +18,24 @@ class HCMessageViewController: BaseViewController {
         
         container = HCMessageContainer.init(frame: .init(x: 0, y: 0, width: view.width, height: view.height))
         view.addSubview(container)
+        
+        container.didSelected = { [unowned self] in
+            if let codeMode = HCMsgListCode(rawValue: $0.code) {
+                switch codeMode {
+                case .notification_type1:
+                    HCMessageViewController.push(HCServerMsgController.self, nil)
+                case .notification_type4:
+                    let url = APIAssistance.consultationChat(with: $0.consultId)
+                    self.navigationController?.pushViewController(BaseWebViewController.createWeb(url: url,
+                                                                                                   title: $0.name),
+                                                                   animated: true)
+                default:
+                    break
+                }
+            }else {
+                PrintLog("未知类型")
+            }
+        }
     }
     
     override func rxBind() {

@@ -74,6 +74,6 @@ extension HCMessageContainer: UICollectionViewDelegateFlowLayout, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        didSelected?(datasource[indexPath.row])
     }
 }

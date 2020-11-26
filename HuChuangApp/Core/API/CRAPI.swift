@@ -9,6 +9,28 @@
 import Foundation
 import Moya
 
+/// 系统消息列表对应code
+enum HCMsgListCode: String {
+    /// 系统消息
+    case notification_type1 = "notification_type1"
+    /// 通知公告
+    case notification_type2 = "notification_type2"
+    /// 圈子
+    case notification_type3 = "notification_type3"
+    /// 医生咨询
+    case notification_type4 = "notification_type4"
+    /// 预约
+    case notification_type5 = "notification_type5"
+    /// 提醒
+    case notification_type6 = "notification_type6"
+    /// 预留1
+    case notification_type7 = "notification_type7"
+    /// 快速提问
+    case notification_type8 = "notification_type8"
+    /// 预留3
+    case notification_type9 = "notification_type9"
+}
+
 /// 文章栏目编码
 enum HCCmsType: String {
     /// 首页-推荐课程列表
@@ -192,6 +214,8 @@ enum API{
     /// 结束通话
     case consultEndPhone(memberId: String, userId: String, watchTime: String)
 
+    /// 系统消息列表
+    case msgListByCode(code: HCMsgListCode, pageNum: Int, pageSize: Int)
     
     // --------------- 2.0接口
     /// 向app服务器注册友盟token
@@ -332,6 +356,8 @@ extension API: TargetType{
         case .consultEndPhone(_, _, _):
             return "api/consult/endPhone"
 
+        case .msgListByCode(_, _, _):
+            return "api/messageCenter/msgListByCode"
             
         case .UMAdd(_):
             return "api/umeng/add"
@@ -522,8 +548,11 @@ extension API {
             params["memberId"] = memberId
             params["userId"] = userId
             params["watchTime"] = watchTime
+        case .msgListByCode(let code, let pageNum, let pageSize):
+            params["code"] = code.rawValue
+            params["pageNum"] = pageNum
+            params["pageSize"] = pageSize
 
-            
         case .UMAdd(let deviceToken):
             params["deviceToken"] = deviceToken
             params["appPackage"] = Bundle.main.bundleIdentifier

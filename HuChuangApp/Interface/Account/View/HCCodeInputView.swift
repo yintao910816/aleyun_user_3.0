@@ -49,7 +49,18 @@ class HCCodeInputView: UIView {
     }
     
     /// 单个的输入code
-    public func setCode(with code: String) {
+    public func setCode(with code: String, isDelete: Bool) {
+        if isDelete {
+            for idx in 0..<codeCount {
+                let label = frontView.viewWithTag(200 + (3 - idx)) as? UILabel
+                if label?.text?.count ?? 0 > 0 {
+                    label?.text = ""
+                    break
+                }
+            }
+            return
+        }
+        
         var result = ""
         for idx in 0..<codeCount {
             let label = frontView.viewWithTag(200 + idx) as? UILabel
@@ -95,7 +106,7 @@ class HCCodeInputView: UIView {
 extension HCCodeInputView: UITextViewDelegate {
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        setCode(with: text)
+        setCode(with: text, isDelete: (text.count == 0 || text == ""))
         return false
     }
 }

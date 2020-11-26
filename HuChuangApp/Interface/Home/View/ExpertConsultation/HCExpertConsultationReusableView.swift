@@ -144,7 +144,7 @@ extension HCExpertConsultationReusableView {
     
     private func initUI() {
         carouselView = CarouselView()
-        carouselView.layer.cornerRadius = 3
+        carouselView.cornerRadius = 8
         carouselView.indicatorPosition = .bottomCenter
         carouselView.pageContrl.currentPageIndicatorTintColor = HC_MAIN_COLOR
         carouselView.pageContrl.pageIndicatorTintColor = RGB(214, 214, 214)

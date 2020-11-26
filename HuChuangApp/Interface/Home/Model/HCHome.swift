@@ -56,6 +56,12 @@ class HCFunctionsMenuModel: HJModel {
 class HCGroupCmsArticleModel: HJModel {
     var articleVoList: [HCCmsArticleListModel] = []
     var name: String = ""
+    
+    public class func createEmpty(name: String) ->HCGroupCmsArticleModel {
+        let m = HCGroupCmsArticleModel()
+        m.name = name
+        return m
+    }
 }
 
 /// 文章栏目菜单

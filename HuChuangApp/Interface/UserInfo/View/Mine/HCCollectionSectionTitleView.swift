@@ -31,12 +31,16 @@ class HCCollectionSectionTitleView: UICollectionReusableView {
     public var title: String = "" {
         didSet {
             titleLabel.text = title
+            setNeedsLayout()
+            layoutIfNeeded()
         }
     }
     
     public var detailTitle: String = "" {
         didSet {
             detailButton.setTitle(detailTitle, for: .normal)
+            setNeedsLayout()
+            layoutIfNeeded()
         }
     }
 

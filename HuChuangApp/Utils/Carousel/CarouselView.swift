@@ -19,6 +19,7 @@ class CarouselView: UIView {
     
     private var scroll: UIScrollView!
     public var pageContrl: UIPageControl!
+    public var cornerRadius: CGFloat = 0
     
     // 上一个
     private var lastImageView: UIImageView!
@@ -105,6 +106,19 @@ class CarouselView: UIView {
     }
     
     private func setCarouselImage() {
+        if lastImageView.layer.cornerRadius != cornerRadius {
+            lastImageView.layer.cornerRadius = cornerRadius
+            lastImageView.clipsToBounds = true
+        }
+        if currentImageView.layer.cornerRadius != cornerRadius {
+            currentImageView.layer.cornerRadius = cornerRadius
+            currentImageView.clipsToBounds = true
+        }
+        if nextImageView.layer.cornerRadius != cornerRadius {
+            nextImageView.layer.cornerRadius = cornerRadius
+            nextImageView.clipsToBounds = true
+        }
+
         lastImageView.setImage(dataControl.itemModel(.last)?.url)
         currentImageView.setImage(dataControl.itemModel(.current)?.url)
         nextImageView.setImage(dataControl.itemModel(.next)?.url)
