@@ -123,6 +123,11 @@ struct APIAssistance {
     static public func HealthRecords() ->String {
         return "\(APIAssistance.consultsH5Host)#/HealthRecords"
     }
+    
+    /// 订单详情
+    static public func orderDetail(with orderSn: String) ->String {
+        return "\(APIAssistance.consultsH5Host)#/chatConsulOrderDetails/\(orderSn)"
+    }
 
 }
 

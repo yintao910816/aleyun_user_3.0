@@ -188,6 +188,20 @@ class HCConsultProjectModel: HJModel {
     var open: Bool = true
     var price: String = "0.0"
     var unit: Int = 1
+    
+    public lazy var nameText: NSAttributedString = {
+        let priceText = "¥\(price)"
+        let text = open ? "\(name)\(priceText)" :"\(name)未开通"
+        if open {
+            return text.attributed(.init(location: name.count, length: priceText.count),
+                                   RGB(255, 79, 120),
+                                   .font(fontSize: 14, fontName: .PingFMedium))
+        }else {
+            return text.attributed(.init(location: 0, length: text.count),
+                                   RGB(153, 153, 153),
+                                   .font(fontSize: 14, fontName: .PingFMedium))
+        }
+    }()
 }
 
 class HCHCDoctorListModel: HJModel {

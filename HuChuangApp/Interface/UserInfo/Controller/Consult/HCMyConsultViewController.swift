@@ -8,6 +8,11 @@
 
 import UIKit
 
+enum HCMyConsultDetailMode {
+    case chat
+    case order
+}
+
 class HCMyConsultViewController: BaseViewController {
 
     private var viewModel: HCMyConsultViewModel!
@@ -18,7 +23,7 @@ class HCMyConsultViewController: BaseViewController {
     private var cloudClinicConsultCtrl: HCCloudClinicConsultViewController!
 
     override func setupUI() {
-        navigationItem.title = "我的问诊"
+        navigationItem.title = "咨询"
         
         slideCtrl = TYSlideMenuController()
         addChild(slideCtrl)
@@ -26,18 +31,34 @@ class HCMyConsultViewController: BaseViewController {
         
         picConsultCtrl = HCPicConsultViewController()
         picConsultCtrl.pushH5CallBack = { [weak self] in
-            let url = APIAssistance.consultationChat(with: $0.consultId)
-            self?.navigationController?.pushViewController(BaseWebViewController.createWeb(url: url,
-                                                                                           title: $0.userName),
-                                                           animated: true)
+            switch $0.0 {
+            case .chat:
+                let url = APIAssistance.consultationChat(with: $0.1.consultId)
+                self?.navigationController?.pushViewController(BaseWebViewController.createWeb(url: url,
+                                                                                               title: $0.1.userName),
+                                                               animated: true)
+            case .order:
+                let url = APIAssistance.orderDetail(with: $0.1.consultId)
+                self?.navigationController?.pushViewController(BaseWebViewController.createWeb(url: url,
+                                                                                               title: "订单详情"),
+                                                               animated: true)
+            }
         }
         
         videoConsultCtrl = HCVideoConsultViewController()
         videoConsultCtrl.pushH5CallBack = { [weak self] in
-            let url = APIAssistance.consultationChat(with: $0.consultId)
-            self?.navigationController?.pushViewController(BaseWebViewController.createWeb(url: url,
-                                                                                           title: $0.userName),
-                                                           animated: true)
+            switch $0.0 {
+            case .chat:
+                let url = APIAssistance.consultationChat(with: $0.1.consultId)
+                self?.navigationController?.pushViewController(BaseWebViewController.createWeb(url: url,
+                                                                                               title: $0.1.userName),
+                                                               animated: true)
+            case .order:
+                let url = APIAssistance.orderDetail(with: $0.1.consultId)
+                self?.navigationController?.pushViewController(BaseWebViewController.createWeb(url: url,
+                                                                                               title: "订单详情"),
+                                                               animated: true)
+            }
         }
 
         cloudClinicConsultCtrl = HCCloudClinicConsultViewController()

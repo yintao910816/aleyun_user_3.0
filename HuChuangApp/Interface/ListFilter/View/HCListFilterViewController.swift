@@ -13,6 +13,8 @@ enum HCListFilterMode {
     case sorted
     /// 咨询类型
     case consultType
+    /// 生殖中心筛选
+    case szzx
 }
 
 class HCListFilterViewController: UIViewController {
@@ -50,6 +52,8 @@ class HCListFilterViewController: UIViewController {
             container.datasource = HCListFilterSectionModel.createExpertConsultationSortedData()
         case .consultType:
             container.datasource = HCListFilterSectionModel.createExpertConsultationTypeData()
+        case .szzx:
+            container.datasource = HCListFilterSectionModel.createSZZXData()
         }
     }
     

@@ -52,7 +52,7 @@ extension HCListFilterSectionModel {
     
     /// 专家问诊列表 - 排序方式筛选
     public class func createExpertConsultationSortedData() ->[HCListFilterSectionModel] {
-        let titles_1 = ["默认排序", "问诊数", "好评率"]
+        let titles_1 = ["默认排序", "职称", "咨询数", "好评率"]
 
         let section_1 = HCListFilterSectionModel()
         for item in titles_1 {
@@ -66,7 +66,21 @@ extension HCListFilterSectionModel {
 
     /// 专家问诊列表 - 咨询方式筛选
     public class func createExpertConsultationTypeData() ->[HCListFilterSectionModel] {
-        let titles_1 = ["图文", "视频"]
+        let titles_1 = ["全部", "图文", "视频"]
+
+        let section_1 = HCListFilterSectionModel()
+        for item in titles_1 {
+            let m = HCListFilterModel()
+            m.title = item
+            section_1.datas.append(m)
+        }
+        
+        return [section_1]
+    }
+
+    /// 生殖中心列表 - 筛选
+    public class func createSZZXData() ->[HCListFilterSectionModel] {
+        let titles_1 = ["全部", "生殖中心", "三甲医院"]
 
         let section_1 = HCListFilterSectionModel()
         for item in titles_1 {

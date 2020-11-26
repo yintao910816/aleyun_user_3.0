@@ -3563,7 +3563,6 @@
 			children = (
 				C4AB271524E52A600095F693 /* ViewModel */,
 				C4AB271624E52A600095F693 /* Controller */,
-				C4AB271724E52A600095F693 /* Model */,
 				C4AB271824E52A600095F693 /* View */,
 			);
 			path = Tool;
@@ -3585,13 +3584,6 @@
 				C4382C0624E62866000C00CE /* HCMenstruationSettingViewController.swift */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		C4AB271724E52A600095F693 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		C4AB271824E52A600095F693 /* View */ = {

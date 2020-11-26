@@ -44,24 +44,17 @@ class HCHospitalListViewModel: RefreshVM<HCHospitalListItemModel> {
             .disposed(by: disposeBag)
         
         levelFilterSubject
-            .subscribe(onNext: { [weak self] _ in
+            .subscribe(onNext: { [weak self] in
                 guard let strongSelf = self else { return }
-//                var needReload = false
-//                if $0 == "默认排序" {
-//                    strongSelf.sortType = "1"
-//                    needReload = true
-//                }else if $0 == "问诊数" {
-//                    strongSelf.sortType = "2"
-//                    needReload = true
-//                }else if $0 == "好评率" {
-//                    strongSelf.sortType = "3"
-//                    needReload = true
-//                }
-//                if needReload {
-//                    strongSelf.slideData[1].title = $0
-//                    strongSelf.slideDataSignal.onNext(strongSelf.slideData)
-//                    strongSelf.requestData(true)
-//                }
+                if $0 == "全部" {
+                    strongSelf.level = ""
+                    strongSelf.slideData[1].title = "筛选"
+                }else {
+                    strongSelf.level = $0
+                    strongSelf.slideData[1].title = $0
+                }
+                strongSelf.slideDataSignal.onNext(strongSelf.slideData)
+                strongSelf.requestData(true)
             })
             .disposed(by: disposeBag)
 

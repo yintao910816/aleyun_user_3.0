@@ -24,7 +24,7 @@ enum HCMenuItemCellMode {
     public var modeString: String {
         switch self {
         case .consult:
-            return "问诊"
+            return "咨询"
         case .reservation:
             return "预约"
         case .order:

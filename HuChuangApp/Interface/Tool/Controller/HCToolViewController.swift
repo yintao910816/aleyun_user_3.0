@@ -12,8 +12,12 @@ class HCToolViewController: BaseViewController {
 
     private var containerView: HCToolViewContainer!
     private var viewModel: HCToolViewModel!
+    
+    private var devCtrl: HCUnderDevController!
 
     override func setupUI() {
+        navigationItem.title = "工具"
+        
         containerView = HCToolViewContainer.init(frame: .init(x: 0, y: 0, width: view.width, height: view.height))
         view.addSubview(containerView)
         
@@ -22,6 +26,10 @@ class HCToolViewController: BaseViewController {
                 self?.navigationController?.pushViewController(HCMenstruationSettingViewController(), animated: true)
             }
         }
+        
+        devCtrl = HCUnderDevController()
+        addChild(devCtrl)
+        view.addSubview(devCtrl.view)
     }
     
     override func rxBind() {

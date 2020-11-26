@@ -14,7 +14,7 @@ class HCVideoConsultViewController: HCSlideItemController {
         
     private var datasource: [HCConsultItemModel] = []
 
-    public var pushH5CallBack:((HCConsultItemModel)->())?
+    public var pushH5CallBack:(((HCMyConsultDetailMode, HCConsultItemModel))->())?
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -75,6 +75,7 @@ extension HCVideoConsultViewController: UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = (tableView.dequeueReusableCell(withIdentifier: HCPicConsultCell_identifier) as! HCPicConsultCell)
         cell.model = datasource[indexPath.row]
+        cell.actionCallBack = { [unowned self] in self.pushH5CallBack?((HCMyConsultDetailMode.chat, $0)) }
         return cell
     }
     
@@ -104,6 +105,6 @@ extension HCVideoConsultViewController: UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        pushH5CallBack?(datasource[indexPath.row])
+        pushH5CallBack?((HCMyConsultDetailMode.order, datasource[indexPath.row]))
     }
 }

@@ -49,8 +49,8 @@ class HCMenuView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        collectionView.frame = .init(x: 0, y: 0, width: width, height: height - 4)
-        animotionView.frame = .init(x: 0, y: height - 4, width: 15, height: 4)
+        collectionView.frame = .init(x: 0, y: 0, width: width, height: height)
+        animotionView.frame = .init(x: 0, y: collectionView.height - 4, width: 15, height: 4)
     }
 }
 
@@ -75,7 +75,7 @@ extension HCMenuView {
         animotionView.clipsToBounds = true
         
         addSubview(collectionView)
-        addSubview(animotionView)
+        collectionView.addSubview(animotionView)
         
         collectionView.register(HCMenuCell.self, forCellWithReuseIdentifier: HCMenuCell_identifier)
     }

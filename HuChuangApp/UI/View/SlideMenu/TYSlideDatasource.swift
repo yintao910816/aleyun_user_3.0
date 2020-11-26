@@ -71,13 +71,13 @@ extension TYSlideItemModel {
     
     /// 我的问诊数据
     internal static func createMyConsultData() ->[TYSlideItemModel] {
-        return [TYSlideItemModel(title: "图文问诊",
+        return [TYSlideItemModel(title: "图文咨询",
                                  textColor: RGB(153, 153, 153),
                                  selectedTextColor: HC_MAIN_COLOR,
                                  lineColor: HC_MAIN_COLOR,
                                  textFont: .font(fontSize: 16),
                                  isSelected: true),
-                TYSlideItemModel(title: "视频问诊",
+                TYSlideItemModel(title: "视频咨询",
                                  textColor: RGB(153, 153, 153),
                                  selectedTextColor: HC_MAIN_COLOR,
                                  lineColor: HC_MAIN_COLOR,

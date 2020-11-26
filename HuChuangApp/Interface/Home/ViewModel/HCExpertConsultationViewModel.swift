@@ -44,9 +44,12 @@ class HCExpertConsultationViewModel: RefreshVM<HCDoctorListItemModel> {
                 guard let strongSelf = self else { return }
                 var needReload = false
                 if $0 == "默认排序" {
+                    strongSelf.sortType = "0"
+                    needReload = true
+                }else if $0 == "职称" {
                     strongSelf.sortType = "1"
                     needReload = true
-                }else if $0 == "问诊数" {
+                }else if $0 == "咨询数" {
                     strongSelf.sortType = "2"
                     needReload = true
                 }else if $0 == "好评率" {
@@ -65,15 +68,18 @@ class HCExpertConsultationViewModel: RefreshVM<HCDoctorListItemModel> {
             .subscribe(onNext: { [weak self] in
                 guard let strongSelf = self else { return }
                 var needReload = false
-                if $0 == "图文" {
-                    strongSelf.consultType = "1"
+                if $0 == "全部" {
+                    strongSelf.consultType = "0"
+                    needReload = true
+                }else if $0 == "图文" {
+                    strongSelf.sortType = "1"
                     needReload = true
                 }else if $0 == "视频" {
                     strongSelf.sortType = "2"
                     needReload = true
                 }
                 if needReload {
-                    strongSelf.slideData[1].title = $0
+                    strongSelf.slideData[2].title = $0
                     strongSelf.slideDataSignal.onNext(strongSelf.slideData)
                     strongSelf.requestData(true)
                 }

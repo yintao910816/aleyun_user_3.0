@@ -45,11 +45,9 @@ class HCDoctorListCell: UICollectionViewCell {
 
             for idx in 0..<model.consultProject.count {
                 if idx == 0 {
-                    let consultProjectModel = model.consultProject[0]
-                    consultFirstPriceLabel.text = "\(consultProjectModel.name)¥\(consultProjectModel.price)"
+                    consultFirstPriceLabel.attributedText = model.consultProject[0].nameText
                 }else if idx == 1 {
-                    let consultProjectModel = model.consultProject[1]
-                    consultSecondPriceLabel.text = "\(consultProjectModel.name)¥\(consultProjectModel.price)"
+                    consultSecondPriceLabel.attributedText = model.consultProject[1].nameText
                 }
             }
         }
@@ -156,11 +154,11 @@ extension HCDoctorListCell {
 
         consultFirstPriceLabel = UILabel()
         consultFirstPriceLabel.textColor = RGB(25, 25, 25)
-        consultFirstPriceLabel.font = .font(fontSize: 14)
+        consultFirstPriceLabel.font = .font(fontSize: 14, fontName: .PingFMedium)
 
         consultSecondPriceLabel = UILabel()
         consultSecondPriceLabel.textColor = RGB(25, 25, 25)
-        consultSecondPriceLabel.font = .font(fontSize: 14)
+        consultSecondPriceLabel.font = .font(fontSize: 14, fontName: .PingFMedium)
         
         consultButton = UIButton()
         consultButton.backgroundColor = RGB(255, 79, 120)
@@ -175,8 +173,8 @@ extension HCDoctorListCell {
         
         addSubview(avatar)
         addSubview(doctorInfoLabel)
-        addSubview(hospitalBg)
-        hospitalBg.addSubview(hospitalLvLabel)
+//        addSubview(hospitalBg)
+//        hospitalBg.addSubview(hospitalLvLabel)
         addSubview(hospitalAdressLabel)
         addSubview(skidInLabel)
         addSubview(doctorBriefLabel)

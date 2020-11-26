@@ -55,7 +55,7 @@ class HCExpertConsultationController: BaseViewController {
     
     override func rxBind() {
         viewModel = HCExpertConsultationViewModel()
-        containerView.collectionView.prepare(viewModel)
+        containerView.collectionView.prepare(viewModel, isAddNoMoreContent: false)
 
         viewModel.headerDataSignal
             .subscribe(onNext: { [weak self] in

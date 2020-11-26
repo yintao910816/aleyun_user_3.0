@@ -21,6 +21,8 @@ class HCPicConsultCell: UITableViewCell {
     private var timeDesLabel: UILabel!
     private var actionButton: UIButton!
 
+    public var actionCallBack: ((HCConsultItemModel)->())?
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -39,7 +41,7 @@ class HCPicConsultCell: UITableViewCell {
             timeDesLabel.text = model.timeText
             actionButton.setTitle(model.statusMode.myConsultButtonText, for: .normal)
             
-            if model.consultTypeName == "视频问诊" {
+            if model.consultTypeName == "视频咨询" {
                 contentLabel.text = "预约时间  \(model.appointTimeDesc)"
             }else {
                 contentLabel.text = model.content
@@ -115,14 +117,18 @@ extension HCPicConsultCell {
         actionButton.layer.borderColor = RGB(255, 79, 120).cgColor
         actionButton.layer.borderWidth = 1
         actionButton.clipsToBounds = true
+        actionButton.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
         
-        addSubview(avatar)
-        addSubview(nameLabel)
-        addSubview(payStatusLabel)
-        addSubview(contentLabel)
-        addSubview(lineView)
-        addSubview(timeDesLabel)
-        addSubview(actionButton)
+        contentView.addSubview(avatar)
+        contentView.addSubview(nameLabel)
+        contentView.addSubview(payStatusLabel)
+        contentView.addSubview(contentLabel)
+        contentView.addSubview(lineView)
+        contentView.addSubview(timeDesLabel)
+        contentView.addSubview(actionButton)
     }
 
+    @objc private func buttonAction() {
+        actionCallBack?(model)
+    }
 }

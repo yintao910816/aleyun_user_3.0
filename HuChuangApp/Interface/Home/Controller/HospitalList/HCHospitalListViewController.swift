@@ -28,7 +28,7 @@ class HCHospitalListViewController: BaseViewController, VMNavigation {
                 
                 areaSelectedCtrk.cityClicked = { [weak self] in self?.viewModel.areaFilterSubject.onNext($0) }
             case 1:
-                let listFilterCtrl = HCListFilterViewController.init(mode: .sorted)
+                let listFilterCtrl = HCListFilterViewController.init(mode: .szzx)
                 self?.addChild(listFilterCtrl)
                 self?.view.addSubview(listFilterCtrl.view)
                 
