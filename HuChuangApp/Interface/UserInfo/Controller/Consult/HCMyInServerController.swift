@@ -14,7 +14,7 @@ class HCMyInServerController: BaseViewController {
     private var progressServices: [HCPersonalProgressServiceModel] = []
     
     override func setupUI() {
-        navigationItem.title = "咨询"
+        navigationItem.title = "进行中的服务"
         
         container = HCMyInServerContainer(frame: view.bounds)
         view.addSubview(container)
