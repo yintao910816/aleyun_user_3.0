@@ -87,6 +87,9 @@ struct APIAssistance {
     
     /// 分享链接统一用这个
     static func shareLink(forUrl url: String) ->String {
+        if url.contains("?") {
+            return "\(url)&share=1"
+        }
         return "\(url)?share=1"
     }
 
