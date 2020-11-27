@@ -54,4 +54,10 @@ extension Notification.Name {
         /// 占线中 onLineBusy
         static let onLineBusyVideoCall = Notification.Name(rawValue: "org.UILogic.notification.name.onLineBusyVideoCall")
     }
+    
+    public struct APPAction {
+        /// 文章搜藏成功
+        static let articleStoreSuccess = Notification.Name(rawValue: "org.Pay.notification.name.articleStoreSuccess")
+    }
+
 }

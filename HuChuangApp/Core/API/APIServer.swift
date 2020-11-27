@@ -66,7 +66,7 @@ public final class RequestLoadingPlugin: PluginType {
                 }
 
                 switch (target as! API) {
-                case .loginTel(_, _), .accountSetting(_, _):
+                case .loginTel(_, _), .accountSetting(_, _), .getAuthMember(_):
                     let infoDic = (rdic["data"] as? [String : Any] ?? [:])
                     userDefault.loginInfoString = infoDic.getJSONString()
                     break

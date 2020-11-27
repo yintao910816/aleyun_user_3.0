@@ -103,7 +103,12 @@ extension HCShareWebViewModel {
                     
                     strongSelf.articleStatusObser.value = statusModel
                     
-                    strongSelf.hud.noticeHidden()
+                    let message: String = status == true ? "收藏成功" : "取消收藏"
+                    strongSelf.hud.successHidden(message)
+                    
+                    if strongSelf.mode == .article {
+                        NotificationCenter.default.post(name: NotificationName.APPAction.articleStoreSuccess, object: nil)
+                    }
                 }else {
                     strongSelf.hud.failureHidden(data.message)
                 }

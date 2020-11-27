@@ -42,7 +42,7 @@ extension HCAppDelegate: SKStoreProductViewControllerDelegate {
         }
     }
     
-    private func checkVersion() {
+    public func checkVersion() {
         _ = HCProvider.request(.version)
             .map(model: AppVersionModel.self)
             .subscribe(onSuccess: { res in

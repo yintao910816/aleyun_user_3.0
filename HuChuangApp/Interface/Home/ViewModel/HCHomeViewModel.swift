@@ -47,6 +47,13 @@ class HCHomeViewModel: BaseViewModel, VMNavigation {
             .subscribe(onNext: { [weak self] _ in self?.requestHeaderDatas() })
             .disposed(by: disposeBag)
         
+        NotificationCenter.default.rx.notification(NotificationName.APPAction.articleStoreSuccess, object: nil)
+            .subscribe(onNext: { [weak self] _ in
+                guard let strongSelf = self else { return }
+                strongSelf.requestCmsArticleList(channelId: strongSelf.currentChannelId, page: strongSelf.currentPage)
+            })
+            .disposed(by: disposeBag)
+            
         reloadSubject.subscribe(onNext: { [weak self] in self?.requestHeaderDatas() })
             .disposed(by: disposeBag)
     }

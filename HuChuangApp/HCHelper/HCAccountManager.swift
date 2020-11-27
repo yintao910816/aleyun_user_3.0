@@ -17,6 +17,7 @@ class HCAccountManager {
                 if error != nil {
                     obser.onError(error!)
                 }else {
+                    PrintLog("微信openId： \((result as? UMSocialUserInfoResponse)?.openid)")
                     obser.onNext(result as? UMSocialUserInfoResponse)
                 }
                 obser.onCompleted()
