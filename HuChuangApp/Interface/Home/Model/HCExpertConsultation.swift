@@ -180,6 +180,19 @@ class HCDoctorListItemModel: HJModel, HCSearchDataProtocol {
             return cellHeight!
         }
     }
+    
+    public lazy var isOpenAnyConsult: Bool = {
+        if consultProject.count == 0 { return true }
+        
+        var flag = false
+        for item in consultProject {
+            if item.open {
+                flag = true
+                break
+            }
+        }
+        return flag
+    }()
 }
 
 class HCConsultProjectModel: HJModel {

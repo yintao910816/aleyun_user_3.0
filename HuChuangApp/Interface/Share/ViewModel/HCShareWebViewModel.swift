@@ -9,23 +9,26 @@
 import Foundation
 import RxSwift
 import RxCocoa
+import Moya
 
-class HCArticleDetailViewModel: BaseViewModel {
+class HCShareWebViewModel: BaseViewModel {
     
-    private var shareModel: HCShareArticleModel!
-
+    private var shareModel: HCShareDataModel!
+    private var mode: HCShareMode!
+    
     public let articleStatusObser = Variable(HCStoreAndStatusModel())
     public let storeEnable = Variable(false)
 
-    init(shareModel: HCShareArticleModel,
+    init(input:(shareModel: HCShareDataModel, mode: HCShareMode),
          tap:(storeDriver: Driver<Bool>, shareDriver: Driver<Void>)) {
         super.init()
 
-        self.shareModel = shareModel
+        shareModel = input.shareModel
+        mode = input.mode
         
         reloadSubject
             .subscribe(onNext: { [weak self] _ in
-                self?.requestArticleStatus()
+                self?.requestStatus()
             })
             .disposed(by: disposeBag)
         
@@ -39,7 +42,7 @@ class HCArticleDetailViewModel: BaseViewModel {
         
         tap.shareDriver
             .drive(onNext: { [unowned self] in
-                let link = APIAssistance.articleLink(forUrl: self.shareModel.link)
+                let link = APIAssistance.shareLink(forUrl: self.shareModel.link)
                 HCAccountManager.presentShare(thumbURL: self.shareModel.picPath,
                                               title: "您的孕期好帮手",
                                               descr: self.shareModel.title,
@@ -48,9 +51,22 @@ class HCArticleDetailViewModel: BaseViewModel {
             .disposed(by: disposeBag)
     }
     
-    private func requestArticleStatus() {
-        HCProvider.request(.cmsFollow(articleId: shareModel.id))
-            .mapJSON()
+}
+
+extension HCShareWebViewModel {
+    
+    // 文章收藏状态
+    private func requestStatus() {
+        var signal: Single<Response>!
+        switch mode {
+        case .article:
+            signal = HCProvider.request(.cmsFollow(articleId: shareModel.id))
+        case .doctor:
+            signal = HCProvider.request(.doctorFollow(userId: shareModel.userId, memberId: shareModel.memberId))
+        case .none:
+            break
+        }
+        signal.mapJSON()
             .asObservable()
             .map({ res -> HCStoreAndStatusModel in
                 let staModel = HCStoreAndStatusModel()
@@ -63,19 +79,21 @@ class HCArticleDetailViewModel: BaseViewModel {
             .catchErrorJustReturn(HCStoreAndStatusModel())
             .bind(to: articleStatusObser)
             .disposed(by: disposeBag)
-
-//        HCProvider.request(.storeAndStatus(articleId: shareModel.id))
-//            .map(model: HCStoreAndStatusModel.self)
-//            .asObservable()
-//            .do(onNext: { [weak self] _ in self?.storeEnable.value = true })
-//            .catchErrorJustReturn(HCStoreAndStatusModel())
-//            .bind(to: articleStatusObser)
-//            .disposed(by: disposeBag)
     }
     
+    // 收藏点击
     private func postChangeStatus(status: Bool) {
-        HCProvider.request(.articelStore(articleId: shareModel.id, storeStatus: status))
-            .mapResponse()
+        var signal: Single<Response>!
+        switch mode {
+        case .article:
+            signal = HCProvider.request(.articelStore(articleId: shareModel.id, storeStatus: status))
+        case .doctor:
+            signal = HCProvider.request(.attentionDoctor(userId: shareModel.userId, attention: status))
+        case .none:
+            break
+        }
+
+        signal.mapResponse()
             .subscribe(onSuccess: { [weak self] data in
                 guard let strongSelf = self else { return }
                 if data.code == RequestCode.success.rawValue {
@@ -94,7 +112,8 @@ class HCArticleDetailViewModel: BaseViewModel {
             }) { [weak self] in
                 self?.hud.failureHidden(self?.errorMessage($0))
                 self?.storeEnable.value = true
-        }
-        .disposed(by: disposeBag)
+            }
+            .disposed(by: disposeBag)
     }
+
 }

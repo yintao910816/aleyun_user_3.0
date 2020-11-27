@@ -17,14 +17,17 @@ enum HCMyConsultMode: Int {
 
 class HCMyConsultViewModel: RefreshVM<HCConsultModelAdapt> {
     
+    private var status: Int?
+    
     private var menuPageListData: [HCMyConsultMode: [HCConsultModelAdapt]] = [:]
     // 记录当前第几页数据
     private var module: HCMyConsultMode = .picConsult
 
     public let changeMenuSignal = PublishSubject<Int>()
     
-    override init() {
+    init(status: Int?) {
         super.init()
+        self.status = status
         
         changeMenuSignal
             .subscribe(onNext: { [unowned self] in
@@ -52,7 +55,7 @@ class HCMyConsultViewModel: RefreshVM<HCConsultModelAdapt> {
         
         switch module {
         case .picConsult:
-            HCProvider.request(.myConsult(consultType: 1, pageSize: 10, pageNum: 1, status: nil))
+            HCProvider.request(.myConsult(consultType: 1, pageSize: 10, pageNum: 1, status: status))
                 .map(result: HCPicConsultListModel.self)
                 .subscribe(onSuccess: { [weak self] data in
                     guard let strongSelf = self else { return }
@@ -67,7 +70,7 @@ class HCMyConsultViewModel: RefreshVM<HCConsultModelAdapt> {
             }
             .disposed(by: disposeBag)
         case .videoConsult:
-            HCProvider.request(.myConsult(consultType: 2, pageSize: 10, pageNum: 1, status: nil))
+            HCProvider.request(.myConsult(consultType: 2, pageSize: 10, pageNum: 1, status: status))
                 .map(result: HCVideoConsultListModel.self)
                 .subscribe(onSuccess: { [weak self] data in
                     guard let strongSelf = self else { return }
@@ -83,7 +86,7 @@ class HCMyConsultViewModel: RefreshVM<HCConsultModelAdapt> {
             .disposed(by: disposeBag)
 
         case .cloudClinic:
-            HCProvider.request(.myConsult(consultType: 3, pageSize: 10, pageNum: 1, status: nil))
+            HCProvider.request(.myConsult(consultType: 3, pageSize: 10, pageNum: 1, status: status))
                 .map(result: HCCloudClinicConsultListModel.self)
                 .subscribe(onSuccess: { [weak self] data in
                     guard let strongSelf = self else { return }

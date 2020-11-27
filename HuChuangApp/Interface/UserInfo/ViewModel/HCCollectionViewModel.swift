@@ -80,7 +80,8 @@ class HCCollectionInformationViewModel: RefreshVM<HCCmsArticleListModel> {
         HCProvider.request(.cmsDetail(articleId: data.id))
             .map(model: HCCmsDetailModel.self)
             .subscribe { [weak self] linkM in
-                HCHomeViewModel.push(HCArticleDetailViewController.self, ["model": HCShareArticleModel.transformCmsModel(model: linkM)])
+                let params = HCShareWebViewController.configParameters(mode: .article, model: HCShareDataModel.transformCmsModel(model: linkM))
+                HCHomeViewModel.push(HCShareWebViewController.self, params)
                 self?.hud.noticeHidden()
             } onError: { [weak self] in
                 self?.hud.failureHidden(self?.errorMessage($0))

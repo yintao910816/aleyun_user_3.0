@@ -48,20 +48,20 @@ struct APIAssistance {
     /// 测试地址最后加s，正式去掉
     public static let base   = "https://ileyun.ivfcn.com/hc-patient-web/"
     public static let fileBase = "https://ileyun.ivfcn.com/hc-files/"
-    /// 检测版本更新域名地址
-    public static let versionBase   = "https://ileyun.ivfcn.com/hc-patient/"
+//    /// 检测版本更新域名地址
+//    public static let versionBase   = "https://ileyun.ivfcn.com/hc-patient/"
 
     /// 测试地址最后加s，正式去掉
     public static let baseH5Host = "https://ileyun.ivfcn.com/hc-patient-web/"
     /// 咨询相关h5主页
-    public static let consultsH5Host = "https://ileyun.ivfcn.com/consults/"
+    public static let consultsH5Host = "https://ileyun.ivfcn.com/consult/"
 
     static public func baseURL(API: API) ->URL{
         switch API {
         case .uploadIcon(_):
             return URL(string: fileBase)!
-        case .version:
-            return URL(string: versionBase)!
+//        case .version:
+//            return URL(string: versionBase)!
         default:
             return URL(string: base)!
         }
@@ -84,6 +84,12 @@ struct APIAssistance {
         let urlString = "\(APIAssistance.baseH5Host)?from=groupmessage#/\(H5Type.doctorHome)?userId=\(userId)&share=1"
         return urlString
     }
+    
+    /// 分享链接统一用这个
+    static func shareLink(forUrl url: String) ->String {
+        return "\(url)?share=1"
+    }
+
     /// 拼接文章分享链接
     static func articleLink(forUrl url: String) ->String {
         return "\(url)?share=1&from=groupmessage"

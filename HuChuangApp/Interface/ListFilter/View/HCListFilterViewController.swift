@@ -20,14 +20,16 @@ enum HCListFilterMode {
 class HCListFilterViewController: UIViewController {
 
     private var mode: HCListFilterMode = .sorted
+    private var selectedIdentifier: String?
     
     private var container: HCListFilterContainer!
     
     public var commitCallBack: ((HCListFilterModel?)->())?
 
-    init(mode: HCListFilterMode) {
+    init(mode: HCListFilterMode, selectedIdentifier: String? = nil) {
         super.init(nibName: nil, bundle: nil)
         self.mode = mode
+        self.selectedIdentifier = selectedIdentifier
     }
     
     required init?(coder: NSCoder) {
@@ -49,11 +51,11 @@ class HCListFilterViewController: UIViewController {
         
         switch mode {
         case .sorted:
-            container.datasource = HCListFilterSectionModel.createExpertConsultationSortedData()
+            container.datasource = HCListFilterSectionModel.createExpertConsultationSortedData(selectedIdentifier: selectedIdentifier)
         case .consultType:
-            container.datasource = HCListFilterSectionModel.createExpertConsultationTypeData()
+            container.datasource = HCListFilterSectionModel.createExpertConsultationTypeData(selectedIdentifier: selectedIdentifier)
         case .szzx:
-            container.datasource = HCListFilterSectionModel.createSZZXData()
+            container.datasource = HCListFilterSectionModel.createSZZXData(selectedIdentifier: selectedIdentifier)
         }
     }
     

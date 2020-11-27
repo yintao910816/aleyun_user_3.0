@@ -167,7 +167,8 @@ extension HCDoctorListCell {
         consultButton.setTitle("问医生", for: .normal)
         consultButton.setTitleColor(.white, for: .normal)
         consultButton.titleLabel?.font = .font(fontSize: 14, fontName: .PingFSemibold)
-
+        consultButton.isUserInteractionEnabled = false
+        
         bottomLine = UIView()
         bottomLine.backgroundColor = RGB(243, 243, 243)
         

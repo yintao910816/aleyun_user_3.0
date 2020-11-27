@@ -46,7 +46,7 @@ class HCHospitalListViewModel: RefreshVM<HCHospitalListItemModel> {
         levelFilterSubject
             .subscribe(onNext: { [weak self] in
                 guard let strongSelf = self else { return }
-                if $0 == "全部" {
+                if $0 == "全部" || $0.count == 0 {
                     strongSelf.level = ""
                     strongSelf.slideData[1].title = "筛选"
                 }else {
@@ -62,6 +62,15 @@ class HCHospitalListViewModel: RefreshVM<HCHospitalListItemModel> {
         reloadSubject
             .subscribe(onNext: { [weak self] in self?.prepareData() })
             .disposed(by: disposeBag)
+    }
+    
+    public var levelIdentifier: String {
+        get {
+            if slideData[1].title == "筛选" {
+                return "全部"
+            }
+            return slideData[1].title
+        }
     }
     
     override func requestData(_ refresh: Bool) {

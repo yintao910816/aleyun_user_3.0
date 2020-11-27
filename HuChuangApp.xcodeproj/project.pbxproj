@@ -277,6 +277,12 @@
 		B866D816256F8DDB000251AD /* HCServerMsgController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B866D815256F8DDB000251AD /* HCServerMsgController.swift */; };
 		B866D819256F8E0B000251AD /* HCServerMsgContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B866D818256F8E0B000251AD /* HCServerMsgContainer.swift */; };
 		B866D81D256F9391000251AD /* HCServerMsgCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B866D81C256F9391000251AD /* HCServerMsgCell.swift */; };
+		B866D827256FB301000251AD /* HCMyInServerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B866D826256FB301000251AD /* HCMyInServerController.swift */; };
+		B866D82A256FB333000251AD /* HCMyInServerContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B866D829256FB333000251AD /* HCMyInServerContainer.swift */; };
+		B866D82E256FC0F1000251AD /* URLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B866D82D256FC0F1000251AD /* URLProtocol.swift */; };
+		B866D8422570B2EC000251AD /* HCShareWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B866D8412570B2EC000251AD /* HCShareWebViewController.swift */; };
+		B866D8462570B31C000251AD /* HCShareWebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B866D8452570B31C000251AD /* HCShareWebViewModel.swift */; };
+		B866D84D2570B3A9000251AD /* HCShare.swift in Sources */ = {isa = PBXBuildFile; fileRef = B866D84C2570B3A9000251AD /* HCShare.swift */; };
 		B86993D32337395800086A77 /* TYButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86993D22337395800086A77 /* TYButton.swift */; };
 		B86993D623373A6500086A77 /* TYSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86993D523373A6500086A77 /* TYSearchBar.swift */; };
 		B86993E12337547700086A77 /* BaseLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86993E02337547700086A77 /* BaseLayout.swift */; };
@@ -323,9 +329,6 @@
 		B892FFA423ABB70700A137C0 /* TYFiliterViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B892FFA323ABB70700A137C0 /* TYFiliterViewData.swift */; };
 		B89A73C325639B0F0094E13A /* HCTestTubeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89A73C225639B0F0094E13A /* HCTestTubeCell.swift */; };
 		B89A73CA2563AA170094E13A /* HCUnderDevController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89A73C92563AA170094E13A /* HCUnderDevController.swift */; };
-		B89A73D72563C06F0094E13A /* HCArticleDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89A73D62563C06F0094E13A /* HCArticleDetailViewController.swift */; };
-		B89A73DA2563C0FA0094E13A /* HCArticleDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89A73D92563C0FA0094E13A /* HCArticleDetailViewModel.swift */; };
-		B89A73DE2563C25E0094E13A /* HCArticle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89A73DD2563C25E0094E13A /* HCArticle.swift */; };
 		B89C396A23A0C90100CAB651 /* TYCurveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89C396923A0C90100CAB651 /* TYCurveView.swift */; };
 		B89C397123A141B200CAB651 /* TYMarkString.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89C397023A141B200CAB651 /* TYMarkString.swift */; };
 		B8BE1AE423A698C300DF472A /* HCAccountManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8BE1AE323A698C300DF472A /* HCAccountManager.swift */; };
@@ -1140,6 +1143,12 @@
 		B866D815256F8DDB000251AD /* HCServerMsgController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCServerMsgController.swift; sourceTree = "<group>"; };
 		B866D818256F8E0B000251AD /* HCServerMsgContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCServerMsgContainer.swift; sourceTree = "<group>"; };
 		B866D81C256F9391000251AD /* HCServerMsgCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCServerMsgCell.swift; sourceTree = "<group>"; };
+		B866D826256FB301000251AD /* HCMyInServerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCMyInServerController.swift; sourceTree = "<group>"; };
+		B866D829256FB333000251AD /* HCMyInServerContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCMyInServerContainer.swift; sourceTree = "<group>"; };
+		B866D82D256FC0F1000251AD /* URLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLProtocol.swift; sourceTree = "<group>"; };
+		B866D8412570B2EC000251AD /* HCShareWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCShareWebViewController.swift; sourceTree = "<group>"; };
+		B866D8452570B31C000251AD /* HCShareWebViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCShareWebViewModel.swift; sourceTree = "<group>"; };
+		B866D84C2570B3A9000251AD /* HCShare.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCShare.swift; sourceTree = "<group>"; };
 		B8688793235B842F00B9B10F /* HCRecordRemindView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCRecordRemindView.swift; sourceTree = "<group>"; };
 		B86993D22337395800086A77 /* TYButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TYButton.swift; sourceTree = "<group>"; };
 		B86993D523373A6500086A77 /* TYSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TYSearchBar.swift; sourceTree = "<group>"; };
@@ -1201,9 +1210,6 @@
 		B892FFA323ABB70700A137C0 /* TYFiliterViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TYFiliterViewData.swift; sourceTree = "<group>"; };
 		B89A73C225639B0F0094E13A /* HCTestTubeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCTestTubeCell.swift; sourceTree = "<group>"; };
 		B89A73C92563AA170094E13A /* HCUnderDevController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCUnderDevController.swift; sourceTree = "<group>"; };
-		B89A73D62563C06F0094E13A /* HCArticleDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCArticleDetailViewController.swift; sourceTree = "<group>"; };
-		B89A73D92563C0FA0094E13A /* HCArticleDetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCArticleDetailViewModel.swift; sourceTree = "<group>"; };
-		B89A73DD2563C25E0094E13A /* HCArticle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCArticle.swift; sourceTree = "<group>"; };
 		B89C396923A0C90100CAB651 /* TYCurveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TYCurveView.swift; sourceTree = "<group>"; };
 		B89C397023A141B200CAB651 /* TYMarkString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TYMarkString.swift; sourceTree = "<group>"; };
 		B8AFDE5A233E702B00196064 /* HCRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCRecordViewController.swift; sourceTree = "<group>"; };
@@ -2395,6 +2401,56 @@
 			path = Message;
 			sourceTree = "<group>";
 		};
+		B866D82C256FC03B000251AD /* URLProtocol */ = {
+			isa = PBXGroup;
+			children = (
+				B866D82D256FC0F1000251AD /* URLProtocol.swift */,
+			);
+			path = URLProtocol;
+			sourceTree = "<group>";
+		};
+		B866D83C2570B2C3000251AD /* Share */ = {
+			isa = PBXGroup;
+			children = (
+				B866D83D2570B2C3000251AD /* ViewModel */,
+				B866D83E2570B2C3000251AD /* Controller */,
+				B866D83F2570B2C3000251AD /* Model */,
+				B866D8402570B2C3000251AD /* View */,
+			);
+			path = Share;
+			sourceTree = "<group>";
+		};
+		B866D83D2570B2C3000251AD /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				B866D8452570B31C000251AD /* HCShareWebViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		B866D83E2570B2C3000251AD /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				B866D8412570B2EC000251AD /* HCShareWebViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		B866D83F2570B2C3000251AD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B866D84C2570B3A9000251AD /* HCShare.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B866D8402570B2C3000251AD /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		B86993D423373A5300086A77 /* TYSearchBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -2546,48 +2602,6 @@
 				B892FFA323ABB70700A137C0 /* TYFiliterViewData.swift */,
 			);
 			path = TYFiliterView;
-			sourceTree = "<group>";
-		};
-		B89A73D12563C05B0094E13A /* Article */ = {
-			isa = PBXGroup;
-			children = (
-				B89A73D22563C05B0094E13A /* ViewModel */,
-				B89A73D32563C05B0094E13A /* Controller */,
-				B89A73D42563C05B0094E13A /* Model */,
-				B89A73D52563C05B0094E13A /* View */,
-			);
-			path = Article;
-			sourceTree = "<group>";
-		};
-		B89A73D22563C05B0094E13A /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				B89A73D92563C0FA0094E13A /* HCArticleDetailViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		B89A73D32563C05B0094E13A /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				B89A73D62563C06F0094E13A /* HCArticleDetailViewController.swift */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		B89A73D42563C05B0094E13A /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				B89A73DD2563C25E0094E13A /* HCArticle.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		B89A73D52563C05B0094E13A /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		B89C396823A0C8F400CAB651 /* TYCurveView */ = {
@@ -2859,6 +2873,7 @@
 		C421330622056B19006C10C4 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				B866D82C256FC03B000251AD /* URLProtocol */,
 				B8454ED223A3EF5200E88BAD /* TYDateCalculate.swift */,
 				B892FF9E23ABB4FD00A137C0 /* TYFiliterView */,
 				B892FF9B23AB6BA600A137C0 /* TYCityFilter */,
@@ -3285,7 +3300,7 @@
 		C4783B2624DD39E800737479 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
-				B89A73D12563C05B0094E13A /* Article */,
+				B866D83C2570B2C3000251AD /* Share */,
 				B87CCB3225569E7200792F76 /* TRTC */,
 				C4D1DB8924F7B366001EF30F /* Search */,
 				C4DDE0C024F4FB8D0001201C /* ListFilter */,
@@ -3749,6 +3764,7 @@
 				C4DDE09A24F14AAF0001201C /* HCPicConsultViewController.swift */,
 				C4DDE09C24F14ABB0001201C /* HCVideoConsultViewController.swift */,
 				C4DDE09E24F14ACB0001201C /* HCCloudClinicConsultViewController.swift */,
+				B866D826256FB301000251AD /* HCMyInServerController.swift */,
 			);
 			path = Consult;
 			sourceTree = "<group>";
@@ -3757,6 +3773,7 @@
 			isa = PBXGroup;
 			children = (
 				C4DDE0A124F14F0C0001201C /* HCPicConsultCell.swift */,
+				B866D829256FB333000251AD /* HCMyInServerContainer.swift */,
 			);
 			path = Consult;
 			sourceTree = "<group>";
@@ -4118,6 +4135,7 @@
 				C4F139BB235419EF00D777F6 /* TYFont.swift in Sources */,
 				B816EB25221DABF400F024D5 /* ZXUPCEANExtension5Support.m in Sources */,
 				B816EB07221DABF400F024D5 /* ZXRSSExpandedBlockParsedResult.m in Sources */,
+				B866D827256FB301000251AD /* HCMyInServerController.swift in Sources */,
 				B8BE34FD221470D900EF16F1 /* EditUserInfoViewModel.swift in Sources */,
 				B816EB16221DABF400F024D5 /* ZXAI01392xDecoder.m in Sources */,
 				B816EB56221DABF400F024D5 /* ZXCGImageLuminanceSource.m in Sources */,
@@ -4244,12 +4262,14 @@
 				B892FFA023ABB50800A137C0 /* TYFiliterView.swift in Sources */,
 				C421332C22056F24006C10C4 /* TYHUD.swift in Sources */,
 				C4D1DB5324F6C306001EF30F /* HCMedicine.swift in Sources */,
+				B866D82E256FC0F1000251AD /* URLProtocol.swift in Sources */,
 				B816EAAA221DABF400F024D5 /* ZXQRCodeFinderPatternInfo.m in Sources */,
 				C42133582205883D006C10C4 /* BaseViewModel.swift in Sources */,
 				B816EAEC221DABF400F024D5 /* ZXDataMatrixHighLevelEncoder.m in Sources */,
 				C4382BFF24E56281000C00CE /* HCAccountSettingViewModel.swift in Sources */,
 				B816EAFD221DABF400F024D5 /* ZXOneDReader.m in Sources */,
 				B87CCB5125569E7200792F76 /* CallUserModel.swift in Sources */,
+				B866D8422570B2EC000251AD /* HCShareWebViewController.swift in Sources */,
 				B85CD93523BE609A00B1A1C3 /* HCEditUserCityViewModel.swift in Sources */,
 				B816EB11221DABF400F024D5 /* ZXRSSExpandedCurrentParsingState.m in Sources */,
 				C4DDE0CC24F50E680001201C /* HCExpertConsultationReusableView.swift in Sources */,
@@ -4260,6 +4280,7 @@
 				C494137524DE9EFC00045749 /* HCHomeViewModel.swift in Sources */,
 				B81C2F772215B60E00A887AF /* MineHeaderView.swift in Sources */,
 				C421332A22056F24006C10C4 /* BackgroundView.swift in Sources */,
+				B866D8462570B31C000251AD /* HCShareWebViewModel.swift in Sources */,
 				B816EB3B221DABF400F024D5 /* ZXWifiResultParser.m in Sources */,
 				B816EAB5221DABF400F024D5 /* ZXBitArray.m in Sources */,
 				B816EAC8221DABF400F024D5 /* ZXPDF417Writer.m in Sources */,
@@ -4326,6 +4347,7 @@
 				C4AB273824E53D6F0095F693 /* HCBaseListCell.swift in Sources */,
 				B816EB1A221DABF400F024D5 /* ZXRSSExpandedReader.m in Sources */,
 				B8BE350D2214794900EF16F1 /* Bundle+Extension.swift in Sources */,
+				B866D82A256FB333000251AD /* HCMyInServerContainer.swift in Sources */,
 				C42AF1A724EA1D8F0034DBEF /* HCRealNameAuthorViewModel.swift in Sources */,
 				B816EB36221DABF400F024D5 /* ZXVEventResultParser.m in Sources */,
 				B8CD926523A2964800C9C061 /* HCRecordUserInfoReusableView.swift in Sources */,
@@ -4370,7 +4392,6 @@
 				B89C396A23A0C90100CAB651 /* TYCurveView.swift in Sources */,
 				B816EAC0221DABF400F024D5 /* ZXBitMatrix.m in Sources */,
 				B816EAF8221DABF400F024D5 /* ZXMaxiCodeReader.m in Sources */,
-				B89A73D72563C06F0094E13A /* HCArticleDetailViewController.swift in Sources */,
 				B816EB3A221DABF400F024D5 /* ZXGeoResultParser.m in Sources */,
 				B816EB35221DABF400F024D5 /* ZXTelResultParser.m in Sources */,
 				B892FFA223ABB5AE00A137C0 /* TYFiliterLayout.swift in Sources */,
@@ -4515,6 +4536,7 @@
 				B870E5542391981C0085AFA3 /* HCCustomNavBar.swift in Sources */,
 				C4382BF924E560C2000C00CE /* HCCollectionSectionTitleView.swift in Sources */,
 				B816EA9C221DABF400F024D5 /* ZXQRCodeBlockPair.m in Sources */,
+				B866D84D2570B3A9000251AD /* HCShare.swift in Sources */,
 				C4382C0C24E62DE3000C00CE /* HCMenstruationSettingViewModel.swift in Sources */,
 				B816EAE9221DABF400F024D5 /* ZXDataMatrixBase256Encoder.m in Sources */,
 				B8FC3F8D239AA626006EB478 /* HCSettingFooterView.swift in Sources */,
@@ -4577,7 +4599,6 @@
 				B866D819256F8E0B000251AD /* HCServerMsgContainer.swift in Sources */,
 				B816EA89221DABF400F024D5 /* ZXGenericMultipleBarcodeReader.m in Sources */,
 				B816EAC3221DABF400F024D5 /* ZXReedSolomonDecoder.m in Sources */,
-				B89A73DE2563C25E0094E13A /* HCArticle.swift in Sources */,
 				B816EB23221DABF400F024D5 /* ZXUPCAWriter.m in Sources */,
 				B816EB32221DABF400F024D5 /* ZXURIResultParser.m in Sources */,
 				B8F1587A24EF642C0046B107 /* HCMyDoctorViewController.swift in Sources */,
@@ -4632,7 +4653,6 @@
 				C4382BFD24E560DB000C00CE /* HCAccountSettingContainer.swift in Sources */,
 				B816EB40221DABF400F024D5 /* ZXExpandedProductResultParser.m in Sources */,
 				B8F1588024EF68310046B107 /* HCCollectionViewModel.swift in Sources */,
-				B89A73DA2563C0FA0094E13A /* HCArticleDetailViewModel.swift in Sources */,
 				C4DDE0C624F4FBC80001201C /* HCListFilterViewController.swift in Sources */,
 				C421333222056F96006C10C4 /* UIKit+Extension.swift in Sources */,
 				B816EAE7221DABF400F024D5 /* ZXDataMatrixSymbolInfo144.m in Sources */,

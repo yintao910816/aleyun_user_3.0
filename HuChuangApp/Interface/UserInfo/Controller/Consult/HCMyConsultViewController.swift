@@ -15,6 +15,7 @@ enum HCMyConsultDetailMode {
 
 class HCMyConsultViewController: BaseViewController {
 
+    private var status: Int?
     private var viewModel: HCMyConsultViewModel!
     
     private var slideCtrl: TYSlideMenuController!
@@ -72,7 +73,7 @@ class HCMyConsultViewController: BaseViewController {
     }
     
     override func rxBind() {
-        viewModel = HCMyConsultViewModel()
+        viewModel = HCMyConsultViewModel(status: status)
         
         picConsultCtrl.bind(viewModel: viewModel, canRefresh: true, canLoadMore: true, isAddNoMoreContent: true)
         videoConsultCtrl.bind(viewModel: viewModel, canRefresh: true, canLoadMore: true, isAddNoMoreContent: true)
@@ -99,5 +100,9 @@ class HCMyConsultViewController: BaseViewController {
         super.viewDidLayoutSubviews()
         
         slideCtrl.view.frame = .init(x: 0, y: 0, width: view.width, height: view.height)
+    }
+    
+    override func prepare(parameters: [String : Any]?) {
+        status = parameters?["status"] as? Int
     }
 }

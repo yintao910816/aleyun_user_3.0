@@ -81,20 +81,16 @@ class HCSearchViewController: BaseViewController {
             self?.viewModel.selectedSearchRecordSubject.onNext($0)
         }
         
-        expertCtrl.cellDidselected = { [weak self] in
-            let url = APIAssistance.consultationHome(with: $0.id, unitId: $0.unitId)
-            self?.navigationController?.pushViewController(BaseWebViewController.createWeb(url: url,
-                                                                                           title: "咨询",
-                                                                                           needUnitId: false),
-                                                           animated: true)
+        expertCtrl.cellDidselected = {
+            let params = HCShareWebViewController.configParameters(mode: .doctor,
+                                                                   model: HCShareDataModel.transformDoctorModel(model: $0),
+                                                                   needUnitId: false,
+                                                                   isAddRightItems: $0.isOpenAnyConsult)
+            HCExpertConsultationController.push(HCShareWebViewController.self,
+                                                params)
         }
         
-        realTimeCtrl.cellSelectedCallBack = { [weak self] in
-            let url = APIAssistance.link(with: $0.id)
-            self?.navigationController?.pushViewController(BaseWebViewController.createWeb(url: url,
-                                                                                           title: $0.title),
-                                                           animated: true)
-        }
+        realTimeCtrl.cellSelectedCallBack = { [unowned self] in self.viewModel.realTimeSelectedSubject.onNext($0.id) }
     }
     
     override func rxBind() {

@@ -25,6 +25,9 @@ class HCSearchViewModel: RefreshVM<HCSearchDataProtocol> {
     /// 绑定当前滑动到哪个栏目
     public let currentPageObser = Variable(HCsearchModule.doctor)
 
+    /// 文章点击
+    public let realTimeSelectedSubject = PublishSubject<String>()
+
     /// 关键字搜索 - 是否添加到本地数据库
     public let requestSearchSubject = PublishSubject<Bool>()
     /// 清除本地缓存记录
@@ -81,6 +84,10 @@ class HCSearchViewModel: RefreshVM<HCSearchDataProtocol> {
                 self.keyWordObser.value = keyWord
                 self.requestData(true)
             })
+            .disposed(by: disposeBag)
+        
+        realTimeSelectedSubject
+            .subscribe(onNext: { [unowned self] in self.requestArticleDetail(articleId: $0) })
             .disposed(by: disposeBag)
     }
     
@@ -166,6 +173,22 @@ class HCSearchViewModel: RefreshVM<HCSearchDataProtocol> {
                 })
                 .disposed(by: disposeBag)
         }
+    }
+
+    private func requestArticleDetail(articleId: String) {
+        HCProvider.request(.cmsDetail(articleId: articleId))
+            .map(model: HCCmsDetailModel.self)
+            .subscribe { [weak self] linkM in
+                guard let strongSelf = self else { return }
+                let params = HCShareWebViewController.configParameters(mode: .article, model: HCShareDataModel.transformCmsModel(model: linkM))
+                HCHomeViewModel.push(HCShareWebViewController.self, params)
+                strongSelf.hud.noticeHidden()
+                
+                self?.requestData(true)
+            } onError: { [weak self] in
+                self?.hud.failureHidden(self?.errorMessage($0))
+            }
+            .disposed(by: disposeBag)
     }
 
 }

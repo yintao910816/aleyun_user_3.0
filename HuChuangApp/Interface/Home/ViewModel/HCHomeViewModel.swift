@@ -12,6 +12,9 @@ import RxSwift
 
 class HCHomeViewModel: BaseViewModel, VMNavigation {
     
+    private var currentChannelId: String = ""
+    private var currentPage: Int = 0
+    
     private var allArticleDatas: [String: [HCCmsArticleListModel]] = [:]
     
     public let functionsMenuSignal = Variable(([HCFunctionsMenuModel](), [HCCmsCmsChanelListModel](), [HCCmsRecommendModel](), 0))
@@ -35,6 +38,8 @@ class HCHomeViewModel: BaseViewModel, VMNavigation {
                 }else {
                     self.requestCmsArticleList(channelId: $0.0.itemId, page: $0.1)
                 }
+                self.currentPage = $0.1
+                self.currentChannelId = $0.0.itemId
             })
             .disposed(by: disposeBag)
         
@@ -56,6 +61,8 @@ extension HCHomeViewModel {
             .subscribe(onNext: { [unowned self] data in
                 self.functionsMenuSignal.value = (data.0, data.2, data.1, 0)
                 if data.2.count > 0 {
+                    self.currentPage = 0
+                    self.currentChannelId = data.2[0].id
                     self.requestCmsArticleList(channelId: data.2[0].id, page: 0)
                 }
                 self.hud.noticeHidden()
@@ -103,8 +110,12 @@ extension HCHomeViewModel {
         HCProvider.request(.cmsDetail(articleId: data.id))
             .map(model: HCCmsDetailModel.self)
             .subscribe { [weak self] linkM in
-                HCHomeViewModel.push(HCArticleDetailViewController.self, ["model": HCShareArticleModel.transformCmsModel(model: linkM)])
-                self?.hud.noticeHidden()
+                guard let strongSelf = self else { return }
+                let params = HCShareWebViewController.configParameters(mode: .article, model: HCShareDataModel.transformCmsModel(model: linkM))
+                HCHomeViewModel.push(HCShareWebViewController.self, params)
+                strongSelf.hud.noticeHidden()
+                
+                strongSelf.requestCmsArticleList(channelId: strongSelf.currentChannelId, page: strongSelf.currentPage)
             } onError: { [weak self] in
                 self?.hud.failureHidden(self?.errorMessage($0))
             }

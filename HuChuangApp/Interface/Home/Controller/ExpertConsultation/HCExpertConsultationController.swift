@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HCExpertConsultationController: BaseViewController {
+class HCExpertConsultationController: BaseViewController,VMNavigation {
 
     private var viewModel: HCExpertConsultationViewModel!
     private var containerView: HCExpertConsultationContainer!
@@ -19,12 +19,13 @@ class HCExpertConsultationController: BaseViewController {
         containerView = HCExpertConsultationContainer.init(frame: view.bounds)
         view.addSubview(containerView)
         
-        containerView.cellDidSelected = { [unowned self] in
-            let url = APIAssistance.consultationHome(with: $0.id, unitId: $0.unitId)
-            self.navigationController?.pushViewController(BaseWebViewController.createWeb(url: url,
-                                                                                          title: $0.name,
-                                                                                          needUnitId: false),
-                                                          animated: true)
+        containerView.cellDidSelected = {
+            let params = HCShareWebViewController.configParameters(mode: .doctor,
+                                                                   model: HCShareDataModel.transformDoctorModel(model: $0),
+                                                                   needUnitId: false,
+                                                                   isAddRightItems: $0.isOpenAnyConsult)
+            HCExpertConsultationController.push(HCShareWebViewController.self,
+                                                params)
         }
         
         containerView.menuSelect = { [weak self] in
@@ -36,13 +37,13 @@ class HCExpertConsultationController: BaseViewController {
                 
                 areaSelectedCtrk.cityClicked = { [weak self] in self?.viewModel.areaFilterSubject.onNext($0) }
             case 1:
-                let listFilterCtrl = HCListFilterViewController.init(mode: .sorted)
+                let listFilterCtrl = HCListFilterViewController.init(mode: .sorted, selectedIdentifier: self?.viewModel.sortedIdentifier)
                 self?.addChild(listFilterCtrl)
                 self?.view.addSubview(listFilterCtrl.view)
                 
                 listFilterCtrl.commitCallBack = { [weak self] in self?.viewModel.sortedFilterSubject.onNext($0?.title ?? "") }
             case 2:
-                let listFilterCtrl = HCListFilterViewController.init(mode: .consultType)
+                let listFilterCtrl = HCListFilterViewController.init(mode: .consultType, selectedIdentifier: self?.viewModel.consultTypeIdentifier)
                 self?.addChild(listFilterCtrl)
                 self?.view.addSubview(listFilterCtrl.view)
                 

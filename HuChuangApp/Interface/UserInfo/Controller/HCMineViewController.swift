@@ -39,7 +39,7 @@ class HCMineViewController: BaseViewController, VMNavigation {
             case .attentionStore:
                 self?.navigationController?.pushViewController(HCCollectionViewController(), animated: true)
             case .allInServer:
-                self?.navigationController?.pushViewController(HCMyConsultViewController(), animated: true)
+                HCMineViewController.push(HCMyInServerController.self, ["models": self?.viewModel.personalCenterInfoSignal.value.progressServices ?? [HCPersonalProgressServiceModel]()])
             }
         }
         

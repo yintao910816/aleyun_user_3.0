@@ -51,13 +51,14 @@ class HCListFilterSectionModel {
 extension HCListFilterSectionModel {
     
     /// 专家问诊列表 - 排序方式筛选
-    public class func createExpertConsultationSortedData() ->[HCListFilterSectionModel] {
+    public class func createExpertConsultationSortedData(selectedIdentifier: String? = nil) ->[HCListFilterSectionModel] {
         let titles_1 = ["默认排序", "职称", "咨询数", "好评率"]
 
         let section_1 = HCListFilterSectionModel()
         for item in titles_1 {
             let m = HCListFilterModel()
             m.title = item
+            m.isSelected = item == selectedIdentifier
             section_1.datas.append(m)
         }
         
@@ -65,13 +66,14 @@ extension HCListFilterSectionModel {
     }
 
     /// 专家问诊列表 - 咨询方式筛选
-    public class func createExpertConsultationTypeData() ->[HCListFilterSectionModel] {
+    public class func createExpertConsultationTypeData(selectedIdentifier: String? = nil) ->[HCListFilterSectionModel] {
         let titles_1 = ["全部", "图文", "视频"]
 
         let section_1 = HCListFilterSectionModel()
         for item in titles_1 {
             let m = HCListFilterModel()
             m.title = item
+            m.isSelected = item == selectedIdentifier
             section_1.datas.append(m)
         }
         
@@ -79,13 +81,14 @@ extension HCListFilterSectionModel {
     }
 
     /// 生殖中心列表 - 筛选
-    public class func createSZZXData() ->[HCListFilterSectionModel] {
+    public class func createSZZXData(selectedIdentifier: String? = nil) ->[HCListFilterSectionModel] {
         let titles_1 = ["全部", "生殖中心", "三甲医院"]
 
         let section_1 = HCListFilterSectionModel()
         for item in titles_1 {
             let m = HCListFilterModel()
             m.title = item
+            m.isSelected = item == selectedIdentifier
             section_1.datas.append(m)
         }
         

@@ -23,12 +23,12 @@ class HCCollectionViewController: BaseViewController {
         view.addSubview(slideCtrl.view)
 
         doctorCtrl = HCMyDoctorViewController()
-        doctorCtrl.cellDidSelected = { [unowned self] in
-            let url = APIAssistance.consultationHome(with: $0.id, unitId: $0.unitId)
-            self.navigationController?.pushViewController(BaseWebViewController.createWeb(url: url,
-                                                                                          title: $0.name,
-                                                                                          needUnitId: false),
-                                                          animated: true)
+        doctorCtrl.cellDidSelected = {
+            let params = HCShareWebViewController.configParameters(mode: .doctor,
+                                                                   model: HCShareDataModel.transformDoctorModel(model: $0),
+                                                                   needUnitId: false)
+            HCExpertConsultationController.push(HCShareWebViewController.self,
+                                                params)
         }
 
         classCtrl = HCMyClassViewController()

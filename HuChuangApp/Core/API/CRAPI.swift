@@ -174,6 +174,10 @@ enum API{
     case articelStore(articleId: String, storeStatus: Bool)
     /// 是否已收藏
     case cmsFollow(articleId: String)
+    /// 医生收藏
+    case attentionDoctor(userId: String, attention: Bool)
+    /// 医生是否已收藏
+    case doctorFollow(userId: String, memberId: String)
     /// 搜索
     case search(moduleType: HCsearchModule, searchWords: String, pageSize: Int, pageNum: Int)
     /// 我的优惠卷
@@ -314,6 +318,10 @@ extension API: TargetType{
             return "api/cms/store"
         case .cmsFollow(let articleId):
             return "api/cms/follow/\(articleId)"
+        case .attentionDoctor(_, _):
+            return "api/doctor/attentionDoctor"
+        case .doctorFollow(_, _):
+            return "api/attentionStore/isAttention"
         case .cmsDetail(let articleId):
             return "api/cms/detail/\(articleId)"
         case .attentionStore(_, _, _):
@@ -617,6 +625,14 @@ extension API {
         case .articelStore(let articleId, let status):
             params["articleId"] = articleId
             params["storeStatus"] = status
+        case .attentionDoctor(let userId, let attention):
+            params["userId"] = userId
+            params["attention"] = attention
+        case .doctorFollow(let userId, let memberId):
+            params["userId"] = userId
+            params["memberId"] = memberId
+
+
         case .mergePro(let opType, let date, let data):
             params["opType"] = opType.rawValue
             params["date"] = date

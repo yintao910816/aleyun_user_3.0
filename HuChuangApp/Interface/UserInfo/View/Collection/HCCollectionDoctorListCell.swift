@@ -133,8 +133,8 @@ extension HCCollectionDoctorListCell {
         
         addSubview(avatar)
         addSubview(doctorInfoLabel)
-        addSubview(hospitalBg)
-        hospitalBg.addSubview(hospitalLvLabel)
+//        addSubview(hospitalBg)
+//        hospitalBg.addSubview(hospitalLvLabel)
         addSubview(hospitalAdressLabel)
         addSubview(skidInLabel)
         addSubview(doctorBriefLabel)

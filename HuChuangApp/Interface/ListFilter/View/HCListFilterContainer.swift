@@ -81,7 +81,7 @@ class HCListFilterContainer: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        contentView.frame = .init(x: 0, y: 0, width: width, height: height / 2)
+        contentView.frame = .init(x: 0, y: 0, width: width, height: 200)
         
         bottomView.frame = .init(x: 0, y: contentView.height - 50, width: contentView.width, height: 50)
         resetButton.frame = .init(x: 0, y: 0, width: bottomView.width / 2, height: bottomView.height)
