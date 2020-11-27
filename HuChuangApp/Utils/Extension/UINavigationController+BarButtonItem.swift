@@ -17,8 +17,10 @@ extension UIViewController {
                                  title itemTitle: String? = nil,
                                  titleColor color: UIColor? = UIColor.white,
                                  right isRight: Bool = true,
+                                 edgeLeft: CGFloat = 0,
+                                 edgeRight: CGFloat = 0,
                                  _ action: @escaping () ->Void) {
-        let button = createButton(normalImage, highlightedImage, itemTitle, color)
+        let button = createButton(normalImage, highlightedImage, itemTitle, color, edgeLeft: edgeLeft, edgeRight: edgeRight)
         isRight == true ? (navigationItem.rightBarButtonItem = UIBarButtonItem(customView:button))
             : (navigationItem.leftBarButtonItem = UIBarButtonItem(customView:button))
         
@@ -33,8 +35,10 @@ extension UIViewController {
                                  highlighted highlightedImage: String? = nil,
                                  title itemTitle: String? = nil,
                                  titleColor color: UIColor? = UIColor.white,
-                                 right isRight: Bool = true) ->Driver<Void> {
-        let button = createButton(normalImage, highlightedImage, itemTitle, color)
+                                 right isRight: Bool = true,
+                                 edgeLeft: CGFloat = 0,
+                                 edgeRight: CGFloat = 0) ->Driver<Void> {
+        let button = createButton(normalImage, highlightedImage, itemTitle, color, edgeLeft: edgeLeft, edgeRight: edgeRight)
         isRight == true ? (navigationItem.rightBarButtonItem = UIBarButtonItem(customView:button))
             : (navigationItem.leftBarButtonItem = UIBarButtonItem(customView:button))
         
@@ -44,7 +48,9 @@ extension UIViewController {
     private func createButton(_ normalImage: String?,
                               _ highlightedImage: String?,
                               _ itemTitle: String?,
-                              _ titleColor: UIColor?) ->UIButton {
+                              _ titleColor: UIColor?,
+                              edgeLeft: CGFloat,
+                              edgeRight: CGFloat) ->UIButton {
         let button : UIButton = UIButton(type : .system)
         if normalImage?.isEmpty == false {
             button.setImage(UIImage(named :normalImage!)?.withRenderingMode(.alwaysOriginal), for: .normal)
@@ -58,6 +64,11 @@ extension UIViewController {
         }
         button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         button.sizeToFit()
+        
+        let edgeTop: CGFloat = max((44 - button.height) / 2, 0)
+        button.contentEdgeInsets =  .init(top: edgeTop, left: edgeLeft, bottom: edgeTop, right: edgeRight)
+
+        PrintLog("item 大小：\(button.frame)")
         
         return button
     }

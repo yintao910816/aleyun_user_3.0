@@ -68,7 +68,7 @@ class HCMineViewController: BaseViewController, VMNavigation {
                                                           animated: true)
         }
         
-        addBarItem(normal: "setting", right: true)
+        addBarItem(normal: "setting", right: true, edgeLeft: 20)
             .drive(onNext: { [weak self] in
                 self?.navigationController?.pushViewController(HCSettingViewController(), animated: true)
             })
