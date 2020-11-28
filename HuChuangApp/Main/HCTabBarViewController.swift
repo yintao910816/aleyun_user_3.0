@@ -54,11 +54,11 @@ class HCTabBarViewController: UITabBarController {
         homeNav.tabBarItem.image = UIImage(named: "tabBar_home_unselected")
         homeNav.tabBarItem.selectedImage = UIImage(named: "tabBar_home_selected")
 
-        let toolCtrl = HCToolViewController()
-        let toolNav = MainNavigationController.init(rootViewController: toolCtrl)
-        toolNav.tabBarItem.title = "工具"
-        toolNav.tabBarItem.image = UIImage(named: "tabBar_tool_unselected")
-        toolNav.tabBarItem.selectedImage = UIImage(named: "tabBar_tool_selected")
+//        let toolCtrl = HCToolViewController()
+//        let toolNav = MainNavigationController.init(rootViewController: toolCtrl)
+//        toolNav.tabBarItem.title = "工具"
+//        toolNav.tabBarItem.image = UIImage(named: "tabBar_tool_unselected")
+//        toolNav.tabBarItem.selectedImage = UIImage(named: "tabBar_tool_selected")
 //        toolNav.tabBarItem.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : RGB(51, 51, 51)], for: .normal)
 //        toolNav.tabBarItem.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : RGB(51, 51, 51)], for: .selected)
 
@@ -75,7 +75,7 @@ class HCTabBarViewController: UITabBarController {
         mineNav.tabBarItem.image = UIImage(named: "tabBar_mine_unselected")
         mineNav.tabBarItem.selectedImage = UIImage(named: "tabBar_mine_selected")
         
-        viewControllers = [homeNav, toolNav, mineNav]
+        viewControllers = [homeNav, mineNav]
 //        viewControllers = [homeNav, toolNav, classRoomNav, mineNav]
     }
 }

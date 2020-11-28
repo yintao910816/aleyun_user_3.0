@@ -11,6 +11,7 @@ import UIKit
 class HCMyInServerContainer: UIView {
 
     private var collectionView: UICollectionView!
+    private var emptyView: HCListEmptyView!
 
     public var excuteMyServerAction: ((HCPersonalProgressServiceModel)->())?
 
@@ -26,6 +27,8 @@ class HCMyInServerContainer: UIView {
         collectionView.delegate = self
         addSubview(collectionView)
         
+        emptyView = HCListEmptyView(frame: bounds)
+        
         collectionView.register(HCMineInServerCell.self, forCellWithReuseIdentifier: HCMineInServerCell_identifier)
     }
     
@@ -35,6 +38,16 @@ class HCMyInServerContainer: UIView {
     
     public var progressServices: [HCPersonalProgressServiceModel] = [] {
         didSet {
+            if progressServices.count == 0 {
+                if emptyView.superview == nil {
+                    addSubview(emptyView)
+                }
+            }else {
+                if emptyView.superview != nil {
+                    emptyView.removeFromSuperview()
+                }
+            }
+            
             collectionView.reloadData()
         }
     }
@@ -43,6 +56,7 @@ class HCMyInServerContainer: UIView {
         super.layoutSubviews()
         
         collectionView.frame = bounds
+        emptyView.frame = bounds
     }
 
 }
