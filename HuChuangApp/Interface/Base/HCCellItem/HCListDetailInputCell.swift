@@ -22,14 +22,7 @@ class HCListDetailInputCell: HCBaseListCell {
         inputTf.font = .font(fontSize: 14)
         inputTf.textColor = .black
         inputTf.delegate = self
-
         contentView.addSubview(inputTf)
-        
-        inputTf.snp.makeConstraints {
-            $0.right.equalTo(arrowImgV.snp.right).offset(15 + 8)
-            $0.size.equalTo(CGSize.init(width: 100, height: 25))
-            $0.centerY.equalTo(contentView.snp.centerY)
-        }
     }
 
     override var model: HCListCellItem! {
@@ -42,12 +35,17 @@ class HCListDetailInputCell: HCBaseListCell {
             
             inputTf.textAlignment = model.detailInputTextAlignment
             inputTf.placeholder = model.placeholder
-            
-            inputTf.snp.updateConstraints {
-                $0.right.equalTo(arrowImgV.snp.right).offset(model.shwoArrow ? 15 + 8 : 0)
-                $0.size.equalTo(model.inputSize)
-            }
         }
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        let inputX: CGFloat = model.shwoArrow ? (width - 15 - 8 - model.inputSize.width) : (width - model.inputSize.width)
+        inputTf.frame = .init(x: inputX,
+                              y: (height - model.inputSize.height) / 2,
+                              width: model.inputSize.width,
+                              height: model.inputSize.height)
     }
     
     deinit {

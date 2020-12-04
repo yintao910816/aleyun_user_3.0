@@ -22,12 +22,6 @@ class HCListDetailButtonCell: HCBaseListCell {
         detailButton.titleLabel?.font = .font(fontSize: 14)
         
         contentView.addSubview(detailButton)
-        
-        detailButton.snp.makeConstraints {
-            $0.right.equalTo(contentView).offset(-15)
-            $0.size.equalTo(CGSize.init(width: 100, height: 25))
-            $0.centerY.equalTo(contentView.snp.centerY)
-        }
     }
 
     override var model: HCListCellItem! {
@@ -35,12 +29,16 @@ class HCListDetailButtonCell: HCBaseListCell {
             super.model = model
             
             detailButton.setTitle(model.detailButtonTitle, for: .normal)
-            detailButton.setTitleColor(model.detailTitleColor, for: .normal)
-            
-            detailButton.snp.updateConstraints {
-                $0.size.equalTo(model.detailButtonSize)
-            }
+            detailButton.setTitleColor(model.detailTitleColor, for: .normal)            
         }
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        detailButton.frame = .init(x: width - 15 - model.detailButtonSize.width,
+                                   y: (height - model.detailButtonSize.height) / 2,
+                                   width: model.detailButtonSize.width,
+                                   height: model.detailButtonSize.height)
+    }
 }

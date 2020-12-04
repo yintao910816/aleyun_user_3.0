@@ -18,14 +18,7 @@ class HCListDetailCell: HCBaseListCell {
         detailTitleLabel = UILabel()
         detailTitleLabel.textAlignment = .right
         detailTitleLabel.font = .font(fontSize: 14)
-
         contentView.addSubview(detailTitleLabel)
-
-        detailTitleLabel.snp.makeConstraints {
-            $0.right.equalTo(arrowImgV.snp.left).offset(-5)
-            $0.centerY.equalTo(contentView.snp.centerY)
-            $0.width.equalTo(contentView.snp.width).multipliedBy(0.45)
-        }
     }
     
     override var model: HCListCellItem! {
@@ -35,5 +28,15 @@ class HCListDetailCell: HCBaseListCell {
             detailTitleLabel.text = model.detailTitle
             detailTitleLabel.textColor = model.detailTitleColor
         }
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        let tempSize = detailTitleLabel.sizeThatFits(.init(width: width * 0.45, height: CGFloat.greatestFiniteMagnitude))
+        detailTitleLabel.frame = .init(x: arrowImgV.x - 5 - tempSize.width,
+                                       y: (height - tempSize.height) / 2,
+                                       width: tempSize.width,
+                                       height: tempSize.height)
     }
 }

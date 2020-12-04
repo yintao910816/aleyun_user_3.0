@@ -31,8 +31,6 @@ class HCListButtonCell: HCBaseListCell {
         actionButton.addTarget(self, action: #selector(buttonClicked), for: .touchUpInside)
 
         contentView.addSubview(actionButton)
-        
-        actionButton.snp.makeConstraints { $0.left.right.top.bottom.equalTo(0) }
     }
     
     @objc private func buttonClicked() {
@@ -49,7 +47,10 @@ class HCListButtonCell: HCBaseListCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        actionButton.snp.updateConstraints { $0.edges.equalTo(model.buttonEdgeInsets) }
+        actionButton.frame = .init(x: model.buttonEdgeInsets.left,
+                                   y: model.buttonEdgeInsets.top,
+                                   width: width - model.buttonEdgeInsets.left - model.buttonEdgeInsets.right,
+                                   height: height - model.buttonEdgeInsets.top - model.buttonEdgeInsets.bottom)
         
         if model.buttonBorderColor != nil {
             actionButton.layer.cornerRadius = (height - model.buttonEdgeInsets.top - model.buttonEdgeInsets.bottom) / 2.0

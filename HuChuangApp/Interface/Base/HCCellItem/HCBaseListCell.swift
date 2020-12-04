@@ -51,53 +51,20 @@ class HCBaseListCell: UITableViewCell {
         contentView.addSubview(titleLabel)
         contentView.addSubview(arrowImgV)
         contentView.addSubview(bottomLine)
-        
-        titleIcon.snp.makeConstraints{
-            $0.centerY.equalTo(contentView.snp.centerY)
-            $0.size.equalTo(CGSize.init(width: 25, height: 25))
-            $0.left.equalTo(contentView).offset(12)
-        }
-        
-        titleLabel.snp.makeConstraints {
-            $0.left.equalTo(titleIcon.snp.right).offset(12)
-            $0.centerY.equalTo(contentView.snp.centerY)
-        }
-        arrowImgV.snp.makeConstraints {
-            $0.right.equalTo(-15)
-            $0.centerY.equalTo(contentView.snp.centerY)
-            $0.size.equalTo(CGSize.init(width: 8, height: 15))
-        }
-
-        bottomLine.snp.makeConstraints {
-            $0.left.right.bottom.equalTo(0)
-            $0.height.equalTo(1)
-        }
-        
+                
         loadView()
     }
     
     /// 设置数据
     public var model: HCListCellItem! {
         didSet {
+            titleLabel.font = model.titleFont
+            titleLabel.textColor = model.titleColor
+            
             if model.titleIcon.count > 0 {
                 titleIcon.image = UIImage.init(named: model.titleIcon)
-                titleIcon.snp.updateConstraints{
-                    $0.size.equalTo(model.titleIconSize)
-                }
-                
-                titleLabel.snp.updateConstraints {
-                    $0.left.equalTo(titleIcon.snp.right).offset(12)
-                }
-
             }else {
                 titleIcon.image = nil
-                titleIcon.snp.updateConstraints{
-                    $0.size.equalTo(CGSize.zero)
-                }
-                
-                titleLabel.snp.updateConstraints {
-                    $0.left.equalTo(titleIcon.snp.right).offset(0)
-                }
             }
             
             if model.attrbuiteTitle.length > 0 {
@@ -108,6 +75,54 @@ class HCBaseListCell: UITableViewCell {
             }
             
             arrowImgV.isHidden = !model.shwoArrow
+        }
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        var tempSize: CGSize = .zero
+        let maxTitleIconSize = CGSize(width: 25, height: height - 30)
+        let leftX: CGFloat = 12
+        if model.titleIcon.count > 0 {
+            if titleIcon.superview == nil {
+                contentView.addSubview(titleIcon)
+            }
+            
+            titleIcon.image = UIImage.init(named: model.titleIcon)
+            tempSize = titleIcon.sizeThatFits(.init(width: CGFloat.greatestFiniteMagnitude,
+                                                    height: maxTitleIconSize.height))
+            titleIcon.frame = .init(x: leftX + max(0, (maxTitleIconSize.width - tempSize.width)) / 2,
+                                    y: (height - tempSize.height) / 2,
+                                    width: tempSize.width,
+                                    height: tempSize.height)
+            
+            let titleX: CGFloat = (leftX + 25 + 15) > titleIcon.frame.maxX ? (leftX + 25 + 15) : titleIcon.frame.maxX + 10
+            tempSize = titleLabel.sizeThatFits(.init(width: CGFloat.greatestFiniteMagnitude, height: height - 30))
+            titleLabel.frame = .init(x: titleX,
+                                     y: (height - tempSize.height) / 2,
+                                     width: tempSize.width,
+                                     height: tempSize.height)
+        }else {
+            titleIcon.image = nil
+            titleIcon.removeFromSuperview()
+
+            tempSize = titleLabel.sizeThatFits(.init(width: CGFloat.greatestFiniteMagnitude, height: height - 30))
+            titleLabel.frame = .init(x: leftX,
+                                     y: (height - tempSize.height) / 2,
+                                     width: tempSize.width,
+                                     height: tempSize.height)
+        }
+        
+        arrowImgV.frame = .init(x: width - 15 - 8, y: (height - 15)/2, width: 8, height: 15)
+        
+        switch model.bottomLineMode {
+        case .noSpace:
+            bottomLine.frame = .init(x: 0, y: height - 0.5, width: width, height: 0.5)
+        case .icon:
+            bottomLine.frame = .init(x: titleIcon.x, y: height - 0.5, width: width - titleIcon.x, height: 0.5)
+        case .title:
+            bottomLine.frame = .init(x: titleLabel.x, y: height - 0.5, width: width - titleLabel.x, height: 0.5)
         }
     }
     

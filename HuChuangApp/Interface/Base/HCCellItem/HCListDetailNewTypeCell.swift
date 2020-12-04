@@ -11,19 +11,19 @@ import UIKit
 public let HCListDetailNewTypeCell_identifier = "HCListDetailNewTypeCell"
 
 class HCListDetailNewTypeCell: HCListDetailCell {
-
-    override func loadView() {
-        super.loadView()
-        
-        detailTitleLabel.snp.remakeConstraints {
-            $0.right.equalTo(-15)
-            $0.centerY.equalTo(contentView.snp.centerY)
-        }
-        
-        arrowImgV.snp.remakeConstraints {
-            $0.right.equalTo(detailTitleLabel.snp.left).offset(-5)
-            $0.centerY.equalTo(contentView.snp.centerY)
-        }
-    }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        let tempSize = detailTitleLabel.sizeThatFits(.init(width: 0.45 * width, height: CGFloat.greatestFiniteMagnitude))
+        detailTitleLabel.frame = .init(x: width - 15 - tempSize.width,
+                                       y: (height - tempSize.height) / 2,
+                                       width: tempSize.width,
+                                       height: tempSize.height)
+        
+        arrowImgV.frame = .init(x: detailTitleLabel.x - 5 - 8,
+                                y: (height - 15)/2,
+                                width: 8,
+                                height: 15)
+    }
 }

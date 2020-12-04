@@ -19,13 +19,6 @@ class HCListDetailIconCell: HCBaseListCell {
         detailIconImgV.backgroundColor = .clear
         detailIconImgV.clipsToBounds = true
         contentView.addSubview(detailIconImgV)
-        
-        detailIconImgV.snp.makeConstraints {
-            $0.top.equalTo(10)
-            $0.bottom.equalTo(-10)
-            $0.right.equalTo(arrowImgV.snp.left).offset(-5)
-            $0.width.equalTo(detailIconImgV.snp.height)
-        }
     }
     
     override var model: HCListCellItem! {
@@ -45,6 +38,23 @@ class HCListDetailIconCell: HCBaseListCell {
             }else {
                 detailIconImgV.image = nil
             }
+        }
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        if model.detailIcon.count > 0 {
+            if detailIconImgV.superview == nil {
+                contentView.addSubview(detailIconImgV)
+            }
+            let imgVHeight: CGFloat = height - 20
+            detailIconImgV.frame = .init(x: arrowImgV.x - 5 - imgVHeight,
+                                         y: 10,
+                                         width: imgVHeight,
+                                         height: imgVHeight)
+        }else {
+            detailIconImgV.removeFromSuperview()
         }
     }
 }

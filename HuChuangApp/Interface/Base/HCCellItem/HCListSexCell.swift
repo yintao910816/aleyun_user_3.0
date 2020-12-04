@@ -43,18 +43,6 @@ class HCListSexCell: HCBaseListCell {
 
         addSubview(boyButton)
         addSubview(girlButton)
-        
-        girlButton.snp.makeConstraints {
-            $0.right.equalTo(self).offset(-15)
-            $0.size.equalTo(CGSize.init(width: 64, height: 30))
-            $0.centerY.equalTo(self.snp.centerY)
-        }
-
-        boyButton.snp.makeConstraints {
-            $0.size.equalTo(girlButton.snp.size)
-            $0.right.equalTo(girlButton.snp.left).offset(-8)
-            $0.centerY.equalTo(self.snp.centerY)
-        }
     }
     
     override var model: HCListCellItem! {
@@ -63,6 +51,23 @@ class HCListSexCell: HCBaseListCell {
             setupGenderStatus(gender: HCGender(rawValue: Int(model.detailTitle) ?? 1) ?? HCGender.male)
         }
     }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        girlButton.frame = .init(x: width - 15 - 64,
+                                 y: (height - 30) / 2,
+                                 width: 64,
+                                 height: 30)
+        
+        boyButton.frame = .init(x: girlButton.x - 8 - 64,
+                                y: (height - 30) / 2,
+                                width: 64,
+                                height: 30)
+    }
+}
+
+extension HCListSexCell {
 
     @objc private func buttonAction(button: UIButton) {
         if button == boyButton {
@@ -73,7 +78,7 @@ class HCListSexCell: HCBaseListCell {
             model.detailTitle = "\(HCGender.female.rawValue)"
         }
     }
-    
+
     private func setupGenderStatus(gender: HCGender) {
         if gender == .male {
             // 男
@@ -94,4 +99,5 @@ class HCListSexCell: HCBaseListCell {
             boyButton.layer.borderColor = UIColor.clear.cgColor
         }
     }
+
 }

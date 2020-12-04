@@ -17,19 +17,29 @@ class HCListSwitchCell: HCBaseListCell {
     override func loadView() {
         switchView = UISwitch()
 //        switchView.onTintColor = RGB(245, 102, 149)
-        
         contentView.addSubview(switchView)
+    }
+    
+    override var model: HCListCellItem! {
+        didSet {
+            super.model = model
+            
+            switchView.isOn = model.isOn
+        }
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
         
-        arrowImgV.snp.makeConstraints{
-            $0.right.equalTo(-15)
-            $0.centerY.equalTo(contentView.snp.centerY)
-            $0.size.equalTo(CGSize.zero)
+        if arrowImgV.superview != nil {
+            arrowImgV.removeFromSuperview()
         }
         
-        switchView.snp.makeConstraints {
-            $0.right.equalTo(arrowImgV.snp.left).offset(0)
-            $0.centerY.equalTo(arrowImgV.snp.centerY)
-        }
+        let tempSize = switchView.sizeThatFits(.init(width: CGFloat.greatestFiniteMagnitude, height: height))
+        switchView.frame = .init(x: width - 15 - tempSize.width,
+                                 y: (height - tempSize.height) / 2,
+                                 width: tempSize.width,
+                                 height: tempSize.height)
     }
     
 }

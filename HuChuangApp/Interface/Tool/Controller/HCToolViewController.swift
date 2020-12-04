@@ -13,8 +13,6 @@ class HCToolViewController: BaseViewController {
     private var containerView: HCToolViewContainer!
     private var viewModel: HCToolViewModel!
     
-    private var devCtrl: HCUnderDevController!
-
     override func setupUI() {
         navigationItem.title = "工具"
         
@@ -25,11 +23,7 @@ class HCToolViewController: BaseViewController {
             if $0.title == "经期设置" {
                 self?.navigationController?.pushViewController(HCMenstruationSettingViewController(), animated: true)
             }
-        }
-        
-        devCtrl = HCUnderDevController()
-        addChild(devCtrl)
-        view.addSubview(devCtrl.view)
+        }        
     }
     
     override func rxBind() {
