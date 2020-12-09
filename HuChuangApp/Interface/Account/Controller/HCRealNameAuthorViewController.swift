@@ -57,8 +57,10 @@ extension HCRealNameAuthorViewController {
             }
         }else if indexPath.row == 3 {
             let picker = HCPickerView()
-            picker.datasource = [HCPickerSection(items: [HCPickerItemModel(title: "身份证")])]
-            addChildViewController(picker)
+            picker.datasource = [HCPickerSectionData(items: [HCPickerItemModel(title: "身份证")])]
+//            addChildViewController(picker)
+            
+            model(for: picker, controllerHeight: view.height)
             
             picker.finishSelected = { [weak self] in
                 self?.containerView.reloadItem(indexPath: indexPath, content: $0.1)

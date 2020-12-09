@@ -21,9 +21,19 @@ class HCMenstruationSettingViewController: BaseViewController {
     }
     
     override func rxBind() {
-        viewModel = HCMenstruationSettingViewModel()
+        let saveSignal = addBarItem(title: "保存", titleColor: HC_MAIN_COLOR)
         
-        containerView.listData = viewModel.getSectionDatas()
+        viewModel = HCMenstruationSettingViewModel(tap: saveSignal)
+        
+        viewModel.listDatasource.asDriver()
+            .drive(onNext: { [weak self] in self?.containerView.listData = $0 })
+            .disposed(by: disposeBag)
+
+        viewModel.enableCommitSignal.asDriver()
+            .drive(navigationItem.rightBarButtonItem!.rx.rx_enable)
+            .disposed(by: disposeBag)
+
+        viewModel.reloadSubject.onNext(Void())
     }
     
     override func viewDidLayoutSubviews() {

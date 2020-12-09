@@ -28,3 +28,17 @@ extension Dictionary {
         return JSONString    
     }
 }
+
+extension Array where Element:Hashable{
+    
+    var deduplicates : [Element] {
+        var keys:[Element:()] = [:]
+        return filter{ keys.updateValue((), forKey:$0) == nil }
+    }
+    
+    public func deduplicates(aFilter:((Element)->(Bool))) ->[Element] {
+        return filter{ aFilter($0) }
+    }
+
+}
+

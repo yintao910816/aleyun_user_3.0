@@ -30,6 +30,20 @@ extension Reactive where Base: UIControl {
     }
 }
 
+extension Reactive where Base: UIBarButtonItem {
+
+    public var rx_enable: Binder<Bool> {
+        return Binder(self.base) { item, enable in
+            item.isEnabled = enable
+            if let button = item.customView as? UIButton {
+                button.setTitleColor(enable ? HC_MAIN_COLOR : RGB(51, 51, 51), for: .normal)
+            }else {
+                item.tintColor = enable ? HC_MAIN_COLOR : RGB(51, 51, 51)
+            }
+        }
+    }
+}
+
 extension Reactive where Base: UITextField {
 
     public var isSecureTextEntry: Binder<Bool> {

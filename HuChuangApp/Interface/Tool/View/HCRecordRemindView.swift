@@ -8,12 +8,12 @@
 
 import UIKit
 
-public let HCRecordRemindView_height: CGFloat = 35
+public let HCRecordRemindView_height: CGFloat = 45
 
 class HCRecordRemindView: UIView {
     
     private let texts: [String] = ["月经期", "预测经期", "安全期", "易孕期", "排卵日"]
-    private let colors: [UIColor] = [RGB(255, 79, 120), RGB(254, 199, 203), RGB(109, 206, 111), RGB(239, 135, 198), RGB(239, 135, 198)]
+    private let colors: [UIColor] = [RGB(255, 79, 120), RGB(254, 199, 203), RGB(109, 206, 111), RGB(195, 172, 230), RGB(239, 135, 198)]
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -23,7 +23,12 @@ class HCRecordRemindView: UIView {
         for idx in 0..<texts.count {
             let img = UIImageView()
             img.tag = 200 + idx
-            img.backgroundColor = colors[idx]
+            
+            if texts[idx] == "排卵日" {
+                img.image = UIImage(named: "tool_painuanri")
+            }else {
+                img.backgroundColor = colors[idx]
+            }
             
             let contentLabel = UILabel()
             contentLabel.text = texts[idx]
@@ -58,11 +63,6 @@ class HCRecordRemindView: UIView {
             contentLabel?.frame = .init(origin: .init(x: (img?.frame.maxX ?? 0) + 3, y: (height - 16) / 2.0), size: contentSize)
             
             lastMaxX = contentLabel?.frame.maxX ?? 0
-            
-            if idx == texts.count - 1 {
-                img?.layer.cornerRadius = 6
-                img?.clipsToBounds = true
-            }
         }
     }
 }

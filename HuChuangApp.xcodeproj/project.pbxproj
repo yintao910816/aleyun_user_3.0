@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		A08398CF7D2F1A7EC078368A /* Pods_HuChuangApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F68DA0CD68B7D8ED10451F88 /* Pods_HuChuangApp.framework */; };
+		B80D3E4C257FD62200073BEE /* HCCalendarLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80D3E4B257FD62200073BEE /* HCCalendarLayout.swift */; };
+		B80D3E51258139A900073BEE /* HCForecastRemindView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80D3E50258139A900073BEE /* HCForecastRemindView.swift */; };
 		B816E871221DABBC00F024D5 /* HCScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B816E870221DABBC00F024D5 /* HCScanViewController.swift */; };
 		B816EA73221DABF400F024D5 /* CodeScan.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B816E874221DABF200F024D5 /* CodeScan.bundle */; };
 		B816EA74221DABF400F024D5 /* LBXScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B816E877221DABF200F024D5 /* LBXScanViewController.m */; };
@@ -331,6 +333,10 @@
 		B89A73CA2563AA170094E13A /* HCUnderDevController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89A73C92563AA170094E13A /* HCUnderDevController.swift */; };
 		B89C396A23A0C90100CAB651 /* TYCurveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89C396923A0C90100CAB651 /* TYCurveView.swift */; };
 		B89C397123A141B200CAB651 /* TYMarkString.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89C397023A141B200CAB651 /* TYMarkString.swift */; };
+		B8B0E26A257A79C0003D9803 /* HCTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B0E269257A79C0003D9803 /* HCTool.swift */; };
+		B8B0E270257E21FC003D9803 /* HCPresentBottom.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B0E26E257E21FC003D9803 /* HCPresentBottom.swift */; };
+		B8B0E271257E21FC003D9803 /* UIViewController+Presation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B0E26F257E21FC003D9803 /* UIViewController+Presation.swift */; };
+		B8B0E274257E3ADB003D9803 /* HCTemperaturePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B0E273257E3ADB003D9803 /* HCTemperaturePicker.swift */; };
 		B8BE1AE423A698C300DF472A /* HCAccountManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8BE1AE323A698C300DF472A /* HCAccountManager.swift */; };
 		B8BE1AE923A7E36B00DF472A /* HCBaseDoctorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8BE1AE823A7E36B00DF472A /* HCBaseDoctorCell.swift */; };
 		B8BE1AED23A7E92F00DF472A /* HCSearchHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8BE1AEC23A7E92F00DF472A /* HCSearchHeaderView.swift */; };
@@ -621,6 +627,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B80D3E4B257FD62200073BEE /* HCCalendarLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCCalendarLayout.swift; sourceTree = "<group>"; };
+		B80D3E50258139A900073BEE /* HCForecastRemindView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCForecastRemindView.swift; sourceTree = "<group>"; };
 		B816E870221DABBC00F024D5 /* HCScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCScanViewController.swift; sourceTree = "<group>"; };
 		B816E874221DABF200F024D5 /* CodeScan.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CodeScan.bundle; sourceTree = "<group>"; };
 		B816E875221DABF200F024D5 /* LBXScanView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBXScanView.h; sourceTree = "<group>"; };
@@ -1213,6 +1221,10 @@
 		B89C396923A0C90100CAB651 /* TYCurveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TYCurveView.swift; sourceTree = "<group>"; };
 		B89C397023A141B200CAB651 /* TYMarkString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TYMarkString.swift; sourceTree = "<group>"; };
 		B8AFDE5A233E702B00196064 /* HCRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCRecordViewController.swift; sourceTree = "<group>"; };
+		B8B0E269257A79C0003D9803 /* HCTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCTool.swift; sourceTree = "<group>"; };
+		B8B0E26E257E21FC003D9803 /* HCPresentBottom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCPresentBottom.swift; sourceTree = "<group>"; };
+		B8B0E26F257E21FC003D9803 /* UIViewController+Presation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Presation.swift"; sourceTree = "<group>"; };
+		B8B0E273257E3ADB003D9803 /* HCTemperaturePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCTemperaturePicker.swift; sourceTree = "<group>"; };
 		B8BE1AE323A698C300DF472A /* HCAccountManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCAccountManager.swift; sourceTree = "<group>"; };
 		B8BE1AE823A7E36B00DF472A /* HCBaseDoctorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCBaseDoctorCell.swift; sourceTree = "<group>"; };
 		B8BE1AEA23A7E39700DF472A /* HCSearchDoctorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCSearchDoctorCell.swift; sourceTree = "<group>"; };
@@ -2614,6 +2626,23 @@
 			path = TYCurveView;
 			sourceTree = "<group>";
 		};
+		B8B0E268257A79B6003D9803 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B8B0E269257A79C0003D9803 /* HCTool.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B8B0E26D257E21FC003D9803 /* HCPresation */ = {
+			isa = PBXGroup;
+			children = (
+				B8B0E26E257E21FC003D9803 /* HCPresentBottom.swift */,
+				B8B0E26F257E21FC003D9803 /* UIViewController+Presation.swift */,
+			);
+			path = HCPresation;
+			sourceTree = "<group>";
+		};
 		B8BE1AE723A7E36B00DF472A /* Base */ = {
 			isa = PBXGroup;
 			children = (
@@ -2784,6 +2813,7 @@
 			children = (
 				C404489E24EA721200AD1610 /* HCDatePickerViewController.swift */,
 				C404489C24EA721200AD1610 /* HCPicker.swift */,
+				B8B0E273257E3ADB003D9803 /* HCTemperaturePicker.swift */,
 				C404489D24EA721200AD1610 /* HCPickerController.swift */,
 				C40448A224EA722A00AD1610 /* HCPickerData.swift */,
 			);
@@ -2873,6 +2903,7 @@
 		C421330622056B19006C10C4 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				B8B0E26D257E21FC003D9803 /* HCPresation */,
 				B866D82C256FC03B000251AD /* URLProtocol */,
 				B8454ED223A3EF5200E88BAD /* TYDateCalculate.swift */,
 				B892FF9E23ABB4FD00A137C0 /* TYFiliterView */,
@@ -3463,7 +3494,6 @@
 			isa = PBXGroup;
 			children = (
 				C404489B24EA71CC00AD1610 /* HCPicker */,
-				C494136624DE7A6900045749 /* HCNav */,
 				C494136324DE549200045749 /* HCCustomButton */,
 			);
 			path = CustomView;
@@ -3475,13 +3505,6 @@
 				C494136424DE54A100045749 /* HCCustomButton.swift */,
 			);
 			path = HCCustomButton;
-			sourceTree = "<group>";
-		};
-		C494136624DE7A6900045749 /* HCNav */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = HCNav;
 			sourceTree = "<group>";
 		};
 		C494136B24DE9E2400045749 /* Home */ = {
@@ -3596,6 +3619,7 @@
 		C4AB271424E52A600095F693 /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				B8B0E268257A79B6003D9803 /* Model */,
 				C4AB271524E52A600095F693 /* ViewModel */,
 				C4AB271624E52A600095F693 /* Controller */,
 				C4AB271824E52A600095F693 /* View */,
@@ -3628,6 +3652,8 @@
 				C4AB271D24E52AF20095F693 /* HCToolViewContainer.swift */,
 				C4AB272424E536D20095F693 /* HCCalendarDayCell.swift */,
 				C4AB272324E536D20095F693 /* HCCalendarView.swift */,
+				B80D3E50258139A900073BEE /* HCForecastRemindView.swift */,
+				B80D3E4B257FD62200073BEE /* HCCalendarLayout.swift */,
 				C4AB271F24E535E30095F693 /* HCRecordRemindView.swift */,
 			);
 			path = View;
@@ -3637,13 +3663,13 @@
 			isa = PBXGroup;
 			children = (
 				C4AB272824E53D6F0095F693 /* DataModel.swift */,
+				C4AB272F24E53D6F0095F693 /* HCBaseListCell.swift */,
 				C4AB272924E53D6F0095F693 /* HCListDetailIconCell.swift */,
 				C4AB272A24E53D6F0095F693 /* HCListDetailCell.swift */,
 				C4AB272B24E53D6F0095F693 /* HCListDetailNewTypeCell.swift */,
 				C4AB272C24E53D6F0095F693 /* HCListSwitchCell.swift */,
 				C4AB272D24E53D6F0095F693 /* HCListButtonCell.swift */,
 				C4AB272E24E53D6F0095F693 /* HCListDetailButtonCell.swift */,
-				C4AB272F24E53D6F0095F693 /* HCBaseListCell.swift */,
 				C4AB273024E53D6F0095F693 /* HCListDetailInputCell.swift */,
 				C42AF1A824EA210E0034DBEF /* HCListSexCell.swift */,
 			);
@@ -4096,6 +4122,7 @@
 				B870E53B238C27AF0085AFA3 /* HCHealthyArchivesViewModel.swift in Sources */,
 				C42B219124ECCB4B00B2A665 /* HCSettingContainer.swift in Sources */,
 				C4F139BA235419EF00D777F6 /* Frame.swift in Sources */,
+				B80D3E51258139A900073BEE /* HCForecastRemindView.swift in Sources */,
 				B81D422224E7FB99003EA388 /* BaseModel.swift in Sources */,
 				C421338322059B8C006C10C4 /* CacheKey.swift in Sources */,
 				B8F90E3424F24F8E00A1D68C /* HCMyOrderCell.swift in Sources */,
@@ -4222,6 +4249,7 @@
 				C4D1DB4B24F6B7FC001EF30F /* HCHospitalListCell.swift in Sources */,
 				C4E254EC233E0D4D006922DB /* TYSlideDatasource.swift in Sources */,
 				B816EB17221DABF400F024D5 /* ZXAI013x0xDecoder.m in Sources */,
+				B8B0E271257E21FC003D9803 /* UIViewController+Presation.swift in Sources */,
 				C421332F22056F4C006C10C4 /* NoticesCenter.swift in Sources */,
 				B816EA7E221DABF400F024D5 /* ZXErrors.m in Sources */,
 				B816EB4C221DABF400F024D5 /* ZXWifiParsedResult.m in Sources */,
@@ -4287,6 +4315,7 @@
 				B8F1587824EF64150046B107 /* HCCollectionViewController.swift in Sources */,
 				B88497E124E7F8E500B91262 /* APIAdapt.swift in Sources */,
 				B816EAED221DABF400F024D5 /* ZXDataMatrixTextEncoder.m in Sources */,
+				B8B0E26A257A79C0003D9803 /* HCTool.swift in Sources */,
 				B816EA79221DABF400F024D5 /* LBXScanNetAnimation.m in Sources */,
 				C4AB273224E53D6F0095F693 /* HCListDetailIconCell.swift in Sources */,
 				B816EA7F221DABF400F024D5 /* ZXResult.m in Sources */,
@@ -4415,6 +4444,7 @@
 				B870E541238C37050085AFA3 /* HCMenstruationHistoryViewController.swift in Sources */,
 				B816EAE2221DABF400F024D5 /* ZXDataMatrixX12Encoder.m in Sources */,
 				B8BE351D221484C600EF16F1 /* UINavigationController+BarButtonItem.swift in Sources */,
+				B8B0E270257E21FC003D9803 /* HCPresentBottom.swift in Sources */,
 				B816EAF1221DABF400F024D5 /* ZXDataMatrixDecoder.m in Sources */,
 				B816EA91221DABF400F024D5 /* ZXAztecEncoder.m in Sources */,
 				C42133712205961D006C10C4 /* UIControl+_Rx.swift in Sources */,
@@ -4423,6 +4453,7 @@
 				B816EAA5221DABF400F024D5 /* ZXQRCodeDataBlock.m in Sources */,
 				B88497DC24E7F6FB00B91262 /* HCVerifyViewModel.swift in Sources */,
 				B8454ED823A5294C00E88BAD /* HCExchangeReusableView.swift in Sources */,
+				B80D3E4C257FD62200073BEE /* HCCalendarLayout.swift in Sources */,
 				B86993D32337395800086A77 /* TYButton.swift in Sources */,
 				B870E53D238C27F40085AFA3 /* PatientInfo.swift in Sources */,
 				B816EACE221DABF400F024D5 /* ZXPDF417BarcodeRow.m in Sources */,
@@ -4477,6 +4508,7 @@
 				B8F1587E24EF64DE0046B107 /* HCMyInformationViewController.swift in Sources */,
 				C4AB273924E53D6F0095F693 /* HCListDetailInputCell.swift in Sources */,
 				B8454ED323A3EF5200E88BAD /* TYDateCalculate.swift in Sources */,
+				B8B0E274257E3ADB003D9803 /* HCTemperaturePicker.swift in Sources */,
 				B816EAAF221DABF400F024D5 /* ZXQRCodeDetector.m in Sources */,
 				C497E94523444E4600328B47 /* HCHomeConsultingVolumeReusableView.swift in Sources */,
 				B816EB13221DABF400F024D5 /* ZXAI01decoder.m in Sources */,

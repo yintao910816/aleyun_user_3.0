@@ -8,9 +8,6 @@
 
 import Foundation
 
-enum HCNavBarTitleMode {
-    case orderRecord
-}
 
 class HCNavBarOrderRecordModel {
     

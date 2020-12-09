@@ -30,6 +30,14 @@ class TYDateFormatter {
         return range.endIndex - 1
     }
     
+    class func calculateDays(forMonth dateString: String) ->Int {
+        guard let date = dateString.stringFormatDate(mode: .yymm) else {
+            return 30
+        }
+        return calculateDays(forMonth: date)
+    }
+
+    
     /// 获取前一月，下一个月的月份天数
     class func calculateDays(fromMonth date: Date, identifier: DateIdentifier.month) ->Int? {
         let calendar = Calendar.init(identifier: .gregorian)

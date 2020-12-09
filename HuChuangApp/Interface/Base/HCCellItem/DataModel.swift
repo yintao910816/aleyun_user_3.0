@@ -8,6 +8,8 @@
 
 import Foundation
 
+import RxSwift
+
 enum CellIconType {
     case local
     case network
@@ -71,4 +73,7 @@ class HCListCellItem {
     var detailInputTextAlignment: NSTextAlignment = .left
     
     var bottomLineMode: HCBottomLineMode = .noSpace
+    
+    /// 监听输入框文字变化
+    var textSignal = Variable("")
 }

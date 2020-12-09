@@ -16,8 +16,13 @@ class HCListSwitchCell: HCBaseListCell {
     
     override func loadView() {
         switchView = UISwitch()
+        switchView.addTarget(self, action: #selector(changeValue(switch:)), for: .valueChanged)
 //        switchView.onTintColor = RGB(245, 102, 149)
         contentView.addSubview(switchView)
+    }
+    
+    @objc private func changeValue(switch: UISwitch) {
+        clickedSwitchCallBack?((switchView.isOn, model))
     }
     
     override var model: HCListCellItem! {

@@ -8,22 +8,26 @@
 
 import UIKit
 
-public let viewHeight: CGFloat = 45 + 50 * 6
+import RxSwift
 
 private let weekLabelTag: Int = 200
 
 class HCCalendarView: UIView {
 
+    private let disposeBag = DisposeBag()
+    
     private var weekContainer: UIView!
     private var collectionView: UICollectionView!
     
-    // 暂时不能滚动
     private var sectionData: [TYCalendarSectionModel] = []
-    
+    private var currentPage: Int = 0
+
+    public let itemSelectedSignal = PublishSubject<TYCalendarItem>()
+    public let heightChangeSignal = PublishSubject<CGFloat>()
+    public let didScrollSignal = PublishSubject<Int>()
+
     override init(frame: CGRect) {
         super.init(frame: frame)
-
-        sectionData.append(contentsOf: TYCalendarSectionModel.creatCalendarData(date: Date()))
         
         setupUI()
     }
@@ -38,38 +42,45 @@ class HCCalendarView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    public func reloadDatas(sectionData: [TYCalendarSectionModel], currentPage: Int) {
+        self.sectionData = sectionData
+        self.currentPage = currentPage
+        collectionView.reloadData()
+        
+        let poision = CGPoint(x: collectionView.width * CGFloat(currentPage), y: 0)
+        collectionView.setContentOffset(poision, animated: false)
+    }
+
+    
     private func setupUI() {
-        backgroundColor = .white
+        clipsToBounds = true
+        backgroundColor = RGB(245, 245, 245)
         
         weekContainer = UIView()
         weekContainer.backgroundColor = RGB(245, 245, 245)
         
-        let weekData = ["周日", "周一", "周二", "周三", "周四", "周五", "周六"]
+        let weekData = ["日", "一", "二", "三", "四", "五", "六"]
         for idx in 0..<7 {
             let weekLabel = UILabel()
-            weekLabel.font = .font(fontSize: 14)
-            weekLabel.textColor = .black
+            weekLabel.font = .font(fontSize: 12, fontName: .PingFMedium)
+            weekLabel.textColor = weekData[idx] == "日" || weekData[idx] == "六" ? RGB(255, 79, 120) : RGB(178, 178, 178)
             weekLabel.textAlignment = .center
             weekLabel.text = weekData[idx]
             weekLabel.tag = weekLabelTag + idx
             weekContainer.addSubview(weekLabel)
         }
-        
-        let weekItemWidth = (UIScreen.main.bounds.width - 1) / 7.0
-        
-        let layout = UICollectionViewFlowLayout()
-        layout.itemSize = .init(width: weekItemWidth, height: 50)
-        layout.minimumLineSpacing = 0
-        layout.minimumInteritemSpacing = 0
-        layout.sectionInset = .zero
+                
+        let layout = HCCalendarLayout()
+        layout.layoutDelegate = self
         
         collectionView = UICollectionView.init(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = RGB(245, 245, 245)
         collectionView.showsVerticalScrollIndicator = false
+        collectionView.showsHorizontalScrollIndicator = false
         collectionView.isPagingEnabled = true
-        collectionView.delegate = self
         collectionView.dataSource = self
-        
+        collectionView.delegate = self
+                
         collectionView.register(HCCalendarDayCell.self, forCellWithReuseIdentifier: HCCalendarDayCell_identifier)
         
         addSubview(weekContainer)
@@ -86,7 +97,7 @@ class HCCalendarView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        weekContainer.frame = .init(x: 0, y: 0, width: width, height: 45)
+        weekContainer.frame = .init(x: 0, y: 0, width: width, height: 24)
         
         let weekItemWidth = width / 7.0
         for idx in 0..<7 {
@@ -100,7 +111,7 @@ class HCCalendarView: UIView {
     }
 }
 
-extension HCCalendarView: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+extension HCCalendarView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return sectionData.count
@@ -116,13 +127,80 @@ extension HCCalendarView: UICollectionViewDelegateFlowLayout, UICollectionViewDa
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        itemSelectedSignal.onNext(sectionData[indexPath.section].items[indexPath.row])
+    }
+    
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         setTitle()
+        didScrollSignal.onNext(pageNumber())
+        let newHeight = HCCalendarView.viewHeight(itemCount: sectionData[pageNumber()].items.count)
+        if newHeight != collectionView.height {
+            PrintLog("日历控件高度变化")
+            heightChangeSignal.onNext(newHeight)
+        }
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if !decelerate {
             setTitle()
+            didScrollSignal.onNext(pageNumber())
+            let newHeight = HCCalendarView.viewHeight(itemCount: sectionData[pageNumber()].items.count)
+            if newHeight != collectionView.height {
+                PrintLog("日历控件高度变化")
+                heightChangeSignal.onNext(newHeight)
+            }
         }
     }
+    
+    private func pageNumber() ->Int {
+        return Int(collectionView.contentOffset.x / collectionView.width)
+    }
 }
+
+extension HCCalendarView: HCCalendarLayoutDelegate {
+    
+    func rowsCount(for section: Int, layout: HCCalendarLayout) ->Int {
+        let itemCount = sectionData[section].items.count
+        var lines: Int = itemCount / 7
+        lines += (itemCount % 7) > 0 ? 1 : 0
+        return lines
+    }
+    
+    func sectionNum() ->Int {
+        return sectionData.count
+    }
+    
+    func countInRow(for section: Int, layout: HCCalendarLayout) ->Int {
+        return 7
+    }
+    
+    func minimumLineSpacing(in section: Int, layout: HCCalendarLayout) ->CGFloat {
+        return 2.5
+    }
+    
+    func minimumInterSpacing(in section: Int, layout: HCCalendarLayout) ->CGFloat {
+        return 2.5
+    }
+    
+    func itemSize(for indexPath: IndexPath, layout: HCCalendarLayout) ->CGSize {
+        let totleW: CGFloat = collectionView.width - 2.5 * 6 - 4.5 * 2
+        return .init(width: (totleW - 1) / 7.0, height: 50)
+    }
+    
+    func sectionInset(in section: Int, layout: HCCalendarLayout) ->UIEdgeInsets {
+        return .init(top: 0, left: 4.5, bottom: 0, right: 4.5)
+    }
+}
+
+
+extension HCCalendarView {
+    
+    public class func viewHeight(itemCount: Int) ->CGFloat {
+        var lines: Int = itemCount / 7
+        lines += (itemCount % 7) > 0 ? 1 : 0
+        return CGFloat(24 + lines * 50) + CGFloat(lines - 1) * 2.5 + 3
+    }
+
+}
+

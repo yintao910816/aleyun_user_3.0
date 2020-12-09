@@ -93,7 +93,7 @@ class HCRecordViewModel: BaseViewModel, VMNavigation {
     private func prepareActionData() {
         let model1 = HCCellActionItem()
         model1.title = "标记月经"
-        model1.opType = .menstruationDate
+//        model1.opType = .menstruationDate
         model1.itemWidth = 80
         
         let model2 = HCCellActionItem()
@@ -148,18 +148,18 @@ extension HCRecordViewModel {
             date = data
         }
         
-        HCProvider.request(.mergePro(opType: type, date: date, data: dataParam))
-            .mapResponse()
-            .subscribe(onSuccess: { [weak self] res in
-                if res.code == RequestCode.success.rawValue {
-                    self?.requestRecordData()
-                }else {
-                    self?.hud.failureHidden(res.message)
-                }
-            }) { [weak self] error in
-                self?.hud.failureHidden(self?.errorMessage(error))
-        }
-        .disposed(by: disposeBag)
+//        HCProvider.request(.mergePro(opType: type, date: date, data: dataParam))
+//            .mapResponse()
+//            .subscribe(onSuccess: { [weak self] res in
+//                if res.code == RequestCode.success.rawValue {
+//                    self?.requestRecordData()
+//                }else {
+//                    self?.hud.failureHidden(res.message)
+//                }
+//            }) { [weak self] error in
+//                self?.hud.failureHidden(self?.errorMessage(error))
+//        }
+//        .disposed(by: disposeBag)
     }
     
     // 添加/修改/删除,月经周期

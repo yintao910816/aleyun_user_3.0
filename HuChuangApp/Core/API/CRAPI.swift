@@ -42,8 +42,6 @@ enum HCCmsType: String {
 }
 
 enum HCMergeProOpType: String {
-    /// 标记月经
-    case menstruationDate = "menstruationDate"
     /// 添加同房记录
     case knewRecord = "knewRecord"
     /// 添加排卵日
@@ -221,6 +219,24 @@ enum API{
     /// 系统消息列表
     case msgListByCode(code: HCMsgListCode, pageNum: Int, pageSize: Int)
     
+    //MARK: 工具相关接口
+    /// 查询基础信息(周期和持续时间)
+    case getMenstruationBasis
+    /// 根据日期查询基础信息
+    case getBaseInfoByDate(date: String)
+    /// 经期开始时间设置，修改，取消
+    case updateMenstruationDate(menstruationDate: String)
+    /// 设置经期结束时间
+    case settingMenstruationEndDate(menstruationEndDate: String)
+    /// 添加或取消同房记录，排卵日记录
+    case mergePro(opType: HCMergeProOpType, date: String)
+    /// 保存或修改体温
+    case saveOrUpdateTemperature(temperature: String, temperatDate: String)
+    /// 保存或修改体重
+    case saveOrUpdateWeight(weight: String, measureDate: String)
+    /// 保存或修改月经基础数据
+    case saveOrUpdateBasis(menstruationCycle: String, menstruationDuration: String)
+
     // --------------- 2.0接口
     /// 向app服务器注册友盟token
     case UMAdd(deviceToken: String)
@@ -275,8 +291,6 @@ enum API{
     case storeAndStatus(articleId: String)
     /// 区域城市
     case allCity
-    /// 添加标记排卵日,添加同房记录
-    case mergePro(opType: HCMergeProOpType, date: String, data: [String: Any])
     /// 添加/修改/删除,月经周期
     case mergeWeekInfo(id: Int, startDate: String, keepDays: Int, next: Int)
 }
@@ -367,6 +381,23 @@ extension API: TargetType{
         case .msgListByCode(_, _, _):
             return "api/messageCenter/msgListByCode"
             
+        case .getMenstruationBasis:
+            return "api/physiology/getMenstruationBasis"
+        case .getBaseInfoByDate(_):
+            return "api/physiology/getBaseInfoByDate"
+        case .updateMenstruationDate(_):
+            return "api/physiology/updateMenstruationDate"
+        case .settingMenstruationEndDate(_):
+            return "api/physiology/settingMenstruationEndDate"
+        case .mergePro(_, _):
+            return "api/physiology/mergePro"
+        case .saveOrUpdateTemperature(_, _):
+            return "api/physiology/saveOrUpdateTemperature"
+        case .saveOrUpdateWeight(_, _):
+            return "api/physiology/saveOrUpdateWeight"
+        case .saveOrUpdateBasis(_, _):
+            return "api/physiology/saveOrUpdateBasis"
+            
         case .UMAdd(_):
             return "api/umeng/add"
         case .selectInfo:
@@ -416,8 +447,6 @@ extension API: TargetType{
             return "api/cms/storeAndStatus"
         case .allCity:
             return "api/area/allCity"
-        case .mergePro(_):
-            return "api/physiology/mergePro"
         case .mergeWeekInfo(_):
             return "api/physiology/mergeWeekInfo"
         }
@@ -561,6 +590,26 @@ extension API {
             params["pageNum"] = pageNum
             params["pageSize"] = pageSize
 
+        case .getBaseInfoByDate(let date):
+            params["date"] = date
+        case .updateMenstruationDate(let menstruationDate):
+            params["menstruationDate"] = menstruationDate
+        case .settingMenstruationEndDate(let menstruationEndDate):
+            params["menstruationEndDate"] = menstruationEndDate
+        case .mergePro(let opType, let date):
+            params["opType"] = opType.rawValue
+            params["date"] = date
+        case .saveOrUpdateTemperature(let temperature, let temperatDate):
+            params["temperature"] = temperature
+            params["temperatDate"] = temperatDate
+        case .saveOrUpdateWeight(let weight, let measureDate):
+            params["weight"] = weight
+            params["measureDate"] = measureDate
+        case .saveOrUpdateBasis(let menstruationCycle, let menstruationDuration):
+            params["menstruationCycle"] = menstruationCycle
+            params["menstruationDuration"] = menstruationDuration
+
+
         case .UMAdd(let deviceToken):
             params["deviceToken"] = deviceToken
             params["appPackage"] = Bundle.main.bundleIdentifier
@@ -633,10 +682,6 @@ extension API {
             params["memberId"] = memberId
 
 
-        case .mergePro(let opType, let date, let data):
-            params["opType"] = opType.rawValue
-            params["date"] = date
-            params["data"] = data
         case .mergeWeekInfo(let id, let startDate, let keepDays, let next):
             params["id"] = id
             params["startDate"] = startDate

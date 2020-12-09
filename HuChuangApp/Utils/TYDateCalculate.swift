@@ -63,10 +63,10 @@ class TYDateCalculate {
     /**
      * 字符串格式化时间 yyyy-MM-dd
      */
-    class func date(for string: String) ->Date {
+    class func date(for string: String, mode: HCDateMode = .yymmdd) ->Date {
         let format = DateFormatter()
         format.timeZone = TimeZone.init(secondsFromGMT: 8)
-        format.dateFormat = "yyyy-MM-dd"
+        format.dateFormat = mode.rawValue
         let date = format.date(from: string)
         return date ?? Date()
     }
@@ -111,10 +111,10 @@ class TYDateCalculate {
         return dateString
     }
     
-    class func formatDate(date: Date) ->Date {
+    class func formatDate(date: Date, mode: HCDateMode = .yymmdd) ->Date {
         let dateFormat = DateFormatter.init()
         dateFormat.timeZone = TimeZone.init(secondsFromGMT: 8)
-        dateFormat.dateFormat = "yyyy-MM-dd"
+        dateFormat.dateFormat = mode.rawValue
         
         let dateString = dateFormat.string(from: date)
         
