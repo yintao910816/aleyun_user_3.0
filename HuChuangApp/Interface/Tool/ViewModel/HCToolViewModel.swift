@@ -40,6 +40,8 @@ class HCToolViewModel: BaseViewModel {
     public let didScrollSignal = PublishSubject<Int>()
     ///
     public let switchChangeSignal = PublishSubject<(Bool, HCListCellItem)>()
+    /// 返回今天
+    public let backTodaySignal = PublishSubject<Void>()
 
     override init() {
         super.init()
@@ -50,6 +52,21 @@ class HCToolViewModel: BaseViewModel {
             })
             .disposed(by: disposeBag)
         
+        backTodaySignal
+            .subscribe(onNext: { [unowned self] in
+                let today = Date.formatCurrentDate(mode: .yymmdd)
+                if today != selectedDate {
+                    selectedDayInt = TYDateFormatter.getDay(date: Date())
+                    selectedDate = today
+                    currentPage = calendarDatasSignal.value.firstIndex(where: { $0.dateText == selectedDate.transform(mode: .yymm) }) ?? 0
+                    navTitleChangeSignal.onNext(selectedDate)
+                    requestGetBaseInfoByDate(date: selectedDate)
+                }else {
+                    NoticesCenter.alert(message: "已经回今天了")
+                }
+            })
+            .disposed(by: disposeBag)
+
         switchChangeSignal
             .subscribe(onNext: { [unowned self] in
                 if $0.1.title == "爱爱" {

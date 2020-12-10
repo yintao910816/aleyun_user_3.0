@@ -23,11 +23,11 @@ enum HCMenstruationMode {
     public var color: UIColor {
         get {
             switch self {
-            case .none:
-                return RGB(51, 51, 51)
+//            case .none:
+//                return RGB(51, 51, 51)
             case .yjq:
                 return .white
-            case .aqq:
+            case .aqq, .none:
                 return RGB(109, 206, 111)
             case .plq, .plr:
                 return RGB(195, 172, 230)

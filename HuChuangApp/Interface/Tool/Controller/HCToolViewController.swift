@@ -72,6 +72,11 @@ class HCToolViewController: BaseViewController {
     override func rxBind() {
         viewModel = HCToolViewModel()
         
+        addBarItem(title: "回今天", titleColor: RGB(51, 51, 51), right: false)
+            .asDriver()
+            .drive(viewModel.backTodaySignal)
+            .disposed(by: disposeBag)
+        
         viewModel.listItemsSignal.asDriver()
             .drive(onNext: { [weak self] in
                 let datas = (self?.viewModel.selectedDayItem?.isAfterToday ?? true) == true ? [] : $0

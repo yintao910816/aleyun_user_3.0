@@ -231,10 +231,10 @@ extension String { /**时间与日期*/
     public func stringFormatDate(mode: HCDateMode = .yymmddhhmm) ->Date?{
         let format = DateFormatter()
         format.dateFormat = mode.rawValue
-        return format.date(from: _transform(mode: mode))
+        return format.date(from: transform(mode: mode))
     }
     
-    fileprivate func _transform(mode: HCDateMode) -> String {
+    public func transform(mode: HCDateMode) -> String {
         var result: String = ""
         switch mode {
         case .yymm:
