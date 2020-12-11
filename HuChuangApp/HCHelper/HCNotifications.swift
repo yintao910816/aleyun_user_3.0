@@ -60,4 +60,11 @@ extension Notification.Name {
         static let articleStoreSuccess = Notification.Name(rawValue: "org.Pay.notification.name.articleStoreSuccess")
     }
 
+    public struct Menstruation {
+        /**
+         * 基础经期数据设置成功
+         */
+        static let SuccessBaseSetting = Notification.Name(rawValue: "org.user.notification.name.SuccessBaseSetting")
+    }
+
 }

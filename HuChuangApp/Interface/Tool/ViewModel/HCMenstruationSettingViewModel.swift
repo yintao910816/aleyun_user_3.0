@@ -57,9 +57,9 @@ extension HCMenstruationSettingViewModel {
         prepareDatas()
 
         HCProvider.request(.getMenstruationBasis)
-            .map(model: HCMenstruationModel.self)
+            .map(result: HCMenstruationModel.self)
             .subscribe(onSuccess: { [weak self] in
-                self?.menstruationModel = $0
+                self?.menstruationModel = $0.data
                 self?.prepareDatas()
             }) { [weak self] in
                 self?.hud.failureHidden(self?.errorMessage($0))
@@ -71,7 +71,8 @@ extension HCMenstruationSettingViewModel {
         HCProvider.request(.saveOrUpdateBasis(menstruationCycle: menstruationCycle,
                                               menstruationDuration: menstruationDuration))
             .map(model: HCMenstruationModel.self)
-            .subscribe { [weak self] _ in
+            .subscribe { [weak self] in
+                NotificationCenter.default.post(name: NotificationName.Menstruation.SuccessBaseSetting, object: $0)
                 self?.hud.successHidden("设置成功", {
                     self?.popSubject.onNext(Void())
                 })

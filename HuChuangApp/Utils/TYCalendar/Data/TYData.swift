@@ -172,8 +172,9 @@ class TYCalendarItem {
     public var isInMonth: Bool = true
     public var isSelected: Bool = false
     
-//    /// 非预测月经时间（准确的月经时间）
-//    public var menstruationDateStrs: [String] = []
+    /// 当前选择的日期属于哪个月经周期（标记的月经周期）
+    public var belongMenstruaModel: HCMenstruationModel?
+    public var yjRemindMode: HCYJRemindMode = .coming
     
     public var mensturationMode: HCMenstruationMode = .none
     public var menstruationModel: HCBaseInfoItemModel?
@@ -210,52 +211,113 @@ class TYCalendarItem {
     }
     
     /// 获取当前选中日期的月经信息
-    public func getYJInfo(menstruationStart: String?, menstruationEnd: String?) ->(Bool, String) {
-        var isOn = false
-        var remindText: String = "大姨妈来了"
+    public func getYJInfo(menstruasDic: [String: [HCMenstruationModel]],
+                          baseMenstru: HCMenstruationModel) ->(mode: HCYJRemindMode, isOn: Bool) {
+
+        let selectedDate = dateText
         
-        if let start = menstruationStart {
-            if let startDate = start.stringFormatDate(mode: .yymmdd),
-               let itemDate = dateText.stringFormatDate(mode: .yymmdd){
-                switch itemDate.dateCompare(date: startDate) {
-                case .orderedAscending:
-                    // 标记的月经开始日之前
-                    isOn = false
-                    remindText = "大姨妈来了"
-                case .orderedDescending:
-                    // 标记的月经开始日之后
-                    if let end = menstruationEnd {
-                        if let endDate = end.stringFormatDate(mode: .yymmdd){
-                            switch itemDate.dateCompare(date: endDate) {
-                            case .orderedAscending:
-                                // 月经结束日之前
-                                isOn = false
-                                remindText = "大姨妈走了"
-                            case .orderedDescending:
-                                // 月经结束日之后
-                                isOn = false
-                                remindText = "大姨妈走了"
-                            case .orderedSame:
-                                // 月经结束日
-                                isOn = true
-                                remindText = "大姨妈走了"
-                            }
-                        }
+        let previousKey = HCToolCalculate.getKey(dateStr: selectedDate, identifier: .previous)
+        let selectedKey = HCToolCalculate.getKey(dateStr: selectedDate)
+        let nextKey = HCToolCalculate.getKey(dateStr: selectedDate, identifier: .next)
+
+        if menstruasDic[selectedKey]!.count == 0 {
+            // 当前显示月没有设置月经
+            if menstruasDic[previousKey]!.count > 0 {
+                return findRelationshipForPrevious(menstruas: menstruasDic[previousKey]!, selectedDate: selectedDate)
+            }else if menstruasDic[nextKey]!.count > 0 {
+                return findRelationshipForNext(menstruas: menstruasDic[nextKey]!, selectedDate: selectedDate, menstruationDuration: baseMenstru.menstruationDuration)
+            }else {
+                belongMenstruaModel = nil
+                yjRemindMode = .coming
+                return (mode: .coming, isOn: false)
+            }
+        }else {
+            // 当前显示月设置了月经
+            for item in menstruasDic[selectedKey]! {
+                if item.menstruationDate == selectedDate {
+                    belongMenstruaModel = item
+                    yjRemindMode = .coming
+                    return (mode: .coming, isOn: true)
+                }else if item.menstruationEndDate == selectedDate {
+                    belongMenstruaModel = item
+                    let compare = TYDateCalculate.compare(dateStr: selectedDate,
+                                                          other: Date().formatDate(mode: .yymmdd),
+                                                          mode: .yymmdd)
+                    let mode: HCYJRemindMode = compare == .orderedAscending ? .cancelGoingForbiden : .going
+                    
+                    yjRemindMode = mode
+                    return (mode: mode, isOn: true)
+                }else if TYDateCalculate.dateIsIn(dateStr: selectedDate, startDateStr: item.menstruationDate, endDateStr: item.menstruationEndDate) {
+                    // 点击在了当前显示月经区间之间
+                    belongMenstruaModel = item
+                    yjRemindMode = .going
+                    return (mode: .going, isOn: false)
+                }
+            }
+            
+            if menstruasDic[selectedKey]!.count == 1 {
+                // 当前显示月只有一个月经周期
+                let mens = menstruasDic[selectedKey]!.first!
+                if TYDateCalculate.compare(dateStr: selectedDate, other: mens.menstruationDate) == .orderedAscending {
+                // 点击在了当前显示月经前面
+                    if TYDateCalculate.numberOfDays(startStr: selectedDate, endStr: mens.menstruationDate) <= (baseMenstru.menstruationDuration + 5) {
+                        belongMenstruaModel = mens
+                        yjRemindMode = .early
+                        return (mode: .early, isOn: false)
                     }else {
-                        isOn = false
-                        remindText = "大姨妈走了"
+                        return findRelationshipForPrevious(menstruas: menstruasDic[previousKey]!, selectedDate: selectedDate)
                     }
-                case .orderedSame:
-                    // 标记的月经开始日
-                    isOn = true
-                    remindText = "大姨妈来了"
+                }else {
+                    // 点击在了当前显示月经后面
+                    if TYDateCalculate.numberOfDays(startStr: selectedDate, endStr: mens.menstruationEndDate) <= 5 {
+                        belongMenstruaModel = mens
+                        yjRemindMode = .going
+                        return (mode: .going, isOn: false)
+                    }else {
+                        return findRelationshipForNext(menstruas: menstruasDic[nextKey]!, selectedDate: selectedDate, menstruationDuration: baseMenstru.menstruationDuration)
+                    }
+                }
+            }else {
+                // 当前显示月多个月经周期
+                if TYDateCalculate.compare(dateStr: selectedDate, other: menstruasDic[selectedKey]!.first!.menstruationDate) == .orderedAscending {
+                    return findRelationshipForPrevious(menstruas: menstruasDic[previousKey]!, selectedDate: selectedDate)
+                }else if TYDateCalculate.compare(dateStr: menstruasDic[selectedKey]!.last!.menstruationEndDate, other: selectedDate) == .orderedAscending {
+                    return findRelationshipForNext(menstruas: menstruasDic[nextKey]!, selectedDate: selectedDate, menstruationDuration: baseMenstru.menstruationDuration)
+                }else {
+
+                    var findIdx: Int = -1
+                    for idx in 0..<menstruasDic[selectedKey]!.count {
+                        // 倒推 找到在哪个经期后面
+                        let newIdx = menstruasDic[selectedKey]!.count - 1 - idx
+                        let mens = menstruasDic[selectedKey]![newIdx]
+                        if TYDateCalculate.compare(dateStr: mens.menstruationEndDate, other: selectedDate) == .orderedAscending {
+                            findIdx = newIdx
+                            break
+                        }
+                    }
+                    
+                    if findIdx == -1 {
+                        PrintLog("寻找月经期失败")
+                        belongMenstruaModel = nil
+                        yjRemindMode = .coming
+                        return (mode: .coming, isOn: false)
+                    }else {
+                        if findIdx + 1 < menstruasDic[selectedKey]!.count {
+                           return findRelationshipForBetween(selectedDate: selectedDate,
+                                                             menstruationDuration: baseMenstru.menstruationDuration,
+                                                             previousMens: menstruasDic[selectedKey]![findIdx], nextMens: menstruasDic[selectedKey]![findIdx + 1])
+                        }else {
+                            PrintLog("寻找月经期又失败")
+                            belongMenstruaModel = nil
+                            yjRemindMode = .coming
+                            return (mode: .coming, isOn: false)
+                        }
+                    }
                 }
             }
         }
-                
-        return (isOn, remindText)
     }
-    
+        
     /// 月经期背景颜色
     public var bgColor: UIColor {
         get {
@@ -307,5 +369,85 @@ class TYCalendarItem {
             
             return isAfter
         }
+    }
+}
+
+extension TYCalendarItem {
+    
+    // 得到当前选择日期与上个月经周期之间的关系
+    private func findRelationshipForPrevious(menstruas: [HCMenstruationModel], selectedDate: String) ->(mode: HCYJRemindMode, isOn: Bool) {
+        if menstruas.count > 0 {
+            let previousMens = menstruas.last!
+            if TYDateCalculate.numberOfDays(startStr: previousMens.menstruationEndDate, endStr: selectedDate) <= 5 {
+                belongMenstruaModel = previousMens
+                yjRemindMode = .going
+                return (mode: .going, isOn: false)
+            }else {
+                belongMenstruaModel = nil
+                yjRemindMode = .coming
+                return (mode: .coming, isOn: false)
+            }
+        }else {
+            belongMenstruaModel = nil
+            yjRemindMode = .coming
+            return (mode: .coming, isOn: false)
+        }
+    }
+    
+    // 得到当前选择日期与下个月经周期之间的关系
+    private func findRelationshipForNext(menstruas: [HCMenstruationModel],
+                                         selectedDate: String,
+                                         menstruationDuration: Int) ->(mode: HCYJRemindMode, isOn: Bool) {
+        if menstruas.count > 0 {
+            let nextMens = menstruas.first!
+            if TYDateCalculate.numberOfDays(startStr: selectedDate, endStr: nextMens.menstruationDate) <= (menstruationDuration + 5) {
+                yjRemindMode = .early
+                belongMenstruaModel = nextMens
+                return (mode: .early, isOn: false)
+            }else {
+                yjRemindMode = .coming
+                belongMenstruaModel = nil
+                return (mode: .coming, isOn: false)
+            }
+        }else {
+            yjRemindMode = .coming
+            belongMenstruaModel = nil
+            return (mode: .coming, isOn: false)
+        }
+    }
+
+    // 得到当前选择日期与前后月经周期之间的关系
+    private func findRelationshipForBetween(selectedDate: String,
+                                            menstruationDuration: Int,
+                                            previousMens: HCMenstruationModel,
+                                            nextMens: HCMenstruationModel) ->(mode: HCYJRemindMode, isOn: Bool) {
+        
+        if TYDateCalculate.numberOfDays(startStr: previousMens.menstruationEndDate, endStr: selectedDate) <= 5 {
+           
+            belongMenstruaModel = previousMens
+           
+            if TYDateCalculate.numberOfDays(startStr: selectedDate, endStr: nextMens.menstruationDate) <= 5 {
+                yjRemindMode = .forbidenGoing
+                return (mode: .forbidenGoing, isOn: false)
+            }else {
+                yjRemindMode = .going
+                return (mode: .going, isOn: false)
+            }
+        }else if TYDateCalculate.numberOfDays(startStr: selectedDate, endStr: nextMens.menstruationDate) <= (menstruationDuration + 5) {
+            
+            belongMenstruaModel = nextMens
+
+            if TYDateCalculate.numberOfDays(startStr: selectedDate, endStr: previousMens.menstruationEndDate) <= 5 {
+                yjRemindMode = .forbidenComming
+                return (mode: .forbidenComming, isOn: false)
+            }else {
+                yjRemindMode = .early
+                return (mode: .early, isOn: false)
+            }
+        }
+        
+        belongMenstruaModel = nil
+        yjRemindMode = .coming
+        return (mode: .coming, isOn: false)
     }
 }

@@ -166,5 +166,44 @@ extension TYDateCalculate {
         let endOfMonth = calendar.date(byAdding: components, to: startOfCurrentMonth())!
         return endOfMonth
     }
+    
+    /// 判断当前时间是否在一个时间范围内
+    public class func dateIsIn(dateStr: String,
+                               startDateStr: String,
+                               endDateStr: String,
+                               mode: HCDateMode = .yymmdd) ->Bool {
+        
+        guard let date = dateStr.stringFormatDate(mode: mode),
+              let startDate = startDateStr.stringFormatDate(mode: mode),
+              let endDate = endDateStr.stringFormatDate(mode: mode)else {
+            return false
+        }
+        
+        if date.compare(startDate) == .orderedDescending && date.compare(endDate) == .orderedAscending {
+            return true
+        }
+        
+        return false
+    }
+    
+    /// 比较两个时间大小
+    public class func compare(dateStr: String, other: String, mode: HCDateMode = .yymmdd) ->ComparisonResult {
+        guard let date = dateStr.stringFormatDate(mode: mode),
+              let otherDate = other.stringFormatDate(mode: mode) else {
+            return .orderedSame
+        }
+        return date.compare(otherDate)
+    }
+    
+    /// 计算两个时间的差值
+    public class func numberOfDays(startStr: String, endStr: String, mode: HCDateMode = .yymmdd) ->Int {
+        guard let startDate = startStr.stringFormatDate(mode: mode),
+              let endDate = endStr.stringFormatDate(mode: mode) else {
+            return 0
+        }
+        let days = numberOfDays(fromDate: startDate, toDate: endDate)
+        return abs(days)
+    }
+    
 }
 

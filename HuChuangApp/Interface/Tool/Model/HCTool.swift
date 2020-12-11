@@ -8,6 +8,49 @@
 
 import Foundation
 
+enum HCYJRemindMode {
+    /// 月经走了
+    case going
+    /// 月经来了
+    case coming
+    /// 把月经开始时间提前，这里需要提示
+    case early
+    /// 之前的周期取消月经走了，不允许操作，弹提示
+    case cancelGoingForbiden
+    /// 两次月经间隔必须大于5天
+    case forbidenGoing
+    case forbidenComming
+
+    public var titleText: String {
+        get {
+            switch self {
+            case .going, .cancelGoingForbiden:
+                return "大姨妈走了"
+            case .coming, .early:
+                return "大姨妈来了"
+            case .forbidenComming:
+                return "大姨妈来了"
+            case .forbidenGoing:
+                return "大姨妈走了"
+            }
+        }
+    }
+    
+    public func remindText(dayItem: TYCalendarItem) ->String? {
+        switch self {
+        case .going, .coming:
+            return nil
+        case .early:
+            return HCToolCalculate.earlyMensturaRemindText(newDateS: dayItem.dateText,
+                                                           dateS: dayItem.belongMenstruaModel?.menstruationDate ?? "")
+        case .cancelGoingForbiden:
+            return HCToolCalculate.cancelGoingForbidenRemindText()
+        case .forbidenComming, .forbidenGoing:
+            return "两次月经间隔必须大于5天"
+        }
+    }
+}
+
 enum HCMenstruationMode {
     ///
     case none
@@ -23,11 +66,11 @@ enum HCMenstruationMode {
     public var color: UIColor {
         get {
             switch self {
-//            case .none:
-//                return RGB(51, 51, 51)
+            case .none:
+                return RGB(161, 161, 161)
             case .yjq:
                 return .white
-            case .aqq, .none:
+            case .aqq:
                 return RGB(109, 206, 111)
             case .plq, .plr:
                 return RGB(195, 172, 230)
@@ -78,104 +121,7 @@ class HCMensturaDateInfo: NSObject {
 
 class HCBaseInfoDataModel: HJModel {
     var baseInfo: [HCBaseInfoItemModel] = []
-    var menstruationList: [[HCMenstruationModel]] = []
-    
-    public func transformMenstruationList(currentDate: String) ->(menstruasDic: [String: [HCMenstruationModel]], reloadSectionKeys: [String]) {
-        if menstruationList.count < 3 {
-            return (menstruasDic: [:], reloadSectionKeys: [])
-        }
-        
-        if menstruationList[0].count == 0 && menstruationList[1].count == 0 && menstruationList[2].count == 0 {
-            return (menstruasDic: [:], reloadSectionKeys: [])
-        }
-
-        var listDic: [Int: [HCMenstruationModel]] = [:]
-        listDic[1] = menstruationList[0]
-        listDic[2] = menstruationList[1]
-        listDic[3] = menstruationList[2]
-        
-        let key1 = getKey(dateStr: currentDate, identifier: .previous)
-        let key2 = getKey(dateStr: currentDate)
-        let key3 = getKey(dateStr: currentDate, identifier: .next)
-        var resultDic: [String: [HCMenstruationModel]] = [:]
-
-        let tupData1 = getFirstMenstruaData(menstruaModels: listDic[1]!)
-        let tupData2 = getFirstMenstruaData(menstruaModels: listDic[2]!)
-        let tupData3 = getFirstMenstruaData(menstruaModels: listDic[3]!)
-
-        if listDic[1]!.count == 0 {
-            if tupData2.isFind {
-                resultDic[key2] = listDic[2]!
-                resultDic[key1] = [createMenstruation(model: tupData2.menstrua, isAfter: false)]
-
-                if tupData3.isFind {
-                    resultDic[key3] = listDic[3]!
-                }else {
-                    resultDic[key3] = [createMenstruation(model: tupData2.menstrua, isAfter: true)]
-                }
-            }else {
-                // 第一二条没有，第三条肯定有
-                resultDic[key3] = listDic[3]!
-                let data2 = createMenstruation(model: tupData3.menstrua, isAfter: false)
-                resultDic[key2] = [data2]
-                resultDic[key1] = [createMenstruation(model: data2, isAfter: false)]
-            }
-        }else if listDic[2]!.count == 0 {
-            resultDic[key1] = listDic[1]!
-            let data2 = createMenstruation(model: tupData1.menstrua, isAfter: true)
-            resultDic[key2] = [data2]
-                
-            if tupData3.isFind {
-                resultDic[key3] = listDic[3]!
-            }else {
-                resultDic[key3] = [createMenstruation(model: data2, isAfter: true)]
-            }
-        }else if listDic[3]!.count == 0 {
-            resultDic[key1] = listDic[1]!
-            resultDic[key2] = listDic[2]!
-            resultDic[key3] = [createMenstruation(model: tupData2.menstrua, isAfter: true)]
-        }else {
-            resultDic[key1] = listDic[1]!
-            resultDic[key2] = listDic[2]!
-            resultDic[key3] = listDic[3]!
-        }
-        
-        let key0 = getKey(dateStr: key1, identifier: .previous)
-        resultDic[key0] = [createMenstruation(model: resultDic[key1]!.first!, isAfter: false)]
-        
-        let key4 = getKey(dateStr: key3, identifier: .next)
-        resultDic[key4] = [createMenstruation(model: resultDic[key3]!.last!, isAfter: true)]
-
-        return (menstruasDic: resultDic, reloadSectionKeys: [key1, key2, key3])
-    }
-    
-    // 找到该月的第一个经期数据
-    private func getFirstMenstruaData(menstruaModels: [HCMenstruationModel]) ->(isFind: Bool, menstrua: HCMenstruationModel) {
-        if menstruaModels.count > 0 {
-            return (true, menstruaModels.first!)
-        }
-        return (false, HCMenstruationModel())
-    }
-    
-    private func createMenstruation(model: HCMenstruationModel, isAfter: Bool) ->HCMenstruationModel {
-        let result = HCMenstruationModel()
-        result.menstruationCycle = model.menstruationCycle
-        result.menstruationDuration = model.menstruationDuration
-        let menstruaDate = TYDateCalculate.getDate(currentDate: TYDateCalculate.date(for: model.menstruationDate),
-                                                   days: model.menstruationCycle,
-                                                   isAfter: isAfter)
-        result.menstruationDate = menstruaDate.formatDate(mode: .yymmdd)
-        return result
-    }
-    
-    private func getKey(dateStr: String, identifier: DateIdentifier.month? = nil) ->String {
-        let indexDate = dateStr.stringFormatDate(mode: .yymm)!
-        if let ider = identifier {
-            let date = TYDateFormatter.getDate(fromData: indexDate, identifier: ider)!
-            return date.formatDate(mode: .yymm)
-        }
-        return indexDate.formatDate(mode: .yymm)
-    }
+    var menstruationList: [[HCMenstruationModel]] = []    
 }
 
 class HCBaseInfoItemModel: HJModel {
@@ -195,6 +141,9 @@ class HCBaseInfoItemModel: HJModel {
 }
 
 class HCMenstruationModel: HJModel {
+    /// 是否为预测
+    var isForecast: Bool = false
+    
     var bak: String = ""
     var createDate: String = ""
     var creates: String = ""

@@ -333,6 +333,7 @@
 		B89A73CA2563AA170094E13A /* HCUnderDevController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89A73C92563AA170094E13A /* HCUnderDevController.swift */; };
 		B89C396A23A0C90100CAB651 /* TYCurveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89C396923A0C90100CAB651 /* TYCurveView.swift */; };
 		B89C397123A141B200CAB651 /* TYMarkString.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89C397023A141B200CAB651 /* TYMarkString.swift */; };
+		B8A194B32582145F00A6EE28 /* HCLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A194B22582145F00A6EE28 /* HCLogic.swift */; };
 		B8B0E26A257A79C0003D9803 /* HCTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B0E269257A79C0003D9803 /* HCTool.swift */; };
 		B8B0E270257E21FC003D9803 /* HCPresentBottom.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B0E26E257E21FC003D9803 /* HCPresentBottom.swift */; };
 		B8B0E271257E21FC003D9803 /* UIViewController+Presation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B0E26F257E21FC003D9803 /* UIViewController+Presation.swift */; };
@@ -1220,6 +1221,7 @@
 		B89A73C92563AA170094E13A /* HCUnderDevController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCUnderDevController.swift; sourceTree = "<group>"; };
 		B89C396923A0C90100CAB651 /* TYCurveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TYCurveView.swift; sourceTree = "<group>"; };
 		B89C397023A141B200CAB651 /* TYMarkString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TYMarkString.swift; sourceTree = "<group>"; };
+		B8A194B22582145F00A6EE28 /* HCLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCLogic.swift; sourceTree = "<group>"; };
 		B8AFDE5A233E702B00196064 /* HCRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCRecordViewController.swift; sourceTree = "<group>"; };
 		B8B0E269257A79C0003D9803 /* HCTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCTool.swift; sourceTree = "<group>"; };
 		B8B0E26E257E21FC003D9803 /* HCPresentBottom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCPresentBottom.swift; sourceTree = "<group>"; };
@@ -2630,6 +2632,7 @@
 			isa = PBXGroup;
 			children = (
 				B8B0E269257A79C0003D9803 /* HCTool.swift */,
+				B8A194B22582145F00A6EE28 /* HCLogic.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -4172,6 +4175,7 @@
 				B816EB06221DABF400F024D5 /* ZXAnyAIDecoder.m in Sources */,
 				B816EAC4221DABF400F024D5 /* ZXReedSolomonEncoder.m in Sources */,
 				B816EA9F221DABF400F024D5 /* ZXQRCodeMultiReader.m in Sources */,
+				B8A194B32582145F00A6EE28 /* HCLogic.swift in Sources */,
 				C4783B2E24DD39E800737479 /* HCLoginViewController.swift in Sources */,
 				B816EAB7221DABF400F024D5 /* ZXCharacterSetECI.m in Sources */,
 				B82456D924EFE0F7006356BB /* HCCouponViewController.swift in Sources */,
@@ -4839,7 +4843,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.02.001;
+				MARKETING_VERSION = 3.02.002;
 				PRODUCT_BUNDLE_IDENTIFIER = com.huchuang.aileyun;
 				PRODUCT_NAME = "爱乐孕";
 				PROVISIONING_PROFILE_SPECIFIER = aileyun_user_old_dev;
@@ -4866,7 +4870,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.02.001;
+				MARKETING_VERSION = 3.02.002;
 				PRODUCT_BUNDLE_IDENTIFIER = com.huchuang.aileyun;
 				PRODUCT_NAME = "爱乐孕";
 				PROVISIONING_PROFILE_SPECIFIER = aleyun_user_old_hoc;

@@ -11,10 +11,15 @@ import RxSwift
 
 private typealias MenstruationDataTup = (yjq:[HCMensturaDateInfo], safeBefore:[HCMensturaDateInfo], plq:[HCMensturaDateInfo], safeAfter:[HCMensturaDateInfo], plr:[HCMensturaDateInfo])
 
-class HCToolViewModel: BaseViewModel {
+class HCToolViewModel: BaseViewModel, VMNavigation {
         
+    /// 根据当前选择的月查询当前月的经期数据
     private var baseInfoDataModel: HCBaseInfoDataModel?
-
+    /// 加载当前月的周期数据获取的三个月经期数据
+    private var selectedMenstruasDic: [String: [HCMenstruationModel]] = [:]
+    /// 用户设置的基础经期数据，用来推算经期
+    private var baseMenstruation: HCMenstruationModel?
+    
 //    // 当月的日期取日，不要月
 //    private let currentDayInt: Int = TYDateFormatter.getDay(date: Date())
     // 当前选中的日期取日，不要月
@@ -71,10 +76,30 @@ class HCToolViewModel: BaseViewModel {
             .subscribe(onNext: { [unowned self] in
                 if $0.1.title == "爱爱" {
                     requestMergePro(dateStr: selectedDate, isOn: $0.0)
-                }else if $0.1.title == "大姨妈来了" {
-                    requestUpdateMenstruationDate()
-                }else if $0.1.title == "大姨妈走了" {
-                   requestSettingMenstruationEndDate()
+                }else if $0.1.title == "大姨妈来了" || $0.1.title == "大姨妈走了" {
+                    if let dayItem = self.selectedDayItem {
+                        switch dayItem.yjRemindMode {
+                        case .coming:
+                            self.requestUpdateMenstruationDate()
+                        case .going:
+                            requestSettingMenstruationEndDate()
+                        case .early:
+                            NoticesCenter.alert(title: "提示", message: dayItem.yjRemindMode.remindText(dayItem: dayItem) ?? "提前默认为空", cancleTitle: "取消", okTitle: "确定") { [unowned self] in
+                                let datas = listItemsSignal.value
+                                datas[0].isOn = false
+                                listItemsSignal.value = datas
+                            } callBackOK: { [weak self] in
+                                self?.requestUpdateMenstruationDate()
+                            }
+                        case .cancelGoingForbiden, .forbidenComming, .forbidenGoing:
+                            NoticesCenter.alert(title: "提示", message: dayItem.yjRemindMode.remindText(dayItem: dayItem) ?? "默认为空", callBackOK:  {
+                                let datas = listItemsSignal.value
+                                listItemsSignal.value = datas
+                            })
+                        }
+                    }else {
+                        NoticesCenter.alert(message: "未找到选择日期")
+                    }
                 }
             })
             .disposed(by: disposeBag)
@@ -100,13 +125,6 @@ class HCToolViewModel: BaseViewModel {
                     if prepareAddCalendarDatas(dateString: selectedDate, identifier: identifier) == true {
                         requestGetBaseInfoByDate(date: selectedDate)
                     }
-
-//                    if page == 0 || page == calendarDatasSignal.value.count - 1 {
-//                        let identifier: DateIdentifier.month = page == 0 ? .previous : .next
-//                        if prepareAddCalendarDatas(dateString: selectedDate, identifier: identifier) == true {
-//                            requestGetBaseInfoByDate(date: selectedDate)
-//                        }
-//                    }
                 }
             })
             .disposed(by: disposeBag)
@@ -125,17 +143,21 @@ class HCToolViewModel: BaseViewModel {
 
         reloadSubject
             .subscribe(onNext: { [unowned self] in
-                selectedDayInt = TYDateFormatter.getDay(date: Date())
-                selectedDate = Date.formatCurrentDate(mode: .yymmdd)
-                currentPage = 1
-                navTitleChangeSignal.onNext(selectedDate)
-
-                self.prepareMenstruaItems()
-                self.prepareCellItems()
-                
-                self.requestGetBaseInfoByDate(date: selectedDate)
+                requestGetMenstruationBasis()
             })
             .disposed(by: disposeBag)
+        
+        NotificationCenter.default.rx.notification(NotificationName.Menstruation.SuccessBaseSetting, object: nil)
+            .subscribe(onNext: { [weak self] in
+                guard let strongSelf = self else { return }
+                if let menstruaModel = $0.object as? HCMenstruationModel {
+                    strongSelf.baseMenstruation = menstruaModel
+                    strongSelf.prepareCellItems()
+                    strongSelf.requestGetBaseInfoByDate(date: strongSelf.selectedDate)
+                }
+            })
+            .disposed(by: disposeBag)
+            
     }
     
     public var selectedDayItem: TYCalendarItem? {
@@ -152,6 +174,52 @@ class HCToolViewModel: BaseViewModel {
 }
 
 extension HCToolViewModel {
+    
+    /// 获取经期周期相关基础数据
+    private func requestGetMenstruationBasis() {
+        HCProvider.request(.getMenstruationBasis)
+            .map(result: HCMenstruationModel.self)
+            .subscribe(onSuccess: { [weak self] in
+                self?.baseMenstruation = $0.data
+                if self?.baseMenstruation == nil {
+                    NoticesCenter.alert(title: "提示", message: "设置经期基础数据才能预测经期", cancleTitle: "取消", okTitle: "去设置") {
+                        
+                    } callBackOK: {
+                        HCToolViewModel.push(HCMenstruationSettingViewController.self, nil)
+                    }
+                    
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
+                        self?.resetMenstrua()
+                    }
+                }else {
+                    self?.resetMenstrua()
+                }
+            }) { [weak self] in
+                self?.resetMenstrua()
+                self?.hud.failureHidden(self?.errorMessage($0))
+            }
+            .disposed(by: disposeBag)
+    }
+    
+    private func resetMenstrua() {
+        if selectedDate == nil {
+            /// 首次设置
+            selectedDayInt = TYDateFormatter.getDay(date: Date())
+            selectedDate = Date.formatCurrentDate(mode: .yymmdd)
+            currentPage = 1
+            
+            selectedMenstruasDic[HCToolCalculate.getKey(dateStr: selectedDate, identifier: .previous)] = []
+            selectedMenstruasDic[HCToolCalculate.getKey(dateStr: selectedDate)] = []
+            selectedMenstruasDic[HCToolCalculate.getKey(dateStr: selectedDate, identifier: .next)] = []
+
+            navTitleChangeSignal.onNext(selectedDate)
+            prepareMenstruaItems()
+        }
+
+        prepareCellItems()
+        
+        requestGetBaseInfoByDate(date: selectedDate)
+    }
     
     // 获取经期数据
     private func requestGetBaseInfoByDate(date: String) {
@@ -181,22 +249,7 @@ extension HCToolViewModel {
             .mapResponse()
             .subscribe { [weak self] _ in
 //                self?.hud.noticeHidden()
-                guard let strongSelf = self else { return }
-
-                let calendarDatas = strongSelf.calendarDatasSignal.value
-                if let sd = strongSelf.selectedDate.stringFormatDate(mode: .yymm),
-                   let sectionData = calendarDatas.first(where: { $0.dateText == sd.formatDate(mode: .yymm) }),
-                   let dayItem = sectionData.items.first(where: { $0.dateText == strongSelf.selectedDate }) {
-                    if (strongSelf.baseInfoDataModel?.baseInfo.count ?? 0) > (dayItem.day - 1) {
-                        strongSelf.baseInfoDataModel?.baseInfo[dayItem.day - 1].temperature = temperature
-                        strongSelf.reloadCalendar(menstruaDatas: calendarDatas)
-                        strongSelf.calendarDatasSignal.value = calendarDatas
-                    }
-                }
-                
-                let listData = strongSelf.listItemsSignal.value
-                listData.first(where: { $0.title == "体温" })?.detailTitle = "\(temperature)°C"
-                strongSelf.listItemsSignal.value = listData
+                self?.reloadDayTemperature(temperature: temperature)
             } onError: { [weak self] in
                 self?.hud.failureHidden(self?.errorMessage($0))
             }
@@ -210,22 +263,7 @@ extension HCToolViewModel {
             .mapResponse()
             .subscribe { [weak self] _ in
 //                self?.hud.noticeHidden()
-                guard let strongSelf = self else { return }
-
-                let calendarDatas = strongSelf.calendarDatasSignal.value
-                if let sd = strongSelf.selectedDate.stringFormatDate(mode: .yymm),
-                   let sectionData = calendarDatas.first(where: { $0.dateText == sd.formatDate(mode: .yymm) }),
-                   let dayItem = sectionData.items.first(where: { $0.dateText == strongSelf.selectedDate }) {
-                    if (strongSelf.baseInfoDataModel?.baseInfo.count ?? 0) > (dayItem.day - 1) {
-                        strongSelf.baseInfoDataModel?.baseInfo[dayItem.day - 1].weight = weight
-                        strongSelf.reloadCalendar(menstruaDatas: calendarDatas)
-                        strongSelf.calendarDatasSignal.value = calendarDatas
-                    }
-                }
-
-                let listData = strongSelf.listItemsSignal.value
-                listData.first(where: { $0.title == "体重" })?.detailTitle = "\(weight)kg"
-                strongSelf.listItemsSignal.value = listData
+                self?.reloadDayWeight(weight: weight)
             } onError: { [weak self] in
                 self?.hud.failureHidden(self?.errorMessage($0))
             }
@@ -241,6 +279,9 @@ extension HCToolViewModel {
                 guard let strongSelf = self else { return }
                 strongSelf.requestGetBaseInfoByDate(date: strongSelf.selectedDate)
             } onError: { [weak self] in
+                guard let strongSelf = self else { return }
+                let datas = strongSelf.listItemsSignal.value
+                strongSelf.listItemsSignal.value = datas
                 self?.hud.failureHidden(self?.errorMessage($0))
             }
             .disposed(by: disposeBag)
@@ -255,6 +296,9 @@ extension HCToolViewModel {
                 guard let strongSelf = self else { return }
                 strongSelf.requestGetBaseInfoByDate(date: strongSelf.selectedDate)
             } onError: { [weak self] in
+                guard let strongSelf = self else { return }
+                let datas = strongSelf.listItemsSignal.value
+                strongSelf.listItemsSignal.value = datas
                 self?.hud.failureHidden(self?.errorMessage($0))
             }
             .disposed(by: disposeBag)
@@ -269,6 +313,9 @@ extension HCToolViewModel {
                 guard let strongSelf = self else { return }
                 strongSelf.requestGetBaseInfoByDate(date: strongSelf.selectedDate)
             } onError: { [weak self] in
+                guard let strongSelf = self else { return }
+                let datas = strongSelf.listItemsSignal.value
+                strongSelf.listItemsSignal.value = datas
                 self?.hud.failureHidden(self?.errorMessage($0))
             }
             .disposed(by: disposeBag)
@@ -281,19 +328,36 @@ extension HCToolViewModel {
     private func prepareCellItems() {
         var items: [HCListCellItem] = []
         
-        let titles: [String] = ["大姨妈来了", "爱爱", "体温", "体重", "经期设置"]
-        let titleIconss: [String] = ["tool_dayima", "tool_aiai", "tool_tiwen", "tool_weight", "tool_setting"]
-        let identifiers: [String] = [HCListSwitchCell_identifier, HCListSwitchCell_identifier, HCListDetailCell_identifier, HCListDetailCell_identifier, HCListDetailCell_identifier]
-        for idx in 0..<titles.count {
-            let item = HCListCellItem()
-            item.cellHeight = 55
-            item.titleIcon = titleIconss[idx]
-            item.title = titles[idx]
-            item.titleFont = .font(fontSize: 18)
-            item.titleColor = RGB(51, 51, 51)
-            item.cellIdentifier = identifiers[idx]
-            item.bottomLineMode = .title
-            items.append(item)
+        if baseMenstruation == nil {
+            let titles: [String] = ["爱爱", "体温", "体重", "经期设置"]
+            let titleIconss: [String] = ["tool_aiai", "tool_tiwen", "tool_weight", "tool_setting"]
+            let identifiers: [String] = [HCListSwitchCell_identifier, HCListDetailCell_identifier, HCListDetailCell_identifier, HCListDetailCell_identifier]
+            for idx in 0..<titles.count {
+                let item = HCListCellItem()
+                item.cellHeight = 55
+                item.titleIcon = titleIconss[idx]
+                item.title = titles[idx]
+                item.titleFont = .font(fontSize: 18)
+                item.titleColor = RGB(51, 51, 51)
+                item.cellIdentifier = identifiers[idx]
+                item.bottomLineMode = .title
+                items.append(item)
+            }
+        }else {
+            let titles: [String] = ["大姨妈来了", "爱爱", "体温", "体重", "经期设置"]
+            let titleIconss: [String] = ["tool_dayima", "tool_aiai", "tool_tiwen", "tool_weight", "tool_setting"]
+            let identifiers: [String] = [HCListSwitchCell_identifier, HCListSwitchCell_identifier, HCListDetailCell_identifier, HCListDetailCell_identifier, HCListDetailCell_identifier]
+            for idx in 0..<titles.count {
+                let item = HCListCellItem()
+                item.cellHeight = 55
+                item.titleIcon = titleIconss[idx]
+                item.title = titles[idx]
+                item.titleFont = .font(fontSize: 18)
+                item.titleColor = RGB(51, 51, 51)
+                item.cellIdentifier = identifiers[idx]
+                item.bottomLineMode = .title
+                items.append(item)
+            }
         }
         
         listItemsSignal.value = items
@@ -309,18 +373,21 @@ extension HCToolViewModel {
             navTitleChangeSignal.onNext(selectedDate)
 
             // 处理列表
-            if let baseInfo = model.menstruationModel,
-               let selecteDateDate = selectedDate.stringFormatDate(mode: .yymm),
-               let sectionData = calendarDatasSignal.value.first(where: { $0.dateText == selecteDateDate.formatDate(mode: .yymm) }) {
-                
-                let yjData = model.getYJInfo(menstruationStart: sectionData.menstruationStartDateStr,
-                                             menstruationEnd: sectionData.menstruationEndDateStr)
+            if let menustruaInfo = model.menstruationModel {
                 let datas = listItemsSignal.value
-                datas[0].isOn = yjData.0
-                datas[0].title = yjData.1
-                datas[1].isOn = baseInfo.knew
-                datas[2].detailTitle = baseInfo.temperature.count > 0 ? "\(baseInfo.temperature)°C" : ""
-                datas[3].detailTitle = baseInfo.weight.count > 0 ? "\(baseInfo.weight)kg" : ""
+
+                if let baseInfo = baseMenstruation {
+                    let yjData = model.getYJInfo(menstruasDic: selectedMenstruasDic, baseMenstru: baseInfo)
+                    datas[0].isOn = yjData.isOn
+                    datas[0].title = yjData.mode.titleText
+                    datas[1].isOn = menustruaInfo.knew
+                    datas[2].detailTitle = menustruaInfo.temperature.count > 0 ? "\(menustruaInfo.temperature)°C" : ""
+                    datas[3].detailTitle = menustruaInfo.weight.count > 0 ? "\(menustruaInfo.weight)kg" : ""
+                }else {
+                    datas[0].isOn = menustruaInfo.knew
+                    datas[1].detailTitle = menustruaInfo.temperature.count > 0 ? "\(menustruaInfo.temperature)°C" : ""
+                    datas[2].detailTitle = menustruaInfo.weight.count > 0 ? "\(menustruaInfo.weight)kg" : ""
+                }
                 listItemsSignal.value = datas
             }else {
                 let datas = listItemsSignal.value
@@ -418,103 +485,113 @@ extension HCToolViewModel {
     }
 
     
-    // 获取所选月份每天的具体数据，刷新经期和列表数据
-    private func reloadCalendar(menstruaDatas: [TYCalendarSectionModel]) {
-        let mentruationDatas = calendarDatasSignal.value
+    // 体重修改，刷新界面
+    private func reloadDayWeight(weight: String) {
+        
+        // 日历
+        let calendarDatas = calendarDatasSignal.value
         var sectionModel: TYCalendarSectionModel?
         
-        for item in mentruationDatas {
+        for item in calendarDatas {
             if item.isContain(date: selectedDate) {
                 sectionModel = item
                 break
             }
         }
         
-        // 月每天体温等详细数据对应到日历模型
-        if let simplData = sectionModel {
-            if let baseModel = baseInfoDataModel {
-                
-                // 重置之前设置的数据
-                for item in simplData.items {
-                    item.menstruationModel = nil
-                    item.bottomRightIcon = nil
-                    item.topRightIcon = nil
-//                    item.menstruationDateStrs = []
-                    item.isSelected = false
-                }
-                
-                for idx in simplData.daysNotInMonthBefore..<simplData.items.count {
-                    simplData.items[idx].isSelected = simplData.items[idx].dateText == selectedDate
+        if let dayItem = sectionModel?.items.first(where: { $0.dateText == selectedDate }) {
+            dayItem.menstruationModel?.weight = weight
+            dayItem.bottomRightIcon = (dayItem.menstruationModel?.isMark == true) ? UIImage(named: "mensturation_mark") : nil
+        }
+        
+        calendarDatasSignal.value = calendarDatas
 
-                    let fixIdx: Int = idx - simplData.daysNotInMonthBefore
-                    if fixIdx < baseModel.baseInfo.count {
-                        
-                        simplData.items[idx].menstruationModel = baseModel.baseInfo[fixIdx]
-                                                
-                        let isMark = baseModel.baseInfo[fixIdx].isMark
-                        simplData.items[idx].bottomRightIcon = isMark ? UIImage(named: "mensturation_mark") : nil
-                      
-                        if baseModel.baseInfo[fixIdx].knew {
-                            let mode = simplData.items[idx].mensturationMode
-                            simplData.items[idx].topRightIcon = mode == .yjq ? UIImage(named: "aiai_pink") : UIImage(named: "aiai_red")
-                        }else {
-                            simplData.items[idx].topRightIcon = nil
-                        }
-                    }
+        // 列表
+        let listData = listItemsSignal.value
+        listData.first(where: { $0.title == "体重" })?.detailTitle = "\(weight)kg"
+        listItemsSignal.value = listData
+    }
+    
+    // 体温修改，刷新界面
+    private func reloadDayTemperature(temperature: String) {
+        
+        // 日历
+        let calendarDatas = calendarDatasSignal.value
+        var sectionModel: TYCalendarSectionModel?
+        
+        for item in calendarDatas {
+            if item.isContain(date: selectedDate) {
+                sectionModel = item
+                break
+            }
+        }
+        
+        if let dayItem = sectionModel?.items.first(where: { $0.dateText == selectedDate }) {
+            dayItem.menstruationModel?.temperature = temperature
+            dayItem.bottomRightIcon = (dayItem.menstruationModel?.isMark == true) ? UIImage(named: "mensturation_mark") : nil
+        }
+        
+        calendarDatasSignal.value = calendarDatas
+
+        // 列表
+        let listData = listItemsSignal.value
+        listData.first(where: { $0.title == "体重" })?.detailTitle = "\(temperature)°C"
+        listItemsSignal.value = listData
+    }
+
+        
+    // 将获取的每天的model对应到日历控件
+    private func mapBaseInfoModel(calendarDatas: [TYCalendarSectionModel], baseInfos: [HCBaseInfoItemModel]) {
+        
+        var sectionModel: TYCalendarSectionModel?
+        
+        for item in calendarDatas {
+            if item.isContain(date: selectedDate) {
+                sectionModel = item
+                break
+            }
+        }
+        
+        if let simplData = sectionModel {
+            // 重置之前设置的数据
+            for item in simplData.items {
+                item.menstruationModel = nil
+            }
+            
+            for idx in simplData.daysNotInMonthBefore..<simplData.items.count {
+                simplData.items[idx].isSelected = simplData.items[idx].dateText == selectedDate
+                
+                let fixIdx: Int = idx - simplData.daysNotInMonthBefore
+                if fixIdx < baseInfos.count {
+                    simplData.items[idx].menstruationModel = baseInfos[fixIdx]
+                    
+                    simplData.items[idx].topRightIcon = baseInfos[fixIdx].knew == true ? UIImage(named: "aiai_red") : nil
+                    simplData.items[idx].bottomRightIcon = baseInfos[fixIdx].isMark == true ? UIImage(named: "mensturation_mark") : nil
                 }
             }
         }
     }
-        
+    
     // 将处理好的月经期数据对应到日历模型
     private func map(mensturationDatasDic: [String: MenstruationDataTup],
                      menstruasDic: [String: [HCMenstruationModel]],
                      calendarDatas: [TYCalendarSectionModel]) {
-        
-        let isYJStart: (((String, [HCMenstruationModel]?))->(Bool)) = { data in
-            if let menstruas = data.1, let _ = menstruas.first(where: { $0.menstruationDate == data.0 }) {
-                return true
-            }
-            return false
-        }
-        
-        let isYJEnd: (((String, [HCMenstruationModel]?))->(Bool)) = { data in
-            if let menstruas = data.1, let _ = menstruas.first(where: { $0.menstruationEndDate == data.0 }) {
-                return true
-            }
-            return false
-        }
-        
+                
         let map: ((([TYCalendarItem], MenstruationDataTup, String))->()) = { data in
             
             // 重置之前设置的数据
             for item in data.0 {
                 item.mensturationMode = .none
                 item.bottomLeftIcon = nil
+                item.bottomRightIcon = (item.menstruationModel?.isMark == true) ? UIImage(named: "mensturation_mark") : nil
+                item.topRightIcon = (item.menstruationModel?.knew == true) ? UIImage(named: "aiai_red") : nil
             }
             
             let yjqArr = data.1.yjq
             let safeArr = data.1.safeBefore + data.1.safeAfter
             let plqArr = data.1.plq
             let plrArr = data.1.plr
-            
-            for idx in 0..<yjqArr.count {
-                if let day = data.0.first(where: { $0.dateText == yjqArr[idx].date.formatDate(mode: .yymmdd) }) {
-                    day.mensturationMode = .yjq
-//                    PrintLog("设置月经：\(day.dateText)")
-
-                    if isYJStart((day.dateText, menstruasDic[data.2])) {
-                        PrintLog("月经开始：\(day.dateText)")
-                        day.bottomLeftIcon = UIImage(named: "yjq_start")
-                    }else if isYJEnd((day.dateText, menstruasDic[data.2])) {
-                        PrintLog("月经结束：\(day.dateText)")
-                        day.bottomLeftIcon = UIImage(named: "yjq_end")
-                    }else {
-                        day.bottomLeftIcon = nil
-                    }
-                }
-            }
-            
+                        
             for item in safeArr {
                 if let day = data.0.first(where: { $0.dateText == item.date.formatDate(mode: .yymmdd) }) {
                     day.mensturationMode = .aqq
@@ -533,6 +610,27 @@ extension HCToolViewModel {
                     day.bottomLeftIcon = UIImage(named: "tool_painuanri")
                 }
             }
+            
+            for idx in 0..<yjqArr.count {
+                if let day = data.0.first(where: { $0.dateText == yjqArr[idx].date.formatDate(mode: .yymmdd) }) {
+                    day.mensturationMode = .yjq
+//                    PrintLog("设置月经：\(day.dateText)")
+
+                    if day.menstruationModel?.knew == true {
+                        day.topRightIcon = UIImage(named: "aiai_pink")
+                    }
+                    
+                    if day.menstruationModel?.menstruationStart == true {
+                        PrintLog("月经开始：\(day.dateText)")
+                        day.bottomLeftIcon = UIImage(named: "yjq_start")
+                    }else if day.menstruationModel?.menstruationEnd == true {
+                        PrintLog("月经结束：\(day.dateText)")
+                        day.bottomLeftIcon = UIImage(named: "yjq_end")
+                    }else {
+                        day.bottomLeftIcon = nil
+                    }
+                }
+            }
         }
 
         for item in mensturationDatasDic {
@@ -542,6 +640,22 @@ extension HCToolViewModel {
             }
         }
     }
+    
+    private func resetBaseCalendar(calendarDatas: [TYCalendarSectionModel]) {
+                
+        for item in calendarDatas {
+            for day in item.items {
+                day.mensturationMode = .none
+                day.bottomLeftIcon = nil
+                day.bottomRightIcon = (day.menstruationModel?.isMark == true) ? UIImage(named: "mensturation_mark") : nil
+
+                if day.menstruationModel?.knew == true {
+                    day.topRightIcon = UIImage(named: "aiai_red")
+                }
+            }
+        }
+    }
+
 
     // 处理日期控件中未设置经期状态的日期
     private func mapNoneMensturationStatu(allMenustruaDataDic: [String: MenstruationDataTup],
@@ -559,7 +673,7 @@ extension HCToolViewModel {
         var allDayItems: [TYCalendarItem] = []
         let reloadSections = calendarSections.filter({ reloadSectionKeys.contains($0.dateText) })
         for item in reloadSections {
-            PrintLog("刷新的月：\(item.dateText)")
+            PrintLog("容错有经期数据的月中未设置经期状态的日：\(item.dateText)")
             allDayItems.append(contentsOf: item.items.filter({ $0.mensturationMode == .none }))
         }
         
@@ -573,46 +687,62 @@ extension HCToolViewModel {
             }
         }
     }
-    
-    // 记录当前查询月份月经开始和结束时间
-    private func reloadSectionMenstruaDate(calendarDatas: [TYCalendarSectionModel]) {
-        guard let sd = selectedDate.stringFormatDate(mode: .yymm) else {
-            return
-        }
         
-        let sdStr = sd.formatDate(mode: .yymm)
-        
-        if let selectedSection = calendarDatas.first(where: { $0.dateText == sdStr }),
-           baseInfoDataModel?.menstruationList.count == 3 {
-            if let sectionMenstruaInfo = baseInfoDataModel?.menstruationList[1].first {
-                selectedSection.menstruationStartDateStr = sectionMenstruaInfo.menstruationDate
-                selectedSection.menstruationEndDateStr = sectionMenstruaInfo.menstruationEndDate
-            }else {
-                selectedSection.menstruationStartDateStr = nil
-                selectedSection.menstruationEndDateStr = nil
-            }
-        }
-    }
-    
     // 推算每个月经期所处阶段
     private func formatMenstruation(baseInfo: HCBaseInfoDataModel) {
         let calendarDatas = calendarDatasSignal.value
         
-        reloadSectionMenstruaDate(calendarDatas: calendarDatas)
-        
-        let mensturationListTup = baseInfo.transformMenstruationList(currentDate: selectedDate)
+        if baseInfo.menstruationList.count == 3 {
+            selectedMenstruasDic[HCToolCalculate.getKey(dateStr: selectedDate, identifier: .previous)] = baseInfo.menstruationList[0]
+            selectedMenstruasDic[HCToolCalculate.getKey(dateStr: selectedDate)] = baseInfo.menstruationList[1]
+            selectedMenstruasDic[HCToolCalculate.getKey(dateStr: selectedDate, identifier: .next)] = baseInfo.menstruationList[2]
+        }else {
+            selectedMenstruasDic[HCToolCalculate.getKey(dateStr: selectedDate, identifier: .previous)] = []
+            selectedMenstruasDic[HCToolCalculate.getKey(dateStr: selectedDate)] = []
+            selectedMenstruasDic[HCToolCalculate.getKey(dateStr: selectedDate, identifier: .next)] = []
+        }
+                
+        let mensturationListTup = HCToolCalculate.transformMenstruationList(currentDate: selectedDate,
+                                                                            menstruaList: baseInfo.menstruationList,
+                                                                            baseMenstruation: baseMenstruation)
 
         let mensturationListDic = mensturationListTup.menstruasDic
         let reloadSectionKeys = mensturationListTup.reloadSectionKeys
         
-        if mensturationListDic.count != 5 || calendarDatas.count < 3 {
+        if baseInfoDataModel!.menstruationList.count == 3 {
+            if baseInfoDataModel!.menstruationList[0].count == 0 {
+                let key = HCToolCalculate.getKey(dateStr: selectedDate, identifier: .previous)
+                baseInfoDataModel!.menstruationList[0] = mensturationListDic[key] ?? []
+            }
+            
+            if baseInfoDataModel!.menstruationList[1].count == 0 {
+                let key = HCToolCalculate.getKey(dateStr: selectedDate)
+                baseInfoDataModel!.menstruationList[1] = mensturationListDic[key] ?? []
+            }
+            
+            if baseInfoDataModel!.menstruationList[2].count == 0 {
+                let key = HCToolCalculate.getKey(dateStr: selectedDate, identifier: .next)
+                baseInfoDataModel!.menstruationList[2] = mensturationListDic[key] ?? []
+            }
+        }
+        
+        if mensturationListDic.count == 0 || calendarDatas.count < 3 {
+            mapBaseInfoModel(calendarDatas: calendarDatas, baseInfos: baseInfo.baseInfo)
+            resetBaseCalendar(calendarDatas: calendarDatas)
+            calendarDatasSignal.value = calendarDatas
             return
         }
         
         var menstruaTupsDic: [String: MenstruationDataTup] = [:]
         for item in mensturationListDic {
-            menstruaTupsDic[item.key] = monthMensturationDates(menstruations: item.value)
+            let compare = TYDateCalculate.compare(dateStr: item.key.transform(mode: .yymm),
+                                                  other: Date().formatDate(mode: .yymm),
+                                                  mode: .yymm)
+            menstruaTupsDic[item.key] = monthMensturationDates(menstruations: item.value,
+                                                               isBeforeToday: compare == .orderedAscending)
         }
+        
+        mapBaseInfoModel(calendarDatas: calendarDatas, baseInfos: baseInfo.baseInfo)
         
         map(mensturationDatasDic: menstruaTupsDic, menstruasDic: mensturationListDic, calendarDatas: calendarDatas)
         
@@ -620,7 +750,6 @@ extension HCToolViewModel {
                                  calendarSections: calendarDatas,
                                  reloadSectionKeys: reloadSectionKeys)
                 
-        reloadCalendar(menstruaDatas: calendarDatas)
         
         calendarDatasSignal.value = calendarDatas
         
@@ -632,7 +761,7 @@ extension HCToolViewModel {
         }
     }
     
-    private func monthMensturationDates(menstruations: [HCMenstruationModel]) ->MenstruationDataTup {
+    private func monthMensturationDates(menstruations: [HCMenstruationModel], isBeforeToday: Bool) ->MenstruationDataTup {
         var yjqDateInfos: [HCMensturaDateInfo] = []
         var safeBeforeDateInfos: [HCMensturaDateInfo] = []
         var plqDateInfos: [HCMensturaDateInfo] = []
@@ -642,7 +771,9 @@ extension HCToolViewModel {
         for item in menstruations {
             let tup = monthOneMensturation(menstruationDate: item.menstruationDate,
                                            menstruationDuration: item.menstruationDuration,
-                                           menstruationCycle: item.menstruationCycle)
+                                           menstruationCycle: item.menstruationCycle,
+                                           needYj: (item.isForecast && !isBeforeToday) || !item.isForecast)
+            
             if let yjStart = tup.yjq.first?.date {
                 yjqDateInfos = yjqDateInfos.filter { da -> Bool in
                     let compareRes = da.date.dateCompare(date: yjStart)
@@ -716,34 +847,49 @@ extension HCToolViewModel {
         return result
     }
     
-    private func monthOneMensturation(menstruationDate: String, menstruationDuration: Int, menstruationCycle: Int) ->MenstruationDataTup {
+    private func monthOneMensturation(menstruationDate: String,
+                                      menstruationDuration: Int,
+                                      menstruationCycle: Int,
+                                      needYj: Bool) ->MenstruationDataTup {
+        
+        var yjInfoArr: [HCMensturaDateInfo] = []
+        var plrInfoArr: [HCMensturaDateInfo] = []
+        var plqInfoArr: [HCMensturaDateInfo] = []
+        var safeAfterInfoArr: [HCMensturaDateInfo] = []
+        var safeBeforeInfoArr: [HCMensturaDateInfo] = []
+        
         /// ---月经期推算
         // 第一天
         let starYj = TYDateCalculate.date(for: menstruationDate)
         // 最后一天
         let endYj = TYDateCalculate.getDate(currentDate: starYj, days: menstruationDuration - 1, isAfter: true)
         let yjArr: [Date] = TYDateCalculate.getDates(startDate: starYj, endDate: endYj)
-        let yjInfoArr = HCMensturaDateInfo.transform(dates: yjArr, mensturationMode: .yjq)
+        yjInfoArr.append(contentsOf: HCMensturaDateInfo.transform(dates: yjArr, mensturationMode: .yjq))
         
         /// --- 排卵期日期推算
         // 下次月经来的第一天
         let nextMenstruationDate = TYDateCalculate.getDate(currentDate: starYj, days: menstruationCycle, isAfter: true)
         // 排卵日 - 下次月经来的第一天往前推14天就是排卵日
         let plaDate = TYDateCalculate.getDate(currentDate: nextMenstruationDate, days: 14, isAfter: false)
-        let plaDateInfo = HCMensturaDateInfo.transform(date: plaDate, mensturationMode: .plr)
+        plrInfoArr.append(HCMensturaDateInfo.transform(date: plaDate, mensturationMode: .plr))
+        
         // 排卵期第一天 排卵日a往前推5天
         let starPlqDate = TYDateCalculate.getDate(currentDate: plaDate, days: 5, isAfter: false)
         // 排卵期最后一天 排卵日a往后推4天
         let endPlqDate = TYDateCalculate.getDate(currentDate: plaDate, days: 4, isAfter: true)
         let plqArr: [Date] = TYDateCalculate.getDates(startDate: starPlqDate, endDate: endPlqDate)
-        var plqInfoArr = HCMensturaDateInfo.transform(dates: plqArr, mensturationMode: .plq)
+        plqInfoArr.append(contentsOf: HCMensturaDateInfo.transform(dates: plqArr, mensturationMode: .plq))
         
-        // 去除排卵期包含在月经期中的部分
-        for yjItem in yjInfoArr {
-            if let idx = plqInfoArr.firstIndex(where: { $0.date == yjItem.date }) {
-                PrintLog("去除排卵期包含在月经期中的部分: \(yjItem.date.formatDate(mode: .yymmdd))")
-                plqInfoArr.remove(at: idx)
+        if needYj {
+            // 去除排卵期包含在月经期中的部分
+            for yjItem in yjInfoArr {
+                if let idx = plqInfoArr.firstIndex(where: { $0.date == yjItem.date }) {
+                    PrintLog("去除排卵期包含在月经期中的部分: \(yjItem.date.formatDate(mode: .yymmdd))")
+                    plqInfoArr.remove(at: idx)
+                }
             }
+        }else {
+            yjInfoArr.removeAll()
         }
         
         /// ---排卵期后安全期日期推算
@@ -753,7 +899,7 @@ extension HCToolViewModel {
                                                             endDate: TYDateCalculate.getDate(currentDate: nextMenstruationDate,
                                                                                              days: 1,
                                                                                              isAfter: false))
-        let safeAfterInfoArr = HCMensturaDateInfo.transform(dates: safeAfterArr, mensturationMode: .aqq)
+        safeAfterInfoArr.append(contentsOf: HCMensturaDateInfo.transform(dates: safeAfterArr, mensturationMode: .aqq))
         
         /// ---排卵期前安全期日期推算
         // 第一天
@@ -761,9 +907,9 @@ extension HCToolViewModel {
         // 最后一天
         let endSafeBefore = TYDateCalculate.getDate(currentDate: starPlqDate, days: 1, isAfter: false)
         let safeBeforeArr = TYDateCalculate.getDates(startDate: starSafeBefore, endDate: endSafeBefore)
-        let safeBeforeInfoArr = HCMensturaDateInfo.transform(dates: safeBeforeArr, mensturationMode: .aqq)
+        safeBeforeInfoArr.append(contentsOf: HCMensturaDateInfo.transform(dates: safeBeforeArr, mensturationMode: .aqq))
         
-        return (yjq:yjInfoArr, safeBefore:safeBeforeInfoArr, plq:plqInfoArr, safeAfter:safeAfterInfoArr, plr:[plaDateInfo])
+        return (yjq:yjInfoArr, safeBefore:safeBeforeInfoArr, plq:plqInfoArr, safeAfter:safeAfterInfoArr, plr:plrInfoArr)
     }
 
     
