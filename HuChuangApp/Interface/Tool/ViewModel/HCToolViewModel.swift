@@ -107,25 +107,23 @@ class HCToolViewModel: BaseViewModel, VMNavigation {
         didScrollSignal
             .subscribe(onNext: { [unowned self] page in
                 if page < calendarDatasSignal.value.count, page != currentPage {
-                    let lastPage = currentPage
-                    currentPage = page
                     let sectionData = calendarDatasSignal.value[page]
                     
                     let days = TYDateFormatter.calculateDays(forMonth: sectionData.dateText)
+                    var currentDateStr: String = ""
                     if days >= selectedDayInt {
-                        selectedDate = sectionData.createDateText(day: selectedDayInt)
+                        currentDateStr = sectionData.createDateText(day: selectedDayInt)
                     }else {
-                        selectedDayInt = days
-                        selectedDate = sectionData.createDateText(day: days)
+                        currentDateStr = sectionData.createDateText(day: days)
                     }
-                    
-                    navTitleChangeSignal.onNext(selectedDate)
 
-                    let identifier: DateIdentifier.month = page < lastPage ? .previous : .next
-                    if prepareAddCalendarDatas(dateString: selectedDate, identifier: identifier) == true {
+                    navTitleChangeSignal.onNext(currentDateStr)
+
+                    if prepareAddSelectedCalendarDatas(dateString: currentDateStr) {
                         requestGetBaseInfoByDate(date: selectedDate)
                     }
                 }
+
             })
             .disposed(by: disposeBag)
 
@@ -138,12 +136,21 @@ class HCToolViewModel: BaseViewModel, VMNavigation {
             .disposed(by: disposeBag)
 
         reloadMenstruaSignal
-            .subscribe(onNext: { [unowned self] in self.requestGetBaseInfoByDate(date: $0) })
+            .subscribe(onNext: { [unowned self] in
+                if prepareAddSelectedCalendarDatas(dateString: $0) {
+                    navTitleChangeSignal.onNext(selectedDate)
+                    requestGetBaseInfoByDate(date: $0)
+                }
+            })
             .disposed(by: disposeBag)
 
         reloadSubject
             .subscribe(onNext: { [unowned self] in
-                requestGetMenstruationBasis()
+                if !HCHelper.userIsLogin() {
+                    HCHelper.presentLogin()
+                }else {
+                    requestGetMenstruationBasis(isClear: true)
+                }
             })
             .disposed(by: disposeBag)
         
@@ -158,6 +165,11 @@ class HCToolViewModel: BaseViewModel, VMNavigation {
             })
             .disposed(by: disposeBag)
             
+        NotificationCenter.default.rx.notification(NotificationName.User.LoginSuccess, object: nil)
+            .subscribe(onNext: { [weak self] _ in
+                self?.requestGetMenstruationBasis(isClear: true)
+            })
+            .disposed(by: disposeBag)
     }
     
     public var selectedDayItem: TYCalendarItem? {
@@ -176,7 +188,7 @@ class HCToolViewModel: BaseViewModel, VMNavigation {
 extension HCToolViewModel {
     
     /// 获取经期周期相关基础数据
-    private func requestGetMenstruationBasis() {
+    private func requestGetMenstruationBasis(isClear: Bool) {
         HCProvider.request(.getMenstruationBasis)
             .map(result: HCMenstruationModel.self)
             .subscribe(onSuccess: { [weak self] in
@@ -187,22 +199,22 @@ extension HCToolViewModel {
                     } callBackOK: {
                         HCToolViewModel.push(HCMenstruationSettingViewController.self, nil)
                     }
-                    
+
                     DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
-                        self?.resetMenstrua()
+                        self?.resetMenstrua(isClear: isClear)
                     }
                 }else {
-                    self?.resetMenstrua()
+                    self?.resetMenstrua(isClear: isClear)
                 }
             }) { [weak self] in
-                self?.resetMenstrua()
+                self?.resetMenstrua(isClear: isClear)
                 self?.hud.failureHidden(self?.errorMessage($0))
             }
             .disposed(by: disposeBag)
     }
     
-    private func resetMenstrua() {
-        if selectedDate == nil {
+    private func resetMenstrua(isClear: Bool) {
+        if selectedDate == nil || isClear {
             /// 首次设置
             selectedDayInt = TYDateFormatter.getDay(date: Date())
             selectedDate = Date.formatCurrentDate(mode: .yymmdd)
@@ -446,44 +458,111 @@ extension HCToolViewModel {
     }
     
     // 切换月份判断是否添加日期数据
-    @discardableResult
-    private func prepareAddCalendarDatas(dateString: String, identifier: DateIdentifier.month) ->Bool {
+//    @discardableResult
+//    private func prepareAddCalendarDatas(dateString: String, identifier: DateIdentifier.month) ->Bool {
+//        guard let date = dateString.stringFormatDate(mode: .yymmdd) else {
+//            return false
+//        }
+//
+//        guard let findDate = TYDateFormatter.getDate(fromData: date, identifier: identifier) else {
+//            return false
+//        }
+//
+//        let findDateStr = findDate.formatDate(mode: .yymm)
+//        if (calendarDatasSignal.value.first(where: { $0.dateText == findDateStr }) != nil) {
+//            return true
+//        }
+//
+//        if let signalSection = TYCalendarSectionModel.creatSignalCalendarData(date: date, identifier: identifier) {
+//
+//            if let selectedDay = signalSection.items.first(where: { $0.day == selectedDayInt }) {
+//                selectedDay.isSelected = true
+//            }else {
+//                signalSection.items.last?.isSelected = true
+//            }
+//
+//            var tempDatas = calendarDatasSignal.value
+//            if identifier == .previous {
+//                currentPage += 1
+//                tempDatas.insert(signalSection, at: 0)
+//            }else {
+//                tempDatas.append(signalSection)
+//            }
+//
+//            calendarDatasSignal.value = tempDatas
+//
+//            return true
+//        }
+//        return false
+//    }
+    
+    // 月份变化判断是否添加日期数据
+    private func prepareAddSelectedCalendarDatas(dateString: String) ->Bool {
         guard let date = dateString.stringFormatDate(mode: .yymmdd) else {
             return false
         }
         
-        guard let findDate = TYDateFormatter.getDate(fromData: date, identifier: identifier) else {
+        guard let findPreDate = TYDateFormatter.getDate(fromData: date, identifier: .previous) else {
             return false
         }
         
-        let findDateStr = findDate.formatDate(mode: .yymm)
-        if (calendarDatasSignal.value.first(where: { $0.dateText == findDateStr }) != nil) {
-            return true
+        guard let findNextDate = TYDateFormatter.getDate(fromData: date, identifier: .next) else {
+            return false
+        }
+
+        var isChange: Bool = false
+        var addCalendars: [TYCalendarSectionModel] = []
+        
+        let findDateStr = date.formatDate(mode: .yymm)
+        if (calendarDatasSignal.value.first(where: { $0.dateText == findDateStr }) == nil),
+           let section = TYCalendarSectionModel.creatSignalCalendarData(date: date) {
+            isChange = true
+            addCalendars.append(section)
         }
         
-        if let signalSection = TYCalendarSectionModel.creatSignalCalendarData(date: date, identifier: identifier) {
-           
-            if let selectedDay = signalSection.items.first(where: { $0.day == selectedDayInt }) {
-                selectedDay.isSelected = true
-            }else {
-                signalSection.items.last?.isSelected = true
-            }
+        let findPreDateStr = findPreDate.formatDate(mode: .yymm)
+        if (calendarDatasSignal.value.first(where: { $0.dateText == findPreDateStr }) == nil),
+           let section = TYCalendarSectionModel.creatSignalCalendarData(date: findPreDate) {
+            isChange = true
+            addCalendars.append(section)
+        }
 
-            var tempDatas = calendarDatasSignal.value
-            if identifier == .previous {
-                currentPage += 1
-                tempDatas.insert(signalSection, at: 0)
-            }else {
-                tempDatas.append(signalSection)
-            }
+        let findNextDateStr = findNextDate.formatDate(mode: .yymm)
+        if (calendarDatasSignal.value.first(where: { $0.dateText == findNextDateStr }) == nil),
+           let section = TYCalendarSectionModel.creatSignalCalendarData(date: findNextDate) {
+            isChange = true
+            addCalendars.append(section)
+        }
+
+        var calendarDatas: [TYCalendarSectionModel] = []
+        calendarDatas.append(contentsOf: calendarDatasSignal.value)
+
+        if isChange == true {
+            calendarDatas.append(contentsOf: addCalendars)
             
-            calendarDatasSignal.value = tempDatas
+            calendarDatas = calendarDatas.sorted(by: { (s1, s2) -> Bool in
+                if TYDateCalculate.compare(dateStr: s1.dateText, other: s2.dateText, mode: .yymm) == .orderedDescending {
+                    return false
+                }
+                return true
+            })
+        }
+        
+        if let idx = calendarDatas.firstIndex(where: { $0.dateText == dateString.transform(mode: .yymm) }) {
+            calendarDatas.first(where: { $0.dateText == selectedDate.transform(mode: .yymm) })?.items.first(where: { $0.dateText == selectedDate })?.isSelected = false
+            calendarDatas.first(where: { $0.dateText == dateString.transform(mode: .yymm) })?.items.first(where: { $0.dateText == dateString })?.isSelected = true
+
+            currentPage = idx
+            selectedDayInt = TYDateFormatter.getDay(date: date)
+            selectedDate = dateString
+            
+            calendarDatasSignal.value = calendarDatas
             
             return true
+        }else {
+            return false
         }
-        return false
     }
-
     
     // 体重修改，刷新界面
     private func reloadDayWeight(weight: String) {

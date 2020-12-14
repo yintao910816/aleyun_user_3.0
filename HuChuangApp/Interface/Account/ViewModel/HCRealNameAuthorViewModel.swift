@@ -53,6 +53,7 @@ class HCRealNameAuthorViewModel: BaseViewModel {
             .map(model: HCUserModel.self)
             .subscribe(onSuccess: { [weak self] in
                 HCHelper.saveLogin(user: $0)
+                NotificationCenter.default.post(name: NotificationName.User.LoginSuccess, object: nil)
                 self?.popSubject.onNext(Void())
             }) { [weak self] in
                 self?.hud.failureHidden(self?.errorMessage($0))

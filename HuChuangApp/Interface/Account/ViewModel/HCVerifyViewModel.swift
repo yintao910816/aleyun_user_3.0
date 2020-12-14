@@ -74,6 +74,8 @@ extension HCVerifyViewModel {
                         self?.hud.noticeHidden()
                         self?.popSubject.onNext(Void())
                         HCHelper.saveLogin(user: user)
+                        
+                        NotificationCenter.default.post(name: NotificationName.User.LoginSuccess, object: nil)
                     }
                 }else {
                     self?.hud.failureHidden($0.message)

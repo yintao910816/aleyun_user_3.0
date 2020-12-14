@@ -84,7 +84,8 @@ extension HCMenuView {
         if let frame = collectionView.layoutAttributesForItem(at: to)?.frame {
             let convertFrame = collectionView.convert(frame, to: self)
             
-            let animotionViewX: CGFloat = convertFrame.minX + (convertFrame.size.width - animotionView.width) / 2.0
+            var animotionViewX: CGFloat = convertFrame.minX + (convertFrame.size.width - animotionView.width) / 2.0
+            animotionViewX += collectionView.contentOffset.x
             let animotionViewFrame = CGRect.init(x: animotionViewX, y: animotionView.y, width: animotionView.width, height: animotionView.height)
             
             if animotion {

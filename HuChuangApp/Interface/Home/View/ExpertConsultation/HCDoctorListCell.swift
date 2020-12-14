@@ -36,7 +36,7 @@ class HCDoctorListCell: UICollectionViewCell {
     
     public var model: HCDoctorListItemModel! {
         didSet {
-            avatar.setImage(model.headPath, .userIconWomen)
+            avatar.setImage(model.headPath, .doctor)
             doctorInfoLabel.attributedText = model.doctorInfoText
             hospitalLvLabel.text = model.departmentName
             hospitalAdressLabel.text = model.unitName

@@ -95,6 +95,9 @@ enum ImageStrategy {
     case messageSystom
     /// 药品百科
     case yaopinbaike
+    
+    /// 医生默认头像 - 部分男女
+    case doctor
 }
 
 extension ImageStrategy {
@@ -118,6 +121,8 @@ extension ImageStrategy {
             return UIImage.init(named: "message_system")
         case .yaopinbaike:
             return UIImage.init(named: "yaopinbaike_empt")
+        case .doctor:
+            return UIImage(named: "default_doctor_icon")
         }
     }
 }
