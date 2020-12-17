@@ -62,7 +62,7 @@ extension HCPicConsultRecordViewController: UITableViewDelegate, UITableViewData
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = (tableView.dequeueReusableCell(withIdentifier: HCConsultRecordCell_identifier) as! HCConsultRecordCell)
-        cell.model = viewModel.datasource.value[indexPath.row]
+        cell.model = viewModel.datasource.value[indexPath.section]
         return cell
     }
     

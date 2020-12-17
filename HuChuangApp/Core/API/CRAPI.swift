@@ -192,6 +192,8 @@ enum API{
     case myDoctor(lng: String, lat: String)
     /// 获取所有省
     case allProvice
+    /// 获取所有热门地区
+    case allHotCity
     /// 获取市
     case city(id: String)
     /// 专家列表
@@ -236,7 +238,8 @@ enum API{
     case saveOrUpdateWeight(weight: String, measureDate: String)
     /// 保存或修改月经基础数据
     case saveOrUpdateBasis(menstruationCycle: String, menstruationDuration: String)
-
+    /// 删除体温或体重 类型1体温2体重
+    case delTemperatureOrWeight(type: Int, date: String)
     // --------------- 2.0接口
     /// 向app服务器注册友盟token
     case UMAdd(deviceToken: String)
@@ -355,7 +358,9 @@ extension API: TargetType{
         case .myDoctor(_, _):
             return "api/doctor/myDoctor"
         case .allProvice:
-            return "api/area/allProvice"
+            return "api/area/newAllProvice"
+        case .allHotCity:
+            return "api/area/allHotCity"
         case .city(let id):
             return "api/area/city/\(id)"
         case .doctorList(_, _, _, _, _):
@@ -397,6 +402,8 @@ extension API: TargetType{
             return "api/physiology/saveOrUpdateWeight"
         case .saveOrUpdateBasis(_, _):
             return "api/physiology/saveOrUpdateBasis"
+        case .delTemperatureOrWeight(_, _):
+            return "api/physiology/delTemperatureOrWeight"
             
         case .UMAdd(_):
             return "api/umeng/add"
@@ -608,6 +615,9 @@ extension API {
         case .saveOrUpdateBasis(let menstruationCycle, let menstruationDuration):
             params["menstruationCycle"] = menstruationCycle
             params["menstruationDuration"] = menstruationDuration
+        case .delTemperatureOrWeight(let type, let date):
+            params["type"] = type
+            params["date"] = date
 
 
         case .UMAdd(let deviceToken):

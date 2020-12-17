@@ -13,8 +13,7 @@ class TYCalendarSectionModel {
     public var year: Int = 0
     public var month: Int = 0
     
-    public var menstruationStartDateStr: String?
-    public var menstruationEndDateStr: String?
+    public var menstruation: HCMenstruationModel?
 
     /// 当月前面有几天不在当月
     public var daysNotInMonthBefore: Int = 0
@@ -172,6 +171,9 @@ class TYCalendarItem {
     public var isInMonth: Bool = true
     public var isSelected: Bool = false
     
+    /// 是否预测
+    var isForecast: Bool = false
+
     /// 当前选择的日期属于哪个月经周期（标记的月经周期）
     public var belongMenstruaModel: HCMenstruationModel?
     public var yjRemindMode: HCYJRemindMode = .coming
@@ -210,6 +212,14 @@ class TYCalendarItem {
 
     public class func isClickedMenstruaItem(title: String) ->Bool {
         return title == "大姨妈来了" || title == "大姨妈走了"
+    }
+    
+    /// 是否是今天
+    public var isToday: Bool {
+        get {
+            let days = TYDateCalculate.numberOfDays(startStr: Date().formatDate(mode: .yymmdd), endStr: dateText, mode: .yymmdd)
+            return days == 0
+        }
     }
     
     /// 获取当前选中日期的月经信息
@@ -339,7 +349,7 @@ class TYCalendarItem {
         get {
             switch mensturationMode {
             case .yjq:
-                if isAfterToday {
+                if isForecast {
                     // 该天属于预测经期
                     return RGB(254, 199, 203)
                 }else {                    

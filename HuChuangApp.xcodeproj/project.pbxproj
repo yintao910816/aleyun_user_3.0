@@ -365,6 +365,8 @@
 		B8CD926A23A2967D00C9C061 /* HCRecordSuggestReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8CD926823A2967D00C9C061 /* HCRecordSuggestReusableView.xib */; };
 		B8CD926F23A29C6800C9C061 /* HCRecordActionItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CD926D23A29C6800C9C061 /* HCRecordActionItemCell.swift */; };
 		B8CD927023A29C6800C9C061 /* HCRecordActionItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8CD926E23A29C6800C9C061 /* HCRecordActionItemCell.xib */; };
+		B8CFBA412589BE1E00BD03A1 /* HCSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CFBA402589BE1E00BD03A1 /* HCSwitch.swift */; };
+		B8CFBA452589C39400BD03A1 /* HCListCustomSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CFBA442589C39400BD03A1 /* HCListCustomSwitchCell.swift */; };
 		B8D4D47D239426B400AA3D52 /* HCPicAndTextAskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D4D47C239426B400AA3D52 /* HCPicAndTextAskViewModel.swift */; };
 		B8D4D47F2394299E00AA3D52 /* HCPicAndTextAskFooterReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D4D47E2394299E00AA3D52 /* HCPicAndTextAskFooterReusableView.swift */; };
 		B8E60F2B2564C89A00B2259F /* HCBindPhoneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E60F2A2564C89A00B2259F /* HCBindPhoneViewModel.swift */; };
@@ -1256,6 +1258,8 @@
 		B8CD926823A2967D00C9C061 /* HCRecordSuggestReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HCRecordSuggestReusableView.xib; sourceTree = "<group>"; };
 		B8CD926D23A29C6800C9C061 /* HCRecordActionItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCRecordActionItemCell.swift; sourceTree = "<group>"; };
 		B8CD926E23A29C6800C9C061 /* HCRecordActionItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HCRecordActionItemCell.xib; sourceTree = "<group>"; };
+		B8CFBA402589BE1E00BD03A1 /* HCSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCSwitch.swift; sourceTree = "<group>"; };
+		B8CFBA442589C39400BD03A1 /* HCListCustomSwitchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCListCustomSwitchCell.swift; sourceTree = "<group>"; };
 		B8D4D47A2394258C00AA3D52 /* HCPicAndTextAskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCPicAndTextAskViewController.swift; sourceTree = "<group>"; };
 		B8D4D47C239426B400AA3D52 /* HCPicAndTextAskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCPicAndTextAskViewModel.swift; sourceTree = "<group>"; };
 		B8D4D47E2394299E00AA3D52 /* HCPicAndTextAskFooterReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCPicAndTextAskFooterReusableView.swift; sourceTree = "<group>"; };
@@ -2714,6 +2718,14 @@
 			path = HCRecord;
 			sourceTree = "<group>";
 		};
+		B8CFBA3F2589BE0700BD03A1 /* HCSwitch */ = {
+			isa = PBXGroup;
+			children = (
+				B8CFBA402589BE1E00BD03A1 /* HCSwitch.swift */,
+			);
+			path = HCSwitch;
+			sourceTree = "<group>";
+		};
 		B8EDA7E223AFD07F0095891D /* Record */ = {
 			isa = PBXGroup;
 			children = (
@@ -2906,6 +2918,7 @@
 		C421330622056B19006C10C4 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				B8CFBA3F2589BE0700BD03A1 /* HCSwitch */,
 				B8B0E26D257E21FC003D9803 /* HCPresation */,
 				B866D82C256FC03B000251AD /* URLProtocol */,
 				B8454ED223A3EF5200E88BAD /* TYDateCalculate.swift */,
@@ -3671,6 +3684,7 @@
 				C4AB272A24E53D6F0095F693 /* HCListDetailCell.swift */,
 				C4AB272B24E53D6F0095F693 /* HCListDetailNewTypeCell.swift */,
 				C4AB272C24E53D6F0095F693 /* HCListSwitchCell.swift */,
+				B8CFBA442589C39400BD03A1 /* HCListCustomSwitchCell.swift */,
 				C4AB272D24E53D6F0095F693 /* HCListButtonCell.swift */,
 				C4AB272E24E53D6F0095F693 /* HCListDetailButtonCell.swift */,
 				C4AB273024E53D6F0095F693 /* HCListDetailInputCell.swift */,
@@ -4548,6 +4562,7 @@
 				B830C4252559356C002F63BC /* HCVideoCall.swift in Sources */,
 				C4D1DBA224F7B366001EF30F /* HCExpertViewController.swift in Sources */,
 				B816EB51221DABF400F024D5 /* ZXCalendarParsedResult.m in Sources */,
+				B8CFBA412589BE1E00BD03A1 /* HCSwitch.swift in Sources */,
 				C4C3257D2205C3AD0091783C /* UIView+XIB.swift in Sources */,
 				C4DDE0A224F14F0C0001201C /* HCPicConsultCell.swift in Sources */,
 				B8BE351722147B1E00EF16F1 /* HCEditBirthdayViewController.swift in Sources */,
@@ -4588,6 +4603,7 @@
 				B8F90E6B24F2604A00A1D68C /* HCHomeViewContainer.swift in Sources */,
 				C4D1DB5F24F760AE001EF30F /* HCClassRoomBaseCell.swift in Sources */,
 				B816EA83221DABF400F024D5 /* ZXRGBLuminanceSource.m in Sources */,
+				B8CFBA452589C39400BD03A1 /* HCListCustomSwitchCell.swift in Sources */,
 				B819AF7424C6E85B00F88BA7 /* HCNavBarFloatView.swift in Sources */,
 				C404489F24EA721200AD1610 /* HCPicker.swift in Sources */,
 				B816EA8D221DABF400F024D5 /* ZXAztecState.m in Sources */,
@@ -4834,7 +4850,7 @@
 				CODE_SIGN_ENTITLEMENTS = HuChuangApp/HuChuangApp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1.3;
+				CURRENT_PROJECT_VERSION = 1.4;
 				DEVELOPMENT_TEAM = GMPPSEQW73;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = HuChuangApp/Info.plist;
@@ -4843,7 +4859,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.02.002;
+				MARKETING_VERSION = 3.02.003;
 				PRODUCT_BUNDLE_IDENTIFIER = com.huchuang.aileyun;
 				PRODUCT_NAME = "爱乐孕";
 				PROVISIONING_PROFILE_SPECIFIER = aileyun_user_old_dev;
@@ -4861,7 +4877,7 @@
 				CODE_SIGN_ENTITLEMENTS = HuChuangApp/HuChuangApp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1.3;
+				CURRENT_PROJECT_VERSION = 1.4;
 				DEVELOPMENT_TEAM = GMPPSEQW73;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = HuChuangApp/Info.plist;
@@ -4870,7 +4886,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.02.002;
+				MARKETING_VERSION = 3.02.003;
 				PRODUCT_BUNDLE_IDENTIFIER = com.huchuang.aileyun;
 				PRODUCT_NAME = "爱乐孕";
 				PROVISIONING_PROFILE_SPECIFIER = aleyun_user_old_hoc;

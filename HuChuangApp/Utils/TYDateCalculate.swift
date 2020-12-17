@@ -125,6 +125,31 @@ class TYDateCalculate {
 extension TYDateCalculate {
     
     /// 判断每天是否在当前月中
+    public class func dayContains(in month: String, day: String) ->Bool {
+        
+        let date = month.stringFormatDate(mode: .yymm)!
+        let calendar = NSCalendar.current
+        let components = calendar.dateComponents(Set<Calendar.Component>([.year, .month]), from: date)
+        let startDate = calendar.date(from: components)!
+
+        let calendar1 = NSCalendar.current
+        var components1 = DateComponents()
+        components1.month = 1
+        components1.day = -1
+        let endDate = calendar1.date(byAdding: components1, to: startDate)!
+
+        guard let dateDate = day.stringFormatDate(mode: .yymmdd) else {
+            return false
+        }
+        
+        if (dateDate.compare(startDate) == .orderedDescending || dateDate.compare(startDate) == .orderedSame) && (dateDate.compare(endDate) == .orderedAscending || dateDate.compare(endDate) == .orderedSame) {
+            return true
+        }
+        
+        return false
+    }
+
+    /// 判断每天是否在当前月中
     public class func currentMonthContais(dateString: String) ->Bool {
         let startDate = startOfCurrentMonth()
         let endDate = endOfCurrentMonth()
@@ -139,7 +164,7 @@ extension TYDateCalculate {
             return false
         }
 
-        return false
+        return true
     }
     
     /// 本月开始日期

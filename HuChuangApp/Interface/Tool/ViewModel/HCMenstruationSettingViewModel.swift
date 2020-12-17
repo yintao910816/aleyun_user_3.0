@@ -88,9 +88,11 @@ extension HCMenstruationSettingViewModel {
     private func prepareDatas() {
         sectionDatas.removeAll()
         
-        let sectionTitles = ["您的月经大概持续几天", "两次月经开始大概间隔多久", "建议开启只能预测"]
-        let rowTitles = ["经期长度", "周期长度", "使用智能预测"]
-        
+//        let sectionTitles = ["您的月经大概持续几天", "两次月经开始大概间隔多久", "建议开启只能预测"]
+//        let rowTitles = ["经期长度", "周期长度", "使用智能预测"]
+        let sectionTitles = ["您的月经大概持续几天", "两次月经开始大概间隔多久"]
+        let rowTitles = ["经期长度", "周期长度"]
+
         let duration = menstruationModel?.menstruationDuration == nil || menstruationModel?.menstruationDuration == 0 ? "" : "\(menstruationModel!.menstruationDuration)"
         let cycle = menstruationModel?.menstruationCycle == nil || menstruationModel?.menstruationCycle == 0 ? "" : "\(menstruationModel!.menstruationCycle)"
         let rowDetailsTitles: [String] = [duration, cycle, ""]

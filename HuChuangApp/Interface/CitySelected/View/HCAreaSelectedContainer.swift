@@ -149,7 +149,17 @@ extension HCAreaSelectedContainer: UITableViewDelegate, UITableViewDataSource {
             provinceClicked?(provinceData[indexPath.row])
         }else {
             if let provinceModel = provinceData.first(where: { [weak self] in $0.id == self?.currentProvinceId }), let cityModel = cityData[currentProvinceId]?[indexPath.row] {
-                cityClicked?((provinceModel, cityModel))
+                
+                let post = HCAreaCityModel()
+                post.name = cityModel.name
+                if cityModel.name == "全国" {
+                    post.id = ""
+                }else if let hotAreaModel = cityModel as? HCHotAreaCityModel {
+                    post.id = hotAreaModel.code
+                }else {
+                    post.id = cityModel.id
+                }
+                cityClicked?((provinceModel, post))
             }
         }
     }

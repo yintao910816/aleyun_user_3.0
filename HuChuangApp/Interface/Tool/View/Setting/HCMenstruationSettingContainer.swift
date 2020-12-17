@@ -54,7 +54,7 @@ extension HCMenstruationSettingContainer {
         remindLabel.font = .font(fontSize: 12)
         remindLabel.textAlignment = .center
         remindLabel.backgroundColor = .clear
-        remindLabel.text = "您所填写的生理信息将用于经期记录、分析及预测"
+        remindLabel.text = "您所填写的生理信息仅用于经期记录、分析及预测"
                 
         tableView.register(HCListSwitchCell.self, forCellReuseIdentifier: HCListSwitchCell_identifier)
         tableView.register(HCListDetailInputCell.self, forCellReuseIdentifier: HCListDetailInputCell_identifier)

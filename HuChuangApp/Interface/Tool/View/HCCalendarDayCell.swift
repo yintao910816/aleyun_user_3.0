@@ -17,6 +17,7 @@ class HCCalendarDayCell: UICollectionViewCell {
     private var topRightIcon: UIImageView!
     private var bottomLeftIcon: UIImageView!
     private var bottomRightIcon: UIImageView!
+    private var bottomRightLabel: UILabel!
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -37,11 +38,16 @@ class HCCalendarDayCell: UICollectionViewCell {
     //MARK: - public
     public var model: TYCalendarItem! {
         didSet {
+            PrintLog("设置cell：\(model.dateText) -- \(model.bottomLeftIcon) - \(model.mensturationMode)")
+            
             dayLabel.text = "\(model.day)"
             dayLabel.textColor = model.mensturationMode.color
-
-            if model.bottomRightIcon != nil {
-                PrintLog("显示标记：\(model.dateText)")
+            bottomRightLabel.textColor = model.mensturationMode.color
+            
+            if model.bottomRightIcon == nil, model.isToday {
+                bottomRightLabel.isHidden = false
+            }else {
+                bottomRightLabel.isHidden = true
             }
             
             if model.isInMonth {
@@ -99,12 +105,19 @@ class HCCalendarDayCell: UICollectionViewCell {
         bottomRightIcon.contentMode = .scaleAspectFill
         bottomRightIcon.clipsToBounds = true
 
+        bottomRightLabel = UILabel()
+        bottomRightLabel.textColor = RGB(109, 206, 111)
+        bottomRightLabel.font = .font(fontSize: 12)
+        bottomRightLabel.text = "今天"
+        bottomRightLabel.isHidden = true
+
         addSubview(selectedBGView)
         addSubview(container)
         container.addSubview(topRightIcon)
         container.addSubview(bottomLeftIcon)
         container.addSubview(bottomRightIcon)
         container.addSubview(dayLabel)
+        container.addSubview(bottomRightLabel)
     }
     
     override func layoutSubviews() {
@@ -135,5 +148,11 @@ class HCCalendarDayCell: UICollectionViewCell {
                                    width: tempSize.width,
                                    height: tempSize.height)
         
+        tempSize = bottomRightLabel.sizeThatFits(.init(width: CGFloat.greatestFiniteMagnitude, height: 13))
+        bottomRightLabel.frame = .init(x: container.width - tempSize.width,
+                                   y: container.height - tempSize.height,
+                                   width: tempSize.width,
+                                   height: tempSize.height)
+
     }
 }

@@ -24,8 +24,12 @@ class HCAreaManager {
         requestProvince()
     }
     
-    public func loadCity(id: String) {
-        requestCity(id: id)
+    public func loadCity(model: HCAreaProvinceModel) {
+        if model.name == "热门地区" {
+            requestHotCity()
+        }else {
+            requestCity(id: model.id)
+        }
     }
 }
 
@@ -34,7 +38,17 @@ extension HCAreaManager {
     private func requestProvince() {
         HCProvider.request(.allProvice)
             .map(models: HCAreaProvinceModel.self)
-            .do(onSuccess: { [weak self] in self?.requestCity(id: $0.first?.id ?? "") })
+            .map({ datas -> [HCAreaProvinceModel] in
+                var tempDatas: [HCAreaProvinceModel] = []
+                let hotModel = HCAreaProvinceModel()
+                hotModel.id = "-1"
+                hotModel.name = "热门地区"
+
+                tempDatas.append(hotModel)
+                tempDatas.append(contentsOf: datas)
+                return tempDatas
+            })
+            .do(onSuccess: { [weak self] _ in self?.requestHotCity() })
             .asObservable()
             .catchErrorJustReturn([HCAreaProvinceModel]())
             .bind(to: provinceDataSignal)
@@ -51,12 +65,18 @@ extension HCAreaManager {
                     self?.cityDataSignal.onNext((id, [HCAreaCityModel]()))
             }
             .disposed(by: disposeBag)
-//                .map{ (id, $0) }
-//                .asObservable()
-//                .catchErrorJustReturn(("", [HCAreaCityModel]()))
-//                .bind(to: cityDataSignal)
-//                .disposed(by: disposeBag)
         }
+    }
+    
+    private func requestHotCity() {
+        HCProvider.request(.allHotCity)
+            .map(models: HCHotAreaCityModel.self)
+            .subscribe(onSuccess: { [weak self] in
+                self?.cityDataSignal.onNext(("-1", $0))
+            }) { [weak self] _ in
+                self?.cityDataSignal.onNext(("-1", [HCAreaCityModel]()))
+        }
+        .disposed(by: disposeBag)
     }
 
 }
@@ -71,4 +91,13 @@ class HCAreaProvinceModel: HJModel {
 class HCAreaCityModel: HJModel {
     var id: String = ""
     var name: String = ""
+}
+
+class HCHotAreaCityModel: HCAreaCityModel {
+    var code: String = ""
+    var firstLetter: String = ""
+    var hotCityFlag: String = ""
+    var level: Int = 0
+    var parent_id: String = ""
+    var sort: Int = 0
 }

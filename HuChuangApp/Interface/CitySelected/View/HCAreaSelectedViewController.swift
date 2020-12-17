@@ -36,7 +36,7 @@ class HCAreaSelectedViewController: UIViewController {
             .subscribe(onNext: { [weak self] in self?.container.reloadCity(id: $0.0, data: $0.1) })
             .disposed(by: disposeBag)
         
-        container.provinceClicked = { [weak self] in self?.areaManager.loadCity(id: $0.id) }
+        container.provinceClicked = { [weak self] in self?.areaManager.loadCity(model: $0) }
         container.cityClicked = { [weak self] in
             self?.cityClicked?($0)
             self?.excuteAnimotion()

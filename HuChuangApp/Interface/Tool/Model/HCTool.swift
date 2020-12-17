@@ -46,7 +46,7 @@ enum HCYJRemindMode {
         case .cancelGoingForbiden:
             return HCToolCalculate.cancelGoingForbidenRemindText()
         case .forbidenComming, .forbidenGoing:
-            return "两次月经间隔必须大于5天"
+            return "姨妈来得这么频繁是不是记错了？如果记录当日月经，请修改临近的经期哦！"
         }
     }
 }
@@ -86,14 +86,16 @@ class HCMensturaDateInfo: NSObject {
     public var topRightIcon: UIImage?
     public var bottomLeftIcon: UIImage?
     public var bottomRightIcon: UIImage?
+    public var isForecast: Bool = false
     
-    public class func transform(dates: [Date], mensturationMode: HCMenstruationMode) ->[HCMensturaDateInfo] {
+    public class func transform(dates: [Date], mensturationMode: HCMenstruationMode, isForecast: Bool) ->[HCMensturaDateInfo] {
         var datas: [HCMensturaDateInfo] = []
         
         for idx in 0..<dates.count {
             let dateInfo = HCMensturaDateInfo()
             dateInfo.mensturationMode = mensturationMode
             dateInfo.date = dates[idx]
+            dateInfo.isForecast = isForecast
             
             if mensturationMode == .yjq {
                 dateInfo.bottomLeftIcon = idx == 0 ? UIImage(named: "yjq_start") : idx == dates.count - 1 ? UIImage(named: "yjq_end") : nil
@@ -105,10 +107,11 @@ class HCMensturaDateInfo: NSObject {
         return datas
     }
     
-    public class func transform(date: Date, mensturationMode: HCMenstruationMode) ->HCMensturaDateInfo {
+    public class func transform(date: Date, mensturationMode: HCMenstruationMode, isForecast: Bool) ->HCMensturaDateInfo {
         let dateInfo = HCMensturaDateInfo()
         dateInfo.mensturationMode = mensturationMode
         dateInfo.date = date
+        dateInfo.isForecast = isForecast
         
         if mensturationMode == .plr {
             dateInfo.bottomLeftIcon = UIImage(named: "tool_painuanri")
@@ -140,9 +143,39 @@ class HCBaseInfoItemModel: HJModel {
     }
 }
 
+enum HCForecastMenstruaMode {
+    /// 正常推算
+    case normal
+    /// 只推算排卵期
+    case onlyPLQ
+    /// 全部为安全期
+    case allSafe
+    /// 不推算
+    case none
+    
+    public func transformMode(mode: HCMenstruationMode) ->HCMenstruationMode {
+        switch self {
+        case .normal:
+            return mode
+        case .onlyPLQ:
+            if mode == .plq || mode == .plr {
+                return mode
+            }else {
+                return .aqq
+            }
+        case .allSafe:
+            return .aqq
+        case .none:
+            return .none
+        }
+    }
+}
+
 class HCMenstruationModel: HJModel {
     /// 是否为预测
     var isForecast: Bool = false
+    
+    var mode: HCForecastMenstruaMode = .normal
     
     var bak: String = ""
     var createDate: String = ""

@@ -25,23 +25,33 @@ class HCToolViewController: BaseViewController {
             if $0.title == "经期设置" {
                 self.navigationController?.pushViewController(HCMenstruationSettingViewController(), animated: true)
             }else if $0.title == "体温" {
+                let datas = HCPickerSectionData.createTemperatureDatas()
                 let picker = HCTemperaturePicker()
-                picker.datasource = HCPickerSectionData.createTemperatureDatas()
+                picker.cancelTitle = "清除"
+                picker.datasource = datas.0
+                picker.selectRow(datas.1, inComponent: 0, animated: false)
                 picker.pickerHeight = 230
                 self.model(for: picker, controllerHeight: self.view.height)
                 picker.finishSelected = { [unowned self] in
                     if $0.0 == .ok, $0.1.count > 0 {
                         self.viewModel.editTemperatureSignal.onNext($0.1)
+                    }else if $0.0 == .leftItemAction {
+                        self.viewModel.delTemperatureOrWeightSignal.onNext(1)
                     }
                 }
             }else if $0.title == "体重" {
+                let datas = HCPickerSectionData.createWeightDatas()
                 let picker = HCPickerView()
-                picker.datasource = HCPickerSectionData.createWeightDatas()
+                picker.cancelTitle = "清除"
+                picker.datasource = datas.0
+                picker.selectRow(datas.1, inComponent: 0, animated: false)
                 picker.pickerHeight = 230
                 self.model(for: picker, controllerHeight: self.view.height)
                 picker.finishSelected = { [unowned self] in
                     if $0.0 == .ok, $0.1.count > 0 {
                         self.viewModel.editWeightSignal.onNext($0.1)
+                    }else if $0.0 == .leftItemAction {
+                        self.viewModel.delTemperatureOrWeightSignal.onNext(2)
                     }
                 }
             }

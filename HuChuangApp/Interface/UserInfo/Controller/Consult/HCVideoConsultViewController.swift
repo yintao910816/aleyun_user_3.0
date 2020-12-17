@@ -74,7 +74,7 @@ extension HCVideoConsultViewController: UITableViewDelegate, UITableViewDataSour
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = (tableView.dequeueReusableCell(withIdentifier: HCPicConsultCell_identifier) as! HCPicConsultCell)
-        cell.model = datasource[indexPath.row]
+        cell.model = datasource[indexPath.section]
         cell.actionCallBack = { [unowned self] in self.pushH5CallBack?((HCMyConsultDetailMode.chat, $0)) }
         return cell
     }

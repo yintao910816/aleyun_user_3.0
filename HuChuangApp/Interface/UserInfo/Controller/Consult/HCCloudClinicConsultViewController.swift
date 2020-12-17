@@ -74,7 +74,7 @@ extension HCCloudClinicConsultViewController: UITableViewDelegate, UITableViewDa
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = (tableView.dequeueReusableCell(withIdentifier: HCPicConsultCell_identifier) as! HCPicConsultCell)
-        cell.model = datasource[indexPath.row]
+        cell.model = datasource[indexPath.section]
         return cell
     }
     

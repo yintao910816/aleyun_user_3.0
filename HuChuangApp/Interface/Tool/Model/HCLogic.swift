@@ -83,6 +83,7 @@ class HCToolCalculate {
 extension HCToolCalculate {
     
     public class func transformMenstruationList(currentDate: String,
+                                                realyMenstrua: HCMenstruationModel?,
                                                 menstruaList: [[HCMenstruationModel]],
                                                 baseMenstruation: HCMenstruationModel?) ->(menstruasDic: [String: [HCMenstruationModel]], reloadSectionKeys: [String]) {
         guard let baseMenstrua = baseMenstruation else {
@@ -98,8 +99,11 @@ extension HCToolCalculate {
         }
         
         var listDic: [Int: [HCMenstruationModel]] = [:]
+        // 上一个设置了月经周期的
         listDic[1] = menstruaList[0]
+        // 当前显示月份
         listDic[2] = menstruaList[1]
+        // 下一个设置了月经周期的
         listDic[3] = menstruaList[2]
         
         let key1 = getKey(dateStr: currentDate, identifier: .previous)
@@ -107,98 +111,345 @@ extension HCToolCalculate {
         let key3 = getKey(dateStr: currentDate, identifier: .next)
         var resultDic: [String: [HCMenstruationModel]] = [:]
         
-        //        let tupData1 = getFirstMenstruaData(menstruaModels: listDic[1]!)
-        let tupData2 = getFirstMenstruaData(menstruaModels: listDic[2]!)
-        let tupData3 = getFirstMenstruaData(menstruaModels: listDic[3]!)
+        let isFind1 = isFind(menstruaModels: listDic[1]!, month: key1)
+//        let isFind2 = isFind(menstruaModels: listDic[2]!, month: key2)
+        let isFind3 = isFind(menstruaModels: listDic[3]!, month: key3)
         
-        if listDic[1]!.count == 0 {
-            if tupData2.isFind {
-                resultDic[key2] = listDic[2]!
-                resultDic[key1] = [createMenstruation(model: baseMenstrua,
-                                                      menstruationDate: tupData2.menstrua.menstruationDate,
-                                                      isAfter: false)]
-                
-                if tupData3.isFind {
+        let realyMonth = isRealyMonth(dateStr: currentDate)
+
+        if listDic[2]!.count != 0 {
+            // 当前显示月设置了月经周期
+            resultDic[key2] = listDic[2]!
+            if isFind1 {
+                resultDic[key1] = listDic[1]!
+                if isFind3 {
                     resultDic[key3] = listDic[3]!
                 }else {
                     resultDic[key3] = [createMenstruation(model: baseMenstrua,
-                                                          menstruationDate: listDic[2]!.last!.menstruationDate,
+                                                          menstruationDate: resultDic[key2]!.last!.menstruationDate,
+                                                          mode: realyMonth ? .normal : .allSafe,
+                                                          isRealyMonth: false,
                                                           isAfter: true)]
                 }
             }else {
-                // 第一二条没有，第三条肯定有
-                resultDic[key3] = listDic[3]!
-                resultDic[key2] = [createMenstruation(model: baseMenstrua,
-                                                      menstruationDate: tupData3.menstrua.menstruationDate,
+                /// 上一个月肯定不是真实的当前月
+                resultDic[key1] = [createMenstruation(model: baseMenstrua,
+                                                      menstruationDate: resultDic[key2]!.first!.menstruationDate,
+                                                      mode: .onlyPLQ,
+                                                      isRealyMonth: false,
                                                       isAfter: false)]
+
+                if isFind3 {
+                    resultDic[key3] = listDic[3]!
+                }else {
+                    if isRealyMonth(dateStr: "\(key3)-01") {
+                        let mens3 = createMenstruation(model: baseMenstrua,
+                                                       menstruationDate: "\(key2)-01",
+                                                       mode: .normal,
+                                                       isRealyMonth: true,
+                                                       isAfter: true,
+                                                       discareMenstruationDate: true)
+                        resultDic[key3] = [mens3]
+                    }else {
+                        resultDic[key3] = [createMenstruation(model: baseMenstrua,
+                                                              menstruationDate: resultDic[key2]!.last!.menstruationDate,
+                                                              mode: realyMonth ? .normal : .allSafe,
+                                                              isRealyMonth: false,
+                                                              isAfter: true)]
+                    }
+                }
             }
-        }else if listDic[2]!.count == 0 {
+        }else if isFind1 {
             resultDic[key1] = listDic[1]!
-            let data2 = createMenstruation(model: baseMenstrua,
-                                           menstruationDate: listDic[1]!.last!.menstruationDate,
-                                           isAfter: true)
-            resultDic[key2] = [data2]
-            
-            if tupData3.isFind {
+            resultDic[key2] = [createMenstruation(model: baseMenstrua,
+                                                  menstruationDate: resultDic[key1]!.last!.menstruationDate,
+                                                  mode: isAfterTodayMonth(dateStr: key2) ? .normal : .allSafe,
+                                                  isRealyMonth: realyMonth,
+                                                  isAfter: true)]
+            if isFind3 {
+                resultDic[key2]?.first?.mode = .onlyPLQ
                 resultDic[key3] = listDic[3]!
+                resultDic[key2]?.first?.menstruationCycle = TYDateCalculate.numberOfDays(startStr: resultDic[key2]!.last!.menstruationDate, endStr: resultDic[key3]!.first!.menstruationDate, mode: .yymmdd) - 1
             }else {
                 resultDic[key3] = [createMenstruation(model: baseMenstrua,
-                                                      menstruationDate: data2.menstruationDate,
+                                                      menstruationDate: resultDic[key2]!.last!.menstruationDate,
+                                                      mode: realyMonth ? .normal : .allSafe,
+                                                      isRealyMonth: realyMonth,
                                                       isAfter: true)]
             }
-        }else if listDic[3]!.count == 0 {
-            resultDic[key1] = listDic[1]!
-            resultDic[key2] = listDic[2]!
-            resultDic[key3] = [createMenstruation(model: baseMenstrua,
-                                                  menstruationDate: listDic[2]!.last!.menstruationDate,
-                                                  isAfter: true)]
-        }else {
-            resultDic[key1] = listDic[1]!
-            resultDic[key2] = listDic[2]!
+        }else if isFind3 {
             resultDic[key3] = listDic[3]!
+            resultDic[key2] = [createMenstruation(model: baseMenstrua,
+                                                  menstruationDate: resultDic[key3]!.first!.menstruationDate,
+                                                  mode: .onlyPLQ,
+                                                  isRealyMonth: false,
+                                                  isAfter: false)]
+            resultDic[key1] = [createMenstruation(model: baseMenstrua,
+                                                  menstruationDate: resultDic[key2]!.first!.menstruationDate,
+                                                  mode: listDic[1]!.count > 0 ? .allSafe : .none,
+                                                  isRealyMonth: false,
+                                                  isAfter: false)]
+        }else {
+            if realyMonth {
+                let realyMens = createRealyMens(baseMens: baseMenstrua)
+                resultDic[key2] = [realyMens]
+                resultDic[key1] = [createMenstruation(model: baseMenstrua,
+                                                      menstruationDate: realyMens.menstruationDate,
+                                                      mode: .onlyPLQ,
+                                                      isRealyMonth: false,
+                                                      isAfter: false)]
+                resultDic[key3] = [createMenstruation(model: baseMenstrua,
+                                                      menstruationDate: realyMens.menstruationDate,
+                                                      mode: .normal,
+                                                      isRealyMonth: false,
+                                                      isAfter: true)]
+            }else {
+                let compare = TYDateCalculate.compare(dateStr: currentDate, other: Date().formatDate(mode: .yymmdd), mode: .yymmdd)
+                if compare == .orderedAscending {
+                    // 当前显示月在真实的月前面
+                    if listDic[1]!.count > 0 {
+                        let mens2 = createSimpleMens(baseMens: baseMenstrua, menstruationDate: "\(key2)-01", mode: .allSafe)
+                        resultDic[key2] = [mens2]
+                        let mens1 = createSimpleMens(baseMens: baseMenstrua, menstruationDate: "\(key1)-01", mode: .allSafe)
+                        resultDic[key1] = [mens1]
+                        
+                        if isRealyMonth(dateStr: "\(key3)-01") {
+                            let mens3 = createMenstruation(model: baseMenstrua,
+                                                           menstruationDate: "\(key2)-01",
+                                                           mode: .normal,
+                                                           isRealyMonth: true,
+                                                           isAfter: true,
+                                                           discareMenstruationDate: true)
+                            resultDic[key2]?.first?.mode = .onlyPLQ
+                            resultDic[key3] = [mens3]
+                        }else {
+                            let mens3 = createSimpleMens(baseMens: baseMenstrua, menstruationDate: "\(key3)-01", mode: .allSafe)
+                            resultDic[key3] = [mens3]
+                        }
+                    }else {
+                        let mens2 = createSimpleMens(baseMens: baseMenstrua, menstruationDate: "\(key2)-01", mode: .none)
+                        resultDic[key2] = [mens2]
+                        let mens1 = createSimpleMens(baseMens: baseMenstrua, menstruationDate: "\(key1)-01", mode: .none)
+                        resultDic[key1] = [mens1]
+                        let mens3 = createSimpleMens(baseMens: baseMenstrua, menstruationDate: "\(key3)-01", mode: .none)
+                        resultDic[key3] = [mens3]
+                    }
+                }else {
+                    // 当前显示月在真实的月后面
+                    let mens2 = createSelectedMensFromRealyMens(model: realyMenstrua!, selectedDate: currentDate)
+                    resultDic[key2] = [mens2]
+                    let mens3 = createMenstruation(model: baseMenstrua,
+                                                   menstruationDate: mens2.menstruationDate,
+                                                   mode: .normal,
+                                                   isRealyMonth: false,
+                                                   isAfter: true)
+                    resultDic[key3] = [mens3]
+                    let mens1 = createMenstruation(model: baseMenstrua,
+                                                   menstruationDate: mens2.menstruationDate,
+                                                   mode: .normal,
+                                                   isRealyMonth: false,
+                                                   isAfter: false)
+                    resultDic[key1] = [mens1]
+                }
+            }
         }
+                
+//        if listDic[1]!.count == 0 {
+//            if tupData2.isFind {
+//                resultDic[key2] = listDic[2]!
+//                resultDic[key1] = [createMenstruation(model: baseMenstrua,
+//                                                      menstruationDate: tupData2.menstrua.menstruationDate,
+//                                                      isAfter: false)]
+//
+//                if tupData3.isFind {
+//                    resultDic[key3] = listDic[3]!
+//                }else {
+//                    resultDic[key3] = [createMenstruation(model: baseMenstrua,
+//                                                          menstruationDate: listDic[2]!.last!.menstruationDate,
+//                                                          isAfter: true)]
+//                }
+//            }else {
+//                // 第一二条没有，第三条肯定有
+//                resultDic[key3] = listDic[3]!
+//                resultDic[key2] = [createMenstruation(model: baseMenstrua,
+//                                                      menstruationDate: tupData3.menstrua.menstruationDate,
+//                                                      isAfter: false)]
+//            }
+//        }else if listDic[2]!.count == 0 {
+//            resultDic[key1] = listDic[1]!
+//            let data2 = createMenstruation(model: baseMenstrua,
+//                                           menstruationDate: listDic[1]!.last!.menstruationDate,
+//                                           isAfter: true)
+//            resultDic[key2] = [data2]
+//
+//            if tupData3.isFind {
+//                resultDic[key3] = listDic[3]!
+//            }else {
+//                resultDic[key3] = [createMenstruation(model: baseMenstrua,
+//                                                      menstruationDate: data2.menstruationDate,
+//                                                      isAfter: true)]
+//            }
+//        }else if listDic[3]!.count == 0 {
+//            resultDic[key1] = listDic[1]!
+//            resultDic[key2] = listDic[2]!
+//            resultDic[key3] = [createMenstruation(model: baseMenstrua,
+//                                                  menstruationDate: listDic[2]!.last!.menstruationDate,
+//                                                  isAfter: true)]
+//        }else {
+//            resultDic[key1] = listDic[1]!
+//            resultDic[key2] = listDic[2]!
+//            resultDic[key3] = listDic[3]!
+//        }
         
+        var hasMens0: Bool = false
+        let key0 = getKey(dateStr: key1, identifier: .previous)
         if resultDic[key1]?.first?.isForecast == false {
+            hasMens0 = true
             // 如果前面一个月设置了经期，才再往前面推一个月
-            let key0 = getKey(dateStr: key1, identifier: .previous)
             resultDic[key0] = [createMenstruation(model: baseMenstrua,
-                                                  menstruationDate: resultDic[key1]!.first!.menstruationDate,
+                                                  menstruationDate: listDic[1]!.first!.menstruationDate,
+                                                  mode: .onlyPLQ,
+                                                  isRealyMonth: false,
                                                   isAfter: false)]
         }
         
+        // 修改本次周期相对于下次周期的间隔
+        var allMens: [HCMenstruationModel] = []
+        if hasMens0 {
+            allMens.append(contentsOf: resultDic[key0]!)
+            allMens.append(contentsOf: resultDic[key1]!)
+            allMens.append(contentsOf: resultDic[key2]!)
+            allMens.append(contentsOf: resultDic[key3]!)
+        }else {
+            allMens.append(contentsOf: resultDic[key1]!)
+            allMens.append(contentsOf: resultDic[key2]!)
+            allMens.append(contentsOf: resultDic[key3]!)
+        }
+        
+        for idx in 0..<allMens.count {
+            if idx + 1 < allMens.count {
+                let days = TYDateCalculate.numberOfDays(startStr: allMens[idx].menstruationDate,
+                                                        endStr: allMens[idx + 1].menstruationDate,
+                                                        mode: .yymmdd)
+                allMens[idx].menstruationCycle = days
+            }
+        }
+        
         // 当前月后面的每一个月都要推算
-        let key4 = getKey(dateStr: key3, identifier: .next)
-        resultDic[key4] = [createMenstruation(model: baseMenstrua,
-                                              menstruationDate: resultDic[key3]!.last!.menstruationDate,
-                                              isAfter: true)]
+//        let key4 = getKey(dateStr: key3, identifier: .next)
+//        resultDic[key4] = [createMenstruation(model: baseMenstrua,
+//                                              menstruationDate: resultDic[key3]!.last!.menstruationDate,
+//                                              isAfter: true)]
         
         return (menstruasDic: resultDic, reloadSectionKeys: [key1, key2, key3])
     }
     
     // 找到该月的第一个经期数据
-    private class func getFirstMenstruaData(menstruaModels: [HCMenstruationModel]) ->(isFind: Bool, menstrua: HCMenstruationModel) {
-        if menstruaModels.count > 0 {
-            return (true, menstruaModels.first!)
+    private class func isFind(menstruaModels: [HCMenstruationModel], month: String) ->Bool {
+        for item in menstruaModels {
+            if TYDateCalculate.dayContains(in: month, day: item.menstruationDate) == true {
+                return true
+            }
         }
-        return (false, HCMenstruationModel())
+        return false
     }
     
-    private class func createMenstruation(model: HCMenstruationModel, menstruationDate: String, isAfter: Bool) ->HCMenstruationModel {
+    private class func createMenstruation(model: HCMenstruationModel,
+                                          menstruationDate: String,
+                                          mode: HCForecastMenstruaMode,
+                                          isRealyMonth: Bool,
+                                          isAfter: Bool,
+                                          discareMenstruationDate: Bool = false) ->HCMenstruationModel {
         let result = HCMenstruationModel()
         result.menstruationCycle = model.menstruationCycle
         result.menstruationDuration = model.menstruationDuration
         result.isForecast = true
+        result.mode = mode
         
-        let date = menstruationDate.stringFormatDate(mode: .yymmdd)!
-        let menstruaDate = TYDateCalculate.getDate(currentDate: date,
-                                                   days: model.menstruationCycle,
-                                                   isAfter: isAfter)
-        result.menstruationDate = menstruaDate.formatDate(mode: .yymmdd)
+        if isRealyMonth {
+            let today = Date().formatDate(mode: .yymmdd)
+            let days = TYDateCalculate.numberOfDays(startStr: menstruationDate,
+                                                    endStr: today,
+                                                    mode: .yymmdd)
+            if days >= model.menstruationCycle || discareMenstruationDate {
+                result.menstruationDate = today
+                let endDate = TYDateCalculate.getDate(currentDate: Date(),
+                                                      days: model.menstruationDuration,
+                                                      isAfter: true)
+                result.menstruationEndDate = endDate.formatDate(mode: .yymmdd)
+            }else {
+                let menstruationDate = TYDateCalculate.getDate(currentDate: menstruationDate.stringFormatDate(mode: .yymmdd)!,
+                                                               days: model.menstruationCycle,
+                                                               isAfter: isAfter)
+                result.menstruationDate = menstruationDate.formatDate(mode: .yymmdd)
+                let endDate = TYDateCalculate.getDate(currentDate: menstruationDate,
+                                                      days: model.menstruationDuration,
+                                                      isAfter: true)
+                result.menstruationEndDate = endDate.formatDate(mode: .yymmdd)
+            }
+        }else {
+            let date = menstruationDate.stringFormatDate(mode: .yymmdd)!
+            let menstruaDate = TYDateCalculate.getDate(currentDate: date,
+                                                       days: model.menstruationCycle,
+                                                       isAfter: isAfter)
+            result.menstruationDate = menstruaDate.formatDate(mode: .yymmdd)
 
+            let menstruaEndDate = TYDateCalculate.getDate(currentDate: menstruaDate,
+                                                          days: model.menstruationDuration,
+                                                          isAfter: true)
+            result.menstruationEndDate = menstruaEndDate.formatDate(mode: .yymmdd)
+        }
+        return result
+    }
+    
+    private class func createSelectedMensFromRealyMens(model: HCMenstruationModel, selectedDate: String) ->HCMenstruationModel {
+        let days = TYDateCalculate.numberOfDays(startStr: model.menstruationDate,
+                                                endStr: selectedDate,
+                                                mode: .yymmdd)
+        let count: Int = days / model.menstruationCycle
+        let realyMenstruaDate = model.menstruationDate.stringFormatDate(mode: .yymmdd)!
+        let menstruaDate = TYDateCalculate.getDate(currentDate: realyMenstruaDate,
+                                                   days: count * model.menstruationCycle,
+                                                   isAfter: true)
         let menstruaEndDate = TYDateCalculate.getDate(currentDate: menstruaDate,
                                                       days: model.menstruationDuration,
                                                       isAfter: true)
+        
+        let result = HCMenstruationModel()
+        result.menstruationCycle = model.menstruationCycle
+        result.menstruationDuration = model.menstruationDuration
+        result.isForecast = true
+        result.mode = .normal
+        result.menstruationDate = menstruaDate.formatDate(mode: .yymmdd)
         result.menstruationEndDate = menstruaEndDate.formatDate(mode: .yymmdd)
+        return result
+    }
+    
+    private class func createRealyMens(baseMens: HCMenstruationModel) ->HCMenstruationModel {
+        let result = HCMenstruationModel()
+        result.menstruationCycle = baseMens.menstruationCycle
+        result.menstruationDuration = baseMens.menstruationDuration
+        result.isForecast = true
+        result.mode = .normal
+        result.menstruationDate = Date().formatDate(mode: .yymmdd)
+        result.menstruationEndDate = TYDateCalculate.getDate(currentDate: Date(),
+                                                             days: baseMens.menstruationDuration,
+                                                             isAfter: true).formatDate(mode: .yymmdd)
+        return result
+    }
+
+    private class func createSimpleMens(baseMens: HCMenstruationModel,
+                                        menstruationDate: String,
+                                        mode: HCForecastMenstruaMode) ->HCMenstruationModel {
+        let result = HCMenstruationModel()
+        result.menstruationCycle = baseMens.menstruationCycle
+        result.menstruationDuration = baseMens.menstruationDuration
+        result.isForecast = true
+        result.mode = mode
+        result.menstruationDate = menstruationDate
+        result.menstruationEndDate = TYDateCalculate.getDate(currentDate: menstruationDate.stringFormatDate(mode: .yymmdd)!,
+                                                             days: baseMens.menstruationDuration,
+                                                             isAfter: true).formatDate(mode: .yymmdd)
         return result
     }
     
@@ -211,6 +462,16 @@ extension HCToolCalculate {
         return indexDate.formatDate(mode: .yymm)
     }
     
+    public class func isRealyMonth(dateStr: String) ->Bool {
+        return TYDateCalculate.currentMonthContais(dateString: dateStr)
+    }
+    
+    public class func isAfterTodayMonth(dateStr: String) ->Bool {
+        let compare = TYDateCalculate.compare(dateStr: Date().formatDate(mode: .yymm),
+                                              other: dateStr,
+                                              mode: .yymm)
+        return (compare == .orderedAscending || compare == .orderedSame)
+    }
 }
 
 //MARK: 相关规则

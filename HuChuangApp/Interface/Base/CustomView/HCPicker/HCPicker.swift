@@ -50,6 +50,12 @@ class HCPickerView: HCPicker {
             picker.reloadAllComponents()
         }
     }
+    
+    public func selectRow(_ row: Int, inComponent component: Int, animated: Bool) {
+        selectedComponent = component
+        selectedRow = row
+        picker.selectRow(row, inComponent: component, animated: animated)
+    }
         
     override var pickerHeight: CGFloat {
         didSet {
@@ -109,6 +115,7 @@ extension HCPickerView: UIPickerViewDelegate, UIPickerViewDataSource {
 
 public enum HCPickerAction {
     case cancel
+    case leftItemAction
     case ok
 }
 
@@ -178,7 +185,7 @@ class HCPicker: UIViewController {
     
     @objc func cancelAction() {
         if !isCustomCancel {
-            finishSelected?((HCPickerAction.cancel, ""))
+            finishSelected?((HCPickerAction.leftItemAction, ""))
         }
         dismiss(animated: true, completion: nil)
     }

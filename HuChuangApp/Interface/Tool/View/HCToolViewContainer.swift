@@ -104,7 +104,7 @@ class HCToolViewContainer: UIView {
         tableView.separatorStyle = .none
         tableView.showsVerticalScrollIndicator = false
         
-        tableView.register(HCListSwitchCell.self, forCellReuseIdentifier: HCListSwitchCell_identifier)
+        tableView.register(HCListCustomSwitchCell.self, forCellReuseIdentifier: HCListCustomSwitchCell_identifier)
         tableView.register(HCListDetailCell.self, forCellReuseIdentifier: HCListDetailCell_identifier)
 
         addSubview(tableView)

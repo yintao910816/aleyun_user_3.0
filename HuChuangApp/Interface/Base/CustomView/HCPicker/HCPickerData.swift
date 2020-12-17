@@ -13,43 +13,47 @@ struct HCPickerSectionData {
     
     
     /// 创建体温数据
-    public static func createTemperatureDatas() ->[HCPickerSectionData] {
+    public static func createTemperatureDatas() ->([HCPickerSectionData], Int) {
         var intPart: [HCPickerItemModel] = []
         var floatPart: [HCPickerItemModel] = []
         let staticItem: [HCPickerItemModel] = [HCPickerItemModel(title: "°C")]
 
-        for idx in 35...43 {
+        for idx in 30...42 {
             intPart.append(HCPickerItemModel(title: "\(idx)"))
         }
+        let selectedIdx: Int = intPart.firstIndex(where: { $0.title == "36" }) ?? 0
 
-        for idx in 0...99 {
-            let idxString = idx < 10 ? ".0\(idx)" : ".\(idx)"
+        for idx in 0...9 {
+            let idxString = ".\(idx)"
             floatPart.append(HCPickerItemModel(title: "\(idxString)"))
         }
 
-        return [HCPickerSectionData(items: intPart),
-                HCPickerSectionData(items: floatPart),
-                HCPickerSectionData(items: staticItem)]
+        let datas = [HCPickerSectionData(items: intPart),
+                     HCPickerSectionData(items: floatPart),
+                     HCPickerSectionData(items: staticItem)]
+        return (datas, selectedIdx)
     }
     
     /// 创建体重数据
-    public static func createWeightDatas() ->[HCPickerSectionData] {
+    public static func createWeightDatas() ->([HCPickerSectionData], Int) {
         var intPart: [HCPickerItemModel] = []
         var floatPart: [HCPickerItemModel] = []
         let staticItem: [HCPickerItemModel] = [HCPickerItemModel(title: "kg")]
 
-        for idx in 20...150 {
+        for idx in 20...120 {
             intPart.append(HCPickerItemModel(title: "\(idx)"))
         }
+        let selectedIdx: Int = intPart.firstIndex(where: { $0.title == "50" }) ?? 0
 
         for idx in 0...99 {
             let idxString = idx < 10 ? ".0\(idx)" : ".\(idx)"
             floatPart.append(HCPickerItemModel(title: "\(idxString)"))
         }
 
-        return [HCPickerSectionData(items: intPart),
-                HCPickerSectionData(items: floatPart),
-                HCPickerSectionData(items: staticItem)]
+        let datas = [HCPickerSectionData(items: intPart),
+                     HCPickerSectionData(items: floatPart),
+                     HCPickerSectionData(items: staticItem)]
+        return (datas, selectedIdx)
     }
 }
 
