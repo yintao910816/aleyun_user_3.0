@@ -4850,7 +4850,7 @@
 				CODE_SIGN_ENTITLEMENTS = HuChuangApp/HuChuangApp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1.4;
+				CURRENT_PROJECT_VERSION = 1.0;
 				DEVELOPMENT_TEAM = GMPPSEQW73;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = HuChuangApp/Info.plist;
@@ -4859,7 +4859,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.02.003;
+				MARKETING_VERSION = 3.02.004;
 				PRODUCT_BUNDLE_IDENTIFIER = com.huchuang.aileyun;
 				PRODUCT_NAME = "爱乐孕";
 				PROVISIONING_PROFILE_SPECIFIER = aileyun_user_old_dev;
@@ -4877,7 +4877,7 @@
 				CODE_SIGN_ENTITLEMENTS = HuChuangApp/HuChuangApp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1.4;
+				CURRENT_PROJECT_VERSION = 1.0;
 				DEVELOPMENT_TEAM = GMPPSEQW73;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = HuChuangApp/Info.plist;
@@ -4886,7 +4886,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.02.003;
+				MARKETING_VERSION = 3.02.004;
 				PRODUCT_BUNDLE_IDENTIFIER = com.huchuang.aileyun;
 				PRODUCT_NAME = "爱乐孕";
 				PROVISIONING_PROFILE_SPECIFIER = aleyun_user_old_hoc;

@@ -93,7 +93,7 @@ extension HCVideoConsultRecordViewController: UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        pushH5CallBack?(viewModel.datasource.value[indexPath.row])
+        pushH5CallBack?(viewModel.datasource.value[indexPath.section])
     }
 }
 

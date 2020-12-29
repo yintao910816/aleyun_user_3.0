@@ -105,6 +105,6 @@ extension HCVideoConsultViewController: UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        pushH5CallBack?((HCMyConsultDetailMode.order, datasource[indexPath.row]))
+        pushH5CallBack?((HCMyConsultDetailMode.order, datasource[indexPath.section]))
     }
 }
