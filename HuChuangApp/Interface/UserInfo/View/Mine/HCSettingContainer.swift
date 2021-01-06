@@ -126,7 +126,7 @@ class HCSettingHeader: UIView {
         appIcon.clipsToBounds = true
         
         appVersionLabel = UILabel()
-        appVersionLabel.text = "爱乐孕\(Bundle.main.version)"
+        appVersionLabel.text = "\(Bundle.main.appName)\(Bundle.main.version)"
         appVersionLabel.font = .font(fontSize: 15)
         appVersionLabel.textColor = RGB(51, 51, 51)
         appVersionLabel.textAlignment = .center

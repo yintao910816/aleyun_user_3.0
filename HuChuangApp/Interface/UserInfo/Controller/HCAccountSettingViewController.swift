@@ -101,10 +101,14 @@ extension HCAccountSettingViewController {
         let systemPicAction = UIAlertAction.init(title: "相册", style: .default) { _ in
             self.systemPic()
         }
-        
+        let cancelAction = UIAlertAction.init(title: "取消", style: .cancel) { [weak self] _ in
+            self?.dismiss(animated: true, completion: nil)
+        }
+
         let alert = UIAlertController.init(title: nil, message: nil, preferredStyle: .actionSheet)
         alert.addAction(takePhotoAction)
         alert.addAction(systemPicAction)
+        alert.addAction(cancelAction)
 
         present(alert, animated: true, completion: nil)
     }
