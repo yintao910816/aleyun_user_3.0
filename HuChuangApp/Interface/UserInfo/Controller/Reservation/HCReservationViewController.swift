@@ -33,7 +33,20 @@ class HCReservationViewController: BaseViewController {
     }
     
     override func rxBind() {
-        
+        accurateReservationCtrl.pushH5CallBack = { [weak self] in
+            switch $0.0 {
+            case .chat:
+                let url = APIAssistance.consultationChat(with: $0.1.consultId)
+                self?.navigationController?.pushViewController(BaseWebViewController.createWeb(url: url,
+                                                                                               title: $0.1.userName),
+                                                               animated: true)
+            case .order:
+                let url = APIAssistance.orderDetail(with: $0.1.consultId)
+                self?.navigationController?.pushViewController(BaseWebViewController.createWeb(url: url,
+                                                                                               title: "订单详情"),
+                                                               animated: true)
+            }
+        }
     }
     
     override func viewDidLayoutSubviews() {

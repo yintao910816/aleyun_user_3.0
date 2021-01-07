@@ -20,7 +20,7 @@ class HCRegisterReservationViewModel: RefreshVM<HCReservationItemModel> {
 
 }
 
-class HCAccurateReservationViewModel: RefreshVM<HCReservationItemModel> {
+class HCAccurateReservationViewModel: RefreshVM<HCAccurateConsultItemModel> {
     
     override init() {
         super.init()
@@ -28,6 +28,16 @@ class HCAccurateReservationViewModel: RefreshVM<HCReservationItemModel> {
     
     override func requestData(_ refresh: Bool) {
         super.requestData(refresh)
+        
+        HCProvider.request(.myConsult(consultType: 4, pageSize: 10, pageNum: 1, status: nil))
+            .map(model: HCAccurateConsultModel.self)
+            .subscribe(onSuccess: { [weak self] data in                
+                self?.updateRefresh(refresh, data.records, data.pages)
+            }) { [weak self] in
+                self?.revertCurrentPageAndRefreshStatus()
+                self?.hud.failureHidden(self?.errorMessage($0))
+            }
+            .disposed(by: disposeBag)
     }
 
 }

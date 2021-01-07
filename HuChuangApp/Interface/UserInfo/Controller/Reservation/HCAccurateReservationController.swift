@@ -14,8 +14,8 @@ class HCAccurateReservationController: HCSlideItemController {
     private var tableView: UITableView!
     private var viewModel: HCAccurateReservationViewModel!
         
-    public var pushH5CallBack:((String)->())?
-   
+    public var pushH5CallBack:(((HCMyConsultDetailMode, HCAccurateConsultItemModel))->())?
+
     override func setupUI() {
         tableView = UITableView.init(frame: view.bounds, style: .grouped)
         tableView.backgroundColor = .white
@@ -32,6 +32,12 @@ class HCAccurateReservationController: HCSlideItemController {
         viewModel = HCAccurateReservationViewModel()
         
         tableView.prepare(viewModel)
+        
+        viewModel.datasource.asDriver()
+            .drive(onNext: { [weak self] _ in self?.tableView.reloadData() })
+            .disposed(by: disposeBag)
+        
+        tableView.headerRefreshing()
         
         viewModel.isEmptyContentObser.value = true
     }
@@ -59,7 +65,8 @@ extension HCAccurateReservationController: UITableViewDelegate, UITableViewDataS
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = (tableView.dequeueReusableCell(withIdentifier: HCAccurateReservationCell_identifier) as! HCAccurateReservationCell)
-        cell.model = viewModel.datasource.value[indexPath.row]
+        cell.model = viewModel.datasource.value[indexPath.section]
+        cell.actionCallBack = { [unowned self] in self.pushH5CallBack?((HCMyConsultDetailMode.chat, $0)) }
         return cell
     }
     
@@ -89,5 +96,7 @@ extension HCAccurateReservationController: UITableViewDelegate, UITableViewDataS
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        pushH5CallBack?((HCMyConsultDetailMode.order, viewModel.datasource.value[indexPath.section]))
     }
 }

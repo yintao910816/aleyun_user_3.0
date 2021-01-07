@@ -119,3 +119,58 @@ class HCCloudClinicConsultItemModel: HJModel, HCConsultModelAdapt {
 protocol HCConsultModelAdapt {
     
 }
+
+//MARK: 精准预约
+class HCAccurateConsultModel: HJModel {
+    var records: [HCAccurateConsultItemModel] = []
+}
+
+class HCAccurateConsultItemModel: HJModel {
+    var address: String = ""
+    var apm: String = ""
+    var appointTimeDesc: String = ""
+    var consultId: String = ""
+    var consultType: Int = 4
+    var consultTypeName: String = ""
+    var content: String = ""
+    var createDate: String = ""
+    var headPath: String = ""
+    var orderSn: String = ""
+    var status: Int = 9
+    var subjectDate: String = ""
+    var  technicalPost: String = ""
+    var userId: String = ""
+    var userName: String = ""
+    var week: String = ""
+    
+    public lazy var nameText: NSAttributedString = {
+        let string = NSMutableAttributedString(string: "\(self.userName) \(self.technicalPost)")
+        string.addAttribute(NSAttributedString.Key.font,
+                            value: UIFont.font(fontSize: 14),
+                            range: .init(location: self.userName.count + 1, length: self.technicalPost.count))
+        string.addAttribute(NSAttributedString.Key.foregroundColor, value: RGB(153, 153, 153),
+                            range: .init(location: self.userName.count + 1, length: self.technicalPost.count))
+        return string
+    }()
+    
+    public lazy var createTimeText: String = {
+        return "\(self.createDate) \(self.consultTypeName)"
+    }()
+
+    public lazy var timeText: NSAttributedString = {
+        let text = "预约时间   \(subjectDate) \(week)(\(apm == "AM" ? "上午" : "下午"))"
+        return text.attributed(.init(location: 4, length: text.count - 4), RGB(51, 51, 51), .font(fontSize: 14))
+    }()
+
+    public lazy var addressText: NSAttributedString = {
+        let text = "预约地点   \(address)"
+        return text.attributed(.init(location: 4, length: text.count - 4), RGB(51, 51, 51), .font(fontSize: 14))
+    }()
+
+    public lazy var statusMode: HCOrderDetailStatus = {
+        if let statusMode = HCOrderDetailStatus(rawValue: self.status) {
+            return statusMode
+        }
+        return .unknow
+    }()
+}
