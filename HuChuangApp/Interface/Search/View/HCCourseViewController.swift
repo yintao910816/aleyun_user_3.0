@@ -10,9 +10,9 @@ import UIKit
 
 class HCCourseViewController: HCSlideItemController {
    
-    private var collectionView: UICollectionView!
+    public var collectionView: UICollectionView!
 
-    private var datasource: [HCCourseListItemModel] = []
+    public var viewModel: HCCourseSearchViewModel!
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -24,6 +24,14 @@ class HCCourseViewController: HCSlideItemController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if viewModel.datasource.value.count == 0 {
+            viewModel.requestData(true)
+        }
+    }
+
     private func initUI() {
         let layout = UICollectionViewFlowLayout()
         layout.minimumInteritemSpacing = 0
@@ -32,22 +40,24 @@ class HCCourseViewController: HCSlideItemController {
 
         collectionView = UICollectionView.init(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .white
-        collectionView.delegate = self
-        collectionView.dataSource = self
         view.addSubview(collectionView)
         
         collectionView.register(HCCourseCell.self, forCellWithReuseIdentifier: HCCourseCell_identifier)
     }
 
-    override func reloadData(data: Any?) {
-        if let source = data as? [HCCourseListItemModel] {
-            datasource = source
-            collectionView.reloadData()
-        }
-    }
-    
-    override func bind<T>(viewModel: RefreshVM<T>, canRefresh: Bool, canLoadMore: Bool, isAddNoMoreContent: Bool) {
-        collectionView.prepare(viewModel, showFooter: canLoadMore, showHeader: canRefresh, isAddNoMoreContent: isAddNoMoreContent)
+    override func rxBind() {
+        viewModel = HCCourseSearchViewModel()
+        
+        collectionView.prepare(viewModel, showFooter: true, showHeader: true, isAddNoMoreContent: true)
+                
+        viewModel.datasource.asDriver()
+            .drive(collectionView.rx.items(cellIdentifier: HCCourseCell_identifier, cellType: HCCourseCell.self)) { _, model, cell in
+                cell.courseModel = model
+            }
+            .disposed(by: disposeBag)
+        
+        collectionView.rx.setDelegate(self)
+            .disposed(by: disposeBag)
     }
 
     override func viewDidLayoutSubviews() {
@@ -58,23 +68,13 @@ class HCCourseViewController: HCSlideItemController {
 
 }
 
-extension HCCourseViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-        
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return datasource.count
-    }
-    
+extension HCCourseViewController: UICollectionViewDelegateFlowLayout {
+            
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return .init(width: view.width, height: HCCourseCell_height)
     }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HCCourseCell_identifier, for: indexPath) as! HCCourseCell
-        cell.courseModel = datasource[indexPath.row]
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        cellDidselected?(datasource[indexPath.row])
-    }
+        
+//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+////        cellDidselected?(datasource[indexPath.row])
+//    }
 }

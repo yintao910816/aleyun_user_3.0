@@ -27,6 +27,7 @@ class HCAppDelegate: UIResponder, UIApplicationDelegate {
         
         TRTCCalling.shareInstance().addDelegate(self)
         setupUM(launchOptions: launchOptions)
+        setupUniLogin()
         
         window = UIWindow.init(frame: UIScreen.main.bounds)
         window?.backgroundColor = .white

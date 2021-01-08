@@ -488,6 +488,7 @@
 		C42DA55825A851190094E4C8 /* OAuth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C42DA55225A851190094E4C8 /* OAuth.framework */; };
 		C42DA5DB25A8539E0094E4C8 /* libz.1.2.8.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C42DA5DA25A8539E0094E4C8 /* libz.1.2.8.tbd */; };
 		C42DA5DE25A853BE0094E4C8 /* libc++.1.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C42DA5DD25A853BE0094E4C8 /* libc++.1.tbd */; };
+		C42DA74925A87F540094E4C8 /* HCAppDelegate+UniLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42DA74825A87F540094E4C8 /* HCAppDelegate+UniLogin.swift */; };
 		C4382BED24E5604D000C00CE /* HCAccountSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4382BEC24E5604D000C00CE /* HCAccountSettingViewController.swift */; };
 		C4382BF524E560C2000C00CE /* HCMineViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4382BEF24E560C2000C00CE /* HCMineViewContainer.swift */; };
 		C4382BF624E560C2000C00CE /* HCMineHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4382BF024E560C2000C00CE /* HCMineHeaderView.swift */; };
@@ -1411,6 +1412,7 @@
 		C42DA74425A874210094E4C8 /* ZOAUCustomModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZOAUCustomModel.h; path = ThirdPartyLibs/chinaunicom/OAuth.framework/Headers/ZOAUCustomModel.h; sourceTree = "<group>"; };
 		C42DA74525A874460094E4C8 /* UACustomModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UACustomModel.h; path = ThirdPartyLibs/cmcc/TYRZUISDK.framework/Headers/UACustomModel.h; sourceTree = "<group>"; };
 		C42DA74625A874690094E4C8 /* ZUOAuthManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZUOAuthManager.h; path = ThirdPartyLibs/chinaunicom/OAuth.framework/Headers/ZUOAuthManager.h; sourceTree = "<group>"; };
+		C42DA74825A87F540094E4C8 /* HCAppDelegate+UniLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HCAppDelegate+UniLogin.swift"; sourceTree = "<group>"; };
 		C4382BE824E55AE2000C00CE /* HCClassRoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCClassRoomViewController.swift; sourceTree = "<group>"; };
 		C4382BEA24E55B06000C00CE /* HCClassRoomViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCClassRoomViewModel.swift; sourceTree = "<group>"; };
 		C4382BEC24E5604D000C00CE /* HCAccountSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCAccountSettingViewController.swift; sourceTree = "<group>"; };
@@ -2998,6 +3000,7 @@
 				B87CCB5725569F2C00792F76 /* HCAppDelegate+TRTC.swift */,
 				B842D1FD22258CC000A4F8DF /* HCAppDelegate+UM.swift */,
 				B853CF1F256A337600A3A90D /* HCAppDelegate+Logic.swift */,
+				C42DA74825A87F540094E4C8 /* HCAppDelegate+UniLogin.swift */,
 			);
 			path = AppDelegate;
 			sourceTree = "<group>";
@@ -3884,10 +3887,10 @@
 		C4D1DB9424F7B366001EF30F /* View */ = {
 			isa = PBXGroup;
 			children = (
-				C4D1DB9524F7B366001EF30F /* HCLiveVideoViewController.swift */,
-				C4D1DB9624F7B366001EF30F /* HCCourseViewController.swift */,
 				C4D1DB9724F7B366001EF30F /* HCExpertViewController.swift */,
 				C4D1DB9824F7B366001EF30F /* HCRealTimeViewController.swift */,
+				C4D1DB9624F7B366001EF30F /* HCCourseViewController.swift */,
+				C4D1DB9524F7B366001EF30F /* HCLiveVideoViewController.swift */,
 				C4D1DBA524F7DEF6001EF30F /* HCCourseCell.swift */,
 				C4D1DBA924F7DF2C001EF30F /* HCRealTimeCell.swift */,
 			);
@@ -4386,6 +4389,7 @@
 				B8F90E5124F25AC800A1D68C /* HCVideoConsultRecordViewController.swift in Sources */,
 				B816EAC6221DABF400F024D5 /* ZXIntArray.m in Sources */,
 				B816EAE3221DABF400F024D5 /* ZXDataMatrixEdifactEncoder.m in Sources */,
+				C42DA74925A87F540094E4C8 /* HCAppDelegate+UniLogin.swift in Sources */,
 				C497E97823447E6F00328B47 /* HCHomeBabyTuinaClassroomCell.swift in Sources */,
 				B87CCB5525569E7200792F76 /* HCTRTCCloudManager.swift in Sources */,
 				B816EB4A221DABF400F024D5 /* ZXTelParsedResult.m in Sources */,

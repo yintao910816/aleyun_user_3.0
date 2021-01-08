@@ -8,12 +8,14 @@
 
 import UIKit
 
+import RxDataSources
+
 class HCExpertViewController: HCSlideItemController {
 
-    private var collectionView: UICollectionView!
+    public var collectionView: UICollectionView!
     
-    private var datasource: [HCDoctorListItemModel] = []
-    
+    public var viewModel: HCDoctorSearchViewModel!
+
     public var cellDidselected: ((HCDoctorListItemModel)->())?
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -34,24 +36,26 @@ class HCExpertViewController: HCSlideItemController {
 
         collectionView = UICollectionView.init(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .white
-        collectionView.delegate = self
-        collectionView.dataSource = self
         view.addSubview(collectionView)
         
         collectionView.register(HCDoctorListCell.self, forCellWithReuseIdentifier: HCDoctorListCell_identifier)
     }
-
-    override func reloadData(data: Any?) {
-        if let source = data as? [HCDoctorListItemModel] {
-            datasource = source
-            collectionView.reloadData()
-        }
-    }
     
-    override func bind<T>(viewModel: RefreshVM<T>, canRefresh: Bool, canLoadMore: Bool, isAddNoMoreContent: Bool) {
-        collectionView.prepare(viewModel, showFooter: canLoadMore, showHeader: canRefresh, isAddNoMoreContent: isAddNoMoreContent)
+    override func rxBind() {
+        viewModel = HCDoctorSearchViewModel()
+        
+        collectionView.prepare(viewModel, showFooter: true, showHeader: true, isAddNoMoreContent: true)
+                
+        viewModel.datasource.asDriver()
+            .drive(collectionView.rx.items(cellIdentifier: HCDoctorListCell_identifier, cellType: HCDoctorListCell.self)) { _, model, cell in
+                cell.model = model
+            }
+            .disposed(by: disposeBag)
+        
+        collectionView.rx.setDelegate(self)
+            .disposed(by: disposeBag)
     }
-    
+        
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -59,23 +63,9 @@ class HCExpertViewController: HCSlideItemController {
     }
 }
 
-extension HCExpertViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension HCExpertViewController: UICollectionViewDelegateFlowLayout {
         
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return datasource.count
-    }
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return .init(width: view.width, height: datasource[indexPath.row].getCellHeight)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HCDoctorListCell_identifier, for: indexPath) as! HCDoctorListCell
-        cell.model = datasource[indexPath.row]
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        cellDidselected?(datasource[indexPath.row])
+        return .init(width: view.width, height: viewModel.datasource.value[indexPath.row].getCellHeight)
     }
 }

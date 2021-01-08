@@ -10,10 +10,10 @@ import UIKit
 
 class HCLiveVideoViewController: HCSlideItemController {
 
-    private var collectionView: UICollectionView!
+    public var collectionView: UICollectionView!
 
-    private var datasource: [HCLiveVideoListItemModel] = []
-    
+    public var viewModel: HCLiveSearchViewModel!
+
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         
@@ -24,6 +24,14 @@ class HCLiveVideoViewController: HCSlideItemController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if viewModel.datasource.value.count == 0 {
+            viewModel.requestData(true)
+        }
+    }
+
     private func initUI() {
         let layout = UICollectionViewFlowLayout()
         layout.minimumInteritemSpacing = 0
@@ -34,22 +42,24 @@ class HCLiveVideoViewController: HCSlideItemController {
         collectionView.backgroundColor = .white
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = false
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.isHidden = true
         view.addSubview(collectionView)
         
         collectionView.register(HCDoctorListCell.self, forCellWithReuseIdentifier: HCDoctorListCell_identifier)
     }
         
-    override func reloadData(data: Any?) {
-        if let source = data as? [HCLiveVideoListItemModel] {
-            datasource = source
-        }
-    }
-    
-    override func bind<T>(viewModel: RefreshVM<T>, canRefresh: Bool, canLoadMore: Bool, isAddNoMoreContent: Bool) {
-        collectionView.prepare(viewModel, showFooter: canLoadMore, showHeader: canRefresh, isAddNoMoreContent: isAddNoMoreContent)
+    override func rxBind() {
+        viewModel = HCLiveSearchViewModel()
+        
+        collectionView.prepare(viewModel, showFooter: true, showHeader: true, isAddNoMoreContent: true)
+                
+        viewModel.datasource.asDriver()
+            .drive(collectionView.rx.items(cellIdentifier: HCDoctorListCell_identifier, cellType: HCDoctorListCell.self)) { _, model, cell in
+
+            }
+            .disposed(by: disposeBag)
+        
+        collectionView.rx.setDelegate(self)
+            .disposed(by: disposeBag)
     }
 
     override func viewDidLayoutSubviews() {
@@ -59,25 +69,16 @@ class HCLiveVideoViewController: HCSlideItemController {
     }
 }
 
-extension HCLiveVideoViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-        
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return datasource.count
-    }
-    
+extension HCLiveVideoViewController: UICollectionViewDelegateFlowLayout {
+            
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 //        return .init(width: view.width, height: HCDoctorListCell_height)
         return .init(width: view.width, height: 210)
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HCDoctorListCell_identifier, for: indexPath) as! HCDoctorListCell
-//        cell.model = datasource[indexPath.row]
-        return cell
-    }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        cellDidselected?(datasource[indexPath.row])
-    }
+//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+////        cellDidselected?(datasource[indexPath.row])
+//    }
 }
 

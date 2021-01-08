@@ -19,8 +19,6 @@ class HCSearchViewController: BaseViewController {
     private var realTimeCtrl: HCRealTimeViewController!
     private var courseCtrl: HCCourseViewController!
     private var liveVideoCtrl: HCLiveVideoViewController!
-
-    private var pageIds: [HCsearchModule] = [.doctor, .article, .course, .live]
     
     private var viewModel: HCSearchViewModel!
 
@@ -41,13 +39,17 @@ class HCSearchViewController: BaseViewController {
         
         searchBar.rightItemTapBack = { [weak self] in
             self?.searchRecordView.isHidden = false
-            self?.viewModel.keyWordObser.value = ""
             self?.searchBar.reloadInput(content: nil)
         }
 
-        searchBar.beginSearch = { [weak self] content in
+        searchBar.beginSearch = { [weak self] in
             self?.searchRecordView.isHidden = true
-            self?.viewModel.requestSearchSubject.onNext(true)
+            self?.viewModel.cacheSearchSubject.onNext($0)
+
+            self?.expertCtrl.collectionView.headerRefreshing()
+            self?.realTimeCtrl.collectionView.headerRefreshing()
+            self?.courseCtrl.collectionView.headerRefreshing()
+            self?.liveVideoCtrl.collectionView.headerRefreshing()
         }
         
         searchBar.willSearch = { [weak self] in
@@ -78,31 +80,38 @@ class HCSearchViewController: BaseViewController {
             self?.searchRecordView.isHidden = true
             self?.searchBar.resignSearchFirstResponder()
             self?.searchBar.reloadInput(content: $0)
-            self?.viewModel.selectedSearchRecordSubject.onNext($0)
+
+            self?.viewModel.cacheSearchSubject.onNext($0)
+
+            self?.expertCtrl.viewModel.keyWordObser.value = $0
+            self?.realTimeCtrl.viewModel.keyWordObser.value = $0
+            self?.courseCtrl.viewModel.keyWordObser.value = $0
+            self?.liveVideoCtrl.viewModel.keyWordObser.value = $0
+
+            self?.expertCtrl.collectionView.headerRefreshing()
+            self?.realTimeCtrl.collectionView.headerRefreshing()
+            self?.courseCtrl.collectionView.headerRefreshing()
+            self?.liveVideoCtrl.collectionView.headerRefreshing()
         }
-        
-        expertCtrl.cellDidselected = {
-            let params = HCShareWebViewController.configParameters(mode: .doctor,
-                                                                   model: HCShareDataModel.transformDoctorModel(model: $0),
-                                                                   needUnitId: false,
-                                                                   isAddRightItems: $0.isOpenAnyConsult)
-            HCExpertConsultationController.push(HCShareWebViewController.self,
-                                                params)
-        }
-        
-        realTimeCtrl.cellSelectedCallBack = { [unowned self] in self.viewModel.realTimeSelectedSubject.onNext($0.id) }
     }
     
     override func rxBind() {
         viewModel = HCSearchViewModel()
         
-        expertCtrl.bind(viewModel: viewModel, canRefresh: true, canLoadMore: true, isAddNoMoreContent: false)
-        realTimeCtrl.bind(viewModel: viewModel, canRefresh: true, canLoadMore: true, isAddNoMoreContent: false)
-        courseCtrl.bind(viewModel: viewModel, canRefresh: true, canLoadMore: true, isAddNoMoreContent: false)
-        liveVideoCtrl.bind(viewModel: viewModel, canRefresh: true, canLoadMore: true, isAddNoMoreContent: false)
+        searchBar.textObser
+            .bind(to: expertCtrl.viewModel.keyWordObser)
+            .disposed(by: disposeBag)
+        
+        searchBar.textObser
+            .bind(to: realTimeCtrl.viewModel.keyWordObser)
+            .disposed(by: disposeBag)
 
         searchBar.textObser
-            .bind(to: viewModel.keyWordObser)
+            .bind(to: courseCtrl.viewModel.keyWordObser)
+            .disposed(by: disposeBag)
+
+        searchBar.textObser
+            .bind(to: liveVideoCtrl.viewModel.keyWordObser)
             .disposed(by: disposeBag)
         
         viewModel.searchRecordsObser.asDriver()
@@ -111,25 +120,20 @@ class HCSearchViewController: BaseViewController {
             })
             .disposed(by: disposeBag)
         
-        viewModel.expertDataSignal
-            .subscribe(onNext: { [weak self] in self?.expertCtrl.reloadData(data: $0) })
+        expertCtrl.collectionView.rx.modelSelected(HCDoctorListItemModel.self)
+            .subscribe(onNext: { 
+                let params = HCShareWebViewController.configParameters(mode: .doctor,
+                                                                       model: HCShareDataModel.transformDoctorModel(model: $0),
+                                                                       needUnitId: false,
+                                                                       isAddRightItems: $0.isOpenAnyConsult)
+                HCExpertConsultationController.push(HCShareWebViewController.self,
+                                                    params)
+            })
             .disposed(by: disposeBag)
         
-        viewModel.realTimeDataSignal
-            .subscribe(onNext: { [weak self] in self?.realTimeCtrl.reloadData(data: $0) })
-            .disposed(by: disposeBag)
-
-        viewModel.courseDataSignal
-            .subscribe(onNext: { [weak self] in self?.courseCtrl.reloadData(data: $0) })
-            .disposed(by: disposeBag)
-
-        viewModel.liveVideoDataSignal
-            .subscribe(onNext: { [weak self] in self?.liveVideoCtrl.reloadData(data: $0) })
-            .disposed(by: disposeBag)
-
-        slideCtrl.pageScrollSubject
-            .map{ [unowned self] in self.pageIds[$0] }
-            .bind(to: viewModel.currentPageObser)
+        realTimeCtrl.collectionView.rx.modelSelected(HCRealTimeListItemModel.self)
+            .map({ $0.id })
+            .bind(to: viewModel.realTimeSelectedSubject)
             .disposed(by: disposeBag)
     }
     

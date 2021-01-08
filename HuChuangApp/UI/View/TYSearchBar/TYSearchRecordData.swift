@@ -44,7 +44,7 @@ extension TYSearchRecordModel: DBOperation {
     static func insert(keyWord: String) {
         let setters = reloadSetters(keyWord: keyWord)
         // 插入数据之前先查询本地数据库是否存在该用户
-        let filier = (uidEx == userDefault.uid)
+        let filier = (uidEx == userDefault.uid && keyWordEx == keyWord)
         DBQueue.share.insterOrUpdateQueue(filier, setters, searchKeyWordTB, TYSearchRecordModel.self)
     }
     

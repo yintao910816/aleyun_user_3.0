@@ -10,9 +10,10 @@ import UIKit
 
 class HCRealTimeViewController: HCSlideItemController {
 
-    private var collectionView: UICollectionView!
-    private var datasource: [HCRealTimeListItemModel] = []
-    
+    public var collectionView: UICollectionView!
+
+    public var viewModel: HCArticleSearchViewModel!
+
     public var cellSelectedCallBack:((HCRealTimeListItemModel)->())?
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -25,6 +26,14 @@ class HCRealTimeViewController: HCSlideItemController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if viewModel.datasource.value.count == 0 {
+            viewModel.requestData(true)
+        }
+    }
+    
     private func initUI() {
         let layout = UICollectionViewFlowLayout()
         layout.minimumInteritemSpacing = 0
@@ -33,22 +42,24 @@ class HCRealTimeViewController: HCSlideItemController {
 
         collectionView = UICollectionView.init(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .white
-        collectionView.delegate = self
-        collectionView.dataSource = self
         view.addSubview(collectionView)
         
         collectionView.register(HCRealTimeCell.self, forCellWithReuseIdentifier: HCRealTimeCell_identifier)
     }
 
-    override func reloadData(data: Any?) {
-        if let source = data as? [HCRealTimeListItemModel] {
-            datasource = source
-            collectionView.reloadData()
-        }
-    }
-    
-    override func bind<T>(viewModel: RefreshVM<T>, canRefresh: Bool, canLoadMore: Bool, isAddNoMoreContent: Bool) {
-        collectionView.prepare(viewModel, showFooter: canLoadMore, showHeader: canRefresh, isAddNoMoreContent: isAddNoMoreContent)
+    override func rxBind() {
+        viewModel = HCArticleSearchViewModel()
+        
+        collectionView.prepare(viewModel, showFooter: true, showHeader: true, isAddNoMoreContent: true)
+                
+        viewModel.datasource.asDriver()
+            .drive(collectionView.rx.items(cellIdentifier: HCRealTimeCell_identifier, cellType: HCRealTimeCell.self)) { _, model, cell in
+                cell.realTimeModel = model
+            }
+            .disposed(by: disposeBag)
+        
+        collectionView.rx.setDelegate(self)
+            .disposed(by: disposeBag)
     }
 
     override func viewDidLayoutSubviews() {
@@ -59,23 +70,9 @@ class HCRealTimeViewController: HCSlideItemController {
 
 }
 
-extension HCRealTimeViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-        
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return datasource.count
-    }
-    
+extension HCRealTimeViewController: UICollectionViewDelegateFlowLayout {
+            
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return .init(width: view.width, height: HCRealTimeCell_height)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HCRealTimeCell_identifier, for: indexPath) as! HCRealTimeCell
-        cell.realTimeModel = datasource[indexPath.row]
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        cellSelectedCallBack?(datasource[indexPath.row])
     }
 }
