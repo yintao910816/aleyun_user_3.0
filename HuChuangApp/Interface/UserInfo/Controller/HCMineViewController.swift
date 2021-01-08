@@ -68,6 +68,10 @@ class HCMineViewController: BaseViewController, VMNavigation {
                                                           animated: true)
         }
         
+        containerView.pushDoctorListAction = { [unowned self] in
+            navigationController?.pushViewController(HCExpertConsultationController(), animated: true)            
+        }
+        
         addBarItem(normal: "setting", right: true, edgeLeft: 20)
             .drive(onNext: { [weak self] in
                 self?.navigationController?.pushViewController(HCSettingViewController(), animated: true)

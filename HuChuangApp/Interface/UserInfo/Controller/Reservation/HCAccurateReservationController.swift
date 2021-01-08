@@ -38,8 +38,6 @@ class HCAccurateReservationController: HCSlideItemController {
             .disposed(by: disposeBag)
         
         tableView.headerRefreshing()
-        
-        viewModel.isEmptyContentObser.value = true
     }
                 
     override func viewDidLayoutSubviews() {

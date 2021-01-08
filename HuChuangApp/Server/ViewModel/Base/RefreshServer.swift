@@ -268,7 +268,7 @@ class HCListEmptyView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .clear
+        backgroundColor = .white
         
         contentView = UIView()
         contentView.backgroundColor = backgroundColor

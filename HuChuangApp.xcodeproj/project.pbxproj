@@ -480,6 +480,14 @@
 		C42B218F24ECCB1500B2A665 /* HCSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42B218E24ECCB1500B2A665 /* HCSettingViewModel.swift */; };
 		C42B219124ECCB4B00B2A665 /* HCSettingContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42B219024ECCB4B00B2A665 /* HCSettingContainer.swift */; };
 		C42B219524ECD44D00B2A665 /* HCCollectionContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42B219424ECD44D00B2A665 /* HCCollectionContainer.swift */; };
+		C42DA55325A851190094E4C8 /* UniLogin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C42DA54925A851190094E4C8 /* UniLogin.framework */; };
+		C42DA55425A851190094E4C8 /* EAccountHYSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C42DA54C25A851190094E4C8 /* EAccountHYSDK.framework */; };
+		C42DA55525A851190094E4C8 /* EAccountOpenPageResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C42DA54D25A851190094E4C8 /* EAccountOpenPageResource.bundle */; };
+		C42DA55625A851190094E4C8 /* TYRZResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C42DA54F25A851190094E4C8 /* TYRZResource.bundle */; };
+		C42DA55725A851190094E4C8 /* TYRZUISDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C42DA55025A851190094E4C8 /* TYRZUISDK.framework */; };
+		C42DA55825A851190094E4C8 /* OAuth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C42DA55225A851190094E4C8 /* OAuth.framework */; };
+		C42DA5DB25A8539E0094E4C8 /* libz.1.2.8.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C42DA5DA25A8539E0094E4C8 /* libz.1.2.8.tbd */; };
+		C42DA5DE25A853BE0094E4C8 /* libc++.1.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C42DA5DD25A853BE0094E4C8 /* libc++.1.tbd */; };
 		C4382BED24E5604D000C00CE /* HCAccountSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4382BEC24E5604D000C00CE /* HCAccountSettingViewController.swift */; };
 		C4382BF524E560C2000C00CE /* HCMineViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4382BEF24E560C2000C00CE /* HCMineViewContainer.swift */; };
 		C4382BF624E560C2000C00CE /* HCMineHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4382BF024E560C2000C00CE /* HCMineHeaderView.swift */; };
@@ -1387,6 +1395,22 @@
 		C42B218E24ECCB1500B2A665 /* HCSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCSettingViewModel.swift; sourceTree = "<group>"; };
 		C42B219024ECCB4B00B2A665 /* HCSettingContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCSettingContainer.swift; sourceTree = "<group>"; };
 		C42B219424ECD44D00B2A665 /* HCCollectionContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCCollectionContainer.swift; sourceTree = "<group>"; };
+		C42DA54925A851190094E4C8 /* UniLogin.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UniLogin.framework; sourceTree = "<group>"; };
+		C42DA54C25A851190094E4C8 /* EAccountHYSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = EAccountHYSDK.framework; sourceTree = "<group>"; };
+		C42DA54D25A851190094E4C8 /* EAccountOpenPageResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = EAccountOpenPageResource.bundle; sourceTree = "<group>"; };
+		C42DA54F25A851190094E4C8 /* TYRZResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TYRZResource.bundle; sourceTree = "<group>"; };
+		C42DA55025A851190094E4C8 /* TYRZUISDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TYRZUISDK.framework; sourceTree = "<group>"; };
+		C42DA55225A851190094E4C8 /* OAuth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OAuth.framework; sourceTree = "<group>"; };
+		C42DA5DA25A8539E0094E4C8 /* libz.1.2.8.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.8.tbd; path = usr/lib/libz.1.2.8.tbd; sourceTree = SDKROOT; };
+		C42DA5DD25A853BE0094E4C8 /* libc++.1.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.1.tbd"; path = "usr/lib/libc++.1.tbd"; sourceTree = SDKROOT; };
+		C42DA62B25A857110094E4C8 /* libc++abi.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++abi.tbd"; path = "usr/lib/libc++abi.tbd"; sourceTree = SDKROOT; };
+		C42DA74025A873BF0094E4C8 /* UniLogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UniLogin.h; path = UniLogin/UniLogin.framework/Headers/UniLogin.h; sourceTree = "<group>"; };
+		C42DA74125A873BF0094E4C8 /* YMCustomConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YMCustomConfig.h; path = UniLogin/UniLogin.framework/Headers/YMCustomConfig.h; sourceTree = "<group>"; };
+		C42DA74225A873BF0094E4C8 /* EACustomAnimatedTransitioning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EACustomAnimatedTransitioning.h; path = UniLogin/UniLogin.framework/Headers/EACustomAnimatedTransitioning.h; sourceTree = "<group>"; };
+		C42DA74325A874030094E4C8 /* EAccountOpenPageConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EAccountOpenPageConfig.h; path = ThirdPartyLibs/chinaTelecom/EAccountHYSDK.framework/Headers/EAccountOpenPageConfig.h; sourceTree = "<group>"; };
+		C42DA74425A874210094E4C8 /* ZOAUCustomModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZOAUCustomModel.h; path = ThirdPartyLibs/chinaunicom/OAuth.framework/Headers/ZOAUCustomModel.h; sourceTree = "<group>"; };
+		C42DA74525A874460094E4C8 /* UACustomModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UACustomModel.h; path = ThirdPartyLibs/cmcc/TYRZUISDK.framework/Headers/UACustomModel.h; sourceTree = "<group>"; };
+		C42DA74625A874690094E4C8 /* ZUOAuthManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZUOAuthManager.h; path = ThirdPartyLibs/chinaunicom/OAuth.framework/Headers/ZUOAuthManager.h; sourceTree = "<group>"; };
 		C4382BE824E55AE2000C00CE /* HCClassRoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCClassRoomViewController.swift; sourceTree = "<group>"; };
 		C4382BEA24E55B06000C00CE /* HCClassRoomViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCClassRoomViewModel.swift; sourceTree = "<group>"; };
 		C4382BEC24E5604D000C00CE /* HCAccountSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCAccountSettingViewController.swift; sourceTree = "<group>"; };
@@ -1560,7 +1584,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C42DA5DE25A853BE0094E4C8 /* libc++.1.tbd in Frameworks */,
+				C42DA5DB25A8539E0094E4C8 /* libz.1.2.8.tbd in Frameworks */,
+				C42DA55725A851190094E4C8 /* TYRZUISDK.framework in Frameworks */,
+				C42DA55425A851190094E4C8 /* EAccountHYSDK.framework in Frameworks */,
 				A08398CF7D2F1A7EC078368A /* Pods_HuChuangApp.framework in Frameworks */,
+				C42DA55825A851190094E4C8 /* OAuth.framework in Frameworks */,
+				C42DA55325A851190094E4C8 /* UniLogin.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1579,6 +1609,9 @@
 		7F9C04DEE1E0A52CA2412AD3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C42DA62B25A857110094E4C8 /* libc++abi.tbd */,
+				C42DA5DD25A853BE0094E4C8 /* libc++.1.tbd */,
+				C42DA5DA25A8539E0094E4C8 /* libz.1.2.8.tbd */,
 				F68DA0CD68B7D8ED10451F88 /* Pods_HuChuangApp.framework */,
 			);
 			name = Frameworks;
@@ -3218,6 +3251,66 @@
 			path = ImageUtls;
 			sourceTree = "<group>";
 		};
+		C42DA54725A851190094E4C8 /* SDK */ = {
+			isa = PBXGroup;
+			children = (
+				C42DA74625A874690094E4C8 /* ZUOAuthManager.h */,
+				C42DA74525A874460094E4C8 /* UACustomModel.h */,
+				C42DA74425A874210094E4C8 /* ZOAUCustomModel.h */,
+				C42DA74325A874030094E4C8 /* EAccountOpenPageConfig.h */,
+				C42DA74225A873BF0094E4C8 /* EACustomAnimatedTransitioning.h */,
+				C42DA74025A873BF0094E4C8 /* UniLogin.h */,
+				C42DA74125A873BF0094E4C8 /* YMCustomConfig.h */,
+				C42DA54825A851190094E4C8 /* UniLogin */,
+				C42DA54A25A851190094E4C8 /* ThirdPartyLibs */,
+			);
+			path = SDK;
+			sourceTree = "<group>";
+		};
+		C42DA54825A851190094E4C8 /* UniLogin */ = {
+			isa = PBXGroup;
+			children = (
+				C42DA54925A851190094E4C8 /* UniLogin.framework */,
+			);
+			path = UniLogin;
+			sourceTree = "<group>";
+		};
+		C42DA54A25A851190094E4C8 /* ThirdPartyLibs */ = {
+			isa = PBXGroup;
+			children = (
+				C42DA54B25A851190094E4C8 /* chinaTelecom */,
+				C42DA54E25A851190094E4C8 /* cmcc */,
+				C42DA55125A851190094E4C8 /* chinaunicom */,
+			);
+			path = ThirdPartyLibs;
+			sourceTree = "<group>";
+		};
+		C42DA54B25A851190094E4C8 /* chinaTelecom */ = {
+			isa = PBXGroup;
+			children = (
+				C42DA54C25A851190094E4C8 /* EAccountHYSDK.framework */,
+				C42DA54D25A851190094E4C8 /* EAccountOpenPageResource.bundle */,
+			);
+			path = chinaTelecom;
+			sourceTree = "<group>";
+		};
+		C42DA54E25A851190094E4C8 /* cmcc */ = {
+			isa = PBXGroup;
+			children = (
+				C42DA54F25A851190094E4C8 /* TYRZResource.bundle */,
+				C42DA55025A851190094E4C8 /* TYRZUISDK.framework */,
+			);
+			path = cmcc;
+			sourceTree = "<group>";
+		};
+		C42DA55125A851190094E4C8 /* chinaunicom */ = {
+			isa = PBXGroup;
+			children = (
+				C42DA55225A851190094E4C8 /* OAuth.framework */,
+			);
+			path = chinaunicom;
+			sourceTree = "<group>";
+		};
 		C4382BE324E55A81000C00CE /* ClassRoom */ = {
 			isa = PBXGroup;
 			children = (
@@ -3365,6 +3458,7 @@
 		C4783B2724DD39E800737479 /* Account */ = {
 			isa = PBXGroup;
 			children = (
+				C42DA54725A851190094E4C8 /* SDK */,
 				C4783B2824DD39E800737479 /* ViewModel */,
 				C4783B2924DD39E800737479 /* Controller */,
 				C4783B2C24DD39E800737479 /* Model */,
@@ -4034,6 +4128,7 @@
 				C42132F922054463006C10C4 /* LaunchScreen.storyboard in Resources */,
 				B8C31DCC2396CF39003754A6 /* HCDoctorInfoHeaderView.xib in Resources */,
 				C497E97923447E6F00328B47 /* HCHomeBabyTuinaClassroomCell.xib in Resources */,
+				C42DA55525A851190094E4C8 /* EAccountOpenPageResource.bundle in Resources */,
 				B816EA73221DABF400F024D5 /* CodeScan.bundle in Resources */,
 				B826AF86221C7205000428C1 /* ArticleCell.xib in Resources */,
 				B8BE34EF2214599B00EF16F1 /* MineHeaderView.xib in Resources */,
@@ -4048,6 +4143,7 @@
 				B8454ED923A5294C00E88BAD /* HCExchangeReusableView.xib in Resources */,
 				C497E94C23444E4600328B47 /* HCHomeAdvCell.xib in Resources */,
 				C4213338220572C6006C10C4 /* HCMain.storyboard in Resources */,
+				C42DA55625A851190094E4C8 /* TYRZResource.bundle in Resources */,
 				B879A062221AF0BB00E573C9 /* MineFooterView.xib in Resources */,
 				C497E94723444E4600328B47 /* HCHomePreparePregnantReusableView.xib in Resources */,
 				C42132F622054463006C10C4 /* Assets.xcassets in Resources */,
@@ -4853,6 +4949,17 @@
 				CURRENT_PROJECT_VERSION = 1.2;
 				DEVELOPMENT_TEAM = GMPPSEQW73;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/HuChuangApp/Interface/Account/UniSDK/SDK/UniLogin",
+					"$(PROJECT_DIR)/HuChuangApp/Interface/Account/UniSDK/SDK/ThirdPartyLibs/chinaTelecom",
+					"$(PROJECT_DIR)/HuChuangApp/Interface/Account/UniSDK/SDK/ThirdPartyLibs/cmcc",
+					"$(PROJECT_DIR)/HuChuangApp/Interface/Account/UniSDK/SDK/ThirdPartyLibs/chinaunicom",
+					"$(PROJECT_DIR)/HuChuangApp/Interface/Account/SDK/UniLogin",
+					"$(PROJECT_DIR)/HuChuangApp/Interface/Account/SDK/ThirdPartyLibs/chinaTelecom",
+					"$(PROJECT_DIR)/HuChuangApp/Interface/Account/SDK/ThirdPartyLibs/cmcc",
+					"$(PROJECT_DIR)/HuChuangApp/Interface/Account/SDK/ThirdPartyLibs/chinaunicom",
+				);
 				INFOPLIST_FILE = HuChuangApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -4860,12 +4967,107 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 3.02.004;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"SocialOfficialWeChat\"",
+					"-l\"SocialWeChat\"",
+					"-l\"WeChatSDK\"",
+					"-l\"c++\"",
+					"-l\"iconv\"",
+					"-l\"resolv\"",
+					"-l\"sqlite3\"",
+					"-l\"z\"",
+					"-framework",
+					"\"AVFoundation\"",
+					"-framework",
+					"\"Accelerate\"",
+					"-framework",
+					"\"Alamofire\"",
+					"-framework",
+					"\"CFNetwork\"",
+					"-framework",
+					"\"CoreFoundation\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreTelephony\"",
+					"-framework",
+					"\"CoreText\"",
+					"-framework",
+					"\"Differentiator\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"HandyJSON\"",
+					"-framework",
+					"\"ImSDK\"",
+					"-framework",
+					"\"Kingfisher\"",
+					"-framework",
+					"\"MJRefresh\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"Moya\"",
+					"-framework",
+					"\"OpenAL\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"Result\"",
+					"-framework",
+					"\"RxAtomic\"",
+					"-framework",
+					"\"RxCocoa\"",
+					"-framework",
+					"\"RxDataSources\"",
+					"-framework",
+					"\"RxSwift\"",
+					"-framework",
+					"\"SQLite\"",
+					"-framework",
+					"\"SecurityEnvSDK\"",
+					"-framework",
+					"\"SnapKit\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"TXLiteAVSDK_Professional\"",
+					"-framework",
+					"\"Toast_Swift\"",
+					"-framework",
+					"\"UIKit\"",
+					"-framework",
+					"\"UMAnalytics\"",
+					"-framework",
+					"\"UMCommon\"",
+					"-framework",
+					"\"UMPush\"",
+					"-framework",
+					"\"UMShare\"",
+					"-framework",
+					"\"UShareUI\"",
+					"-framework",
+					"\"UTDID\"",
+					"-framework",
+					"\"UserNotifications\"",
+					"-framework",
+					"\"VideoToolbox\"",
+					"-framework",
+					"\"WebKit\"",
+					"-framework",
+					"\"WebViewJavascriptBridge\"",
+					"-framework",
+					"\"YYText\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.huchuang.aileyun;
 				PRODUCT_NAME = "爱乐孕";
 				PROVISIONING_PROFILE_SPECIFIER = aleyun_user_dev_pro;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/HuChuangApp/Main/Config/HcChuangApp-Bridge-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
 		};
@@ -4880,6 +5082,17 @@
 				CURRENT_PROJECT_VERSION = 1.2;
 				DEVELOPMENT_TEAM = GMPPSEQW73;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/HuChuangApp/Interface/Account/UniSDK/SDK/UniLogin",
+					"$(PROJECT_DIR)/HuChuangApp/Interface/Account/UniSDK/SDK/ThirdPartyLibs/chinaTelecom",
+					"$(PROJECT_DIR)/HuChuangApp/Interface/Account/UniSDK/SDK/ThirdPartyLibs/cmcc",
+					"$(PROJECT_DIR)/HuChuangApp/Interface/Account/UniSDK/SDK/ThirdPartyLibs/chinaunicom",
+					"$(PROJECT_DIR)/HuChuangApp/Interface/Account/SDK/UniLogin",
+					"$(PROJECT_DIR)/HuChuangApp/Interface/Account/SDK/ThirdPartyLibs/chinaTelecom",
+					"$(PROJECT_DIR)/HuChuangApp/Interface/Account/SDK/ThirdPartyLibs/cmcc",
+					"$(PROJECT_DIR)/HuChuangApp/Interface/Account/SDK/ThirdPartyLibs/chinaunicom",
+				);
 				INFOPLIST_FILE = HuChuangApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -4887,12 +5100,107 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 3.02.004;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"SocialOfficialWeChat\"",
+					"-l\"SocialWeChat\"",
+					"-l\"WeChatSDK\"",
+					"-l\"c++\"",
+					"-l\"iconv\"",
+					"-l\"resolv\"",
+					"-l\"sqlite3\"",
+					"-l\"z\"",
+					"-framework",
+					"\"AVFoundation\"",
+					"-framework",
+					"\"Accelerate\"",
+					"-framework",
+					"\"Alamofire\"",
+					"-framework",
+					"\"CFNetwork\"",
+					"-framework",
+					"\"CoreFoundation\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreTelephony\"",
+					"-framework",
+					"\"CoreText\"",
+					"-framework",
+					"\"Differentiator\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"HandyJSON\"",
+					"-framework",
+					"\"ImSDK\"",
+					"-framework",
+					"\"Kingfisher\"",
+					"-framework",
+					"\"MJRefresh\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"Moya\"",
+					"-framework",
+					"\"OpenAL\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"Result\"",
+					"-framework",
+					"\"RxAtomic\"",
+					"-framework",
+					"\"RxCocoa\"",
+					"-framework",
+					"\"RxDataSources\"",
+					"-framework",
+					"\"RxSwift\"",
+					"-framework",
+					"\"SQLite\"",
+					"-framework",
+					"\"SecurityEnvSDK\"",
+					"-framework",
+					"\"SnapKit\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"TXLiteAVSDK_Professional\"",
+					"-framework",
+					"\"Toast_Swift\"",
+					"-framework",
+					"\"UIKit\"",
+					"-framework",
+					"\"UMAnalytics\"",
+					"-framework",
+					"\"UMCommon\"",
+					"-framework",
+					"\"UMPush\"",
+					"-framework",
+					"\"UMShare\"",
+					"-framework",
+					"\"UShareUI\"",
+					"-framework",
+					"\"UTDID\"",
+					"-framework",
+					"\"UserNotifications\"",
+					"-framework",
+					"\"VideoToolbox\"",
+					"-framework",
+					"\"WebKit\"",
+					"-framework",
+					"\"WebViewJavascriptBridge\"",
+					"-framework",
+					"\"YYText\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.huchuang.aileyun;
 				PRODUCT_NAME = "爱乐孕";
 				PROVISIONING_PROFILE_SPECIFIER = aleyun_user_appstore_pro;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/HuChuangApp/Main/Config/HcChuangApp-Bridge-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Release;
 		};

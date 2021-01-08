@@ -145,11 +145,15 @@ extension TYSlideMenuController: UIPageViewControllerDataSource, UIPageViewContr
     // 动画过渡完成 - previousViewControllers为过渡之前的视图控制器
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         
+        PrintLog("动画过渡完成: \(completed)")
+        
+        if !completed { return }
+        
         for idx in 0..<menuCtrls.count {
             // //判断视图控制器是否与正在转换的视图控制器为同一个
             if pendingCtrl == menuCtrls[idx] {
                 currentPage = idx
-                                
+                           
                 headerMenu.setMenu(index: currentPage)
                 pageScroll?(currentPage)
                 pageScrollSubject.onNext(currentPage)
@@ -200,11 +204,13 @@ class TYSlideMenu: UIView {
     }
     
     public func setMenu(index: Int) {
-        datasource[index].isSelected = true
-        datasource[lastSelected].isSelected = false
-        collectionView.reloadData()
-        
-        lastSelected = index
+        if index != lastSelected {
+            datasource[index].isSelected = true
+            datasource[lastSelected].isSelected = false
+            collectionView.reloadData()
+            
+            lastSelected = index
+        }
     }
     
     public var datasource: [TYSlideItemModel] = [] {

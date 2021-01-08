@@ -19,6 +19,8 @@ class HCMineViewContainer: UIView {
     public var excuteHealthyAction: (()->())?
     /// 点击进行中的服务
     public var excuteInServerAction: ((HCPersonalProgressServiceModel)->())?
+    /// 点击去咨询
+    public var pushDoctorListAction: (()->())?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -102,6 +104,7 @@ extension HCMineViewContainer: UICollectionViewDataSource, UICollectionViewDeleg
                 (cell as? HCMineInServerCell)?.model = model.progressServices[indexPath.row]
             }else {
                 cell = collectionView.dequeueReusableCell(withReuseIdentifier: HCMineEmptyConsultCell_identifier, for: indexPath)
+                (cell as? HCMineEmptyConsultCell)?.action = { [unowned self] in pushDoctorListAction?() }
             }
         }else if indexPath.section == 1 {
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: HCMenuItemCell_identifier, for: indexPath)
