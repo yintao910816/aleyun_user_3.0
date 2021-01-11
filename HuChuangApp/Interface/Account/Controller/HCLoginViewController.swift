@@ -41,6 +41,12 @@ class HCLoginViewController: BaseViewController {
                 self?.containerView.platformContainer.isHidden = !$0
             })
             .disposed(by: disposeBag)
+        
+        containerView.fastLoginButton.rx.tap.asDriver()
+            .drive(onNext: { [unowned self] in
+                (UIApplication.shared.delegate as? HCAppDelegate)?.setupUniLogin(viewController: self)
+            })
+            .disposed(by: disposeBag)
 
         viewModel = HCLoginViewModel.init(input: containerView.phoneTf.rx.text.orEmpty.asDriver(),
                                           tap: (codeTap: containerView.getCodeButton.rx.tap.asDriver(),

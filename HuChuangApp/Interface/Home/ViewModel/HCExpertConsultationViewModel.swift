@@ -11,9 +11,9 @@ import RxSwift
 
 class HCExpertConsultationViewModel: RefreshVM<HCDoctorListItemModel> {
     
-    private var areaCode: String = "0"
-    private var sortType: String = "1"
-    private var consultType: String = "0"
+    private var areaCode: String = ""
+    private var sortType: String = ""
+    private var consultType: String = ""
     
     private var slideData: [TYSlideItemModel] = []
     
@@ -45,7 +45,7 @@ class HCExpertConsultationViewModel: RefreshVM<HCDoctorListItemModel> {
                 var needReload = false
                 var title = $0
                 if $0 == "默认排序" || $0.count == 0 {
-                    strongSelf.sortType = "0"
+                    strongSelf.sortType = ""
                     needReload = true
                     title = "推荐排序"
                 }else if $0 == "职称" {

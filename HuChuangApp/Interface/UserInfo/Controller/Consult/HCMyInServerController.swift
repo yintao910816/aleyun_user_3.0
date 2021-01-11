@@ -21,11 +21,9 @@ class HCMyInServerController: BaseViewController {
         
         container.progressServices = progressServices
         
-        container.excuteMyServerAction = { [unowned self] in
+        container.excuteMyServerAction = { 
             let url = APIAssistance.consultationChat(with: $0.consultId)
-            self.navigationController?.pushViewController(BaseWebViewController.createWeb(url: url,
-                                                                                          title: $0.userName),
-                                                          animated: true)
+            HCMineViewController.push(HCConsultChatController.self, ["url": url, "title": $0.userName])
         }
     }
     

@@ -132,16 +132,25 @@ class HCConsultVideoCallController: UIViewController, CallingViewControllerRespo
 
         NotificationCenter.default.rx.notification(NotificationName.ChatCall.otherRejectVideoCall)
             .subscribe(onNext: { [weak self] _ in
+                HCSystemAudioPlay.share.videoCallStop()
                 self?.disMiss()
             })
             .disposed(by: disposebag)
 
         NotificationCenter.default.rx.notification(NotificationName.ChatCall.onLineBusyVideoCall)
             .subscribe(onNext: { [weak self] _ in
+                HCSystemAudioPlay.share.videoCallStop()
                 self?.disMiss()
             })
             .disposed(by: disposebag)
 
+        NotificationCenter.default.rx.notification(NotificationName.ChatCall.finishAudio)
+            .subscribe(onNext: { [weak self] _ in
+                TRTCCalling.shareInstance().hangup()
+                self?.disMiss()
+            })
+            .disposed(by: disposebag)
+        
         initUI()
     }
     
@@ -526,6 +535,7 @@ extension HCConsultVideoCallController {
             hangup.setImage(UIImage(named: "ic_hangup"), for: .normal)
             view.addSubview(hangup)
             hangup.rx.controlEvent(.touchUpInside).subscribe(onNext: {[weak self] in
+                HCSystemAudioPlay.share.videoCallStop()
                 guard let self = self else {return}
                  TRTCCalling.shareInstance().hangup()
                 self.disMiss()
@@ -538,6 +548,7 @@ extension HCConsultVideoCallController {
             accept.setImage(UIImage(named: "ic_dialing"), for: .normal)
             view.addSubview(accept)
             accept.rx.controlEvent(.touchUpInside).subscribe(onNext: {[weak self] in
+                HCSystemAudioPlay.share.videoCallStop()
                 guard let self = self else {return}
                 TRTCCalling.shareInstance().accept()
                 var curUser = CallingUserModel()

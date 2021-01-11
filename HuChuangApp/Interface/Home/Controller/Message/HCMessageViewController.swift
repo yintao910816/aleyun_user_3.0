@@ -26,9 +26,7 @@ class HCMessageViewController: BaseViewController, VMNavigation {
                     HCMessageViewController.push(HCServerMsgController.self, nil)
                 case .notification_type4:
                     let url = APIAssistance.consultationChat(with: $0.consultId)
-                    self.navigationController?.pushViewController(BaseWebViewController.createWeb(url: url,
-                                                                                                   title: $0.name),
-                                                                   animated: true)
+                    HCMineViewController.push(HCConsultChatController.self, ["url": url, "title": $0.name])
                 default:
                     break
                 }

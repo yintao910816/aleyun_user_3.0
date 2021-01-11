@@ -12,6 +12,7 @@ extension HCAppDelegate: TRTCCallingDelegate {
 
     // 被邀请通话
     func onInvited(sponsor: String, userIds: [String], isFromGroup: Bool, callType: CallType) {
+        HCSystemAudioPlay.share.videoCallPlay()
         _ = HCHelper.requestVideoCallUserInfo(userId: sponsor, consultId: "\(TRTCCalling.shareInstance().curRoomID)")
             .subscribe(onNext: {
                 if let callingUser = $0 {
@@ -72,6 +73,7 @@ extension HCAppDelegate: TRTCCallingDelegate {
     // 当前通话被取消回调
     func onCallingCancel(uid: String) {
         print("当前通话被取消")
+        NotificationCenter.default.post(name: NotificationName.ChatCall.otherRejectVideoCall, object: nil)
     }
     
     // 通话超时的回调

@@ -489,6 +489,17 @@
 		C42DA5DB25A8539E0094E4C8 /* libz.1.2.8.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C42DA5DA25A8539E0094E4C8 /* libz.1.2.8.tbd */; };
 		C42DA5DE25A853BE0094E4C8 /* libc++.1.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C42DA5DD25A853BE0094E4C8 /* libc++.1.tbd */; };
 		C42DA74925A87F540094E4C8 /* HCAppDelegate+UniLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42DA74825A87F540094E4C8 /* HCAppDelegate+UniLogin.swift */; };
+		C42DA78D25AC61790094E4C8 /* HCH5ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42DA78C25AC61790094E4C8 /* HCH5ViewController.swift */; };
+		C42DA79125AC62DD0094E4C8 /* HCConsultChatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42DA79025AC62DD0094E4C8 /* HCConsultChatController.swift */; };
+		C42DA7B825AC81250094E4C8 /* HCImagePickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42DA7AE25AC81250094E4C8 /* HCImagePickerManager.swift */; };
+		C42DA7B925AC81250094E4C8 /* HCMediaPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42DA7B025AC81250094E4C8 /* HCMediaPickerController.swift */; };
+		C42DA7BA25AC81250094E4C8 /* HCPickerMediaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42DA7B225AC81250094E4C8 /* HCPickerMediaView.swift */; };
+		C42DA7BB25AC81250094E4C8 /* HCAssetImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42DA7B325AC81250094E4C8 /* HCAssetImageView.swift */; };
+		C42DA7BC25AC81250094E4C8 /* HCPickerMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42DA7B425AC81250094E4C8 /* HCPickerMenuView.swift */; };
+		C42DA7BD25AC81250094E4C8 /* HCMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42DA7B625AC81250094E4C8 /* HCMenuModel.swift */; };
+		C42DA7BE25AC81250094E4C8 /* HCAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42DA7B725AC81250094E4C8 /* HCAsset.swift */; };
+		C42DA7CA25AC9C530094E4C8 /* HCSystemAudioPlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42DA7C825AC9C530094E4C8 /* HCSystemAudioPlay.swift */; };
+		C42DA7CB25AC9C530094E4C8 /* call.wav in Resources */ = {isa = PBXBuildFile; fileRef = C42DA7C925AC9C530094E4C8 /* call.wav */; };
 		C4382BED24E5604D000C00CE /* HCAccountSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4382BEC24E5604D000C00CE /* HCAccountSettingViewController.swift */; };
 		C4382BF524E560C2000C00CE /* HCMineViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4382BEF24E560C2000C00CE /* HCMineViewContainer.swift */; };
 		C4382BF624E560C2000C00CE /* HCMineHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4382BF024E560C2000C00CE /* HCMineHeaderView.swift */; };
@@ -1413,6 +1424,17 @@
 		C42DA74525A874460094E4C8 /* UACustomModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UACustomModel.h; path = ThirdPartyLibs/cmcc/TYRZUISDK.framework/Headers/UACustomModel.h; sourceTree = "<group>"; };
 		C42DA74625A874690094E4C8 /* ZUOAuthManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZUOAuthManager.h; path = ThirdPartyLibs/chinaunicom/OAuth.framework/Headers/ZUOAuthManager.h; sourceTree = "<group>"; };
 		C42DA74825A87F540094E4C8 /* HCAppDelegate+UniLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HCAppDelegate+UniLogin.swift"; sourceTree = "<group>"; };
+		C42DA78C25AC61790094E4C8 /* HCH5ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCH5ViewController.swift; sourceTree = "<group>"; };
+		C42DA79025AC62DD0094E4C8 /* HCConsultChatController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCConsultChatController.swift; sourceTree = "<group>"; };
+		C42DA7AE25AC81250094E4C8 /* HCImagePickerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCImagePickerManager.swift; sourceTree = "<group>"; };
+		C42DA7B025AC81250094E4C8 /* HCMediaPickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCMediaPickerController.swift; sourceTree = "<group>"; };
+		C42DA7B225AC81250094E4C8 /* HCPickerMediaView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCPickerMediaView.swift; sourceTree = "<group>"; };
+		C42DA7B325AC81250094E4C8 /* HCAssetImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCAssetImageView.swift; sourceTree = "<group>"; };
+		C42DA7B425AC81250094E4C8 /* HCPickerMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCPickerMenuView.swift; sourceTree = "<group>"; };
+		C42DA7B625AC81250094E4C8 /* HCMenuModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCMenuModel.swift; sourceTree = "<group>"; };
+		C42DA7B725AC81250094E4C8 /* HCAsset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCAsset.swift; sourceTree = "<group>"; };
+		C42DA7C825AC9C530094E4C8 /* HCSystemAudioPlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCSystemAudioPlay.swift; sourceTree = "<group>"; };
+		C42DA7C925AC9C530094E4C8 /* call.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = call.wav; sourceTree = "<group>"; };
 		C4382BE824E55AE2000C00CE /* HCClassRoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCClassRoomViewController.swift; sourceTree = "<group>"; };
 		C4382BEA24E55B06000C00CE /* HCClassRoomViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCClassRoomViewModel.swift; sourceTree = "<group>"; };
 		C4382BEC24E5604D000C00CE /* HCAccountSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCAccountSettingViewController.swift; sourceTree = "<group>"; };
@@ -2953,6 +2975,8 @@
 		C421330622056B19006C10C4 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				C42DA7C725AC9C520094E4C8 /* HCSystemAudioPlay */,
+				C42DA7AC25AC81250094E4C8 /* HCMediaPicker */,
 				B8CFBA3F2589BE0700BD03A1 /* HCSwitch */,
 				B8B0E26D257E21FC003D9803 /* HCPresation */,
 				B866D82C256FC03B000251AD /* URLProtocol */,
@@ -3314,6 +3338,70 @@
 			path = chinaunicom;
 			sourceTree = "<group>";
 		};
+		C42DA78625AC610D0094E4C8 /* H5 */ = {
+			isa = PBXGroup;
+			children = (
+				C42DA78C25AC61790094E4C8 /* HCH5ViewController.swift */,
+				C42DA79025AC62DD0094E4C8 /* HCConsultChatController.swift */,
+			);
+			path = H5;
+			sourceTree = "<group>";
+		};
+		C42DA7AC25AC81250094E4C8 /* HCMediaPicker */ = {
+			isa = PBXGroup;
+			children = (
+				C42DA7AD25AC81250094E4C8 /* SysPhoto */,
+				C42DA7AF25AC81250094E4C8 /* Controller */,
+				C42DA7B125AC81250094E4C8 /* View */,
+				C42DA7B525AC81250094E4C8 /* HCMediaSource */,
+			);
+			path = HCMediaPicker;
+			sourceTree = "<group>";
+		};
+		C42DA7AD25AC81250094E4C8 /* SysPhoto */ = {
+			isa = PBXGroup;
+			children = (
+				C42DA7AE25AC81250094E4C8 /* HCImagePickerManager.swift */,
+			);
+			path = SysPhoto;
+			sourceTree = "<group>";
+		};
+		C42DA7AF25AC81250094E4C8 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C42DA7B025AC81250094E4C8 /* HCMediaPickerController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C42DA7B125AC81250094E4C8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C42DA7B225AC81250094E4C8 /* HCPickerMediaView.swift */,
+				C42DA7B325AC81250094E4C8 /* HCAssetImageView.swift */,
+				C42DA7B425AC81250094E4C8 /* HCPickerMenuView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C42DA7B525AC81250094E4C8 /* HCMediaSource */ = {
+			isa = PBXGroup;
+			children = (
+				C42DA7B625AC81250094E4C8 /* HCMenuModel.swift */,
+				C42DA7B725AC81250094E4C8 /* HCAsset.swift */,
+			);
+			path = HCMediaSource;
+			sourceTree = "<group>";
+		};
+		C42DA7C725AC9C520094E4C8 /* HCSystemAudioPlay */ = {
+			isa = PBXGroup;
+			children = (
+				C42DA7C825AC9C530094E4C8 /* HCSystemAudioPlay.swift */,
+				C42DA7C925AC9C530094E4C8 /* call.wav */,
+			);
+			path = HCSystemAudioPlay;
+			sourceTree = "<group>";
+		};
 		C4382BE324E55A81000C00CE /* ClassRoom */ = {
 			isa = PBXGroup;
 			children = (
@@ -3443,6 +3531,7 @@
 		C4783B2624DD39E800737479 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
+				C42DA78625AC610D0094E4C8 /* H5 */,
 				B866D83C2570B2C3000251AD /* Share */,
 				B87CCB3225569E7200792F76 /* TRTC */,
 				C4D1DB8924F7B366001EF30F /* Search */,
@@ -4142,6 +4231,7 @@
 				B8CD926623A2964800C9C061 /* HCRecordUserInfoReusableView.xib in Resources */,
 				C497E96E234466E100328B47 /* HCHomePregnancyClassroomCellItemCell.xib in Resources */,
 				C497E95A23444EF200328B47 /* HCHomeGoodNewsCell.xib in Resources */,
+				C42DA7CB25AC9C530094E4C8 /* call.wav in Resources */,
 				B826AF80221C671B000428C1 /* ColunmCollectionViewCell.xib in Resources */,
 				B8454ED923A5294C00E88BAD /* HCExchangeReusableView.xib in Resources */,
 				C497E94C23444E4600328B47 /* HCHomeAdvCell.xib in Resources */,
@@ -4322,6 +4412,7 @@
 				B816EA88221DABF400F024D5 /* ZXMultiFormatWriter.m in Sources */,
 				B816EB24221DABF400F024D5 /* ZXITFReader.m in Sources */,
 				C4382BF524E560C2000C00CE /* HCMineViewContainer.swift in Sources */,
+				C42DA7BD25AC81250094E4C8 /* HCMenuModel.swift in Sources */,
 				B870E532238A7E1C0085AFA3 /* HCAskCollectionReusableView.swift in Sources */,
 				B816EAF4221DABF400F024D5 /* ZXDataMatrixWriter.m in Sources */,
 				C454C01F234E00A8005CBC0B /* TYSearchRecordData.swift in Sources */,
@@ -4377,6 +4468,7 @@
 				C40448A724EAAFB500AD1610 /* HCPersonalCenter.swift in Sources */,
 				C4382C0124E56A59000C00CE /* HCEditInfoViewController.swift in Sources */,
 				B816EB29221DABF400F024D5 /* ZXCode128Reader.m in Sources */,
+				C42DA7BB25AC81250094E4C8 /* HCAssetImageView.swift in Sources */,
 				B89A73CA2563AA170094E13A /* HCUnderDevController.swift in Sources */,
 				B86993D623373A6500086A77 /* TYSearchBar.swift in Sources */,
 				B816EA8A221DABF400F024D5 /* ZXByQuadrantReader.m in Sources */,
@@ -4474,6 +4566,7 @@
 				B816EB39221DABF400F024D5 /* ZXEmailDoCoMoResultParser.m in Sources */,
 				B816EAAB221DABF400F024D5 /* ZXQRCodeAlignmentPattern.m in Sources */,
 				B816EADD221DABF400F024D5 /* ZXPDF417DetectorResult.m in Sources */,
+				C42DA79125AC62DD0094E4C8 /* HCConsultChatController.swift in Sources */,
 				B816EB2A221DABF400F024D5 /* ZXUPCEANWriter.m in Sources */,
 				B816EB0A221DABF400F024D5 /* ZXRSSExpandedDecodedInformation.m in Sources */,
 				B816EA8B221DABF400F024D5 /* ZXAztecDetectorResult.m in Sources */,
@@ -4489,6 +4582,7 @@
 				C421339D2205B224006C10C4 /* ImageRx.swift in Sources */,
 				C421338822059B8C006C10C4 /* DB+Extension.swift in Sources */,
 				C42133952205B1E9006C10C4 /* CarouselDatasource.swift in Sources */,
+				C42DA7BC25AC81250094E4C8 /* HCPickerMenuView.swift in Sources */,
 				B816EAE6221DABF400F024D5 /* ZXDataMatrixEncoderContext.m in Sources */,
 				B816EB14221DABF400F024D5 /* ZXAbstractExpandedDecoder.m in Sources */,
 				C4AB273824E53D6F0095F693 /* HCBaseListCell.swift in Sources */,
@@ -4525,9 +4619,11 @@
 				B8F90E7024F2605E00A1D68C /* HCMessageContainer.swift in Sources */,
 				C421334C220587DC006C10C4 /* HandyJSON+MapModel.swift in Sources */,
 				B870E534238A878A0085AFA3 /* HCAskViewModel.swift in Sources */,
+				C42DA7BE25AC81250094E4C8 /* HCAsset.swift in Sources */,
 				C4F139B8235419EF00D777F6 /* Timer.swift in Sources */,
 				B8BE351522147AFF00EF16F1 /* HCEditSexViewController.swift in Sources */,
 				C4D1DBA424F7B3FC001EF30F /* HCSearchViewController.swift in Sources */,
+				C42DA7CA25AC9C530094E4C8 /* HCSystemAudioPlay.swift in Sources */,
 				C421331622056C74006C10C4 /* HCAppConfig.swift in Sources */,
 				B8BE1AE923A7E36B00DF472A /* HCBaseDoctorCell.swift in Sources */,
 				C421335A2205883D006C10C4 /* RefreshServer.swift in Sources */,
@@ -4597,6 +4693,7 @@
 				B816EAB9221DABF400F024D5 /* ZXWhiteRectangleDetector.m in Sources */,
 				B816E871221DABBC00F024D5 /* HCScanViewController.swift in Sources */,
 				C4AB273424E53D6F0095F693 /* HCListDetailNewTypeCell.swift in Sources */,
+				C42DA7B925AC81250094E4C8 /* HCMediaPickerController.swift in Sources */,
 				B816EA77221DABF400F024D5 /* LBXScanLineAnimation.m in Sources */,
 				C421338722059B8C006C10C4 /* DBCtrl.swift in Sources */,
 				B816EA95221DABF400F024D5 /* ZXAztecDetector.m in Sources */,
@@ -4610,6 +4707,7 @@
 				C40448AB24EB721E00AD1610 /* HCMineHealthArchivesCell.swift in Sources */,
 				B816EB12221DABF400F024D5 /* ZXRSSExpandedGeneralAppIdDecoder.m in Sources */,
 				C4DDE0BD24F4EBD80001201C /* HCAreaSelectedContainer.swift in Sources */,
+				C42DA7B825AC81250094E4C8 /* HCImagePickerManager.swift in Sources */,
 				C4D1DB6724F7622B001EF30F /* HCClassRoomRecommendCell.swift in Sources */,
 				B816EB0F221DABF400F024D5 /* ZXAI01393xDecoder.m in Sources */,
 				C4D1DB4424F6B6CD001EF30F /* HCHospitalList.swift in Sources */,
@@ -4636,6 +4734,7 @@
 				C4F139B9235419EF00D777F6 /* TYIcon.swift in Sources */,
 				B87CCB5825569F2D00792F76 /* HCAppDelegate+TRTC.swift in Sources */,
 				C42133A12205B41C006C10C4 /* BaseFilesOwner.swift in Sources */,
+				C42DA78D25AC61790094E4C8 /* HCH5ViewController.swift in Sources */,
 				B816EAC1221DABF400F024D5 /* ZXBitSource.m in Sources */,
 				B816EB26221DABF400F024D5 /* ZXMultiFormatOneDReader.m in Sources */,
 				B816EA78221DABF400F024D5 /* LBXScanView.m in Sources */,
@@ -4702,6 +4801,7 @@
 				B8CD926923A2967D00C9C061 /* HCRecordSuggestReusableView.swift in Sources */,
 				B8F90E6B24F2604A00A1D68C /* HCHomeViewContainer.swift in Sources */,
 				C4D1DB5F24F760AE001EF30F /* HCClassRoomBaseCell.swift in Sources */,
+				C42DA7BA25AC81250094E4C8 /* HCPickerMediaView.swift in Sources */,
 				B816EA83221DABF400F024D5 /* ZXRGBLuminanceSource.m in Sources */,
 				B8CFBA452589C39400BD03A1 /* HCListCustomSwitchCell.swift in Sources */,
 				B819AF7424C6E85B00F88BA7 /* HCNavBarFloatView.swift in Sources */,
@@ -4970,7 +5070,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.02.004;
+				MARKETING_VERSION = 3.02.001;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -5103,7 +5203,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.02.004;
+				MARKETING_VERSION = 3.02.001;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",

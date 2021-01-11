@@ -61,11 +61,9 @@ class HCMineViewController: BaseViewController, VMNavigation {
                                                                    "title":"健康档案"])
         }
         
-        containerView.excuteInServerAction = { [unowned self] in
+        containerView.excuteInServerAction = {
             let url = APIAssistance.consultationChat(with: $0.consultId)
-            self.navigationController?.pushViewController(BaseWebViewController.createWeb(url: url,
-                                                                                          title: $0.userName),
-                                                          animated: true)
+            HCMineViewController.push(HCConsultChatController.self, ["url": url, "title": $0.userName])
         }
         
         containerView.pushDoctorListAction = { [unowned self] in

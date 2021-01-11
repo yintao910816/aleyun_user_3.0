@@ -23,19 +23,16 @@ class HCMyRecordViewController: BaseViewController {
         view.addSubview(slideCtrl.view)
         
         picConsultRecordCtrl = HCPicConsultRecordViewController()
-        picConsultRecordCtrl.pushH5CallBack = { [weak self] in
+        picConsultRecordCtrl.pushH5CallBack = {
             let url = APIAssistance.consultationChat(with: $0.consultId)
-            self?.navigationController?.pushViewController(BaseWebViewController.createWeb(url: url,
-                                                                                           title: $0.userName),
-                                                           animated: true)
+            HCMineViewController.push(HCConsultChatController.self, ["url": url, "title": $0.userName])
+
         }
 
         videoConsultRecordCtrl = HCVideoConsultRecordViewController()
-        videoConsultRecordCtrl.pushH5CallBack = { [weak self] in
+        videoConsultRecordCtrl.pushH5CallBack = { 
             let url = APIAssistance.consultationChat(with: $0.consultId)
-            self?.navigationController?.pushViewController(BaseWebViewController.createWeb(url: url,
-                                                                                           title: $0.userName),
-                                                           animated: true)
+            HCMineViewController.push(HCConsultChatController.self, ["url": url, "title": $0.userName])
         }
 
         accurateReservationRecordCtrl = HCAccurateReservationRecordController()

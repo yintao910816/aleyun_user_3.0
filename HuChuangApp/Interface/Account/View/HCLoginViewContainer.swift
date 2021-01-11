@@ -30,8 +30,10 @@ class HCLoginViewContainer: UIView {
     private var platformRemindLabel: UILabel!
     private var rightLine: UIView!
     public var wchatLoginButton: UIButton!
+    // 一键登录
+    public var fastLoginButton: UIButton!
 
-    public let agreeSignal = Variable(true)
+    public let agreeSignal = Variable(false)
     public var agreementTap: (()->())?
     
     override init(frame: CGRect) {
@@ -73,7 +75,10 @@ class HCLoginViewContainer: UIView {
         leftLine.frame = .init(x: 0, y: 9, width: lineW, height: 1)
         platformRemindLabel.frame = .init(x: leftLine.frame.maxX + 20, y: 0, width: tempSize.width, height: 20)
         rightLine.frame = .init(x: platformRemindLabel.frame.maxX + 20, y: leftLine.frame.minY, width: lineW, height: 1)
-        wchatLoginButton.frame = .init(x: (platformContainer.width - 50) / 2.0, y: platformRemindLabel.frame.maxY + 15, width: 50, height: 50)
+        
+        fastLoginButton.frame = .init(x: (platformContainer.width - 100 - 80) / 2, y: platformRemindLabel.frame.maxY + 15, width: 50, height: 50)
+        fastLoginButton.viewWithTag(100)?.frame = .init(x: 0, y: 0, width: fastLoginButton.width, height: fastLoginButton.height)
+        wchatLoginButton.frame = .init(x: fastLoginButton.frame.maxX + 80, y: fastLoginButton.y, width: 50, height: 50)
     }
 }
 
@@ -132,7 +137,7 @@ extension HCLoginViewContainer {
         agreeButton.setImage(UIImage(named: "login_unselected_agree"), for: .normal)
         agreeButton.setImage(UIImage(named: "login_selected_agree"), for: .selected)
         agreeButton.addTarget(self, action: #selector(agreeClicked), for: .touchUpInside)
-        agreeButton.isSelected = true
+        agreeButton.isSelected = false
 
         agreeLabel = YYLabel()
         agreeLabel.textColor = RGB(154, 154, 154)
@@ -167,6 +172,19 @@ extension HCLoginViewContainer {
         wchatLoginButton = UIButton()
         wchatLoginButton.setImage(UIImage(named: "wchat_login"), for: .normal)
         
+        fastLoginButton = UIButton()
+        fastLoginButton.backgroundColor = RGB(125, 189, 245)
+        fastLoginButton.layer.cornerRadius = 25
+        fastLoginButton.clipsToBounds = true
+        
+        let label = UILabel()
+        label.textColor = .white
+        label.text = "一键\n登录"
+        label.numberOfLines = 2
+        label.textAlignment = .center
+        label.font = .font(fontSize: 14)
+        label.tag = 100
+        
         addSubview(titlelabel)
         addSubview(subTitleLabel)
         addSubview(subIcon)
@@ -184,6 +202,8 @@ extension HCLoginViewContainer {
         platformContainer.addSubview(platformRemindLabel)
         platformContainer.addSubview(rightLine)
         platformContainer.addSubview(wchatLoginButton)
+        platformContainer.addSubview(fastLoginButton)
+        fastLoginButton.addSubview(label)
         
         #if DEBUG
 //        phoneTf.text = "13995631675"

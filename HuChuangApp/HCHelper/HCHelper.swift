@@ -263,7 +263,7 @@ extension HCHelper {
             if let user = HCHelper.share.userInfoModel {
                 return HCProvider.request(.consultVideoUserInfo(memberId: user.uid, userId: userId, consultId: consultId))
                     .map(model: HCShortUserInfoModel.self)
-                    .map{ $0.tranformUser(memberId: userId) }
+                    .map{ $0.tranformUser(userId: userId) }
                     .do(onSuccess: { res in
                         HCHelper.share.saveCallingUser(user: res)
                     }, onError: { NoticesCenter.alert(message: BaseViewModel().errorMessage($0)) })
@@ -311,9 +311,9 @@ extension HCHelper {
     }
 
     /// 拨打电话
-    public static func requestStartPhone(memberId: String) ->Observable<Bool> {
+    public static func requestStartPhone(userId: String) ->Observable<Bool> {
         if let user = HCHelper.share.userInfoModel {
-            return HCProvider.request(.consultStartPhone(memberId: memberId, userId: user.uid))
+            return HCProvider.request(.consultStartPhone(memberId: user.uid, userId: userId))
                 .mapJSON()
                 .map({ res -> Bool in
                     if let dic = res as? [String: Any],
