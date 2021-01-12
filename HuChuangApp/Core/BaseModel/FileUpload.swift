@@ -12,3 +12,11 @@ class UpLoadIconModel: HJModel {
     var fileName: String = ""
     var filePath: String = ""
 }
+
+class HCFileUploadModel: HJModel {
+    var fileName: String = ""
+    var filePath: String = ""
+    var subFilePath: String = ""
+    
+    var audioDuration: UInt = 0
+}

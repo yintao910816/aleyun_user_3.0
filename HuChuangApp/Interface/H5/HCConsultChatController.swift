@@ -67,7 +67,7 @@ extension HCConsultChatController {
             }
         }
         
-        pickerContrl.selectedImage = { [unowned self] _ in  }
+        pickerContrl.selectedImage = { [unowned self] in sendPic(image: $0, model: model) }
     }
     
     private func prepareVideoCall(model: HCConsultInfoModel) {
@@ -107,6 +107,38 @@ extension HCConsultChatController {
         TRTCCalling.shareInstance().call(model.userId, roomId: UInt32(model.consultId) ?? 0, type: .video)
     }
 
+    private func sendPic(image: UIImage, model: HCConsultInfoModel) {
+        
+        if let data = image.jpegData(compressionQuality: 0.5) {
+            hud.noticeLoading()
+            HCProvider.request(.uploadFile(data: data, fileType: .image))
+                .mapJSON()
+                .subscribe(onSuccess: { [weak self] res in
+                    self?.hud.noticeHidden()
+                    if let json = res as? [String: Any],
+                       let data = json["data"] as? [String: Any],
+                       let filePath = data["filePath"] {
+                        
+                        var params: [String: Any] = [:]
+                        params["content"] = ""
+                        params["filePath"] = filePath
+                        params["consultId"] = model.consultId
+                        let jsonStr = params.getJSONString()
+                        
+                        self?.webView.evaluateJavaScript("sendTextIosOrAnd(\(jsonStr))") { (msg, error) in
+                            if let err = error {
+                                NoticesCenter.alert(message: err.localizedDescription)
+                            }
+                        }
+                    }else {
+                        NoticesCenter.alert(message: "发送失败")
+                    }
+                }) { [weak self] in
+                    self?.hud.failureHidden($0.localizedDescription)
+                }
+                .disposed(by: disposeBag)
+        }
+    }
 }
 
 class HCConsultInfoModel: HJModel {

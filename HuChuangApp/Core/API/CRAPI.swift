@@ -9,6 +9,21 @@
 import Foundation
 import Moya
 
+/// 文件类型
+enum HCFileUploadType: String {
+    case image = "image/jpeg"
+    case audio = "audio/mp3"
+    
+    public var getSuffix: String {
+        switch self {
+        case .image:
+            return ".jpg"
+        case .audio:
+            return ".mp3"
+        }
+    }
+}
+
 /// 系统消息列表对应code
 enum HCMsgListCode: String {
     /// 系统消息
@@ -152,6 +167,8 @@ enum API{
     case accountSetting(nickName: String, headPath: String)
     /// 上传头像
     case uploadIcon(image: UIImage)
+    /// 文件上传
+    case uploadFile(data: Data, fileType: HCFileUploadType)
     /// 个人中心
     case personalCenterInfo
     /// 首页菜单
@@ -319,6 +336,8 @@ extension API: TargetType{
             return "api/personalCenter/accountSetting"
         case .uploadIcon(_):
             return "api/upload/imgSingle"
+        case .uploadFile(_):
+            return "api/upload/imgSingle"
         case .personalCenterInfo:
             return "api/personalCenter/info"
         case .functionsMenu:
@@ -463,6 +482,12 @@ extension API: TargetType{
     
     var task: Task {
         switch self {
+        case .uploadFile(let data, let fileType):
+            //根据当前时间设置图片上传时候的名字
+            let timeInterval: TimeInterval = Date().timeIntervalSince1970
+            let dateStr = "\(Int(timeInterval))\(fileType.getSuffix)"
+            let formData = MultipartFormData(provider: .data(data), name: "file", fileName: dateStr, mimeType: fileType.rawValue)
+            return .uploadMultipart([formData])
         case .uploadIcon(let image):
             let data = image.jpegData(compressionQuality: 0.6)!
             //根据当前时间设置图片上传时候的名字
@@ -499,6 +524,8 @@ extension API: TargetType{
         switch self {
         case .uploadIcon(_):
             contentType = "image/jpeg"
+        case .uploadFile(_, let fileType):
+            contentType = fileType.rawValue
         default:
             break
         }

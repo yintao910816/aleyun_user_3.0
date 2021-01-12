@@ -15,11 +15,11 @@ extension Dictionary {
             PrintLog("无法解析出JSONString")
             return ""
         }
-        guard let data = try? JSONSerialization.data(withJSONObject: self, options: []) else {
+        guard let data = try? JSONSerialization.data(withJSONObject: self, options: .prettyPrinted) else {
             PrintLog("无法解析出 Data")
             return ""
         }
-        
+
         guard let JSONString = String.init(data: data, encoding: .utf8) else {
             PrintLog("无法解析出 String")
             return ""
