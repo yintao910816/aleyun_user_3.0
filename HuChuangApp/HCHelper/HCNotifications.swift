@@ -53,7 +53,9 @@ extension Notification.Name {
         static let otherRejectVideoCall = Notification.Name(rawValue: "org.UILogic.notification.name.otherRejectVideoCall")
         /// 占线中 onLineBusy
         static let onLineBusyVideoCall = Notification.Name(rawValue: "org.UILogic.notification.name.onLineBusyVideoCall")
-        /// 铃声播放完成还未接通
+        /// 获取到了总共通话时长
+        static let totleCallTime = Notification.Name(rawValue: "org.UILogic.notification.name.totleCallTime")
+        /// 铃声播放完成还未接通  / 通话时长已到
         static let finishAudio = Notification.Name(rawValue: "org.UILogic.notification.name.finishAudio")
     }
     

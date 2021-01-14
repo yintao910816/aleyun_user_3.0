@@ -8,23 +8,14 @@
 
 import UIKit
 
-class HCShareWebViewController: BaseWebViewController {
+class HCShareWebViewController: HCConsultChatController {
     
     private var viewModel: HCShareWebViewModel!
     private var shareModel: HCShareDataModel!
     private var mode: HCShareMode = .article
-    private var isAddRightItems: Bool = true
     
-//    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-//        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-//
-//        navBarColor = HC_MAIN_COLOR
-//        (navigationController as? BaseNavigationController)?.backItemInterface = .red
-//    }
-    
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
+    public var storeButton: TYClickedButton!
+    public var shareButton: TYClickedButton!
     
     override func setupUI() {
         super.setupUI()
@@ -61,6 +52,20 @@ class HCShareWebViewController: BaseWebViewController {
         viewModel.reloadSubject.onNext(Void())
     }
     
+    override func configList() -> [String] {
+        var names = super.configList()
+        names.append(contentsOf: ["updateCollectStatus", "updateShareStatus"])
+        return names
+    }
+
+    public var isAddRightItems: Bool = true {
+        didSet {
+            if isAddRightItems {
+                configRightItems()
+            }
+        }
+    }
+    
     public class func configParameters(mode: HCShareMode,
                                        model: HCShareDataModel,
                                        needUnitId: Bool = true,
@@ -78,4 +83,105 @@ class HCShareWebViewController: BaseWebViewController {
         
         super.prepare(parameters: ["url": shareModel.href])
     }
+    
+}
+
+extension HCShareWebViewController {
+        
+    override func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        super.userContentController(userContentController, didReceive: message)
+
+        if message.name == "updateCollectStatus" {
+            if let json = message.body as? String,
+               let flag = json.transform()["updateCollectStatus"] as? Bool {
+                reloadStoreItem(isAdd: flag)
+            }else {
+                reloadStoreItem(isAdd: false)
+            }
+        }else if message.name == "updateShareStatus" {
+            if let json = message.body as? String,
+               let flag = json.transform()["updateShareStatus"] as? Bool{
+                reloadShareItem(isAdd: flag)
+            }else {
+                reloadShareItem(isAdd: false)
+            }
+        }
+    }
+
+}
+
+extension HCShareWebViewController {
+    
+    private func configRightItems() {
+        storeButton = TYClickedButton.init(type: .custom)
+        storeButton.frame = .init(x: 0, y: 0, width: 30, height: 30)
+        storeButton.setEnlargeEdge(top: 10, bottom: 10, left: 10, right: 10)
+        storeButton.backgroundColor = .clear
+        storeButton.setImage(UIImage(named: "button_collect_unsel"), for: .normal)
+        storeButton.setImage(UIImage(named: "button_collect_sel"), for: .selected)
+        //        storeButton.titleLabel?.font = .font(fontSize: 10)
+        //        storeButton.imageEdgeInsets = .init(top: 0, left: 0, bottom: 0, right: 10)
+        //        storeButton.sizeToFit()
+
+        shareButton = TYClickedButton.init(type: .custom)
+        shareButton.frame = .init(x: 0, y: 0, width: 30, height: 30)
+        shareButton.setEnlargeEdge(top: 10, bottom: 10, left: 10, right: 10)
+        shareButton.setImage(UIImage(named: "button_share_black"), for: .normal)
+    }
+    
+    public func addRightItems() {
+        navigationItem.rightBarButtonItems = [UIBarButtonItem.init(customView: shareButton),
+                                              UIBarButtonItem.init(customView: storeButton)]
+    }
+    
+    public func reloadShareItem(isAdd: Bool) {
+        var hasStore: Bool = false
+        for item in navigationItem.rightBarButtonItems ?? [] {
+            if item.customView == storeButton {
+                hasStore = true
+                break
+            }
+        }
+
+        if isAdd {
+            if hasStore {
+                navigationItem.rightBarButtonItems = [UIBarButtonItem.init(customView: shareButton),
+                                                      UIBarButtonItem.init(customView: storeButton)]
+            }else {
+                navigationItem.rightBarButtonItems = [UIBarButtonItem.init(customView: shareButton)]
+            }
+        }else {
+            if hasStore {
+                navigationItem.rightBarButtonItems = [UIBarButtonItem.init(customView: storeButton)]
+            }else {
+                navigationItem.rightBarButtonItems = []
+            }
+        }
+    }
+    
+    public func reloadStoreItem(isAdd: Bool) {
+        var hasShare: Bool = false
+        for item in navigationItem.rightBarButtonItems ?? [] {
+            if item.customView == shareButton {
+                hasShare = true
+                break
+            }
+        }
+
+        if isAdd {
+            if hasShare {
+                navigationItem.rightBarButtonItems = [UIBarButtonItem.init(customView: shareButton),
+                                                      UIBarButtonItem.init(customView: storeButton)]
+            }else {
+                navigationItem.rightBarButtonItems = [UIBarButtonItem.init(customView: storeButton)]
+            }
+        }else {
+            if hasShare {
+                navigationItem.rightBarButtonItems = [UIBarButtonItem.init(customView: shareButton)]
+            }else {
+                navigationItem.rightBarButtonItems = []
+            }
+        }
+    }
+
 }

@@ -49,7 +49,7 @@ class HCSystemAudioPlay {
         AudioServicesRemoveSystemSoundCompletion(soundId)
         AudioServicesDisposeSystemSoundID(soundId)
         
-        NotificationCenter.default.post(name: NotificationName.ChatCall.finishAudio, object: nil)
+//        NotificationCenter.default.post(name: NotificationName.ChatCall.finishAudio, object: nil)
     }
 
 }

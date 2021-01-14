@@ -38,6 +38,19 @@ class HCReceivePhoneModel: HJModel {
     var startTime = ""
     var subjectDate = ""
     var subjectTimeId = ""
-    var timeLength = ""
+    var timeLength: Int = 0
     var userId = ""
+    
+    public var isCallEnd: Bool {
+        get {
+            PrintLog("已用通话总时长：\(timeLength)")
+            return timeLength >= 15 * 60
+        }
+    }
+    
+    public var seconds: Int {
+        get {
+            return 15 * 60 - timeLength
+        }
+    }
 }

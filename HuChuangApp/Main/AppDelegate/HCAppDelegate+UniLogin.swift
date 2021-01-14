@@ -17,14 +17,12 @@ import Foundation
 extension HCAppDelegate {
     
     public func setupUniLogin(viewController: UIViewController) {
-        UniLogin.shareInstance().delegate = self
+//        UniLogin.shareInstance().delegate = self
         
         UniLogin.shareInstance().initWithAppId(AppId, secretKey: AppSecret) { [weak self] (flag, msg) in
             PrintLog("一键登录初始化结果：\(flag) \(msg)")
             if flag {
-                guard let strongSelf = self else {
-                    return
-                }
+                guard let strongSelf = self else { return }
                 
                 let config = YMCustomConfig()
                 config.cuccModel = strongSelf.createCUCCModel(viewController: viewController, isMini: false)
@@ -60,8 +58,6 @@ extension HCAppDelegate {
             model.backgroundColor = UIColor.white
             model.navText = ""
             model.navBgColor = .white
-//            let bgImg = imageWithColor(color: RGB(255, 248, 220), size: .init(width: viewController.view.size.width, height: viewController.view.size.height - topCustomHeight + 30), viewController: viewController)
-//            model.bgImage = bgImg
             model.modalPresentationStyle = .fullScreen
             model.privacyOffsetY = -10
             model.topCustomHeight = topCustomHeight
@@ -236,7 +232,6 @@ extension HCAppDelegate {
         DispatchQueue.main.async {
             ZUOAuthManager.getInstance()?.interruptTheCULoginFlow(false, ifDisapperTheShowingLoginPage: true, cancelTheNextAuthorizationPageToPullUp: false)
         }
-        NoticesCenter.alert(message: "CANCLE_LOGIN")
     }
 
     private func login(viewController: UIViewController) {
@@ -246,10 +241,10 @@ extension HCAppDelegate {
     }
 }
 
-extension HCAppDelegate: UniLoginDelegate {
-    
-    func ctccCustomBtnClick(_ senderTag: String) {
-        PrintLog(senderTag)
-    }
-    
-}
+//extension HCAppDelegate: UniLoginDelegate {
+//
+//    func ctccCustomBtnClick(_ senderTag: String) {
+//        PrintLog(senderTag)
+//    }
+//
+//}

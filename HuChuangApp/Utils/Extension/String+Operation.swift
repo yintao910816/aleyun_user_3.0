@@ -54,3 +54,19 @@ extension String {
  let subString = “123456”
  subString.insert(Character.init("123"), at: subString.index(subString.startIndex, offsetBy: 1))  //在2后面插入123
  */
+
+extension String {
+    
+    // JSONString转换为字典
+    func transform() ->[String: Any]{
+        let jsonData:Data = data(using: .utf8)!
+     
+        let obj = try? JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers)
+        
+        guard let dic = obj as? [String: Any] else {
+            return [:]
+        }
+        
+        return dic
+    }
+}

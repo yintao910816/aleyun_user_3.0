@@ -40,7 +40,7 @@ extension HCAppDelegate: TRTCCallingDelegate {
                 }
             })
         
-        _ = HCHelper.requestReceivePhone(memberId: uid, consultId: "\(TRTCCalling.shareInstance().curRoomID)")
+        _ = HCHelper.requestReceivePhone(userId: uid, consultId: "\(TRTCCalling.shareInstance().curRoomID)")
             .subscribe(onNext: { _ in })
     }
     
@@ -48,7 +48,7 @@ extension HCAppDelegate: TRTCCallingDelegate {
     func onUserLeave(uid: String) {
         print("离开通话")
         NotificationCenter.default.post(name: NotificationName.ChatCall.otherLeaveVideoCall, object: nil)
-        _ = HCHelper.requestEndPhone(userId: uid, watchTime: "100")
+        _ = HCHelper.requestEndPhone(userId: uid, watchTime: "1")
             .subscribe(onNext:{ _ in })
     }
     

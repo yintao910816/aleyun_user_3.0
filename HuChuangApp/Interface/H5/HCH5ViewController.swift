@@ -63,7 +63,7 @@ class HCH5ViewController: BaseViewController {
     }
     
     public func configList() ->[String] {
-        return ["changeTitle"]
+        return ["changeTitle", "backHomeFnApi", "backToList", "userInvalid", "appInfo", "getUserInfoFnApi", "backFnApi"]
     }
     
     //MARK: 参数设置
@@ -165,6 +165,7 @@ class HCH5ViewController: BaseViewController {
         w.backgroundColor = .clear
         w.scrollView.bounces = false
         w.navigationDelegate = self
+        w.uiDelegate = self
         return w
     }()
     
@@ -221,6 +222,16 @@ extension HCH5ViewController: WKNavigationDelegate {
     }
 }
 
+extension HCH5ViewController: WKUIDelegate {
+    
+    func webView(_ webView: WKWebView, runJavaScriptTextInputPanelWithPrompt prompt: String, defaultText: String?, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (String?) -> Void) {
+
+        if prompt == "appInfo" {
+            completionHandler(stringForAppInfo())
+        }
+    }
+}
+
 extension HCH5ViewController: WKScriptMessageHandler {
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
@@ -229,7 +240,40 @@ extension HCH5ViewController: WKScriptMessageHandler {
         if message.name == "changeTitle", let title = message.body as? String, title.count > 0 {
             webTitle = title
             navigationItem.title = webTitle
+        }else if message.name == "backHomeFnApi" {
+            navigationController?.popToRootViewController(animated: true)
+        }else if message.name == "backToList" {
+            if webView.canGoBack == true {
+                webView.goBack()
+            }
+        }else if message.name == "userInvalid" {
+            HCHelper.presentLogin(presentVC: navigationController, { [weak self] in
+                self?.navigationController?.popToRootViewController(animated: true)
+            })
+        }else if message.name == "getUserInfoFnApi" {
+            // 刷新首页
+            NotificationCenter.default.post(name: NotificationName.UserInterface.jsReloadHome, object: nil)
+        }else if message.name == "backFnApi" {
+            // 返回上一个界面 （如个人中心提交反馈成功）
+            navigationController?.popViewController(animated: true)
         }
     }
     
+}
+
+extension HCH5ViewController {
+    
+    private func stringForAppInfo() ->String {
+        let infoDic: [String : String] = ["app_version": Bundle.main.version,
+                                          "app_name": Bundle.main.appName,
+                                          "app_packge": Bundle.main.bundleIdentifier,
+                                          "app_sign": "",
+                                          "app_type": "ios"]
+        guard JSONSerialization.isValidJSONObject(infoDic) else { return "" }
+        guard let jsonData =  try? JSONSerialization.data(withJSONObject: infoDic, options: []) else { return "" }
+        guard let jsonString =  String.init(data: jsonData, encoding: .utf8) else { return "" }
+        PrintLog("app信息：\(jsonString)")
+        return jsonString
+    }
+
 }
