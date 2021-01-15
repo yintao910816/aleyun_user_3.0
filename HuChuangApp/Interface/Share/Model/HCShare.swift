@@ -53,6 +53,20 @@ extension HCShareDataModel {
         m.memberId = HCHelper.share.userInfoModel?.uid ?? ""
         return m
     }
+    
+    /// 精准预约医生主页
+    public static func transformAccurateConsultModel(model: HCAccurateConsultItemModel) ->HCShareDataModel {
+        let url = APIAssistance.consultationHome(with: model.userId, unitId: "")
+
+        let m = HCShareDataModel()
+        m.title = model.userName
+        m.picPath = model.headPath
+        m.link = url
+        m.href = url
+        m.userId = model.userId
+        m.memberId = HCHelper.share.userInfoModel?.uid ?? ""
+        return m
+    }
 }
 
 class HCStoreAndStatusModel: HJModel {

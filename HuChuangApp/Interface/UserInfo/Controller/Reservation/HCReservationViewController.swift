@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HCReservationViewController: BaseViewController {
+class HCReservationViewController: BaseViewController, VMNavigation {
     
     private var slideCtrl: TYSlideMenuController!
     private var registerReservationCtrl: HCRegisterReservationController!
@@ -33,18 +33,41 @@ class HCReservationViewController: BaseViewController {
     }
     
     override func rxBind() {
-        accurateReservationCtrl.pushH5CallBack = { [weak self] in
-            switch $0.0 {
+        accurateReservationCtrl.pushH5CallBack = { [unowned self] in dealPush(mode: $0.0, model: $0.1) }
+    }
+    
+    private func dealPush(mode: HCMyConsultDetailMode?, model: HCAccurateConsultItemModel) {
+        if let _mode = mode {
+            switch _mode {
             case .chat:
-                let url = APIAssistance.consultationChat(with: $0.1.consultId)
-                self?.navigationController?.pushViewController(BaseWebViewController.createWeb(url: url,
-                                                                                               title: $0.1.userName),
-                                                               animated: true)
+                let url = APIAssistance.consultationChat(with: model.consultId)
+                navigationController?.pushViewController(BaseWebViewController.createWeb(url: url,
+                                                                                         title: model.userName),
+                                                         animated: true)
             case .order:
-                let url = APIAssistance.orderDetail(with: $0.1.consultId)
-                self?.navigationController?.pushViewController(BaseWebViewController.createWeb(url: url,
-                                                                                               title: "订单详情"),
-                                                               animated: true)
+                let url = APIAssistance.orderDetail(with: model.consultId)
+                navigationController?.pushViewController(BaseWebViewController.createWeb(url: url,
+                                                                                         title: "订单详情"),
+                                                         animated: true)
+            }
+        }else {
+            switch model.statusMode {
+            case .unpay:
+                let url = APIAssistance.orderDetail(with: model.consultId)
+                let webCtrl = HCH5ViewController()
+                webCtrl.prepare(parameters: ["url": url, "title": "订单详情"])
+                navigationController?.pushViewController(webCtrl, animated: true)
+            case .cancelled, .finished:
+                let params = HCShareWebViewController.configParameters(mode: .doctor,
+                                                                       model: HCShareDataModel.transformAccurateConsultModel(model: model),
+                                                                       needUnitId: false,
+                                                                       isAddRightItems: false)
+                HCReservationViewController.push(HCShareWebViewController.self, params)
+            case .waiteReceive, .receiving:
+                let url = APIAssistance.consultationChat(with: model.consultId)
+                HCReservationViewController.push(HCConsultChatController.self, ["url": url, "title": model.userName])
+            default:
+                break
             }
         }
     }

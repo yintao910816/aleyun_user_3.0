@@ -14,7 +14,7 @@ class HCAccurateReservationController: HCSlideItemController {
     private var tableView: UITableView!
     private var viewModel: HCAccurateReservationViewModel!
         
-    public var pushH5CallBack:(((HCMyConsultDetailMode, HCAccurateConsultItemModel))->())?
+    public var pushH5CallBack:(((HCMyConsultDetailMode?, HCAccurateConsultItemModel))->())?
 
     override func setupUI() {
         tableView = UITableView.init(frame: view.bounds, style: .grouped)
@@ -64,7 +64,7 @@ extension HCAccurateReservationController: UITableViewDelegate, UITableViewDataS
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = (tableView.dequeueReusableCell(withIdentifier: HCAccurateReservationCell_identifier) as! HCAccurateReservationCell)
         cell.model = viewModel.datasource.value[indexPath.section]
-        cell.actionCallBack = { [unowned self] in self.pushH5CallBack?((HCMyConsultDetailMode.chat, $0)) }
+        cell.actionCallBack = { [unowned self] in self.pushH5CallBack?((nil, $0)) }
         return cell
     }
     

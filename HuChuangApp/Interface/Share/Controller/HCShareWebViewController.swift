@@ -22,9 +22,7 @@ class HCShareWebViewController: HCConsultChatController {
         
         title = shareModel.title
         
-        if isAddRightItems {
-            addRightItems()
-        }
+        configRightItems()        
     }
     
     override func rxBind() {
@@ -61,7 +59,7 @@ class HCShareWebViewController: HCConsultChatController {
     public var isAddRightItems: Bool = true {
         didSet {
             if isAddRightItems {
-                configRightItems()
+                addRightItems()
             }
         }
     }
