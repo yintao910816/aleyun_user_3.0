@@ -21,23 +21,19 @@ class HCLoginViewModel: BaseViewModel, VMNavigation {
               weChatTap: Driver<Void>)) {
         super.init()
         
-        enableCode = Driver.combineLatest(input, tap.agreeTap){ ($0, $1) }
-            .map({ ret -> Bool in
-                if !ret.1 {
+        enableCode = input.map{ ValidateNum.phoneNum($0).isRight }
+                
+        let combineSignal = Driver.combineLatest(input, tap.agreeTap){ ($0, $1) }
+        tap.codeTap.withLatestFrom(combineSignal)
+            .filter({ data -> Bool in
+                if !data.1 {
+                    NoticesCenter.alert(message: "请阅读并勾选《用户协议》《隐私声明》")
                     return false
                 }
-                
-                if !ValidateNum.phoneNum(ret.0).isRight {
-                    return false
-                }
-                
                 return true
             })
-            .asDriver()
-        
-        tap.codeTap.withLatestFrom(input)
             ._doNext(forNotice: hud)
-            .drive(onNext: { [weak self] in self?.requestCode(mobile: $0) })
+            .drive(onNext: { [weak self] in self?.requestCode(mobile: $0.0) })
             .disposed(by: disposeBag)
         
         tap.weChatTap.asObservable()

@@ -58,6 +58,8 @@ class HCShareWebViewController: HCConsultChatController {
 
     public var isAddRightItems: Bool = true {
         didSet {
+            configRightItems()
+
             if isAddRightItems {
                 addRightItems()
             }
@@ -111,6 +113,10 @@ extension HCShareWebViewController {
 extension HCShareWebViewController {
     
     private func configRightItems() {
+        if storeButton != nil, shareButton != nil {
+            return
+        }
+        
         storeButton = TYClickedButton.init(type: .custom)
         storeButton.frame = .init(x: 0, y: 0, width: 30, height: 30)
         storeButton.setEnlargeEdge(top: 10, bottom: 10, left: 10, right: 10)
