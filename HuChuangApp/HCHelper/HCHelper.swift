@@ -269,7 +269,7 @@ extension HCHelper {
                     }, onError: { NoticesCenter.alert(message: BaseViewModel().errorMessage($0)) })
                     .asObservable()
             }else {
-                NoticesCenter.alert(message: "未登陆")
+                NoticesCenter.alert(message: "未登录")
                 return Observable.just(nil)
             }
         }
@@ -319,7 +319,7 @@ extension HCHelper {
         }else {
             NotificationCenter.default.post(name: NotificationName.ChatCall.finishAudio, object: nil)
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
-                NoticesCenter.alert(message: "未登陆")
+                NoticesCenter.alert(message: "未登录")
             }
             return Observable.just(HCReceivePhoneModel())
         }
@@ -352,7 +352,7 @@ extension HCHelper {
                 .catchErrorJustReturn(false)
                 .asObservable()
         }else {
-            NoticesCenter.alert(message: "未登陆")
+            NoticesCenter.alert(message: "未登录")
             return Observable.just(false)
         }
     }
@@ -384,7 +384,7 @@ extension HCHelper {
                 .catchErrorJustReturn(false)
                 .asObservable()
         }else {
-            NoticesCenter.alert(message: "未登陆")
+            NoticesCenter.alert(message: "未登录")
             return Observable.just(false)
         }
     }

@@ -17,7 +17,7 @@ class HCMyPicRecordViewModel: RefreshVM<HCConsultItemModel> {
     override func requestData(_ refresh: Bool) {
         super.requestData(refresh)
         
-        HCProvider.request(.myConsult(consultType: 1, pageSize: 10, pageNum: 1, status: 3))
+        HCProvider.request(.myConsult(consultType: 1, pageSize: 10, pageNum: 1, status: nil))
             .map(result: HCPicConsultListModel.self)
             .subscribe(onSuccess: { [weak self] data in
                 self?.updateRefresh(refresh, data.data?.records, data.data?.pages ?? 1)
@@ -37,7 +37,7 @@ class HCMyVideoRecordViewModel: RefreshVM<HCConsultItemModel> {
     override func requestData(_ refresh: Bool) {
         super.requestData(refresh)
         
-        HCProvider.request(.myConsult(consultType: 2, pageSize: 10, pageNum: 1, status: 3))
+        HCProvider.request(.myConsult(consultType: 2, pageSize: 10, pageNum: 1, status: nil))
             .map(result: HCVideoConsultListModel.self)
             .subscribe(onSuccess: { [weak self] data in
                 self?.updateRefresh(refresh, data.data?.records, data.data?.pages ?? 1)

@@ -127,7 +127,7 @@ class RefreshVM<T>: BaseViewModel {
     public let modelSelected = PublishSubject<T>()
 
     /// 用于多table
-    private var pageModels:[String: PageModel] = [:]
+    public var pageModels:[String: PageModel] = [:]
     
     /**
      * 子类重写，响应上拉下拉加载数据

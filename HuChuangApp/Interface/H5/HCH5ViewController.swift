@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import JavaScriptCore
 
 class HCH5ViewController: BaseViewController {
+
+    private var redirect_url: String?
 
     private var correctURL: String = ""
     private var webTitle: String?
@@ -19,6 +22,16 @@ class HCH5ViewController: BaseViewController {
         if webTitle?.count ?? 0 > 0 { navigationItem.title = webTitle }
 
         view.addSubview(webView)
+        
+        NotificationCenter.default.rx.notification(NotificationName.Pay.wChatPayFinish)
+            .subscribe(onNext: { [weak self] _ in
+                if let redirect = self?.redirect_url, let redirectURL = URL(string: redirect) {
+                    let request = URLRequest.init(url: redirectURL)
+                    self?.webView.load(request)
+                }
+                self?.redirect_url = nil
+            })
+            .disposed(by: disposeBag)
         
         requestData()
     }
@@ -58,12 +71,19 @@ class HCH5ViewController: BaseViewController {
         config.preferences = preferences
                 
         config.userContentController = WKUserContentController()
-
+        
+        let js = "appInfo('\(stringForAppInfo())')"
+        PrintLog("appInfo JS: \(js)")
+        let script = WKUserScript.init(source: js,
+                                       injectionTime: .atDocumentStart,
+                                       forMainFrameOnly: true)
+        config.userContentController.addUserScript(script)
+        
         return config
     }
     
     public func configList() ->[String] {
-        return ["changeTitle", "backHomeFnApi", "backToList", "userInvalid", "appInfo", "getUserInfoFnApi", "backFnApi"]
+        return ["changeTitle", "backHomeFnApi", "backToList", "userInvalid", "getUserInfoFnApi", "backFnApi"]
     }
     
     //MARK: 参数设置
@@ -169,6 +189,16 @@ class HCH5ViewController: BaseViewController {
         return w
     }()
     
+    private lazy var payWeb: UIWebView = {
+        let w = UIWebView(frame: view.bounds)
+        w.backgroundColor = .clear
+        w.scrollView.bounces = false
+        w.delegate = self
+        view.addSubview(w)
+        view.bringSubviewToFront(w)
+        return w
+    }()
+    
     public lazy var hud: NoticesCenter = {
         return NoticesCenter()
     }()
@@ -179,6 +209,35 @@ extension HCH5ViewController: WKNavigationDelegate {
     
     // 决定网页能否被允许跳转    
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        let s = navigationAction.request.url?.absoluteString
+        PrintLog("网页能否被允许跳转 -- \(String(describing: s))")
+
+        if s == "app://reload"{
+            payWeb.isHidden = true
+            webView.load(URLRequest.init(url: URL.init(string: correctURL)!))
+            decisionHandler(.cancel)
+            return
+        }
+        
+        let rs = "\(HCHelper.AppKeys.appSchame.rawValue)://".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+
+        if s?.contains("wx.tenpay.com") == true && s?.contains("redirect_url=\(rs)") == false
+        {
+            let sep = s!.components(separatedBy: "redirect_url=")
+            redirect_url = sep.last?.removingPercentEncoding//sep.first(where: { !$0.contains("wx.tenpay.com") })
+            let reloadUrl = sep.first(where: { $0.contains("wx.tenpay.com") })!.appending("&redirect_url=\(rs)")
+            if let _url = URL.init(string: reloadUrl) {
+                var mRequest = URLRequest.init(url: _url)
+                mRequest.setValue("\(HCHelper.AppKeys.appSchame.rawValue)://", forHTTPHeaderField: "Referer")
+//                webView.load(mRequest)
+                payWeb.isHidden = false
+                payWeb.loadRequest(mRequest)
+            }
+            decisionHandler(.cancel)
+            return
+        }
+        
+        payWeb.isHidden = true
         decisionHandler(.allow)
     }
     
@@ -189,8 +248,9 @@ extension HCH5ViewController: WKNavigationDelegate {
 
     // 处理网页开始加载
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-        let s = webView.url?.absoluteURL
+        let s = webView.url?.absoluteString
         PrintLog("开始加载 -- \(String(describing: s))")
+                
     }
      
     // 处理网页加载失败
@@ -208,6 +268,10 @@ extension HCH5ViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         PrintLog("网页加载完成")
         hud.noticeHidden()
+        
+//        webView.evaluateJavaScript("appInfo('\(stringForAppInfo())')") { (res, error) in
+//            PrintLog("js调用appInfo：\(res) --- \(error)")
+//        }
     }
      
     // 处理网页返回内容时发生的失败
@@ -274,6 +338,28 @@ extension HCH5ViewController {
         guard let jsonString =  String.init(data: jsonData, encoding: .utf8) else { return "" }
         PrintLog("app信息：\(jsonString)")
         return jsonString
+    }
+
+}
+
+//MARK: 微信支付暂时使用此方法
+extension HCH5ViewController: UIWebViewDelegate {
+    
+    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebView.NavigationType) -> Bool{
+        return true
+    }
+    
+    func webViewDidStartLoad(_ webView: UIWebView){
+        PrintLog("didStartLoad")
+    }
+    
+    func webViewDidFinishLoad(_ webView: UIWebView){
+        PrintLog("didFinishLoad")
+        hud.noticeHidden()
+    }
+    
+    func webView(_ webView: UIWebView, didFailLoadWithError error: Error){
+        hud.failureHidden(error.localizedDescription)
     }
 
 }

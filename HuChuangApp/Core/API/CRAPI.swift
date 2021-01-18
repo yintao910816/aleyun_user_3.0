@@ -198,7 +198,7 @@ enum API{
     /// 我的优惠卷
     case myCoupon(orderSn: String, useStatus: Int, pageSize: Int, pageNum: Int)
     /// 我的问诊
-    case myConsult(consultType: Int, pageSize: Int, pageNum: Int, status: Int?)
+    case myConsult(consultType: Int, pageSize: Int, pageNum: Int, status: String?)
     /// 消息中心
     case messageCenter
     /// banner
@@ -585,6 +585,8 @@ extension API {
             params["pageNum"] = pageNum
             if let s = status {
                 params["status"] = s
+            }else {
+                params["status"] = nil
             }
         case .myDoctor(let lng, let lat):
             params["lng"] = lng
@@ -727,6 +729,8 @@ extension API {
         default:
             return nil
         }
+        
+        PrintLog(params)
         return params
     }
 }

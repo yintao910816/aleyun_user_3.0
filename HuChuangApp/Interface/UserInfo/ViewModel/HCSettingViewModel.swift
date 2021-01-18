@@ -57,7 +57,7 @@ extension HCSettingViewModel {
         }
         
         let loginOutItem = HCListCellItem()
-        loginOutItem.title = "退出登陆"
+        loginOutItem.title = "退出登录"
         loginOutItem.titleColor = RGB(51, 51, 51)
         loginOutItem.cellIdentifier = HCListDetailCell_identifier
         

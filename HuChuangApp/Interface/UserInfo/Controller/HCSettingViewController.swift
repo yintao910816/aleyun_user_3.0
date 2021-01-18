@@ -20,7 +20,7 @@ class HCSettingViewController: BaseViewController {
         view.addSubview(containerView)
 
         containerView.didSelected = { [weak self] in
-            if $0.title == "退出登陆" {
+            if $0.title == "退出登录" {
                 NoticesCenter.alert(message: "确定退出当前账号？", cancleTitle: "取消", okTitle: "确定", presentCtrl: self, callBackOK: {
                     HCHelper.presentLogin()
                 })

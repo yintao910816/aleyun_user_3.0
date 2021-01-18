@@ -35,14 +35,14 @@ class HCMyConsultViewController: BaseViewController {
             switch $0.0 {
             case .chat:
                 let url = APIAssistance.consultationChat(with: $0.1.consultId)
-                self?.navigationController?.pushViewController(BaseWebViewController.createWeb(url: url,
-                                                                                               title: $0.1.userName),
-                                                               animated: true)
+                let ctrl = HCConsultChatController()
+                ctrl.prepare(parameters: ["url": url, "title": $0.1.userName])
+                self?.navigationController?.pushViewController(ctrl, animated: true)
             case .order:
                 let url = APIAssistance.orderDetail(with: $0.1.consultId)
-                self?.navigationController?.pushViewController(BaseWebViewController.createWeb(url: url,
-                                                                                               title: "订单详情"),
-                                                               animated: true)
+                let ctrl = HCConsultChatController()
+                ctrl.prepare(parameters: ["url": url, "title": "订单详情"])
+                self?.navigationController?.pushViewController(ctrl, animated: true)
             }
         }
         
@@ -51,14 +51,14 @@ class HCMyConsultViewController: BaseViewController {
             switch $0.0 {
             case .chat:
                 let url = APIAssistance.consultationChat(with: $0.1.consultId)
-                self?.navigationController?.pushViewController(BaseWebViewController.createWeb(url: url,
-                                                                                               title: $0.1.userName),
-                                                               animated: true)
+                let ctrl = HCConsultChatController()
+                ctrl.prepare(parameters: ["url": url, "title": $0.1.userName])
+                self?.navigationController?.pushViewController(ctrl, animated: true)
             case .order:
                 let url = APIAssistance.orderDetail(with: $0.1.consultId)
-                self?.navigationController?.pushViewController(BaseWebViewController.createWeb(url: url,
-                                                                                               title: "订单详情"),
-                                                               animated: true)
+                let ctrl = HCConsultChatController()
+                ctrl.prepare(parameters: ["url": url, "title": "订单详情"])
+                self?.navigationController?.pushViewController(ctrl, animated: true)
             }
         }
 
