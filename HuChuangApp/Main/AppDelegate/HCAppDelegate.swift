@@ -49,4 +49,12 @@ class HCAppDelegate: UIResponder, UIApplicationDelegate {
             return .portrait
         }
     }
+    
+    func applicationWillEnterForeground(_ application: UIApplication) {
+        DispatchQueue.main.async {
+            if NSObject().visibleViewController?.isKind(of: HCH5ViewController.self) == true {
+                NotificationCenter.default.post(name: NotificationName.Pay.wChatPayFinish, object: nil)
+            }
+        }
+    }
 }
