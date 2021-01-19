@@ -58,7 +58,7 @@ struct APIAssistance {
 
     static public func baseURL(API: API) ->URL{
         switch API {
-        case .uploadIcon(_):
+        case .uploadIcon(_), .uploadFile(_, _):
             return URL(string: fileBase)!
 //        case .version:
 //            return URL(string: versionBase)!
@@ -136,6 +136,11 @@ struct APIAssistance {
     /// 订单详情
     static public func orderDetail(with orderSn: String) ->String {
         return "\(APIAssistance.consultsH5Host)#/chatConsulOrderDetails/\(orderSn)"
+    }
+
+    /// 订单支付
+    static public func orderPay(with orderSn: String) ->String {
+        return "\(APIAssistance.consultsH5Host)#/payOrder/\(orderSn)"
     }
 
 }

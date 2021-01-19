@@ -49,6 +49,11 @@ class HCReservationViewController: BaseViewController, VMNavigation {
                 navigationController?.pushViewController(BaseWebViewController.createWeb(url: url,
                                                                                          title: "订单详情"),
                                                          animated: true)
+            case .pay:
+                let url = APIAssistance.orderDetail(with: model.orderSn)
+                let ctrl = HCConsultChatController()
+                ctrl.prepare(parameters: ["url": url, "title": "支付"])
+                navigationController?.pushViewController(ctrl, animated: true)
             }
         }else {
             switch model.statusMode {

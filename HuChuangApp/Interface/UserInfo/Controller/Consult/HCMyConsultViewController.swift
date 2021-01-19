@@ -11,6 +11,7 @@ import UIKit
 enum HCMyConsultDetailMode {
     case chat
     case order
+    case pay
 }
 
 class HCMyConsultViewController: BaseViewController {
@@ -43,6 +44,11 @@ class HCMyConsultViewController: BaseViewController {
                 let ctrl = HCConsultChatController()
                 ctrl.prepare(parameters: ["url": url, "title": "订单详情"])
                 self?.navigationController?.pushViewController(ctrl, animated: true)
+            case .pay:
+                let url = APIAssistance.orderPay(with: $0.1.orderSn)
+                let ctrl = HCConsultChatController()
+                ctrl.prepare(parameters: ["url": url, "title": "支付"])
+                self?.navigationController?.pushViewController(ctrl, animated: true)
             }
         }
         
@@ -58,6 +64,11 @@ class HCMyConsultViewController: BaseViewController {
                 let url = APIAssistance.orderDetail(with: $0.1.consultId)
                 let ctrl = HCConsultChatController()
                 ctrl.prepare(parameters: ["url": url, "title": "订单详情"])
+                self?.navigationController?.pushViewController(ctrl, animated: true)
+            case .pay:
+                let url = APIAssistance.orderPay(with: $0.1.orderSn)
+                let ctrl = HCConsultChatController()
+                ctrl.prepare(parameters: ["url": url, "title": "支付"])
                 self?.navigationController?.pushViewController(ctrl, animated: true)
             }
         }

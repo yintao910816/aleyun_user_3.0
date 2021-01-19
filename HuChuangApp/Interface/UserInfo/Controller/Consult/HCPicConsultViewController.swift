@@ -77,7 +77,7 @@ extension HCPicConsultViewController: UITableViewDelegate, UITableViewDataSource
         cell.model = datasource[indexPath.section]
         cell.actionCallBack = { [unowned self] in
             if HCOrderDetailStatus(rawValue: $0.status) == .unpay {
-                self.pushH5CallBack?((HCMyConsultDetailMode.order, $0))
+                self.pushH5CallBack?((HCMyConsultDetailMode.pay, $0))
             }else {
                 self.pushH5CallBack?((HCMyConsultDetailMode.chat, $0))
             }
