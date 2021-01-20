@@ -84,6 +84,9 @@ extension HCExpertConsultationContainer {
         collectionView.register(HCExpertConsultationReusableView.self,
                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                                 withReuseIdentifier: HCExpertConsultationReusableView_identifier)
+        collectionView.register(HCEmptyFilterReusableView.self,
+                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
+                                withReuseIdentifier: HCEmptyFilterReusableView_identifier)
     }
 }
 
@@ -108,21 +111,32 @@ extension HCExpertConsultationContainer: UICollectionViewDataSource, UICollectio
     }
 
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        if indexPath.section == 0, kind == UICollectionView.elementKindSectionHeader {
-            let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HCExpertConsultationReusableView_identifier, for: indexPath) as! HCExpertConsultationReusableView
-            header.setupHeader(bannberDatas: bannberDatas,
-                               statisticsDoctorHopitalModel: statisticsDoctorHopitalModel,
-                               doctorListDatas: doctorListDatas,
-                               slideMenuData: slideMenuData)
-            header.menuSelect = { [weak self] in self?.menuSelect?($0) }
-            header.cellDidSelected = { [weak self] in self?.cellDidSelected?($0) }
-            return header
+        if indexPath.section == 0 {
+            if kind == UICollectionView.elementKindSectionHeader {
+                let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HCExpertConsultationReusableView_identifier, for: indexPath) as! HCExpertConsultationReusableView
+                header.setupHeader(bannberDatas: bannberDatas,
+                                   statisticsDoctorHopitalModel: statisticsDoctorHopitalModel,
+                                   doctorListDatas: doctorListDatas,
+                                   slideMenuData: slideMenuData)
+                header.menuSelect = { [weak self] in self?.menuSelect?($0) }
+                header.cellDidSelected = { [weak self] in self?.cellDidSelected?($0) }
+                return header
+            }else {
+                if colDatasource.count == 0 {
+                    let footer = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: HCEmptyFilterReusableView_identifier, for: indexPath)
+                    return footer
+                }
+            }
         }
         return UICollectionReusableView()
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return .init(width: width, height: HCExpertConsultationReusableView.viewHeight(myDoctorCount: doctorListDatas.count))
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        return colDatasource.count > 0 ? .zero : .init(width: collectionView.width, height: HCEmptyFilterReusableView_height)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

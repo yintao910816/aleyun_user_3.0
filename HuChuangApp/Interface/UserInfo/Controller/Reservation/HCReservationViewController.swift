@@ -50,7 +50,7 @@ class HCReservationViewController: BaseViewController, VMNavigation {
                                                                                          title: "订单详情"),
                                                          animated: true)
             case .pay:
-                let url = APIAssistance.orderDetail(with: model.orderSn)
+                let url = APIAssistance.orderPay(with: model.orderSn)
                 let ctrl = HCConsultChatController()
                 ctrl.prepare(parameters: ["url": url, "title": "支付"])
                 navigationController?.pushViewController(ctrl, animated: true)
@@ -58,10 +58,10 @@ class HCReservationViewController: BaseViewController, VMNavigation {
         }else {
             switch model.statusMode {
             case .unpay:
-                let url = APIAssistance.orderDetail(with: model.consultId)
-                let webCtrl = HCH5ViewController()
-                webCtrl.prepare(parameters: ["url": url, "title": "订单详情"])
-                navigationController?.pushViewController(webCtrl, animated: true)
+                let url = APIAssistance.orderPay(with: model.orderSn)
+                let ctrl = HCConsultChatController()
+                ctrl.prepare(parameters: ["url": url, "title": "支付"])
+                navigationController?.pushViewController(ctrl, animated: true)
             case .cancelled, .finished:
                 let params = HCShareWebViewController.configParameters(mode: .doctor,
                                                                        model: HCShareDataModel.transformAccurateConsultModel(model: model),

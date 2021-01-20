@@ -530,6 +530,7 @@
 		C472525524DD7C80006DEEC9 /* HCCodeInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C472525424DD7C80006DEEC9 /* HCCodeInputView.swift */; };
 		C4783B2E24DD39E800737479 /* HCLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4783B2A24DD39E800737479 /* HCLoginViewController.swift */; };
 		C4783B3124DD3BFC00737479 /* HCLoginViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4783B3024DD3BFC00737479 /* HCLoginViewContainer.swift */; };
+		C480AF4125B7ED8B007EA84E /* HCEmptyFilterReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C480AF4025B7ED8B007EA84E /* HCEmptyFilterReusableView.swift */; };
 		C494135524DE4B7900045749 /* HCMineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C494135424DE4B7900045749 /* HCMineViewController.swift */; };
 		C494135924DE4C5800045749 /* HCMineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C494135824DE4C5800045749 /* HCMineViewModel.swift */; };
 		C494136524DE54A100045749 /* HCCustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C494136424DE54A100045749 /* HCCustomButton.swift */; };
@@ -1473,6 +1474,7 @@
 		C47E067823588FCD003A3320 /* TYCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TYCalendarView.swift; sourceTree = "<group>"; };
 		C47E067A23589355003A3320 /* TYCalendarDayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TYCalendarDayCell.swift; sourceTree = "<group>"; };
 		C47E067D23589800003A3320 /* HCRecorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCRecorderView.swift; sourceTree = "<group>"; };
+		C480AF4025B7ED8B007EA84E /* HCEmptyFilterReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCEmptyFilterReusableView.swift; sourceTree = "<group>"; };
 		C48842B0233EF6A700C209B3 /* HCClassRoomListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCClassRoomListCell.swift; sourceTree = "<group>"; };
 		C48842B4233EFD3500C209B3 /* HCClassRoomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCClassRoomViewModel.swift; sourceTree = "<group>"; };
 		C494135424DE4B7900045749 /* HCMineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCMineViewController.swift; sourceTree = "<group>"; };
@@ -4020,6 +4022,7 @@
 			children = (
 				C4DDE0B124F4D9A40001201C /* HCExpertConsultationContainer.swift */,
 				C4DDE0CB24F50E680001201C /* HCExpertConsultationReusableView.swift */,
+				C480AF4025B7ED8B007EA84E /* HCEmptyFilterReusableView.swift */,
 				C4DDE0CD24F529B80001201C /* HCDoctorCardCell.swift */,
 				C4BDAB0E24F54EBF00954F6E /* HCDoctorListCell.swift */,
 			);
@@ -4729,6 +4732,7 @@
 				C497E94523444E4600328B47 /* HCHomeConsultingVolumeReusableView.swift in Sources */,
 				B816EB13221DABF400F024D5 /* ZXAI01decoder.m in Sources */,
 				B82456DB24EFE139006356BB /* HCCouponViewModel.swift in Sources */,
+				C480AF4125B7ED8B007EA84E /* HCEmptyFilterReusableView.swift in Sources */,
 				B879A060221AF0B200E573C9 /* MineFooterView.swift in Sources */,
 				C4DDE0C424F4FBB20001201C /* HCListFilter.swift in Sources */,
 				C4F139B9235419EF00D777F6 /* TYIcon.swift in Sources */,

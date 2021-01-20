@@ -64,7 +64,13 @@ extension HCAccurateReservationController: UITableViewDelegate, UITableViewDataS
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = (tableView.dequeueReusableCell(withIdentifier: HCAccurateReservationCell_identifier) as! HCAccurateReservationCell)
         cell.model = viewModel.datasource.value[indexPath.section]
-        cell.actionCallBack = { [unowned self] in self.pushH5CallBack?((nil, $0)) }
+        cell.actionCallBack = { [unowned self] in
+            if HCOrderDetailStatus(rawValue: $0.status) == .unpay {
+                self.pushH5CallBack?((HCMyConsultDetailMode.pay, $0))
+            }else {
+                self.pushH5CallBack?((HCMyConsultDetailMode.chat, $0))
+            }
+        }
         return cell
     }
     
