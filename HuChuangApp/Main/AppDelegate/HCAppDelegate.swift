@@ -25,7 +25,7 @@ class HCAppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        TRTCCalling.shareInstance().addDelegate(self)
+        setupTRTC()
         setupUM(launchOptions: launchOptions)
         
         window = UIWindow.init(frame: UIScreen.main.bounds)
@@ -56,5 +56,9 @@ class HCAppDelegate: UIResponder, UIApplicationDelegate {
                 NotificationCenter.default.post(name: NotificationName.Pay.wChatPayFinish, object: nil)
             }
         }
+    }
+        
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        UIApplication.shared.applicationIconBadgeNumber = 0
     }
 }

@@ -10,6 +10,15 @@ import Foundation
 
 extension HCAppDelegate: TRTCCallingDelegate {
 
+    public func setupTRTC() {
+        TRTCCalling.shareInstance().addDelegate(self)
+        V2TIMManager.sharedInstance()?.setAPNSListener(self)
+        
+        #if DEBUG
+        TRTCCloud.setConsoleEnabled(true)
+        #endif
+    }
+    
     // 被邀请通话
     func onInvited(sponsor: String, userIds: [String], isFromGroup: Bool, callType: CallType) {
         HCSystemAudioPlay.share.videoCallPlay()
@@ -86,4 +95,12 @@ extension HCAppDelegate: TRTCCallingDelegate {
     func onCallEnd() {
         print("通话结束")
     }
+}
+
+extension HCAppDelegate: V2TIMAPNSListener {
+    
+    func onSetAPPUnreadCount() -> UInt32 {
+        return 0
+    }
+    
 }

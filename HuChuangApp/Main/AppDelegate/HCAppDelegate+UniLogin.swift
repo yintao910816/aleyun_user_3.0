@@ -19,29 +19,29 @@ extension HCAppDelegate {
     public func setupUniLogin(viewController: UIViewController) {
 //        UniLogin.shareInstance().delegate = self
         
-        UniLogin.shareInstance().initWithAppId(AppId, secretKey: AppSecret) { [weak self] (flag, msg) in
-            PrintLog("一键登录初始化结果：\(flag) \(msg)")
-            if flag {
-                guard let strongSelf = self else { return }
-                
-                let config = YMCustomConfig()
-                config.cuccModel = strongSelf.createCUCCModel(viewController: viewController, isMini: false)
-                config.ctccMini = false
-                
-                UniLogin.shareInstance().openAtuhVC(with: config, timeout: 30, controller: viewController) { (mobile, msg, result) in
-                    DispatchQueue.main.async {
-                        if let m = mobile, m.count > 0 {
-                            NoticesCenter.alert(message: "一键登录成功：\(m)")
-                        }else {
-                            NoticesCenter.alert(message: msg ?? "一键登录失败")
-    //                        UniLogin.shareInstance().closeViewControler(animated: false, completion: nil)
-                        }
-                    }
-                }
-            }else {
-                NoticesCenter.alert(message: msg)
-            }
-        }
+//        UniLogin.shareInstance().initWithAppId(AppId, secretKey: AppSecret) { [weak self] (flag, msg) in
+//            PrintLog("一键登录初始化结果：\(flag) \(msg)")
+//            if flag {
+//                guard let strongSelf = self else { return }
+//                
+//                let config = YMCustomConfig()
+//                config.cuccModel = strongSelf.createCUCCModel(viewController: viewController, isMini: false)
+//                config.ctccMini = false
+//                
+//                UniLogin.shareInstance().openAtuhVC(with: config, timeout: 30, controller: viewController) { (mobile, msg, result) in
+//                    DispatchQueue.main.async {
+//                        if let m = mobile, m.count > 0 {
+//                            NoticesCenter.alert(message: "一键登录成功：\(m)")
+//                        }else {
+//                            NoticesCenter.alert(message: msg ?? "一键登录失败")
+//    //                        UniLogin.shareInstance().closeViewControler(animated: false, completion: nil)
+//                        }
+//                    }
+//                }
+//            }else {
+//                NoticesCenter.alert(message: msg)
+//            }
+//        }
     }
 }
 
