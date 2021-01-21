@@ -96,7 +96,7 @@ extension HCConsultChatController {
     }
     
     private func presentVideoCallCtrl(callUser: CallingUserModel, model: HCConsultInfoModel) {
-        let callVC = HCConsultVideoCallController(sponsor: nil)
+        let callVC = HCConsultVideoCallController(callingUser: callUser)
         callVC.otherId = callUser.userId
         
         callVC.dismissBlock = { }

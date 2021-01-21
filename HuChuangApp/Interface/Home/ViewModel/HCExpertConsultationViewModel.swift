@@ -72,14 +72,14 @@ class HCExpertConsultationViewModel: RefreshVM<HCDoctorListItemModel> {
                 var needReload = false
                 var title = $0
                 if $0 == "全部" || $0.count == 0 {
-                    strongSelf.consultType = "0"
+                    strongSelf.consultType = ""
                     needReload = true
                     title = "咨询方式"
                 }else if $0 == "图文" {
-                    strongSelf.sortType = "1"
+                    strongSelf.consultType = "1"
                     needReload = true
                 }else if $0 == "视频" {
-                    strongSelf.sortType = "2"
+                    strongSelf.consultType = "2"
                     needReload = true
                 }
                 if needReload {

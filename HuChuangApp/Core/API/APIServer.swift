@@ -54,11 +54,11 @@ public final class RequestLoadingPlugin: PluginType {
         case .success(let response):
             do {
                 let json = try JSONSerialization.jsonObject(with: response.data, options: .allowFragments)
-                
-                PrintLog("返回json -- \(target) -- \(json)")
-                
+                                
                 guard let rdic = json as? [String : Any] else { return }
                 
+                PrintLog("返回json -- \(target) -- \(rdic)")
+
                 guard let code = rdic["code"] as? Int else { return }
                 
                 if code == RequestCode.invalid.rawValue && HCHelper.share.isPresentLogin == false {

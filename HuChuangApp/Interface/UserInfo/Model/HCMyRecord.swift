@@ -9,5 +9,5 @@
 import Foundation
 
 class HCMyRecordItemModel: HJModel {
-    
+    var records: [HCConsultItemModel] = []
 }

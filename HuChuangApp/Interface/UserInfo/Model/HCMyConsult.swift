@@ -78,7 +78,12 @@ class HCConsultItemModel: HJModel, HCConsultModelAdapt {
     var technicalPost: String = ""
     var userId: String = ""
     var userName: String = ""
-    
+    var consultType: String = ""
+    var subjectDate: String = ""
+    var apm: String = ""
+    var address: String = ""
+    var week: String = ""
+
     public lazy var nameText: NSAttributedString = {
         let string = NSMutableAttributedString(string: "\(self.userName) \(self.technicalPost)")
         string.addAttribute(NSAttributedString.Key.font,

@@ -36,6 +36,10 @@ class HCMyRecordViewController: BaseViewController {
         }
 
         accurateReservationRecordCtrl = HCAccurateReservationRecordController()
+        accurateReservationRecordCtrl.pushH5CallBack = {
+            let url = APIAssistance.consultationChat(with: $0.consultId)
+            HCMineViewController.push(HCConsultChatController.self, ["url": url, "title": $0.userName])
+        }
 
         slideCtrl.menuItems = TYSlideItemModel.createMyRecordData()
         slideCtrl.menuCtrls = [picConsultRecordCtrl, videoConsultRecordCtrl, accurateReservationRecordCtrl]

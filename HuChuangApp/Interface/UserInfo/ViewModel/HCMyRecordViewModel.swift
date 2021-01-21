@@ -18,7 +18,7 @@ class HCMyPicRecordViewModel: RefreshVM<HCConsultItemModel> {
         super.requestData(refresh)
         
         HCProvider.request(.myConsult(consultType: 1, pageSize: 10, pageNum: 1, status: nil))
-            .map(result: HCPicConsultListModel.self)
+            .map(result: HCMyRecordItemModel.self)
             .subscribe(onSuccess: { [weak self] data in
                 self?.updateRefresh(refresh, data.data?.records, data.data?.pages ?? 1)
             }) { [weak self] _ in
@@ -38,7 +38,7 @@ class HCMyVideoRecordViewModel: RefreshVM<HCConsultItemModel> {
         super.requestData(refresh)
         
         HCProvider.request(.myConsult(consultType: 2, pageSize: 10, pageNum: 1, status: nil))
-            .map(result: HCVideoConsultListModel.self)
+            .map(result: HCMyRecordItemModel.self)
             .subscribe(onSuccess: { [weak self] data in
                 self?.updateRefresh(refresh, data.data?.records, data.data?.pages ?? 1)
             }) { [weak self] _ in
@@ -48,7 +48,7 @@ class HCMyVideoRecordViewModel: RefreshVM<HCConsultItemModel> {
     }
 }
 
-class HCAccurateReservationRecordViewModel: RefreshVM<HCReservationItemModel> {
+class HCAccurateReservationRecordViewModel: RefreshVM<HCConsultItemModel> {
     
     override init() {
         super.init()
@@ -56,6 +56,16 @@ class HCAccurateReservationRecordViewModel: RefreshVM<HCReservationItemModel> {
     
     override func requestData(_ refresh: Bool) {
         super.requestData(refresh)
+        
+        HCProvider.request(.myConsult(consultType: 4, pageSize: 10, pageNum: 1, status: nil))
+            .map(result: HCMyRecordItemModel.self)
+            .subscribe(onSuccess: { [weak self] data in
+                self?.updateRefresh(refresh, data.data?.records, data.data?.pages ?? 1)
+            }) { [weak self] _ in
+                self?.revertCurrentPageAndRefreshStatus()
+        }
+        .disposed(by: disposeBag)
+
     }
 
 }

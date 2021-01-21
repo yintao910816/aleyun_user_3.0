@@ -44,6 +44,8 @@ class HCConsultVideoCallController: UIViewController, CallingViewControllerRespo
     var callingTime: UInt32 = 0
     var cutdownCallingTime: Int = 0
     
+    var callingUser: CallingUserModel?
+    
     /// 通话对方的id
     public var otherId: String = ""
 
@@ -76,8 +78,9 @@ class HCConsultVideoCallController: UIViewController, CallingViewControllerRespo
         return panel
     }()
     
-    init(sponsor: CallingUserModel? = nil) {
+    init(sponsor: CallingUserModel? = nil, callingUser: CallingUserModel? = nil) {
         curSponsor = sponsor
+        self.callingUser = callingUser
         if let _ = sponsor {
             curState = .onInvitee
         } else {
@@ -499,52 +502,64 @@ extension HCConsultVideoCallController {
     }
     
     func setupSponsorPanel(topPadding: CGFloat) {
-        // sponsor
+        var avatarURL = ""
+        var name = ""
+        var remindText = ""
         if let sponsor = curSponsor {
-            view.addSubview(sponsorPanel)
-            sponsorPanel.snp.makeConstraints { (make) in
-                make.leading.trailing.equalTo(view)
-                make.top.equalTo(topPadding + 18)
-                make.height.equalTo(60)
-            }
-            //发起者头像
-            let userImage = UIImageView()
-            sponsorPanel.addSubview(userImage)
-            userImage.snp.makeConstraints { (make) in
-                make.trailing.equalTo(sponsorPanel).offset(-18)
-                make.top.equalTo(sponsorPanel)
-                make.width.equalTo(60)
-                make.height.equalTo(60)
-            }
-            userImage.setImage(sponsor.avatarUrl)
-            
-            //发起者名字
-            let userName = UILabel()
-            userName.textAlignment = .right
-            userName.font = UIFont.boldSystemFont(ofSize: 30)
-            userName.textColor = .white
-            userName.text = sponsor.name
-            sponsorPanel.addSubview(userName)
-            userName.snp.makeConstraints { (make) in
-                make.trailing.equalTo(userImage.snp.leading).offset(-6)
-                make.height.equalTo(32)
-                make.top.equalTo(sponsorPanel)
-                make.leading.equalTo(sponsorPanel)
-            }
-            
-            //提醒文字
-            let invite = UILabel()
-            invite.textAlignment = .right
-            invite.font = UIFont.systemFont(ofSize: 13)
-            invite.textColor = .white
-            invite.text = "邀请你视频通话"
-            sponsorPanel.addSubview(invite)
-            invite.snp.makeConstraints { (make) in
-                make.trailing.equalTo(userImage.snp.leading).offset(-6)
-                make.height.equalTo(32)
-                make.top.equalTo(userName.snp.bottom).offset(2)
-                make.leading.equalTo(sponsorPanel)
-            }
+            avatarURL = sponsor.avatarUrl
+            name = sponsor.name
+            remindText = "邀请你视频通话"
+        }else if let call = callingUser {
+            avatarURL = call.avatarUrl
+            name = call.name
+            remindText = "拨号中..."
+        }else {
+            return
+        }
+        
+        view.addSubview(sponsorPanel)
+        sponsorPanel.snp.makeConstraints { (make) in
+            make.leading.trailing.equalTo(view)
+            make.top.equalTo(topPadding + 18)
+            make.height.equalTo(60)
+        }
+        //发起者头像
+        let userImage = UIImageView()
+        sponsorPanel.addSubview(userImage)
+        userImage.snp.makeConstraints { (make) in
+            make.trailing.equalTo(sponsorPanel).offset(-18)
+            make.top.equalTo(sponsorPanel)
+            make.width.equalTo(60)
+            make.height.equalTo(60)
+        }
+        userImage.setImage(avatarURL)
+        
+        //发起者名字
+        let userName = UILabel()
+        userName.textAlignment = .right
+        userName.font = UIFont.boldSystemFont(ofSize: 30)
+        userName.textColor = .white
+        userName.text = name
+        sponsorPanel.addSubview(userName)
+        userName.snp.makeConstraints { (make) in
+            make.trailing.equalTo(userImage.snp.leading).offset(-6)
+            make.height.equalTo(32)
+            make.top.equalTo(sponsorPanel)
+            make.leading.equalTo(sponsorPanel)
+        }
+        
+        //提醒文字
+        let invite = UILabel()
+        invite.textAlignment = .right
+        invite.font = UIFont.systemFont(ofSize: 13)
+        invite.textColor = .white
+        invite.text = remindText
+        sponsorPanel.addSubview(invite)
+        invite.snp.makeConstraints { (make) in
+            make.trailing.equalTo(userImage.snp.leading).offset(-6)
+            make.height.equalTo(32)
+            make.top.equalTo(userName.snp.bottom).offset(2)
+            make.leading.equalTo(sponsorPanel)
         }
     }
     
@@ -663,7 +678,7 @@ extension HCConsultVideoCallController {
     
     func autoSetUIByState() {
         userCollectionView.isHidden = ((curState != .calling) || (collectionCount <= 2))
-        if let _ = curSponsor {
+        if curSponsor != nil || callingUser != nil {
             sponsorPanel.isHidden = curState == .calling
         }
         
