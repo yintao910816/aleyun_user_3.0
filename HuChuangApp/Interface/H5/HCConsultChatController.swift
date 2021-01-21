@@ -74,19 +74,17 @@ extension HCConsultChatController {
         hud.noticeLoading()
         
         HCHelper.requestStartPhone(userId: model.userId)
-            .flatMap { [weak self] res -> Observable<CallingUserModel?> in
+            .flatMap { [weak self] res -> Observable<CallingUserModel> in
                 if res {
                     return HCHelper.requestVideoCallUserInfo(userId: model.userId, consultId: model.consultId)
                 }
                 
                 self?.hud.noticeHidden()
-                return Observable.just(nil)
+                return Observable.error(MapperError.server(message: "拨打失败"))
             }
             .subscribe(onNext: { [weak self] user in
-                if let callingUser = user {
-                    HCSystemAudioPlay.share.videoCallPlay()
-                    self?.presentVideoCallCtrl(callUser: callingUser, model: model)
-                }
+                HCSystemAudioPlay.share.videoCallPlay()
+                self?.presentVideoCallCtrl(callUser: user, model: model)
                 self?.hud.noticeHidden()
             }, onError: { [weak self] _ in
                 self?.hud.noticeHidden()

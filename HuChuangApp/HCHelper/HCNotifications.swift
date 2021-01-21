@@ -45,18 +45,20 @@ extension Notification.Name {
     }
 
     public struct ChatCall {
-        /// 发起视频通话对方接受
-        static let videoCallAccept = Notification.Name(rawValue: "org.UILogic.notification.name.videoCallAccept")
+        /// 对方进入通话
+        static let userEnter = Notification.Name(rawValue: "org.UILogic.notification.ChatCall.userEnter")
         /// 对方离开通话
-        static let otherLeaveVideoCall = Notification.Name(rawValue: "org.UILogic.notification.name.otherLeaveVideoCall")
+        static let otherLeave = Notification.Name(rawValue: "org.UILogic.notification.ChatCall.otherLeave")
         /// 对方拒绝通话
-        static let otherRejectVideoCall = Notification.Name(rawValue: "org.UILogic.notification.name.otherRejectVideoCall")
+        static let otherReject = Notification.Name(rawValue: "org.UILogic.notification.ChatCall.otherReject")
+        /// 已取消
+        static let cancel = Notification.Name(rawValue: "org.UILogic.notification.ChatCall.cancel")
         /// 占线中 onLineBusy
-        static let onLineBusyVideoCall = Notification.Name(rawValue: "org.UILogic.notification.name.onLineBusyVideoCall")
-        /// 获取到了总共通话时长
-        static let totleCallTime = Notification.Name(rawValue: "org.UILogic.notification.name.totleCallTime")
+        static let onLineBusy = Notification.Name(rawValue: "org.UILogic.notification.ChatCall.onLineBusy")
         /// 铃声播放完成还未接通  / 通话时长已到
-        static let finishAudio = Notification.Name(rawValue: "org.UILogic.notification.name.finishAudio")
+        static let finishAudio = Notification.Name(rawValue: "org.UILogic.notification.ChatCall.finishAudio")
+        /// 异常
+        static let error = Notification.Name(rawValue: "org.UILogic.notification.ChatCall.error")
     }
     
     public struct APPAction {

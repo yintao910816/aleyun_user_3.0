@@ -8,6 +8,8 @@
 
 import Foundation
 
+import RxSwift
+
 extension HCAppDelegate: TRTCCallingDelegate {
 
     public func setupTRTC() {
@@ -24,76 +26,101 @@ extension HCAppDelegate: TRTCCallingDelegate {
         HCSystemAudioPlay.share.videoCallPlay()
         _ = HCHelper.requestVideoCallUserInfo(userId: sponsor, consultId: "\(TRTCCalling.shareInstance().curRoomID)")
             .subscribe(onNext: {
-                if let callingUser = $0 {
-                    let callVC = HCConsultVideoCallController(sponsor: callingUser)
-                    
-                    callVC.dismissBlock = { }
-                    
-                    callVC.modalPresentationStyle = .fullScreen
-                    callVC.resetWithUserList(users: [callingUser], isInit: true)
-                    NSObject().visibleViewController?.present(callVC, animated: true, completion: nil)
-                    
-                    print("\(callingUser.name) 邀请你通话")
-                }
+                let callVC = HCConsultVideoCallController(sponsor: $0)
+                
+                callVC.dismissBlock = { }
+                
+                callVC.modalPresentationStyle = .fullScreen
+                callVC.resetWithUserList(users: [$0], isInit: true)
+                NSObject().visibleViewController?.present(callVC, animated: true, completion: nil)
+                
+                print("\($0.name) 邀请你通话")
             })
     }
     
     // 进入通话回调
     func onUserEnter(uid: String) {
-        _ = HCHelper.requestVideoCallUserInfo(userId: uid, consultId: "\(TRTCCalling.shareInstance().curRoomID)")
-            .subscribe(onNext: { user in
-                if let callingUser = user {
-                    NotificationCenter.default.post(name: NotificationName.ChatCall.videoCallAccept, object: callingUser)
-                    
-                    print("\(callingUser.name) 进入通话")
-                }
-            })
         
-        _ = HCHelper.requestReceivePhone(userId: uid, consultId: "\(TRTCCalling.shareInstance().curRoomID)")
-            .subscribe(onNext: { _ in })
+        _ = Observable.combineLatest(HCHelper.requestVideoCallUserInfo(userId: uid,
+                                                                   consultId: "\(TRTCCalling.shareInstance().curRoomID)"),
+                                 HCHelper.requestReceivePhone(userId: uid,
+                                                              consultId: "\(TRTCCalling.shareInstance().curRoomID)"))
+            .subscribe(onNext: {
+                NotificationCenter.default.post(name: NotificationName.ChatCall.userEnter, object: $0)
+            })
     }
     
     // 离开通话回调
     func onUserLeave(uid: String) {
-        print("离开通话")
-        NotificationCenter.default.post(name: NotificationName.ChatCall.otherLeaveVideoCall, object: nil)
+        var text = "已挂断"
+        if let user = HCHelper.share.getCallingUser(uid: uid) {
+            text = "\(user.name) 已挂断"
+            PrintLog(text)
+        }
+        NotificationCenter.default.post(name: NotificationName.ChatCall.otherLeave, object: text)
+        
+        // 后台计算的通话时间，没截通给0，接通了给个大于0的值或者不传这个参数都可以
         _ = HCHelper.requestEndPhone(userId: uid, watchTime: "1")
             .subscribe(onNext:{ _ in })
     }
     
     // 拒绝通话回调-仅邀请者受到通知,其他用户应使用
     func onReject(uid: String) {
-        print("拒绝通话")
-        NotificationCenter.default.post(name: NotificationName.ChatCall.otherRejectVideoCall, object: nil)
+        var text = "已拒绝"
+        if let user = HCHelper.share.getCallingUser(uid: uid) {
+            text = "\(user.name) 已拒绝"
+            PrintLog(text)
+        }
+
+        NotificationCenter.default.post(name: NotificationName.ChatCall.otherReject, object: text)
     }
     
     // 无回应回调-仅邀请者受到通知，其他用户应使用
     func onNoResp(uid: String) {
-        print("通话无回应")
-        NotificationCenter.default.post(name: NotificationName.ChatCall.onLineBusyVideoCall, object: nil)
+        var text = "无响应"
+        if let user = HCHelper.share.getCallingUser(uid: uid) {
+            text = "\(user.name) 无响应"
+            PrintLog(text)
+        }
+
+        NotificationCenter.default.post(name: NotificationName.ChatCall.error, object: text)
     }
             
     // 通话占线回调-仅邀请者受到通知，其他用户应使用
     func onLineBusy(uid: String) {
-        print("通话占线")
-        NotificationCenter.default.post(name: NotificationName.ChatCall.onLineBusyVideoCall, object: nil)
+        var text = "通话占线"
+        if let user = HCHelper.share.getCallingUser(uid: uid) {
+            text = "\(user.name) 通话占线"
+            PrintLog(text)
+        }
+
+        NotificationCenter.default.post(name: NotificationName.ChatCall.error, object: text)
     }
     
     // 当前通话被取消回调
     func onCallingCancel(uid: String) {
-        print("当前通话被取消")
-        NotificationCenter.default.post(name: NotificationName.ChatCall.otherRejectVideoCall, object: nil)
+        var text = "已取消"
+        if let user = HCHelper.share.getCallingUser(uid: uid) {
+            text = "\(user.name) 已取消"
+            PrintLog(text)
+        }
+
+        NotificationCenter.default.post(name: NotificationName.ChatCall.cancel, object: text)
     }
     
     // 通话超时的回调
     func onCallingTimeOut() {
-        print("通话超时")
-        NotificationCenter.default.post(name: NotificationName.ChatCall.onLineBusyVideoCall, object: nil)
+        PrintLog("通话超时")
+        NotificationCenter.default.post(name: NotificationName.ChatCall.error, object: "超时")
     }
 
     // 通话结束
     func onCallEnd() {
         print("通话结束")
+    }
+    
+    func onError(code: Int32, msg: String?) {
+        NotificationCenter.default.post(name: NotificationName.ChatCall.error, object: "内部错误：\(code) -- \(msg ?? "")")
     }
 }
 

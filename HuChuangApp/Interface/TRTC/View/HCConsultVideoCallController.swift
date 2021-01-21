@@ -49,7 +49,10 @@ class HCConsultVideoCallController: UIViewController, CallingViewControllerRespo
     /// 通话对方的id
     public var otherId: String = ""
 
-    var codeTimer = DispatchSource.makeTimerSource(queue: DispatchQueue.global(qos: .userInteractive))
+//    var codeTimer = DispatchSource.makeTimerSource(queue: DispatchQueue.global(qos: .userInteractive))
+    
+    let timer = CountdownTimer(timeInterval: 1, totleCount: 15 * 60)
+    
     let callTimeLabel = UILabel()
     let localPreView = VideoCallingRenderView.init()
     static var renderViews: [VideoCallingRenderView] = []
@@ -88,6 +91,52 @@ class HCConsultVideoCallController: UIViewController, CallingViewControllerRespo
         }
         
         super.init(nibName: nil, bundle: nil)
+        
+        timer.countTime.asDriver()
+            .skip(1)
+            .drive(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                
+                self.cutdownCallingTime -= 1
+                
+                if self.cutdownCallingTime < 0 {
+                    self.timer.timerRemove()
+                    
+                    TRTCCalling.shareInstance().hangup()
+                    DispatchQueue.main.async { [weak self] in
+                        self?.resetRemind(text: "通话时长已用完，通话已结束")
+                    }
+                    return
+                }
+                
+                // UI 更新
+                DispatchQueue.main.async {
+                    if self.cutdownCallingTime == 60 {
+                        self.timeRemindLabel.isHidden = false
+                        self.timeRemindLabel.text = "还有60秒结束通话"
+                        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
+                            self.timeRemindLabel.isHidden = true
+                        }
+                    }else if self.cutdownCallingTime == 15 {
+                        self.timeRemindLabel.isHidden = false
+                        self.timeRemindLabel.text = "还有15秒结束通话"
+                        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
+                            self.timeRemindLabel.isHidden = true
+                        }
+                    }
+
+                    var mins: Int = 0
+                    var seconds: Int = 0
+    //                mins = self.callingTime / 60
+    //                seconds = self.callingTime % 60
+                    mins = self.cutdownCallingTime / 60
+                    seconds = self.cutdownCallingTime % 60
+
+                    self.callTimeLabel.text = String(format: "%02d:", mins) + String(format: "%02d", seconds)
+                }
+            })
+            .disposed(by: disposebag)
+
     }
     
     required init?(coder: NSCoder) {
@@ -123,35 +172,93 @@ class HCConsultVideoCallController: UIViewController, CallingViewControllerRespo
         return user
     }()
     
+    lazy var timeRemindLabel: UILabel = {
+        let label = UILabel()
+        label.font = .font(fontSize: 14)
+        label.textColor = RGB(51, 51, 51)
+        label.backgroundColor = RGB(255, 255, 255, 0.7)
+        label.layer.cornerRadius = 15
+        label.clipsToBounds = true
+        label.isHidden = true
+        label.textAlignment = .center
+        label.frame = .init(x: (view.width - 160) / 2, y: callTimeLabel.frame.maxY + 10, width: 180, height: 30)
+        view.addSubview(label)
+        return label
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         UIApplication.shared.isIdleTimerDisabled = true
         
-        NotificationCenter.default.rx.notification(NotificationName.ChatCall.videoCallAccept)
+        NotificationCenter.default.rx.notification(NotificationName.ChatCall.userEnter)
             .subscribe(onNext: { [weak self] no in
-                if let callUser = no.object as? CallingUserModel {
-                    self?.enterUser(user: callUser)
+                HCSystemAudioPlay.share.videoCallStop()
+
+                self?.hud.noticeHidden()
+                self?.curState = .calling
+                self?.accept.isHidden = true
+
+                if let data = no.object as? (CallingUserModel, HCReceivePhoneModel) {
+                    self?.enterUser(user: data.0)
+                    
+                    if !data.1.isCallEnd {
+                        self?.cutdownCallingTime = data.1.seconds
+    //                    strongSelf.cutdownCallingTime = 8
+                        self?.startGCDTimer()
+                    }else {
+                        TRTCCalling.shareInstance().hangup()
+                        self?.resetRemind(text: "通话时长已用完，通话已结束")
+                    }
                 }
             })
             .disposed(by: disposebag)
 
-        NotificationCenter.default.rx.notification(NotificationName.ChatCall.otherLeaveVideoCall)
-            .subscribe(onNext: { [weak self] _ in
-                self?.disMiss()
+        NotificationCenter.default.rx.notification(NotificationName.ChatCall.error)
+            .subscribe(onNext: { [weak self] in
+                HCSystemAudioPlay.share.videoCallStop()
+
+                if let text = $0.object as? String {
+                    self?.resetRemind(text: text)
+                }else {
+                    self?.disMiss()
+                }
+            })
+            .disposed(by: disposebag)
+        
+        NotificationCenter.default.rx.notification(NotificationName.ChatCall.otherLeave)
+            .subscribe(onNext: { [weak self] in
+                TRTCCalling.shareInstance().hangup()
+
+                if let text = $0.object as? String {
+                    self?.resetRemind(text: text)
+                }else {
+                    self?.timer.timerRemove()
+                    self?.disMiss()
+                }                
             })
             .disposed(by: disposebag)
 
-        NotificationCenter.default.rx.notification(NotificationName.ChatCall.otherRejectVideoCall)
-            .subscribe(onNext: { [weak self] _ in
+        NotificationCenter.default.rx.notification(NotificationName.ChatCall.otherReject)
+            .subscribe(onNext: { [weak self] in
                 HCSystemAudioPlay.share.videoCallStop()
-                self?.disMiss()
+
+                if let text = $0.object as? String {
+                    self?.resetRemind(text: text)
+                }else {
+                    self?.disMiss()
+                }
             })
             .disposed(by: disposebag)
-
-        NotificationCenter.default.rx.notification(NotificationName.ChatCall.onLineBusyVideoCall)
-            .subscribe(onNext: { [weak self] _ in
+        
+        NotificationCenter.default.rx.notification(NotificationName.ChatCall.cancel)
+            .subscribe(onNext: { [weak self] in
                 HCSystemAudioPlay.share.videoCallStop()
-                self?.disMiss()
+
+                if let text = $0.object as? String {
+                    self?.resetRemind(text: text)
+                }else {
+                    self?.disMiss()
+                }
             })
             .disposed(by: disposebag)
 
@@ -161,20 +268,32 @@ class HCConsultVideoCallController: UIViewController, CallingViewControllerRespo
                 self?.disMiss()
             })
             .disposed(by: disposebag)
-        
-        NotificationCenter.default.rx.notification(NotificationName.ChatCall.totleCallTime)
-            .subscribe(onNext: { [weak self] in
-                guard let strongSelf = self else { return }
-                if strongSelf.cutdownCallingTime == 0 {
-                    strongSelf.cutdownCallingTime = ($0.object as! HCReceivePhoneModel).seconds
-                    strongSelf.startGCDTimer()
-                }
-            })
-            .disposed(by: disposebag)
-        
+                
         initUI()
     }
     
+    private func resetRemind(text: String) {
+        timer.timerRemove()
+                
+        view.isUserInteractionEnabled = false
+        
+        timeRemindLabel.isHidden = false
+        timeRemindLabel.text = text
+        
+        var size = self.timeRemindLabel.sizeThatFits(.init(width: CGFloat.greatestFiniteMagnitude, height: 30))
+        size.width = min(size.width + 30, self.view.width - 90)
+        var rect = timeRemindLabel.frame
+        rect.origin.x = (self.view.width - size.width) / 2.0
+        rect.size.width = size.width
+        
+        timeRemindLabel.frame = rect
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) { [weak self] in
+            self?.timeRemindLabel.isHidden = true
+            self?.disMiss()
+        }
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         reloadData()
@@ -190,12 +309,14 @@ class HCConsultVideoCallController: UIViewController, CallingViewControllerRespo
     }
     
     func disMiss() {
-        if self.curState != .calling {
-            if !codeTimer.isCancelled {
-                self.codeTimer.resume()
-            }
-        }
-        self.codeTimer.cancel()
+//        if self.curState != .calling {
+//            if !codeTimer.isCancelled {
+//                self.codeTimer.resume()
+//            }
+//        }
+//        self.codeTimer.cancel()
+        timer.timerRemove()
+        
         dismiss(animated: false) {
             if let dis = self.dismissBlock {
                 dis()
@@ -591,34 +712,9 @@ extension HCConsultVideoCallController {
                 
                 guard let self = self else {return}
 
+                TRTCCalling.shareInstance().accept()
+
                 self.hud.noticeLoading()
-                
-                _ = HCHelper.requestReceivePhone(userId: self.otherId, consultId: "\(TRTCCalling.shareInstance().curRoomID)")
-                    .subscribe(onNext: { [weak self] model in
-                        self?.hud.noticeHidden()
-                        
-                        guard let self = self else {return}
-                        
-                        TRTCCalling.shareInstance().accept()
-                        var curUser = CallingUserModel()
-                        if let name = self.curSponsor?.name,
-                            let avatar = self.curSponsor?.avatarUrl,
-                            let userId = self.curSponsor?.userId {
-                            curUser.name = name
-                            curUser.avatarUrl = avatar
-                            curUser.userId = userId
-                            curUser.isEnter = true
-                            curUser.isVideoAvaliable = true
-                        }
-                        self.enterUser(user: curUser)
-                        self.curState = .calling
-                        self.accept.isHidden = true
-                        
-                        if self.cutdownCallingTime == 0 {
-                            self.cutdownCallingTime = model.seconds
-                            self.startGCDTimer()
-                        }
-                    })
                 
                 }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposebag)
         }
@@ -740,41 +836,12 @@ extension HCConsultVideoCallController {
     
     // Dispatch Timer
      func startGCDTimer() {
-        // 设定这个时间源是每秒循环一次，立即开始
-        codeTimer.schedule(deadline: .now(), repeating: .seconds(1))
-        // 设定时间源的触发事件
-        codeTimer.setEventHandler(handler: { [weak self] in
-            guard let self = self else {return}
-//            self.callingTime += 1
-            self.cutdownCallingTime -= 1
-            
-            if self.cutdownCallingTime <= 0 {
-                TRTCCalling.shareInstance().hangup()
-                DispatchQueue.main.async {
-                    self.disMiss()
-                }
-                return
-            }
-            
-            // UI 更新
-            DispatchQueue.main.async {
-                var mins: Int = 0
-                var seconds: Int = 0
-//                mins = self.callingTime / 60
-//                seconds = self.callingTime % 60
-                mins = self.cutdownCallingTime / 60
-                seconds = self.cutdownCallingTime % 60
-
-                self.callTimeLabel.text = String(format: "%02d:", mins) + String(format: "%02d", seconds)
-            }
-        })
-        
-        // 判断是否取消，如果已经取消了，调用resume()方法时就会崩溃！！！
-        if codeTimer.isCancelled {
+        if cutdownCallingTime <= 0 {
+            resetRemind(text: "通话时长已用完，通话已结束")
             return
         }
-        // 启动时间源
-        codeTimer.resume()
+        
+        timer.timerStar()
     }
     
     @objc func handleTapGesture(tap: UIPanGestureRecognizer) {
