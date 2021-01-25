@@ -161,6 +161,8 @@ enum API{
     case getAuthMember(openId: String)
     /// 绑定微信
     case bindAuthMember(openId: String, mobile: String, smsCode: String)
+    /// 一键登录
+    case tokenLogin(token: String)
     /// 实名认证
     case realNameAuth(realName: String, sex: String, birthDay: String, certificateType: String, certificateNo: String)
     /// 账号设置 - 头像/昵称
@@ -330,6 +332,8 @@ extension API: TargetType{
             return "api/login/getAuthMember"
         case .bindAuthMember(_):
             return "api/login/bindAuthMember"
+        case .tokenLogin(_):
+            return "api/login/jgLogin"
         case .realNameAuth(_, _, _, _, _):
             return "api/consumer/realNameAuth"
         case .accountSetting(_, _):
@@ -659,6 +663,8 @@ extension API {
             params["oauthType"] = "weixin"
             params["mobile"] = mobile
             params["smsCode"] = smsCode
+        case .tokenLogin(let token):
+            params["token"] = token
         case .updateInfo(let param):
             params = param
 

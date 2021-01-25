@@ -27,8 +27,7 @@ class HCLoginViewController: BaseViewController {
         view.addSubview(containerView)
 
         containerView.agreementTap = { [weak self] in
-            let url = "https://ileyun.ivfcn.com/cms/alyyhxy.html"
-            self?.navigationController?.pushViewController(BaseWebViewController.createWeb(url: url),
+            self?.navigationController?.pushViewController(BaseWebViewController.createWeb(url: $0.1, title: $0.0),
                                                            animated: true)
         }
         
@@ -42,16 +41,12 @@ class HCLoginViewController: BaseViewController {
             })
             .disposed(by: disposeBag)
         
-        containerView.fastLoginButton.rx.tap.asDriver()
-            .drive(onNext: { [unowned self] in
-                (UIApplication.shared.delegate as? HCAppDelegate)?.setupUniLogin(viewController: self)
-            })
-            .disposed(by: disposeBag)
-
         viewModel = HCLoginViewModel.init(input: containerView.phoneTf.rx.text.orEmpty.asDriver(),
                                           tap: (codeTap: containerView.getCodeButton.rx.tap.asDriver(),
                                                 agreeTap: containerView.agreeSignal.asDriver(),
-                                                weChatTap: containerView.wchatLoginButton.rx.tap.asDriver()))
+                                                weChatTap: containerView.wchatLoginButton.rx.tap.asDriver(),
+                                                fastLoginTap: containerView.fastLoginButton.rx.tap.asDriver()),
+                                          controller: self)
         viewModel.enableCode
             .do(onNext: { [weak self] flag in
                 self?.containerView.getCodeButton.backgroundColor = flag ? HC_MAIN_COLOR : RGB(242, 242, 242)

@@ -352,6 +352,7 @@ extension HCHelper {
                        let code = dic["code"] as? Int,
                        let status = RequestCode(rawValue: code) {
                         if status == .success {
+                            NotificationCenter.default.post(name: NotificationName.ChatCall.dismissCall, object: nil)
                             return true
                         }else {
                             if let message = dic["message"] as? String {

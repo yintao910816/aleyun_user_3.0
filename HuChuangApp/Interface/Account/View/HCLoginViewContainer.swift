@@ -34,7 +34,7 @@ class HCLoginViewContainer: UIView {
     public var fastLoginButton: UIButton!
 
     public let agreeSignal = Variable(false)
-    public var agreementTap: (()->())?
+    public var agreementTap: (((String, String))->())?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -144,16 +144,16 @@ extension HCLoginViewContainer {
         agreeLabel.textColor = RGB(154, 154, 154)
         agreeLabel.font = .font(fontSize: 12)
         agreeLabel.numberOfLines = 0
-        let string = NSMutableAttributedString.init(string: "阅读并勾选以下协议《爱乐孕用户服务协议》《法律声明》《隐私政策》")
+        let string = NSMutableAttributedString.init(string: "阅读并勾选以下协议《爱乐孕用户服务协议》《隐私政策》")
         string.yy_setTextHighlight(.init(location: 9, length: 11), color: RGB(57, 129, 247), backgroundColor: .clear) { [weak self] (_, _, _, _) in
-            self?.agreementTap?()
+            self?.agreementTap?(("爱乐孕用户服务协议", "https://ileyun.ivfcn.com/cms/alyyhxy.html"))
         }
         string.yy_setTextHighlight(.init(location: 20, length: 6), color: RGB(57, 129, 247), backgroundColor: .clear) { [weak self] (_, _, _, _) in
-            self?.agreementTap?()
+            self?.agreementTap?(("隐私政策", "https://ileyun.ivfcn.com/cms/0-1073.html"))
         }
-        string.yy_setTextHighlight(.init(location: 26, length: 6), color: RGB(57, 129, 247), backgroundColor: .clear) { [weak self] (_, _, _, _) in
-            self?.agreementTap?()
-        }
+//        string.yy_setTextHighlight(.init(location: 26, length: 6), color: RGB(57, 129, 247), backgroundColor: .clear) { [weak self] (_, _, _, _) in
+//            self?.agreementTap?()
+//        }
         agreeLabel.attributedText = string
         
         platformContainer = UIView()

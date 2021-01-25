@@ -33,7 +33,7 @@ enum HCOrderDetailStatus: Int {
         case .finished:
             return "已完成"
         case .receiving:
-            return "接诊中"
+            return "咨询中"
         case .waiteReceive:
             return "待接诊"
         case .unknow:

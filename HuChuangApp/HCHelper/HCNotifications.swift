@@ -59,6 +59,9 @@ extension Notification.Name {
         static let finishAudio = Notification.Name(rawValue: "org.UILogic.notification.ChatCall.finishAudio")
         /// 异常
         static let error = Notification.Name(rawValue: "org.UILogic.notification.ChatCall.error")
+        
+        /// 视频通话界面消失
+        static let dismissCall = Notification.Name(rawValue: "org.UILogic.notification.name.Consult.dismissCall")
     }
     
     public struct APPAction {

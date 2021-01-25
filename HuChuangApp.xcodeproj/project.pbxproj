@@ -480,12 +480,6 @@
 		C42B218F24ECCB1500B2A665 /* HCSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42B218E24ECCB1500B2A665 /* HCSettingViewModel.swift */; };
 		C42B219124ECCB4B00B2A665 /* HCSettingContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42B219024ECCB4B00B2A665 /* HCSettingContainer.swift */; };
 		C42B219524ECD44D00B2A665 /* HCCollectionContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42B219424ECD44D00B2A665 /* HCCollectionContainer.swift */; };
-		C42DA55325A851190094E4C8 /* UniLogin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C42DA54925A851190094E4C8 /* UniLogin.framework */; };
-		C42DA55425A851190094E4C8 /* EAccountHYSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C42DA54C25A851190094E4C8 /* EAccountHYSDK.framework */; };
-		C42DA55525A851190094E4C8 /* EAccountOpenPageResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C42DA54D25A851190094E4C8 /* EAccountOpenPageResource.bundle */; };
-		C42DA55625A851190094E4C8 /* TYRZResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C42DA54F25A851190094E4C8 /* TYRZResource.bundle */; };
-		C42DA55725A851190094E4C8 /* TYRZUISDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C42DA55025A851190094E4C8 /* TYRZUISDK.framework */; };
-		C42DA55825A851190094E4C8 /* OAuth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C42DA55225A851190094E4C8 /* OAuth.framework */; };
 		C42DA5DB25A8539E0094E4C8 /* libz.1.2.8.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C42DA5DA25A8539E0094E4C8 /* libz.1.2.8.tbd */; };
 		C42DA5DE25A853BE0094E4C8 /* libc++.1.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C42DA5DD25A853BE0094E4C8 /* libc++.1.tbd */; };
 		C42DA74925A87F540094E4C8 /* HCAppDelegate+UniLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42DA74825A87F540094E4C8 /* HCAppDelegate+UniLogin.swift */; };
@@ -531,6 +525,7 @@
 		C4783B2E24DD39E800737479 /* HCLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4783B2A24DD39E800737479 /* HCLoginViewController.swift */; };
 		C4783B3124DD3BFC00737479 /* HCLoginViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4783B3024DD3BFC00737479 /* HCLoginViewContainer.swift */; };
 		C480AF4125B7ED8B007EA84E /* HCEmptyFilterReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C480AF4025B7ED8B007EA84E /* HCEmptyFilterReusableView.swift */; };
+		C480AFBF25BED3A0007EA84E /* UIImage+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = C480AFBE25BED3A0007EA84E /* UIImage+Color.swift */; };
 		C494135524DE4B7900045749 /* HCMineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C494135424DE4B7900045749 /* HCMineViewController.swift */; };
 		C494135924DE4C5800045749 /* HCMineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C494135824DE4C5800045749 /* HCMineViewModel.swift */; };
 		C494136524DE54A100045749 /* HCCustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C494136424DE54A100045749 /* HCCustomButton.swift */; };
@@ -1408,22 +1403,9 @@
 		C42B218E24ECCB1500B2A665 /* HCSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCSettingViewModel.swift; sourceTree = "<group>"; };
 		C42B219024ECCB4B00B2A665 /* HCSettingContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCSettingContainer.swift; sourceTree = "<group>"; };
 		C42B219424ECD44D00B2A665 /* HCCollectionContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCCollectionContainer.swift; sourceTree = "<group>"; };
-		C42DA54925A851190094E4C8 /* UniLogin.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UniLogin.framework; sourceTree = "<group>"; };
-		C42DA54C25A851190094E4C8 /* EAccountHYSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = EAccountHYSDK.framework; sourceTree = "<group>"; };
-		C42DA54D25A851190094E4C8 /* EAccountOpenPageResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = EAccountOpenPageResource.bundle; sourceTree = "<group>"; };
-		C42DA54F25A851190094E4C8 /* TYRZResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TYRZResource.bundle; sourceTree = "<group>"; };
-		C42DA55025A851190094E4C8 /* TYRZUISDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TYRZUISDK.framework; sourceTree = "<group>"; };
-		C42DA55225A851190094E4C8 /* OAuth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OAuth.framework; sourceTree = "<group>"; };
 		C42DA5DA25A8539E0094E4C8 /* libz.1.2.8.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.8.tbd; path = usr/lib/libz.1.2.8.tbd; sourceTree = SDKROOT; };
 		C42DA5DD25A853BE0094E4C8 /* libc++.1.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.1.tbd"; path = "usr/lib/libc++.1.tbd"; sourceTree = SDKROOT; };
 		C42DA62B25A857110094E4C8 /* libc++abi.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++abi.tbd"; path = "usr/lib/libc++abi.tbd"; sourceTree = SDKROOT; };
-		C42DA74025A873BF0094E4C8 /* UniLogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UniLogin.h; path = UniLogin/UniLogin.framework/Headers/UniLogin.h; sourceTree = "<group>"; };
-		C42DA74125A873BF0094E4C8 /* YMCustomConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YMCustomConfig.h; path = UniLogin/UniLogin.framework/Headers/YMCustomConfig.h; sourceTree = "<group>"; };
-		C42DA74225A873BF0094E4C8 /* EACustomAnimatedTransitioning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EACustomAnimatedTransitioning.h; path = UniLogin/UniLogin.framework/Headers/EACustomAnimatedTransitioning.h; sourceTree = "<group>"; };
-		C42DA74325A874030094E4C8 /* EAccountOpenPageConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EAccountOpenPageConfig.h; path = ThirdPartyLibs/chinaTelecom/EAccountHYSDK.framework/Headers/EAccountOpenPageConfig.h; sourceTree = "<group>"; };
-		C42DA74425A874210094E4C8 /* ZOAUCustomModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZOAUCustomModel.h; path = ThirdPartyLibs/chinaunicom/OAuth.framework/Headers/ZOAUCustomModel.h; sourceTree = "<group>"; };
-		C42DA74525A874460094E4C8 /* UACustomModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UACustomModel.h; path = ThirdPartyLibs/cmcc/TYRZUISDK.framework/Headers/UACustomModel.h; sourceTree = "<group>"; };
-		C42DA74625A874690094E4C8 /* ZUOAuthManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZUOAuthManager.h; path = ThirdPartyLibs/chinaunicom/OAuth.framework/Headers/ZUOAuthManager.h; sourceTree = "<group>"; };
 		C42DA74825A87F540094E4C8 /* HCAppDelegate+UniLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HCAppDelegate+UniLogin.swift"; sourceTree = "<group>"; };
 		C42DA78C25AC61790094E4C8 /* HCH5ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCH5ViewController.swift; sourceTree = "<group>"; };
 		C42DA79025AC62DD0094E4C8 /* HCConsultChatController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCConsultChatController.swift; sourceTree = "<group>"; };
@@ -1475,6 +1457,7 @@
 		C47E067A23589355003A3320 /* TYCalendarDayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TYCalendarDayCell.swift; sourceTree = "<group>"; };
 		C47E067D23589800003A3320 /* HCRecorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCRecorderView.swift; sourceTree = "<group>"; };
 		C480AF4025B7ED8B007EA84E /* HCEmptyFilterReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCEmptyFilterReusableView.swift; sourceTree = "<group>"; };
+		C480AFBE25BED3A0007EA84E /* UIImage+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Color.swift"; sourceTree = "<group>"; };
 		C48842B0233EF6A700C209B3 /* HCClassRoomListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCClassRoomListCell.swift; sourceTree = "<group>"; };
 		C48842B4233EFD3500C209B3 /* HCClassRoomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCClassRoomViewModel.swift; sourceTree = "<group>"; };
 		C494135424DE4B7900045749 /* HCMineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCMineViewController.swift; sourceTree = "<group>"; };
@@ -1612,11 +1595,7 @@
 			files = (
 				C42DA5DE25A853BE0094E4C8 /* libc++.1.tbd in Frameworks */,
 				C42DA5DB25A8539E0094E4C8 /* libz.1.2.8.tbd in Frameworks */,
-				C42DA55725A851190094E4C8 /* TYRZUISDK.framework in Frameworks */,
-				C42DA55425A851190094E4C8 /* EAccountHYSDK.framework in Frameworks */,
 				A08398CF7D2F1A7EC078368A /* Pods_HuChuangApp.framework in Frameworks */,
-				C42DA55825A851190094E4C8 /* OAuth.framework in Frameworks */,
-				C42DA55325A851190094E4C8 /* UniLogin.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3122,6 +3101,7 @@
 				C421333122056F96006C10C4 /* UIKit+Extension.swift */,
 				C4213335220570B6006C10C4 /* UIView+Frame.swift */,
 				B8BE603223BB4C4D00EC0027 /* Dictionary+Extension.swift */,
+				C480AFBE25BED3A0007EA84E /* UIImage+Color.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -3278,66 +3258,6 @@
 				C421339A2205B224006C10C4 /* HttpImage.swift */,
 			);
 			path = ImageUtls;
-			sourceTree = "<group>";
-		};
-		C42DA54725A851190094E4C8 /* SDK */ = {
-			isa = PBXGroup;
-			children = (
-				C42DA74625A874690094E4C8 /* ZUOAuthManager.h */,
-				C42DA74525A874460094E4C8 /* UACustomModel.h */,
-				C42DA74425A874210094E4C8 /* ZOAUCustomModel.h */,
-				C42DA74325A874030094E4C8 /* EAccountOpenPageConfig.h */,
-				C42DA74225A873BF0094E4C8 /* EACustomAnimatedTransitioning.h */,
-				C42DA74025A873BF0094E4C8 /* UniLogin.h */,
-				C42DA74125A873BF0094E4C8 /* YMCustomConfig.h */,
-				C42DA54825A851190094E4C8 /* UniLogin */,
-				C42DA54A25A851190094E4C8 /* ThirdPartyLibs */,
-			);
-			path = SDK;
-			sourceTree = "<group>";
-		};
-		C42DA54825A851190094E4C8 /* UniLogin */ = {
-			isa = PBXGroup;
-			children = (
-				C42DA54925A851190094E4C8 /* UniLogin.framework */,
-			);
-			path = UniLogin;
-			sourceTree = "<group>";
-		};
-		C42DA54A25A851190094E4C8 /* ThirdPartyLibs */ = {
-			isa = PBXGroup;
-			children = (
-				C42DA54B25A851190094E4C8 /* chinaTelecom */,
-				C42DA54E25A851190094E4C8 /* cmcc */,
-				C42DA55125A851190094E4C8 /* chinaunicom */,
-			);
-			path = ThirdPartyLibs;
-			sourceTree = "<group>";
-		};
-		C42DA54B25A851190094E4C8 /* chinaTelecom */ = {
-			isa = PBXGroup;
-			children = (
-				C42DA54C25A851190094E4C8 /* EAccountHYSDK.framework */,
-				C42DA54D25A851190094E4C8 /* EAccountOpenPageResource.bundle */,
-			);
-			path = chinaTelecom;
-			sourceTree = "<group>";
-		};
-		C42DA54E25A851190094E4C8 /* cmcc */ = {
-			isa = PBXGroup;
-			children = (
-				C42DA54F25A851190094E4C8 /* TYRZResource.bundle */,
-				C42DA55025A851190094E4C8 /* TYRZUISDK.framework */,
-			);
-			path = cmcc;
-			sourceTree = "<group>";
-		};
-		C42DA55125A851190094E4C8 /* chinaunicom */ = {
-			isa = PBXGroup;
-			children = (
-				C42DA55225A851190094E4C8 /* OAuth.framework */,
-			);
-			path = chinaunicom;
 			sourceTree = "<group>";
 		};
 		C42DA78625AC610D0094E4C8 /* H5 */ = {
@@ -3552,7 +3472,6 @@
 		C4783B2724DD39E800737479 /* Account */ = {
 			isa = PBXGroup;
 			children = (
-				C42DA54725A851190094E4C8 /* SDK */,
 				C4783B2824DD39E800737479 /* ViewModel */,
 				C4783B2924DD39E800737479 /* Controller */,
 				C4783B2C24DD39E800737479 /* Model */,
@@ -4223,7 +4142,6 @@
 				C42132F922054463006C10C4 /* LaunchScreen.storyboard in Resources */,
 				B8C31DCC2396CF39003754A6 /* HCDoctorInfoHeaderView.xib in Resources */,
 				C497E97923447E6F00328B47 /* HCHomeBabyTuinaClassroomCell.xib in Resources */,
-				C42DA55525A851190094E4C8 /* EAccountOpenPageResource.bundle in Resources */,
 				B816EA73221DABF400F024D5 /* CodeScan.bundle in Resources */,
 				B826AF86221C7205000428C1 /* ArticleCell.xib in Resources */,
 				B8BE34EF2214599B00EF16F1 /* MineHeaderView.xib in Resources */,
@@ -4239,7 +4157,6 @@
 				B8454ED923A5294C00E88BAD /* HCExchangeReusableView.xib in Resources */,
 				C497E94C23444E4600328B47 /* HCHomeAdvCell.xib in Resources */,
 				C4213338220572C6006C10C4 /* HCMain.storyboard in Resources */,
-				C42DA55625A851190094E4C8 /* TYRZResource.bundle in Resources */,
 				B879A062221AF0BB00E573C9 /* MineFooterView.xib in Resources */,
 				C497E94723444E4600328B47 /* HCHomePreparePregnantReusableView.xib in Resources */,
 				C42132F622054463006C10C4 /* Assets.xcassets in Resources */,
@@ -4765,6 +4682,7 @@
 				B830C4252559356C002F63BC /* HCVideoCall.swift in Sources */,
 				C4D1DBA224F7B366001EF30F /* HCExpertViewController.swift in Sources */,
 				B816EB51221DABF400F024D5 /* ZXCalendarParsedResult.m in Sources */,
+				C480AFBF25BED3A0007EA84E /* UIImage+Color.swift in Sources */,
 				B8CFBA412589BE1E00BD03A1 /* HCSwitch.swift in Sources */,
 				C4C3257D2205C3AD0091783C /* UIView+XIB.swift in Sources */,
 				C4DDE0A224F14F0C0001201C /* HCPicConsultCell.swift in Sources */,
@@ -5054,7 +4972,7 @@
 				CODE_SIGN_ENTITLEMENTS = HuChuangApp/HuChuangApp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1.6;
+				CURRENT_PROJECT_VERSION = 1.8;
 				DEVELOPMENT_TEAM = GMPPSEQW73;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -5074,7 +4992,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.02.005;
+				MARKETING_VERSION = 3.02.001;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -5187,7 +5105,7 @@
 				CODE_SIGN_ENTITLEMENTS = HuChuangApp/HuChuangApp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1.6;
+				CURRENT_PROJECT_VERSION = 1.8;
 				DEVELOPMENT_TEAM = GMPPSEQW73;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -5207,7 +5125,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.02.005;
+				MARKETING_VERSION = 3.02.001;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",

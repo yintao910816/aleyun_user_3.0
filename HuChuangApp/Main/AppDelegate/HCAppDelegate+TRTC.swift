@@ -27,7 +27,7 @@ extension HCAppDelegate: TRTCCallingDelegate {
         _ = HCHelper.requestVideoCallUserInfo(userId: sponsor, consultId: "\(TRTCCalling.shareInstance().curRoomID)")
             .subscribe(onNext: {
                 let callVC = HCConsultVideoCallController(sponsor: $0)
-                
+                callVC.otherId = sponsor
                 callVC.dismissBlock = { }
                 
                 callVC.modalPresentationStyle = .fullScreen
@@ -116,6 +116,7 @@ extension HCAppDelegate: TRTCCallingDelegate {
     }
     
     func onError(code: Int32, msg: String?) {
+        PrintLog("\(code): \(msg)")
         NotificationCenter.default.post(name: NotificationName.ChatCall.error, object: "内部错误：\(code) -- \(msg ?? "")")
     }
 }

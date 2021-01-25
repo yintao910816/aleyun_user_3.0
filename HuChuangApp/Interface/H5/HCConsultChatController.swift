@@ -18,6 +18,11 @@ class HCConsultChatController: HCH5ViewController {
     override func setupUI() {
         super.setupUI()
         
+        NotificationCenter.default.rx.notification(NotificationName.ChatCall.dismissCall, object: nil)
+            .subscribe(onNext: { [weak self] _ in
+                self?.webView.reload()
+            })
+            .disposed(by: disposeBag)
     }
         
     override func configList() -> [String] {

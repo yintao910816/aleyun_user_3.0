@@ -6,245 +6,234 @@
 //  Copyright © 2021 sw. All rights reserved.
 //
 
-//private let AppId = "a754666bf7344a79a1371e09faf42192"
-//private let AppSecret = "8c9884f16b664a0e"
+public enum HCUniLoginEvent {
+    case phoneLogin
+    case watchLogin
+    case tokenLogin
+    case error
+}
 
-private let AppId = "9a56a8fd83a1429d9e01c40a8044124d"
-private let AppSecret = "6d9ff2ba738f4a21"
+private let AppKey = "1c2f442942496da4a432295d"
+private let AppSecret = "84870f31a3fc8ecb68bd432f"
 
 import Foundation
 
 extension HCAppDelegate {
     
-    public func setupUniLogin(viewController: UIViewController) {
-//        UniLogin.shareInstance().delegate = self
+    public func startUniLogin(viewController: UIViewController,
+                              otherLoginCallBack:@escaping (((HCUniLoginEvent, String))->()),
+                              presentCallBack:@escaping (()->())) {
+        customFullScreenUI(viewController: viewController, otherLoginCallBack: otherLoginCallBack)
         
-//        UniLogin.shareInstance().initWithAppId(AppId, secretKey: AppSecret) { [weak self] (flag, msg) in
-//            PrintLog("一键登录初始化结果：\(flag) \(msg)")
-//            if flag {
-//                guard let strongSelf = self else { return }
-//                
-//                let config = YMCustomConfig()
-//                config.cuccModel = strongSelf.createCUCCModel(viewController: viewController, isMini: false)
-//                config.ctccMini = false
-//                
-//                UniLogin.shareInstance().openAtuhVC(with: config, timeout: 30, controller: viewController) { (mobile, msg, result) in
-//                    DispatchQueue.main.async {
-//                        if let m = mobile, m.count > 0 {
-//                            NoticesCenter.alert(message: "一键登录成功：\(m)")
-//                        }else {
-//                            NoticesCenter.alert(message: msg ?? "一键登录失败")
-//    //                        UniLogin.shareInstance().closeViewControler(animated: false, completion: nil)
-//                        }
+        let config = JVAuthConfig()
+        config.appKey = AppKey
+        JVERIFICATIONService.setup(with: config)
+        
+        JVERIFICATIONService.getAuthorizationWith(viewController, hide: false, animated: true, timeout: 15*1000, completion: { (result) in
+            if let result = result {
+                if let token = result["loginToken"] as? String {
+//                    if let code = result["code"], let op = result["operator"] {
+//                        print("一键登录 result: code = \(code), operator = \(op), loginToken = \(token)")
 //                    }
-//                }
-//            }else {
-//                NoticesCenter.alert(message: msg)
-//            }
-//        }
+                    JVERIFICATIONService.dismissLoginController(animated: true) {
+                        otherLoginCallBack((.tokenLogin, token))
+                    }
+                }else if let code = result["code"] as? Int, let content = result["content"] {
+                    print("一键登录 result: code = \(code), content = \(content)")
+                    if code != 6002 {
+                        NoticesCenter.alert(message: "一键登录失败: \(code)(\(content))")
+                    }
+                }
+            }else {
+                NoticesCenter.alert(message: "一键登录失败: 未知错误")
+            }
+        }) { (type, content) in
+            if let content = content {
+                print("一键登录 actionBlock :type = \(type), content = \(content)")
+            }
+
+            if type == 2 {
+                presentCallBack()
+            }
+        }
     }
 }
 
 extension HCAppDelegate {
     
-    /// 联通demo设置
-    private func createCUCCModel(viewController: UIViewController, isMini: Bool) ->ZOAUCustomModel {
-        let model = ZOAUCustomModel()
-        if (isMini) {
-            model.navBarHidden = true
-            model.logoImg = UIImage(named: "app_icon")
-            let topCustomHeight: CGFloat = 330
-            model.controllerType = .PushController
-            model.backgroundColor = UIColor.white
-            model.navText = ""
-            model.navBgColor = .white
-            model.modalPresentationStyle = .fullScreen
-            model.privacyOffsetY = -10
-            model.topCustomHeight = topCustomHeight
-            model.stringAfterPrivacy = "\n"
-            model.ifAddPrivacyPageBG = true
-            model.logoOffsetY = 0
-            model.logoWidth = 35
-            model.logoHeight = 35
-            model.numberOffsetY = 5
-            model.brandOffsetY = 5
-            model.logBtnOffsetY = 5
-            model.logBtnHeight = 20
-            model.logBtnLeading = 100
-            model.swithAccOffsetX = 30
-            model.navReturnImg = UIImage(named: "navigationButtonReturnClick")
-            
-            DispatchQueue.main.async {
-                let rightItem = UIBarButtonItem.init(title: "close", style: .done, target: self, action: #selector(self.stopLogining))
-                model.navControl = rightItem;
-            }
-            
-            ZUOAuthManager.getInstance()?.customUI(withParams: model, topCustomViews: { [weak self] in
-                guard let strongSelf = self else { return }
-                if let customView = $0 {
-                    let button = UIButton.init(type: .custom)
-                    button.frame = .init(x: customView.frame.size.width - 55, y: customView.frame.size.height - 25, width: 50, height: 25)
-                    button.backgroundColor = UIColor.red
-                    button.setTitle("关闭", for: .normal)
-                    button.addTarget(strongSelf, action: #selector(strongSelf.stopLogining), for: .touchUpInside)
-                    customView.addSubview(button)
-                }
-            }, bottomCustomViews: nil)
-        }else {
-            model.modalPresentationStyle = .fullScreen
-            model.navBarHidden = false
-            model.backgroundColor = .white
-            
-            model.navBottomLineHidden = true
-            model.navBgColor = .white
-            model.navText = ""
-            
-//            model.topCustomHeight = 5
-//            model.logoImg = UIImage(named: "app_icon")
-//            model.logoWidth = 100
-//            model.logoHeight = 100
-//            model.logBtnOffsetY = 0
-            model.ifHiddenLOGO = true
-            
-            model.brandColor = RGB(154, 154, 154)
-            model.brandFont = .font(fontSize: 12)
-            
-            model.appNameHidden = true
-//            model.appNameColor = .black
-//            model.appNameFont = .font(fontSize: 23, fontName: .PingFSemibold)
-//            model.appNameOffsetY = 5
-            
-            model.numberColor = .black
-            model.numberFont = .font(fontSize: 24, fontName: .PingFSemibold)
-            model.numberOffsetY = 0
-                        
-            model.logBtnText = "一键登录";
-            model.logBtnTextFont = .font(fontSize: 18)
-            model.logBtnTextColor = .white
-            model.logBtnOffsetY = 10
-            model.logBtnRadius = 10
-            model.logBtnUsableBGColor = HC_MAIN_COLOR
-            model.logBtnUnusableBGColor = .gray
-            model.logBtnLeading = 40
-            model.logBtnHeight = 48
-                        
-            model.swithAccHidden = true
-            
-            model.stringBeforeDefaultPrivacyText = "登录即同意"
-            model.defaultPrivacyName = "《中国联通服务协议》"
-//            model.stringBeforeAppFPrivacyText = "《爱乐孕用户服务协议》"
-//            model.stringBeforeAppSPrivacyText = "《隐私政策》"
-//            model.stringAfterPrivacy = "自定义位置4"
-//            model.stringAfterAppName = "自定义位置5"
-            model.appFPrivacyText = "《爱乐孕用户服务协议》"
-            model.appFPrivacyUrl = "http://www.baidu.com"
-            model.appSPrivacyText = "《隐私政策》"
-            model.appSPrivacyUrl = "https://ileyun.ivfcn.com/cms/alyyhxy.html"
-            model.checkBoxHidden = false
-            model.checkBoxNormalImg = UIImage(named: "login_unselected_agree")
-            model.checkBoxCheckedImg = UIImage(named: "login_selected_agree")
-            model.privacyColor = RGB(57, 129, 247)
-            model.privacyTextColor  = RGB(154, 154, 154)
-
-            model.loadingText = "请稍后"
-                        
-//            //动画
-//            //用法一
-//            model.modalTransitionStyle = .flipHorizontal
-//            //
-//            //用法二
-//            //        CATransition *animation = [CATransition animation];
-//            //        animation.duration = 0.5;
-//            //        animation.type = @"cube";
-//            //        animation.subtype = kCATransitionFromBottom;
-//            //        model.presentTransition = animation;
-//            //        model.dismissTransition = animation;
-            
-            
-            
-            ZUOAuthManager.getInstance()?.customUI(withParams: model, topCustomViews: { [weak self] in
-//                guard let strongSelf = self else { return }
-                if let customView = $0 {
-                    let titleLabel = UILabel(frame: .init(x: (customView.width - 160) / 2, y: 30, width: 160, height: 35))
-                    titleLabel.font = .font(fontSize: 32, fontName: .PingFSemibold)
-                    titleLabel.text = "登录爱乐孕"
-                    titleLabel.textColor = .black
-                    titleLabel.backgroundColor = .white
-                    
-                    let subTitleLabel = UILabel(frame: .init(x: titleLabel.x, y: titleLabel.frame.maxY + 10, width: 84, height: 15))
-                    subTitleLabel.font = .font(fontSize: 14)
-                    subTitleLabel.text = "为爱孕育生命"
-                    subTitleLabel.textColor = RGB(51, 51, 51)
-                    subTitleLabel.backgroundColor = .white
-
-                    let icon = UIImageView(frame: .init(x: subTitleLabel.frame.maxX + 5, y: subTitleLabel.y, width: 18, height: 15))
-                    icon.image = UIImage(named: "login_title_icon")
-
-                    
-                    customView.addSubview(titleLabel)
-                    customView.addSubview(subTitleLabel)
-                    customView.addSubview(icon)
-                }
-            }, bottomCustomViews: {
-                if let customView = $0 {
-                    let leftLine = UIView()
-                    leftLine.backgroundColor = RGB(229, 229, 229)
-                    
-                    let platformRemindLabel = UILabel()
-                    platformRemindLabel.text = "其它方式登录"
-                    platformRemindLabel.font = .font(fontSize: 14)
-                    platformRemindLabel.textColor = RGB(43, 43, 43)
-                    
-                    let rightLine = UIView()
-                    rightLine.backgroundColor = RGB(229, 229, 229)
-
-                    let wchatLoginButton = UIButton()
-                    wchatLoginButton.setImage(UIImage(named: "wchat_login"), for: .normal)
-                    
-                    let phoneLoginButton = UIButton()
-                    phoneLoginButton.backgroundColor = RGB(125, 189, 245)
-                    phoneLoginButton.layer.cornerRadius = 25
-                    phoneLoginButton.clipsToBounds = true
-                    
-                    let tempSize = platformRemindLabel.sizeThatFits(.init(width: CGFloat(MAXFLOAT), height: 20))
-                    let lineW: CGFloat = (customView.width - tempSize.width - 20 * 2 - 40 * 2) / 2.0
-                    leftLine.frame = .init(x: 40, y: customView.height - 160, width: lineW, height: 1)
-                    platformRemindLabel.frame = .init(x: leftLine.frame.maxX + 20, y: leftLine.y - 10, width: tempSize.width, height: 20)
-                    rightLine.frame = .init(x: platformRemindLabel.frame.maxX + 20, y: leftLine.frame.minY, width: lineW, height: 1)
-                    
-                    phoneLoginButton.frame = .init(x: (customView.width - 100 - 80) / 2, y: platformRemindLabel.frame.maxY + 15, width: 50, height: 50)
-                    wchatLoginButton.frame = .init(x: phoneLoginButton.frame.maxX + 80, y: phoneLoginButton.y, width: 50, height: 50)
-
-                    
-                    customView.addSubview(leftLine)
-                    customView.addSubview(platformRemindLabel)
-                    customView.addSubview(rightLine)
-                    customView.addSubview(wchatLoginButton)
-                    customView.addSubview(phoneLoginButton)
-                }
-            })
-        }
-        return model
-    }
-    
+    func customFullScreenUI(viewController: UIViewController, otherLoginCallBack:@escaping (((HCUniLoginEvent, String))->())) {
+        let config = JVUIConfig()
+        //导航栏
+        config.navCustom = false
+        config.navText = NSAttributedString.init(string: "", attributes: nil)
+        config.navReturnHidden = false
+        config.navReturnImg = UIImage(named: "navigationButtonReturnClick")
+        config.navColor = .white
         
-    @objc private func stopLogining() {
-        DispatchQueue.main.async {
-            ZUOAuthManager.getInstance()?.interruptTheCULoginFlow(false, ifDisapperTheShowingLoginPage: true, cancelTheNextAuthorizationPageToPullUp: false)
+        config.shouldAutorotate = true
+        config.autoLayout = true
+        //弹窗弹出方式
+        config.modalTransitionStyle = UIModalTransitionStyle.coverVertical
+        //logo
+        config.logoHidden = true
+        
+        //号码栏
+        config.numberFont = .font(fontSize: 24, fontName: .PingFSemibold)
+        
+        let numberConstraintX = JVLayoutConstraint(attribute: NSLayoutConstraint.Attribute.centerX, relatedBy: NSLayoutConstraint.Relation.equal, to: JVLayoutItem.super, attribute: NSLayoutConstraint.Attribute.centerX, multiplier: 1, constant:0)
+        let numberConstraintY = JVLayoutConstraint(attribute: NSLayoutConstraint.Attribute.top, relatedBy: NSLayoutConstraint.Relation.equal, to: JVLayoutItem.super, attribute: NSLayoutConstraint.Attribute.top, multiplier: 1, constant: 110)
+        let numberConstraintW = JVLayoutConstraint(attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, to: JVLayoutItem.none, attribute: NSLayoutConstraint.Attribute.width, multiplier: 1, constant:viewController.view.width - 80)
+        let numberConstraintH = JVLayoutConstraint(attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, to: JVLayoutItem.none, attribute: NSLayoutConstraint.Attribute.height, multiplier: 1, constant:33)
+        config.numberConstraints = [numberConstraintX!, numberConstraintY!, numberConstraintW!, numberConstraintH!]
+        config.numberHorizontalConstraints = config.numberConstraints
+        
+        //slogan
+        config.sloganFont = .font(fontSize: 12)
+        config.sloganTextColor = RGB(154, 154, 154)
+        
+        let sloganConstraintX = JVLayoutConstraint(attribute: NSLayoutConstraint.Attribute.centerX, relatedBy: NSLayoutConstraint.Relation.equal, to: JVLayoutItem.super, attribute: NSLayoutConstraint.Attribute.centerX, multiplier: 1, constant:0)
+        let sloganConstraintY = JVLayoutConstraint(attribute: NSLayoutConstraint.Attribute.top, relatedBy: NSLayoutConstraint.Relation.equal, to: JVLayoutItem.number, attribute: NSLayoutConstraint.Attribute.bottom, multiplier: 1, constant: 7)
+        let sloganConstraintW = JVLayoutConstraint(attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, to: JVLayoutItem.none, attribute: NSLayoutConstraint.Attribute.width, multiplier: 1, constant:viewController.view.width - 80)
+        let sloganConstraintH = JVLayoutConstraint(attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, to: JVLayoutItem.none, attribute: NSLayoutConstraint.Attribute.height, multiplier: 1, constant:20)
+        config.sloganConstraints = [sloganConstraintX!, sloganConstraintY!, sloganConstraintW!, sloganConstraintH!]
+        config.sloganHorizontalConstraints = config.sloganConstraints
+        
+        //登录按钮
+        config.logBtnText = "一键登录"
+        let login_nor_image = UIImage.image(with: RGB(255, 79, 120))
+        let login_dis_image = UIImage.image(with: RGB(160, 160, 160))
+        let login_hig_image = login_nor_image
+        if let norImage = login_nor_image, let disImage = login_dis_image, let higImage = login_hig_image {
+            config.logBtnImgs = [norImage, disImage, higImage]
         }
+        let loginBtnWidth = viewController.view.width - 80
+        let loginBtnHeight: CGFloat = 48.0
+        let loginConstraintX = JVLayoutConstraint(attribute: NSLayoutConstraint.Attribute.centerX, relatedBy: NSLayoutConstraint.Relation.equal, to: JVLayoutItem.super, attribute: NSLayoutConstraint.Attribute.centerX, multiplier: 1, constant:0)
+        let loginConstraintY = JVLayoutConstraint(attribute: NSLayoutConstraint.Attribute.top, relatedBy: NSLayoutConstraint.Relation.equal, to: JVLayoutItem.slogan, attribute: NSLayoutConstraint.Attribute.bottom, multiplier: 1, constant:20)
+        let loginConstraintW = JVLayoutConstraint(attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, to: JVLayoutItem.none, attribute: NSLayoutConstraint.Attribute.width, multiplier: 1, constant:loginBtnWidth)
+        let loginConstraintH = JVLayoutConstraint(attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, to: JVLayoutItem.none, attribute: NSLayoutConstraint.Attribute.height, multiplier: 1, constant:loginBtnHeight)
+        config.logBtnConstraints = [loginConstraintX!, loginConstraintY!, loginConstraintW!, loginConstraintH!]
+        config.logBtnHorizontalConstraints = config.logBtnConstraints
+        
+        //勾选框
+        let uncheckedImage = UIImage(named: "login_unselected_agree")
+        let checkedImage = UIImage(named: "login_selected_agree")
+        let checkViewWidth = uncheckedImage?.size.width ?? 10
+        let checkViewHeight = uncheckedImage?.size.height ?? 10
+        config.uncheckedImg = uncheckedImage
+        config.checkedImg = checkedImage
+        let checkViewConstraintX = JVLayoutConstraint(attribute: NSLayoutConstraint.Attribute.left, relatedBy: NSLayoutConstraint.Relation.equal, to: JVLayoutItem.login, attribute: NSLayoutConstraint.Attribute.left, multiplier: 1, constant:0)
+        let checkViewConstraintY = JVLayoutConstraint(attribute: NSLayoutConstraint.Attribute.top, relatedBy: NSLayoutConstraint.Relation.equal, to: JVLayoutItem.login, attribute: NSLayoutConstraint.Attribute.bottom, multiplier: 1, constant:20)
+        let checkViewConstraintW = JVLayoutConstraint(attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, to: JVLayoutItem.none, attribute: NSLayoutConstraint.Attribute.width, multiplier: 1, constant:checkViewWidth)
+        let checkViewConstraintH = JVLayoutConstraint(attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, to: JVLayoutItem.none, attribute: NSLayoutConstraint.Attribute.height, multiplier: 1, constant:checkViewHeight)
+        config.checkViewConstraints = [checkViewConstraintX!, checkViewConstraintY!, checkViewConstraintW!, checkViewConstraintH!]
+        config.checkViewHorizontalConstraints = config.checkViewConstraints
+        
+        //隐私
+        config.privacyState = false
+        config.appPrivacyColor = [RGB(154, 154, 154), RGB(57, 129, 247)]
+        config.privacyTextFontSize = 12
+        config.privacyTextAlignment = NSTextAlignment.left
+        config.appPrivacyOne = ["《爱乐孕用户服务协议》","https://ileyun.ivfcn.com/cms/alyyhxy.html"]
+        config.appPrivacyTwo = ["《隐私政策》","https://ileyun.ivfcn.com/cms/0-1073.html"]
+        let privacyConstraintX = JVLayoutConstraint(attribute: NSLayoutConstraint.Attribute.left, relatedBy: NSLayoutConstraint.Relation.equal, to: JVLayoutItem.check, attribute: NSLayoutConstraint.Attribute.right, multiplier: 1, constant:5)
+        let privacyConstraintX2 = JVLayoutConstraint(attribute: NSLayoutConstraint.Attribute.right, relatedBy: NSLayoutConstraint.Relation.equal, to: JVLayoutItem.super, attribute: NSLayoutConstraint.Attribute.right, multiplier: 1, constant:-40)
+        let privacyConstraintY = JVLayoutConstraint(attribute: NSLayoutConstraint.Attribute.top, relatedBy: NSLayoutConstraint.Relation.equal, to: JVLayoutItem.check, attribute: NSLayoutConstraint.Attribute.top, multiplier: 1, constant:0)
+//        let privacyConstraintH = JVLayoutConstraint(attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, to: JVLayoutItem.none, attribute: NSLayoutConstraint.Attribute.height, multiplier: 1, constant:50)
+        config.privacyConstraints = [privacyConstraintX!,privacyConstraintX2!, privacyConstraintY!]
+        config.privacyHorizontalConstraints = config.privacyConstraints
+        
+        //loading
+        let loadingConstraintX = JVLayoutConstraint(attribute: NSLayoutConstraint.Attribute.centerX, relatedBy: NSLayoutConstraint.Relation.equal, to: JVLayoutItem.super, attribute: NSLayoutConstraint.Attribute.centerX, multiplier: 1, constant:0)
+        let loadingConstraintY = JVLayoutConstraint(attribute: NSLayoutConstraint.Attribute.centerY, relatedBy: NSLayoutConstraint.Relation.equal, to: JVLayoutItem.super, attribute: NSLayoutConstraint.Attribute.centerY, multiplier: 1, constant:0)
+        let loadingConstraintW = JVLayoutConstraint(attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, to: JVLayoutItem.none, attribute: NSLayoutConstraint.Attribute.width, multiplier: 1, constant:30)
+        let loadingConstraintH = JVLayoutConstraint(attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, to: JVLayoutItem.none, attribute: NSLayoutConstraint.Attribute.height, multiplier: 1, constant:30)
+        config.loadingConstraints = [loadingConstraintX!, loadingConstraintY!, loadingConstraintW!, loadingConstraintH!]
+        config.loadingHorizontalConstraints = config.loadingConstraints
+        
+        // 协议页面
+        config.agreementNavBackgroundColor = .white
+        config.agreementNavReturnImage = UIImage(named: "navigationButtonReturnClick")
+        config.agreementNavTextColor = RGB(60, 60, 60)
+        
+        JVERIFICATIONService.customUI(with: config) { [unowned self] in
+            //自定义view, 加到customView上
+            if let customView = $0 {
+                let titleLabel = UILabel(frame: .init(x: (customView.width - 160) / 2, y: 30, width: 160, height: 35))
+                titleLabel.font = .font(fontSize: 32, fontName: .PingFSemibold)
+                titleLabel.text = "登录爱乐孕"
+                titleLabel.textColor = .black
+                titleLabel.backgroundColor = .white
+                
+                let subTitleLabel = UILabel(frame: .init(x: titleLabel.x, y: titleLabel.frame.maxY + 10, width: 84, height: 15))
+                subTitleLabel.font = .font(fontSize: 14)
+                subTitleLabel.text = "为爱孕育生命"
+                subTitleLabel.textColor = RGB(51, 51, 51)
+                subTitleLabel.backgroundColor = .white
+                
+                let icon = UIImageView(frame: .init(x: subTitleLabel.frame.maxX + 5, y: subTitleLabel.y, width: 18, height: 15))
+                icon.image = UIImage(named: "login_title_icon")
+                                
+                let platformContainer = UIView()
+                platformContainer.backgroundColor = .white
+                
+                let leftLine = UIView()
+                leftLine.backgroundColor = RGB(229, 229, 229)
+                
+                let platformRemindLabel = UILabel()
+                platformRemindLabel.text = "其它方式登录"
+                platformRemindLabel.font = .font(fontSize: 14)
+                platformRemindLabel.textColor = RGB(43, 43, 43)
+                
+                let rightLine = UIView()
+                rightLine.backgroundColor = RGB(229, 229, 229)
+
+                let wchatLoginButton = UIButton()
+                wchatLoginButton.setImage(UIImage(named: "wchat_login"), for: .normal)
+                
+                let phoneLoginButton = UIButton()
+                phoneLoginButton.setImage(UIImage(named: "phone_login"), for: .normal)
+                
+                customView.addSubview(titleLabel)
+                customView.addSubview(subTitleLabel)
+                customView.addSubview(icon)
+                customView.addSubview(platformContainer)
+                platformContainer.addSubview(leftLine)
+                platformContainer.addSubview(platformRemindLabel)
+                platformContainer.addSubview(rightLine)
+                platformContainer.addSubview(wchatLoginButton)
+                platformContainer.addSubview(phoneLoginButton)
+
+                platformContainer.frame = .init(x: 40, y: customView.height - 85 - 50, width: customView.width - 80, height: 85)
+
+                let tempSize = platformRemindLabel.sizeThatFits(.init(width: CGFloat(MAXFLOAT), height: 20))
+                let lineW: CGFloat = (platformContainer.width - tempSize.width - 40) / 2.0
+
+                leftLine.frame = .init(x: 0, y: 9, width: lineW, height: 1)
+                platformRemindLabel.frame = .init(x: leftLine.frame.maxX + 20, y: 0, width: tempSize.width, height: 20)
+                rightLine.frame = .init(x: platformRemindLabel.frame.maxX + 20, y: leftLine.frame.minY, width: lineW, height: 1)
+                
+                phoneLoginButton.frame = .init(x: (platformContainer.width - 100 - 80) / 2, y: platformRemindLabel.frame.maxY + 15, width: 50, height: 50)
+                wchatLoginButton.frame = .init(x: phoneLoginButton.frame.maxX + 80, y: phoneLoginButton.y, width: 50, height: 50)
+                
+                phoneLoginButton.rx.controlEvent(.touchUpInside)
+                    .subscribe(onNext: {
+                        JVERIFICATIONService.dismissLoginController(animated: true) {
+                            otherLoginCallBack((.phoneLogin, ""))
+                        }
+                    })
+                    .disposed(by: disposeBag)
+                
+                wchatLoginButton.rx.controlEvent(.touchUpInside)
+                    .subscribe(onNext: {
+                        JVERIFICATIONService.dismissLoginController(animated: true) {
+                            otherLoginCallBack((.watchLogin, ""))
+                        }
+                    })
+                    .disposed(by: disposeBag)
+            }
+        }
+        
     }
 
-    private func login(viewController: UIViewController) {
-        ZUOAuthManager.getInstance()?.login(NSObject().visibleViewController!, timeout: 15, resultListener: { res in
-            PrintLog(res)
-        })
-    }
 }
-
-//extension HCAppDelegate: UniLoginDelegate {
-//
-//    func ctccCustomBtnClick(_ senderTag: String) {
-//        PrintLog(senderTag)
-//    }
-//
-//}

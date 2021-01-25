@@ -2,6 +2,9 @@ PODS:
   - Alamofire (4.8.2)
   - Differentiator (3.1.0)
   - HandyJSON (5.0.0)
+  - JCore (2.4.0)
+  - JVerification (2.6.7):
+    - JCore (< 6.0.0, >= 2.1.6)
   - Kingfisher (4.6.4)
   - MJRefresh (3.1.15.7)
   - Moya/Core (12.0.1):
@@ -50,6 +53,7 @@ PODS:
 
 DEPENDENCIES:
   - HandyJSON (~> 5.0.0-beta.1)
+  - JVerification
   - Kingfisher (~> 4.6.1)
   - MJRefresh (~> 3.1.15.3)
   - Moya/RxSwift (~> 12.0.1)
@@ -91,6 +95,8 @@ SPEC REPOS:
     - UMCSecurityPlugins
     - WebViewJavascriptBridge
   trunk:
+    - JCore
+    - JVerification
     - Toast-Swift
     - TXIMSDK_iOS
     - TXLiteAVSDK_Professional
@@ -101,6 +107,8 @@ SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
   Differentiator: be49ca3408f0ecfc761e4c7763d20c62be01b9ad
   HandyJSON: 992f2d661716d6a91de82d0056927bc7813b5770
+  JCore: a29e4b0ee54e1301446dc02d8e1c350404108b34
+  JVerification: b68688ad80829c9cab25cda105ca847b3ae57068
   Kingfisher: 68498a706e46c2a050b0c9572f100e5db407f6e0
   MJRefresh: 697f8ec75ebdbe9207767bb682cf0f51b0d8a41f
   Moya: cf730b3cd9e005401ef37a85143aa141a12fd38f
@@ -122,6 +130,6 @@ SPEC CHECKSUMS:
   WebViewJavascriptBridge: 7f5bc4d3581e672e8f32bd0f812d54bc69bb8e29
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
 
-PODFILE CHECKSUM: ac2bac76f22839beb0a3c9d9c81d8aaa1cf70c81
+PODFILE CHECKSUM: 27c5bc0992a61eab78ee650419e5c2b998c484ad
 
 COCOAPODS: 1.8.3
