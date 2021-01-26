@@ -505,6 +505,9 @@ extension API: TargetType{
         case .version:
             return .requestParameters(parameters: ["type": "ios", "packageName": Bundle.main.bundleIdentifier],
                                       encoding: URLEncoding.default)
+        case .tokenLogin(let token):
+            return .requestParameters(parameters: ["token": token],
+                                      encoding: URLEncoding.default)
         default:
             if let _parameters = parameters {
                 guard let jsonData = try? JSONSerialization.data(withJSONObject: _parameters, options: []) else {
@@ -663,8 +666,6 @@ extension API {
             params["oauthType"] = "weixin"
             params["mobile"] = mobile
             params["smsCode"] = smsCode
-        case .tokenLogin(let token):
-            params["token"] = token
         case .updateInfo(let param):
             params = param
 

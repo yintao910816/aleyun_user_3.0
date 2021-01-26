@@ -29,7 +29,7 @@ extension HCAppDelegate {
         config.appKey = AppKey
         JVERIFICATIONService.setup(with: config)
         
-        JVERIFICATIONService.getAuthorizationWith(viewController, hide: false, animated: true, timeout: 15*1000, completion: { (result) in
+        JVERIFICATIONService.getAuthorizationWith(viewController, hide: false, animated: true, timeout: 15*1000, completion: { [unowned self] (result) in
             if let result = result {
                 if let token = result["loginToken"] as? String {
 //                    if let code = result["code"], let op = result["operator"] {
@@ -41,10 +41,12 @@ extension HCAppDelegate {
                 }else if let code = result["code"] as? Int, let content = result["content"] {
                     print("一键登录 result: code = \(code), content = \(content)")
                     if code != 6002 {
-                        NoticesCenter.alert(message: "一键登录失败: \(code)(\(content))")
+                        presentCallBack()
+                        mapError(code: code)
                     }
                 }
             }else {
+                presentCallBack()
                 NoticesCenter.alert(message: "一键登录失败: 未知错误")
             }
         }) { (type, content) in
@@ -116,14 +118,14 @@ extension HCAppDelegate {
         config.logBtnHorizontalConstraints = config.logBtnConstraints
         
         //勾选框
-        let uncheckedImage = UIImage(named: "login_unselected_agree")
-        let checkedImage = UIImage(named: "login_selected_agree")
-        let checkViewWidth = uncheckedImage?.size.width ?? 10
-        let checkViewHeight = uncheckedImage?.size.height ?? 10
+        let uncheckedImage = UIImage(named: "unilogin_agree_unselected")
+        let checkedImage = UIImage(named: "unilogin_agree_selected")
+        let checkViewWidth: CGFloat = 22
+        let checkViewHeight: CGFloat = 22
         config.uncheckedImg = uncheckedImage
         config.checkedImg = checkedImage
-        let checkViewConstraintX = JVLayoutConstraint(attribute: NSLayoutConstraint.Attribute.left, relatedBy: NSLayoutConstraint.Relation.equal, to: JVLayoutItem.login, attribute: NSLayoutConstraint.Attribute.left, multiplier: 1, constant:0)
-        let checkViewConstraintY = JVLayoutConstraint(attribute: NSLayoutConstraint.Attribute.top, relatedBy: NSLayoutConstraint.Relation.equal, to: JVLayoutItem.login, attribute: NSLayoutConstraint.Attribute.bottom, multiplier: 1, constant:20)
+        let checkViewConstraintX = JVLayoutConstraint(attribute: NSLayoutConstraint.Attribute.left, relatedBy: NSLayoutConstraint.Relation.equal, to: JVLayoutItem.login, attribute: NSLayoutConstraint.Attribute.left, multiplier: 1, constant:-5)
+        let checkViewConstraintY = JVLayoutConstraint(attribute: NSLayoutConstraint.Attribute.top, relatedBy: NSLayoutConstraint.Relation.equal, to: JVLayoutItem.login, attribute: NSLayoutConstraint.Attribute.bottom, multiplier: 1, constant:10)
         let checkViewConstraintW = JVLayoutConstraint(attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, to: JVLayoutItem.none, attribute: NSLayoutConstraint.Attribute.width, multiplier: 1, constant:checkViewWidth)
         let checkViewConstraintH = JVLayoutConstraint(attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, to: JVLayoutItem.none, attribute: NSLayoutConstraint.Attribute.height, multiplier: 1, constant:checkViewHeight)
         config.checkViewConstraints = [checkViewConstraintX!, checkViewConstraintY!, checkViewConstraintW!, checkViewConstraintH!]
@@ -138,7 +140,7 @@ extension HCAppDelegate {
         config.appPrivacyTwo = ["《隐私政策》","https://ileyun.ivfcn.com/cms/0-1073.html"]
         let privacyConstraintX = JVLayoutConstraint(attribute: NSLayoutConstraint.Attribute.left, relatedBy: NSLayoutConstraint.Relation.equal, to: JVLayoutItem.check, attribute: NSLayoutConstraint.Attribute.right, multiplier: 1, constant:5)
         let privacyConstraintX2 = JVLayoutConstraint(attribute: NSLayoutConstraint.Attribute.right, relatedBy: NSLayoutConstraint.Relation.equal, to: JVLayoutItem.super, attribute: NSLayoutConstraint.Attribute.right, multiplier: 1, constant:-40)
-        let privacyConstraintY = JVLayoutConstraint(attribute: NSLayoutConstraint.Attribute.top, relatedBy: NSLayoutConstraint.Relation.equal, to: JVLayoutItem.check, attribute: NSLayoutConstraint.Attribute.top, multiplier: 1, constant:0)
+        let privacyConstraintY = JVLayoutConstraint(attribute: NSLayoutConstraint.Attribute.top, relatedBy: NSLayoutConstraint.Relation.equal, to: JVLayoutItem.login, attribute: NSLayoutConstraint.Attribute.bottom, multiplier: 1, constant:15)
 //        let privacyConstraintH = JVLayoutConstraint(attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, to: JVLayoutItem.none, attribute: NSLayoutConstraint.Attribute.height, multiplier: 1, constant:50)
         config.privacyConstraints = [privacyConstraintX!,privacyConstraintX2!, privacyConstraintY!]
         config.privacyHorizontalConstraints = config.privacyConstraints
@@ -236,4 +238,35 @@ extension HCAppDelegate {
         
     }
 
+}
+
+//MARK:
+//MARK: 一键登录错误码匹配
+extension HCAppDelegate {
+    
+    private func mapError(code: Int) {
+        if code == 6002 {
+            return
+        }
+        
+        var msg: String = "一键登录获取失败，请使用其他方式登录"
+        if code == 2003 {
+            msg = "网络连接不通"
+        }
+//        else if code == 2005 {
+//            msg = "请求超时"
+//        }else if code == 2016 {
+//            msg = "当前网络环境不支持认证"
+//        }
+        else if code == 2010 {
+            msg = "未开启读取手机状态权限"
+        }
+//        else if code == 6001 {
+//            msg = "获取loginToken失败"
+//        }else if code == 6006 {
+//            msg = "预取号结果超时，需要重新预取号"
+//        }
+        
+        NoticesCenter.alert(message: msg)
+    }
 }
