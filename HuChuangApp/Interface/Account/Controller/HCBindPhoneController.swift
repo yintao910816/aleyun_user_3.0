@@ -9,8 +9,8 @@
 import UIKit
 
 class HCBindPhoneController: HCLoginViewController {
-
-    private var viewModel: HCBindPhoneViewModel!
+    
+    private var bindViewModel: HCBindPhoneViewModel!
     private var openId: String = ""
     
     override func setupUI() {
@@ -20,11 +20,11 @@ class HCBindPhoneController: HCLoginViewController {
     }
     
     override func rxBind() {
-        viewModel = HCBindPhoneViewModel.init(input: containerView.phoneTf.rx.text.orEmpty.asDriver(),
-                                              openId: openId,
-                                              tap: (codeTap: containerView.getCodeButton.rx.tap.asDriver(),
-                                                agreeTap: containerView.agreeSignal.asDriver()))
-        viewModel.enableCode
+        bindViewModel = HCBindPhoneViewModel.init(input: containerView.phoneTf.rx.text.orEmpty.asDriver(),
+                                                  openId: openId,
+                                                  tap: (codeTap: containerView.getCodeButton.rx.tap.asDriver(),
+                                                        agreeTap: containerView.agreeSignal.asDriver()))
+        bindViewModel.enableCode
             .do(onNext: { [weak self] flag in
                 self?.containerView.getCodeButton.backgroundColor = flag ? HC_MAIN_COLOR : RGB(242, 242, 242)
                 self?.containerView.getCodeButton.isSelected = flag

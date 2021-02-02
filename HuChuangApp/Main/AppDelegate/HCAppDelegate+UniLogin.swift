@@ -21,6 +21,7 @@ import Foundation
 extension HCAppDelegate {
     
     public func startUniLogin(viewController: UIViewController,
+                              needRemind: Bool,
                               otherLoginCallBack:@escaping (((HCUniLoginEvent, String))->()),
                               presentCallBack:@escaping (()->())) {
         customFullScreenUI(viewController: viewController, otherLoginCallBack: otherLoginCallBack)
@@ -42,7 +43,10 @@ extension HCAppDelegate {
                     print("一键登录 result: code = \(code), content = \(content)")
                     if code != 6002 {
                         presentCallBack()
-                        mapError(code: code)
+                        
+                        if needRemind {
+                            mapError(code: code)
+                        }
                     }
                 }
             }else {
@@ -117,34 +121,50 @@ extension HCAppDelegate {
         config.logBtnConstraints = [loginConstraintX!, loginConstraintY!, loginConstraintW!, loginConstraintH!]
         config.logBtnHorizontalConstraints = config.logBtnConstraints
         
+        // sb产品不要勾选框，暂时屏蔽掉
         //勾选框
-        let uncheckedImage = UIImage(named: "unilogin_agree_unselected")
-        let checkedImage = UIImage(named: "unilogin_agree_selected")
-        let checkViewWidth: CGFloat = 22
-        let checkViewHeight: CGFloat = 22
-        config.uncheckedImg = uncheckedImage
-        config.checkedImg = checkedImage
-        let checkViewConstraintX = JVLayoutConstraint(attribute: NSLayoutConstraint.Attribute.left, relatedBy: NSLayoutConstraint.Relation.equal, to: JVLayoutItem.login, attribute: NSLayoutConstraint.Attribute.left, multiplier: 1, constant:-5)
-        let checkViewConstraintY = JVLayoutConstraint(attribute: NSLayoutConstraint.Attribute.top, relatedBy: NSLayoutConstraint.Relation.equal, to: JVLayoutItem.login, attribute: NSLayoutConstraint.Attribute.bottom, multiplier: 1, constant:10)
-        let checkViewConstraintW = JVLayoutConstraint(attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, to: JVLayoutItem.none, attribute: NSLayoutConstraint.Attribute.width, multiplier: 1, constant:checkViewWidth)
-        let checkViewConstraintH = JVLayoutConstraint(attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, to: JVLayoutItem.none, attribute: NSLayoutConstraint.Attribute.height, multiplier: 1, constant:checkViewHeight)
-        config.checkViewConstraints = [checkViewConstraintX!, checkViewConstraintY!, checkViewConstraintW!, checkViewConstraintH!]
-        config.checkViewHorizontalConstraints = config.checkViewConstraints
+//        let uncheckedImage = UIImage(named: "unilogin_agree_unselected")
+//        let checkedImage = UIImage(named: "unilogin_agree_selected")
+//        let checkViewWidth: CGFloat = 22
+//        let checkViewHeight: CGFloat = 22
+//        config.uncheckedImg = uncheckedImage
+//        config.checkedImg = checkedImage
+//        let checkViewConstraintX = JVLayoutConstraint(attribute: NSLayoutConstraint.Attribute.left, relatedBy: NSLayoutConstraint.Relation.equal, to: JVLayoutItem.login, attribute: NSLayoutConstraint.Attribute.left, multiplier: 1, constant:-5)
+//        let checkViewConstraintY = JVLayoutConstraint(attribute: NSLayoutConstraint.Attribute.top, relatedBy: NSLayoutConstraint.Relation.equal, to: JVLayoutItem.login, attribute: NSLayoutConstraint.Attribute.bottom, multiplier: 1, constant:10)
+//        let checkViewConstraintW = JVLayoutConstraint(attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, to: JVLayoutItem.none, attribute: NSLayoutConstraint.Attribute.width, multiplier: 1, constant:checkViewWidth)
+//        let checkViewConstraintH = JVLayoutConstraint(attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, to: JVLayoutItem.none, attribute: NSLayoutConstraint.Attribute.height, multiplier: 1, constant:checkViewHeight)
+//        config.checkViewConstraints = [checkViewConstraintX!, checkViewConstraintY!, checkViewConstraintW!, checkViewConstraintH!]
+//        config.checkViewHorizontalConstraints = config.checkViewConstraints
+//
+//        //隐私
+//        config.privacyState = false
+//        config.appPrivacyColor = [RGB(154, 154, 154), RGB(57, 129, 247)]
+//        config.privacyTextFontSize = 12
+//        config.privacyTextAlignment = NSTextAlignment.left
+//        config.appPrivacyOne = ["《爱乐孕用户服务协议》","https://ileyun.ivfcn.com/cms/alyyhxy.html"]
+//        config.appPrivacyTwo = ["《隐私政策》","https://ileyun.ivfcn.com/cms/0-1073.html"]
+//        let privacyConstraintX = JVLayoutConstraint(attribute: NSLayoutConstraint.Attribute.left, relatedBy: NSLayoutConstraint.Relation.equal, to: JVLayoutItem.check, attribute: NSLayoutConstraint.Attribute.right, multiplier: 1, constant:5)
+//        let privacyConstraintX2 = JVLayoutConstraint(attribute: NSLayoutConstraint.Attribute.right, relatedBy: NSLayoutConstraint.Relation.equal, to: JVLayoutItem.super, attribute: NSLayoutConstraint.Attribute.right, multiplier: 1, constant:-40)
+//        let privacyConstraintY = JVLayoutConstraint(attribute: NSLayoutConstraint.Attribute.top, relatedBy: NSLayoutConstraint.Relation.equal, to: JVLayoutItem.login, attribute: NSLayoutConstraint.Attribute.bottom, multiplier: 1, constant:15)
+//        let privacyConstraintH = JVLayoutConstraint(attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, to: JVLayoutItem.none, attribute: NSLayoutConstraint.Attribute.height, multiplier: 1, constant:25)
+//        config.privacyConstraints = [privacyConstraintX!,privacyConstraintX2!, privacyConstraintY!, privacyConstraintH!]
+//        config.privacyHorizontalConstraints = config.privacyConstraints
         
+        config.checkViewHidden = true
+        config.privacyState = true
         //隐私
-        config.privacyState = false
         config.appPrivacyColor = [RGB(154, 154, 154), RGB(57, 129, 247)]
         config.privacyTextFontSize = 12
         config.privacyTextAlignment = NSTextAlignment.left
         config.appPrivacyOne = ["《爱乐孕用户服务协议》","https://ileyun.ivfcn.com/cms/alyyhxy.html"]
         config.appPrivacyTwo = ["《隐私政策》","https://ileyun.ivfcn.com/cms/0-1073.html"]
-        let privacyConstraintX = JVLayoutConstraint(attribute: NSLayoutConstraint.Attribute.left, relatedBy: NSLayoutConstraint.Relation.equal, to: JVLayoutItem.check, attribute: NSLayoutConstraint.Attribute.right, multiplier: 1, constant:5)
+        let privacyConstraintX = JVLayoutConstraint(attribute: NSLayoutConstraint.Attribute.left, relatedBy: NSLayoutConstraint.Relation.equal, to: JVLayoutItem.login, attribute: NSLayoutConstraint.Attribute.left, multiplier: 1, constant:0)
         let privacyConstraintX2 = JVLayoutConstraint(attribute: NSLayoutConstraint.Attribute.right, relatedBy: NSLayoutConstraint.Relation.equal, to: JVLayoutItem.super, attribute: NSLayoutConstraint.Attribute.right, multiplier: 1, constant:-40)
         let privacyConstraintY = JVLayoutConstraint(attribute: NSLayoutConstraint.Attribute.top, relatedBy: NSLayoutConstraint.Relation.equal, to: JVLayoutItem.login, attribute: NSLayoutConstraint.Attribute.bottom, multiplier: 1, constant:15)
         let privacyConstraintH = JVLayoutConstraint(attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, to: JVLayoutItem.none, attribute: NSLayoutConstraint.Attribute.height, multiplier: 1, constant:25)
         config.privacyConstraints = [privacyConstraintX!,privacyConstraintX2!, privacyConstraintY!, privacyConstraintH!]
         config.privacyHorizontalConstraints = config.privacyConstraints
-        
+
         //loading
         let loadingConstraintX = JVLayoutConstraint(attribute: NSLayoutConstraint.Attribute.centerX, relatedBy: NSLayoutConstraint.Relation.equal, to: JVLayoutItem.super, attribute: NSLayoutConstraint.Attribute.centerX, multiplier: 1, constant:0)
         let loadingConstraintY = JVLayoutConstraint(attribute: NSLayoutConstraint.Attribute.centerY, relatedBy: NSLayoutConstraint.Relation.equal, to: JVLayoutItem.super, attribute: NSLayoutConstraint.Attribute.centerY, multiplier: 1, constant:0)

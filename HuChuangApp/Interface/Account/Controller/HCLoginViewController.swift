@@ -13,7 +13,7 @@ class HCLoginViewController: BaseViewController {
     
     public var containerView: HCLoginViewContainer!
     
-    private var viewModel: HCLoginViewModel!
+    public var viewModel: HCLoginViewModel!
         
     override func viewWillAppear(_ animated: Bool) {        
         navigationController?.setNavigationBarHidden(true, animated: animated)
