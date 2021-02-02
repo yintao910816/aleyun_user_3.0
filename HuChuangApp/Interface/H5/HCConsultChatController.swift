@@ -73,6 +73,12 @@ extension HCConsultChatController {
         }
         
         pickerContrl.selectedImage = { [unowned self] in sendPic(image: $0, model: model) }
+        
+        pickerManager.selectedImageCallBack = { [weak self] in
+            if let img = $0 {
+                self?.sendPic(image: img, model: model)
+            }
+        }
     }
     
     private func prepareVideoCall(model: HCConsultInfoModel) {
