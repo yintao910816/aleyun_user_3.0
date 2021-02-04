@@ -65,22 +65,34 @@ extension HCHelper {
         HCHelper.share.clearUser()
         
         let loginVC = HCLoginViewController()
-        loginVC.view.isHidden = true
 
         let loginControl = MainNavigationController.init(rootViewController: loginVC)
-        loginControl.view.isHidden = true
         loginControl.modalPresentationStyle = .overFullScreen
         
-        let newPresentV = presentVC == nil ? NSObject().visibleViewController : presentVC
-        newPresentV?.present(loginControl, animated: true, completion: {
-            if isPopToRoot {
-                newPresentV?.navigationController?.popViewController(animated: true)
-            }
-            completion?()
-        })
+        if HCHelper.share.enableWchatLogin {
+            loginVC.view.isHidden = true
+            loginControl.view.isHidden = true
+
+            let newPresentV = presentVC == nil ? NSObject().visibleViewController : presentVC
+            newPresentV?.present(loginControl, animated: true, completion: {
+                if isPopToRoot {
+                    newPresentV?.navigationController?.popViewController(animated: true)
+                }
+                completion?()
+            })
+            
+            loginVC.viewModel.hud.noticeLoading(nil, UIApplication.shared.keyWindow!)
+            loginVC.viewModel.presentFastLogin(vc: loginVC, needRemind: false)
+        }else {
+            let newPresentV = presentVC == nil ? NSObject().visibleViewController : presentVC
+            newPresentV?.present(loginControl, animated: true, completion: {
+                if isPopToRoot {
+                    newPresentV?.navigationController?.popViewController(animated: true)
+                }
+                completion?()
+            })
+        }
         
-        loginVC.viewModel.hud.noticeLoading(nil, UIApplication.shared.keyWindow!)
-        loginVC.viewModel.presentFastLogin(vc: loginVC, needRemind: false)
     }
     
     func clearUser() {

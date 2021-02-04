@@ -42,9 +42,9 @@ class HCTabBarViewController: UITabBarController {
     private func setupTabBar() {
         if #available(iOS 13.0, *) {
             tabBar.tintColor = RGB(51, 51, 51)
-            tabBar.unselectedItemTintColor = RGB(51, 51, 51)
+            tabBar.unselectedItemTintColor = RGB(153, 153, 153)
         }else {
-            UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor : RGB(51, 51, 51)], for: .normal)
+            UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor : RGB(153, 153, 153)], for: .normal)
             UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor : RGB(51, 51, 51)], for: .selected)
         }
 
@@ -59,8 +59,6 @@ class HCTabBarViewController: UITabBarController {
         toolNav.tabBarItem.title = "工具"
         toolNav.tabBarItem.image = UIImage(named: "tabBar_tool_unselected")
         toolNav.tabBarItem.selectedImage = UIImage(named: "tabBar_tool_selected")
-        toolNav.tabBarItem.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : RGB(51, 51, 51)], for: .normal)
-        toolNav.tabBarItem.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : RGB(51, 51, 51)], for: .selected)
 
 //        let classRoomCtrl = HCClassRoomViewController()
 //        let classRoomNav = MainNavigationController.init(rootViewController: classRoomCtrl)
