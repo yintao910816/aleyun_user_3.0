@@ -69,7 +69,7 @@ extension HCHelper {
         let loginControl = MainNavigationController.init(rootViewController: loginVC)
         loginControl.modalPresentationStyle = .overFullScreen
         
-        if HCHelper.share.enableWchatLogin {
+//        if HCHelper.share.enableWchatLogin {
             loginVC.view.isHidden = true
             loginControl.view.isHidden = true
 
@@ -83,15 +83,15 @@ extension HCHelper {
             
             loginVC.viewModel.hud.noticeLoading(nil, UIApplication.shared.keyWindow!)
             loginVC.viewModel.presentFastLogin(vc: loginVC, needRemind: false)
-        }else {
-            let newPresentV = presentVC == nil ? NSObject().visibleViewController : presentVC
-            newPresentV?.present(loginControl, animated: true, completion: {
-                if isPopToRoot {
-                    newPresentV?.navigationController?.popViewController(animated: true)
-                }
-                completion?()
-            })
-        }
+//        }else {
+//            let newPresentV = presentVC == nil ? NSObject().visibleViewController : presentVC
+//            newPresentV?.present(loginControl, animated: true, completion: {
+//                if isPopToRoot {
+//                    newPresentV?.navigationController?.popViewController(animated: true)
+//                }
+//                completion?()
+//            })
+//        }
         
     }
     

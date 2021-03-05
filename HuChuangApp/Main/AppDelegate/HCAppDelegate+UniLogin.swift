@@ -219,13 +219,16 @@ extension HCAppDelegate {
                 customView.addSubview(titleLabel)
                 customView.addSubview(subTitleLabel)
                 customView.addSubview(icon)
-                customView.addSubview(platformContainer)
-                platformContainer.addSubview(leftLine)
-                platformContainer.addSubview(platformRemindLabel)
-                platformContainer.addSubview(rightLine)
-                platformContainer.addSubview(wchatLoginButton)
-                platformContainer.addSubview(phoneLoginButton)
 
+                if HCHelper.share.enableWchatLogin {
+                    customView.addSubview(platformContainer)
+                    platformContainer.addSubview(leftLine)
+                    platformContainer.addSubview(platformRemindLabel)
+                    platformContainer.addSubview(rightLine)
+                    platformContainer.addSubview(wchatLoginButton)
+                    platformContainer.addSubview(phoneLoginButton)
+                }
+                
                 platformContainer.frame = .init(x: 40, y: customView.height - 85 - 50, width: customView.width - 80, height: 85)
 
                 let tempSize = platformRemindLabel.sizeThatFits(.init(width: CGFloat(MAXFLOAT), height: 20))
